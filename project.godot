@@ -1,0 +1,93 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Position3D",
+"class": "Between_node",
+"language": "GDScript",
+"path": "res://scripts/Between_node.gd"
+}, {
+"base": "Spatial",
+"class": "Map",
+"language": "GDScript",
+"path": "res://scripts/Map.gd"
+}, {
+"base": "Position3D",
+"class": "Navigation_Node",
+"language": "GDScript",
+"path": "res://scripts/Navigation_Node.gd"
+}, {
+"base": "Position3D",
+"class": "Player_Avatar",
+"language": "GDScript",
+"path": "res://scripts/Player_Avatar.gd"
+}, {
+"base": "Reference",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://scripts/Utils.gd"
+} ]
+_global_script_class_icons={
+"Between_node": "",
+"Map": "",
+"Navigation_Node": "",
+"Player_Avatar": "",
+"Utils": ""
+}
+
+[application]
+
+config/name="JRPG Builder"
+run/main_scene="res://scenes/map/Map.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 2,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": true,
+"flags/mipmaps": true,
+"flags/repeat": true,
+"flags/srgb": 1,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[input]
+
+"click left mouse"={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

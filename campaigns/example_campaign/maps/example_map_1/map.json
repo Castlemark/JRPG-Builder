@@ -1,0 +1,65 @@
+{
+    "navigation_nodes": 
+    [
+        {
+            "x": 0,
+            "y": 0,
+            "connected_nodes":[1],
+            "event": "none"
+        },
+        {
+            "x": 30,
+            "y": 0,
+            "connected_nodes":[0,2],
+            "event": "none"
+        },
+        {
+            "x": 0,
+            "y": 15,
+            "connected_nodes":[1,3,4],
+            "event": "none"
+        },
+        {
+            "x": 15,
+            "y": 15,
+            "connected_nodes":[2,4,6],
+            "event": "none"
+        },
+        {
+            "x": 0,
+            "y": 30,
+            "connected_nodes":[2,3,5,6],
+            "event": "none"
+        },
+        {
+            "x": 15,
+            "y": 30,
+            "connected_nodes":[4],
+            "event": "none"
+        },
+        {
+            "x": 20,
+            "y": 20,
+            "connected_nodes":[3, 4, 7],
+            "event": "none"
+        },
+        {
+            "x": 35,
+            "y": 20,
+            "connected_nodes":[6, 8],
+            "event": "none"
+        },
+        {
+            "x": 35,
+            "y": 30,
+            "connected_nodes":[7],
+            "event": "none"
+        }
+    ],
+    "backgroung_info":
+    {
+        "height": 10,
+        "width" : 10,
+        "total_tiles": 95
+    }
+}
