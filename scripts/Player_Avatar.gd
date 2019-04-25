@@ -29,5 +29,8 @@ func move_to_pos(destination_node : Position3D ) -> void:
 	yield(tween,"tween_completed")
 	current_node = destination_node
 
+func is_moving() -> bool:
+	return tween.is_active()
+
 func execute_events() -> void:
 	print("implementation pending")

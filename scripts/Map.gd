@@ -72,6 +72,6 @@ func instantiate_between_nodes(node_list : Array) -> void:
 		counter += 1
 
 func _on_Navigation_Node_clicked_destination(node : Navigation_Node) -> void:
-	if node.is_connected_to(player_avatar.current_node, navigation_nodes.get_children()):
+	if node.is_connected_to(player_avatar.current_node, navigation_nodes.get_children()) and !player_avatar.is_moving():
 		camera.return_to_original_position()
 		yield(player_avatar.move_to_pos(node), "completed")
