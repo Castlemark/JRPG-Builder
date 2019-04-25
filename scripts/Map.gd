@@ -9,6 +9,7 @@ onready var GM : Node
 onready var navigation_nodes : Spatial
 onready var between_nodes : Spatial
 onready var player_avatar : Player_Avatar
+onready var camera : Map_Camera
 
 var path_img : Texture
 var intersection_img : Texture
@@ -17,10 +18,11 @@ var avatar_img : Texture
 
 
 func initialize(map_name : String, acces_point : int):
-	player_avatar = $Movables/Player_Avatar as Player_Avatar
+	player_avatar = $Player_Avatar as Player_Avatar
 	navigation_nodes = $Navigation_Nodes as Spatial
 	between_nodes = $Between_Nodes as Spatial
 	GM = $"/root/Game_Manager"
+	camera = $Player_Avatar/Camera as Map_Camera
 	
 	var map_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/map.json")
 	
@@ -39,8 +41,8 @@ func instantiate_navigation_nodes(node_list : Array) -> void:
 	var counter : int = 0
 	for node in node_list:
 		var nav_node = navigation_node_res.instance()
-		nav_node.initialize(node as Dictionary, counter, path_img, intersection_img)
 		navigation_nodes.add_child(nav_node, true)
+		nav_node.initialize(node as Dictionary, counter, path_img, intersection_img)
 		
 		counter += 1
 
@@ -71,4 +73,5 @@ func instantiate_between_nodes(node_list : Array) -> void:
 
 func _on_Navigation_Node_clicked_destination(node : Navigation_Node) -> void:
 	if node.is_connected_to(player_avatar.current_node, navigation_nodes.get_children()):
+		camera.return_to_original_position()
 		yield(player_avatar.move_to_pos(node), "completed")

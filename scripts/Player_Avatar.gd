@@ -22,9 +22,8 @@ func move_to_pos(destination_node : Position3D ) -> void:
 	var origin := translation
 	
 	var duration : float = (destination_node.translation - translation).length() / 10.0
-#warning-ignore:return_value_discarded
+	
 	tween.interpolate_property(self, "translation", origin, target, duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-#warning-ignore:return_value_discarded
 	tween.start()
 	
 	yield(tween,"tween_completed")

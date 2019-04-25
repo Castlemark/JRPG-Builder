@@ -30,7 +30,8 @@ func initialize(node_info : Dictionary, node_index : int, path_img : Resource, i
 	index = node_index
 	connected_nodes = node_info.connected_nodes
 	
-	translation = Vector3(node_info.x, node_info.y, 0)
+	translation = Vector3(node_info.x, 0, -node_info.y)
+	rotation_degrees = Vector3(-60, 0 , 0)
 	
 	set_up_skin(connected_nodes.size())
 
