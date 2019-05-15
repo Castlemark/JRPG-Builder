@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite3D",
+"class": "Background_Tile",
+"language": "GDScript",
+"path": "res://scripts/Background_Tile.gd"
+}, {
 "base": "Position3D",
 "class": "Between_node",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://scripts/Utils.gd"
 } ]
 _global_script_class_icons={
+"Background_Tile": "",
 "Between_node": "",
 "Map": "",
 "Map_Camera": "",
@@ -58,6 +64,11 @@ config/icon="res://icon.png"
 
 Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
 
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=1280
@@ -74,7 +85,7 @@ texture={
 "detect_3d": false,
 "flags/anisotropic": false,
 "flags/filter": true,
-"flags/mipmaps": true,
+"flags/mipmaps": false,
 "flags/repeat": true,
 "flags/srgb": 1,
 "process/HDR_as_SRGB": false,
@@ -98,7 +109,13 @@ reset_camera_map={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
+"click right mouse"={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [rendering]
 
+quality/filters/anisotropic_filter_level=1
 environment/default_environment="res://default_env.tres"

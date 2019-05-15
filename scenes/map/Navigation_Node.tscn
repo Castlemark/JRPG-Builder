@@ -14,11 +14,9 @@ texture = ExtResource( 2 )
 [node name="Events" type="Spatial" parent="."]
 
 [node name="Clickable_Navigation" type="Area" parent="."]
-input_ray_pickable = true
 input_capture_on_drag = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Clickable_Navigation"]
-transform = Transform( -1.18021e-08, 0, 0.75, 0, 0.7, 0, -0.27, 0, -3.27835e-08, 0, 0, 0 )
+transform = Transform( -1.18021e-008, 0, 0.75, 0, 0.7, 0, -0.27, 0, -3.27835e-008, 0, 0, 0 )
 shape = SubResource( 1 )
-
 [connection signal="input_event" from="Clickable_Navigation" to="." method="_on_Clickable_Navigation_input_event"]

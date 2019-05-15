@@ -54,10 +54,6 @@ func is_connected_to(node : Navigation_Node, all_nodes : Array) -> bool:
 			return true
 	return false
 
-#warning-ignore:unused_argument
-#warning-ignore:unused_argument
-#warning-ignore:unused_argument
-#warning-ignore:unused_argument
 func _on_Clickable_Navigation_input_event(camera: Node, event: InputEvent, click_position: Vector3, click_normal: Vector3, shape_idx: int) -> void:
 	if event.is_action_pressed("click left mouse"):
 		emit_signal("clicked_destination", self)

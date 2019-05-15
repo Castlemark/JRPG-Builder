@@ -1,5 +1,5 @@
 {
-    "navigation_nodes": 
+    "navigation_nodes":
     [
         {
             "x": 0,
@@ -58,8 +58,7 @@
     ],
     "backgroung_info":
     {
-        "height": 10,
-        "width" : 10,
-        "total_tiles": 95
+        "x_offset": 1,
+        "y_offset": 1
     }
 }

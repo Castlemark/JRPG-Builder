@@ -12,7 +12,7 @@
     -   https://godotengine.org/qa/21150/how-to-get-a-node-on-which-user-clicked-in-3d
     -   https://godotengine.org/qa/13504/how-can-i-get-the-mouse-event-in-a-object
     -   https://github.com/godotengine/godot/issues/21194
--   [ ] Background Art
+-   [x] Background Art
 
     -   https://godotengine.org/qa/3164/how-to-make-a-tiled-repeating-background
     -   https://godotengine.org/qa/36050/2d-texture-mask-shader-to-simply-mask-part-of-sprite-in-godot

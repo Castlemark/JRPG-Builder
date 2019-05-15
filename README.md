@@ -14,7 +14,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [ ] Map module V-1
         - [x] Navigation
         - [ ] Inter-map movement
-        - [ ] Background art
+        - [x] Background art
 - [ ] <u>Map interaction Sprint - 12/07/19</u>
     - [ ] Map module V-2
         - [ ] Shaders
