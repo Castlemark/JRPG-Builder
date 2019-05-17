@@ -8,12 +8,12 @@ var navigation_node_res : Resource = preload("res://scenes/map/Navigation_Node.t
 var between_node_res : Resource = preload("res://scenes/map/Between_node.tscn")
 var background_tile_res : Resource = preload("res://scenes/map/Background_Tile.tscn")
 
-onready var GM : Node
-onready var navigation_nodes : Spatial
-onready var between_nodes : Spatial
-onready var background : Spatial
-onready var player_avatar : Player_Avatar
-onready var camera : Map_Camera
+onready var GM := $"/root/Game_Manager"
+onready var navigation_nodes := $Navigation_Nodes as Spatial
+onready var between_nodes := $Between_Nodes as Spatial
+onready var background := $Backgorund as Spatial
+onready var player_avatar := $Player_Avatar as Player_Avatar
+onready var camera := $Player_Avatar/Camera as Map_Camera
 
 var path_img : Texture
 var intersection_img : Texture
@@ -21,22 +21,18 @@ var between_img : Texture
 var avatar_img : Texture
 var map_img : Texture
 
+func _ready() -> void:
+	initialize(GM.campaign.cur_map.name, GM.campaign.cur_map.access_point)
 
 func initialize(map_name : String, acces_point : int):
-	player_avatar = $Player_Avatar as Player_Avatar
-	navigation_nodes = $Navigation_Nodes as Spatial
-	between_nodes = $Between_Nodes as Spatial
-	background = $Backgorund as Spatial
-	GM = $"/root/Game_Manager"
-	camera = $Player_Avatar/Camera as Map_Camera
 	
-	var map_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/map.json")
+	var map_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map.json")
 	
-	path_img = Utils.load_img("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/map_nodes/node_path.png")
-	intersection_img = Utils.load_img("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/map_nodes/node_intersection.png")
-	between_img = Utils.load_img("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/map_nodes/node_between.png")
-	avatar_img = Utils.load_img("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/player_avatar.png")
-	map_img = Utils.load_img("res://campaigns/" + GM.campaign_name + "/maps/" + map_name + "/map.png")
+	path_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_path.png")
+	intersection_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_intersection.png")
+	between_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_between.png")
+	avatar_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/player_avatar.png")
+	map_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map.png")
 	
 	instantiate_navigation_nodes(map_data.navigation_nodes as Array)
 	instantiate_between_nodes(map_data.navigation_nodes as Array)
@@ -91,7 +87,7 @@ func instantiate_background_map(offset : Vector2):
 			
 			back_tile.initialize(Vector2(i, j), 
 			                     map_img, 
-			                     Vector2(i/100 - 10 * offset.x, map_size.y/100 - j/100 - 10 * (offset.y + 1)))
+			                     Vector2(i/100.0 - 10 * offset.x, map_size.y/100.0 - j/100.0 - 10 * (offset.y + 1)))
 			background.add_child(back_tile, true)
 
 func _on_Navigation_Node_clicked_destination(node : Navigation_Node) -> void:

@@ -12,32 +12,47 @@ _global_script_classes=[ {
 "base": "Sprite3D",
 "class": "Background_Tile",
 "language": "GDScript",
-"path": "res://scripts/Background_Tile.gd"
+"path": "res://scripts/map/Background_Tile.gd"
 }, {
 "base": "Position3D",
 "class": "Between_node",
 "language": "GDScript",
-"path": "res://scripts/Between_node.gd"
+"path": "res://scripts/map/Between_node.gd"
+}, {
+"base": "Node",
+"class": "Game_Manager",
+"language": "GDScript",
+"path": "res://scripts/Game_Manager.gd"
+}, {
+"base": "Node",
+"class": "Generic_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Generic_Action.gd"
 }, {
 "base": "Spatial",
 "class": "Map",
 "language": "GDScript",
-"path": "res://scripts/Map.gd"
+"path": "res://scripts/map/Map.gd"
 }, {
 "base": "Camera",
 "class": "Map_Camera",
 "language": "GDScript",
-"path": "res://scripts/Camera.gd"
+"path": "res://scripts/map/Camera.gd"
 }, {
 "base": "Position3D",
 "class": "Navigation_Node",
 "language": "GDScript",
-"path": "res://scripts/Navigation_Node.gd"
+"path": "res://scripts/map/Navigation_Node.gd"
 }, {
 "base": "Position3D",
 "class": "Player_Avatar",
 "language": "GDScript",
-"path": "res://scripts/Player_Avatar.gd"
+"path": "res://scripts/map/Player_Avatar.gd"
+}, {
+"base": "Generic_Action",
+"class": "Travel_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Travel_Action.gd"
 }, {
 "base": "Reference",
 "class": "Utils",
@@ -47,10 +62,13 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Background_Tile": "",
 "Between_node": "",
+"Game_Manager": "",
+"Generic_Action": "",
 "Map": "",
 "Map_Camera": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
+"Travel_Action": "",
 "Utils": ""
 }
 
@@ -66,7 +84,9 @@ Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
 
 [debug]
 
+gdscript/completion/autocomplete_setters_and_getters=true
 gdscript/warnings/unused_argument=false
+gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
 
 [display]

@@ -58,8 +58,8 @@
                 "type" : "travel",
                 "data" :
                 {
-                  "map_name" : "example_map_2",
-                  "access_point" : 3
+                  "map_name" : "example_map_1",
+                  "access_point" : 1
                 }
               }
             ]
@@ -67,7 +67,7 @@
     ],
     "backgroung_info":
     {
-        "x_offset": 1,
+        "x_offset": 2,
         "y_offset": 1
     }
 }

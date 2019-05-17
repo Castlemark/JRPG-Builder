@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scripts/Player_Avatar.gd" type="Script" id=1]
+[ext_resource path="res://scripts/map/Player_Avatar.gd" type="Script" id=1]
 [ext_resource path="res://default_assets/map/player_avatar.png" type="Texture" id=2]
 
 [node name="Player_Avatar" type="Position3D"]

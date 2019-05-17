@@ -12,6 +12,7 @@ var default_path_node : Texture = preload("res://default_assets/map/map_nodes/no
 
 onready var skin : Sprite3D
 onready var events : Spatial
+onready var actions : Node
 
 var index : int
 var connected_nodes : Array = []
@@ -23,6 +24,7 @@ func _ready() -> void:
 func initialize(node_info : Dictionary, node_index : int, path_img : Resource, intersection_img : Texture) -> void:
 	skin  = ($Skin as Sprite3D)
 	events  = ($Events as Spatial)
+	actions = $Actions
 	
 	intersection_node = intersection_img
 	path_node = path_img
@@ -34,6 +36,7 @@ func initialize(node_info : Dictionary, node_index : int, path_img : Resource, i
 	rotation_degrees = Vector3(-60, 0 , 0)
 	
 	set_up_skin(connected_nodes.size())
+	set_up_actions(node_info.actions as Array)
 
 # If the desired node images aren't available, it will use the default ones
 func set_up_skin(connected_nodes_num : int) -> void:
@@ -47,6 +50,15 @@ func set_up_skin(connected_nodes_num : int) -> void:
 		
 		if intersection_node == null:
 			skin.texture = default_intersection_node
+
+func set_up_actions(actions_list : Array):
+	for i in actions_list:
+		match (i.type as String):
+			"travel":
+				var action := Travel_Action.new()
+				action.name = "Travel_Action"
+				action.initialize(i.data)
+				actions.add_child(action, true)
 
 func is_connected_to(node : Navigation_Node, all_nodes : Array) -> bool:
 	for i in connected_nodes:

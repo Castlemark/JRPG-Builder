@@ -17,7 +17,7 @@ func initialize(nav_node : Navigation_Node, avatar_img : Texture) -> void:
 	if avatar_img != null:
 		skin.texture = avatar_img
 
-func move_to_pos(destination_node : Position3D ) -> void:
+func move_to_pos(destination_node : Navigation_Node ) -> void:
 	var target := destination_node.translation + Vector3(0, 0.26, 0)
 	var origin := translation
 	
@@ -28,9 +28,11 @@ func move_to_pos(destination_node : Position3D ) -> void:
 	
 	yield(tween,"tween_completed")
 	current_node = destination_node
+	execute_actions()
 
 func is_moving() -> bool:
 	return tween.is_active()
 
-func execute_events() -> void:
-	print("implementation pending")
+func execute_actions() -> void:
+	for action in current_node.actions.get_children():
+		(action as Generic_Action).execute()

@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	
 
 func calculate_motion_direction(position : Vector2) -> Vector3:
-	var direction2D := position - Vector2(width/2, height/2)
+	var direction2D := position - Vector2(width/2.0, height/2.0)
 	
 	direction2D = direction2D.normalized()
 	
