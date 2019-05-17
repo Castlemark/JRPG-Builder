@@ -24,6 +24,7 @@ func spawn_between_sprites(from : Vector3, to : Vector3) -> void:
 		if traveled_distance < distance:
 			var bet_sprite := Sprite3D.new()
 			bet_sprite.translation = cur_pos
+			bet_sprite.rotation_degrees = Vector3(-60, 0, 0)
 			
 			bet_sprite.texture = between_img
 			if between_img == null:
