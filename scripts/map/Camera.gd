@@ -2,9 +2,8 @@ extends Camera
 
 class_name Map_Camera
 
-const SPEED : int = 12
+const SPEED : int = 6
 const MAX_ACC : int = 48
-const INCREMENT_ACC : float = 0.5
 
 var original_position : Vector3
 
@@ -27,7 +26,6 @@ func _ready() -> void:
 	get_tree().root.connect("size_changed", self, "on_window_resize")
 	
 	direction = Vector3(0, 0, 0)
-	acceleration = 0.0
 	
 	trigger_move = false
 
@@ -39,15 +37,12 @@ func _input(event: InputEvent) -> void:
 		trigger_move = true
 	if Input.is_action_just_released("click right mouse"):
 		trigger_move = false
-		acceleration = 0.0
-
 
 func _process(delta: float) -> void:
 	if trigger_move:
-		if acceleration < MAX_ACC:
-			acceleration += INCREMENT_ACC
-		
 		direction = calculate_motion_direction(get_viewport().get_mouse_position())
+		acceleration = calculate_acceleration(get_viewport().get_mouse_position())
+		
 		global_translate((SPEED + acceleration) * delta * direction)
 	
 
@@ -57,6 +52,13 @@ func calculate_motion_direction(position : Vector2) -> Vector3:
 	direction2D = direction2D.normalized()
 	
 	return Vector3(direction2D.x, 0 , direction2D.y)
+
+func calculate_acceleration(position : Vector2) -> float:
+	var  direction2D := position - Vector2(width/2.0, height/2.0)
+	
+	# We use this formula to get a value of 1 when the user is clicking from the egde of the screen in the veritcal axis, we use 2.1 instead of 2.0 to give a little bit off margin
+	var magnitude := 2.1 * direction2D.length()/height
+	return MAX_ACC * magnitude
 
 func has_camera_moved() -> bool:
 	return translation != original_position
