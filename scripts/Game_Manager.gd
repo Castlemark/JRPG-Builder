@@ -20,7 +20,7 @@ var current_scene : Node = null
 const MAP : Resource = preload("res://scenes/map/Map.tscn") 
 
 onready var transition : ColorRect = $UI/Transition
-onready var animation_player : AnimationPlayer = $UI/Transition/AnimationPlayer
+onready var transition_tween : Tween = $UI/Transition/Tween
 
 
 func _ready() -> void:
@@ -53,7 +53,15 @@ func goto_scene(scene : Resource) -> void:
 
 # IMPROVE TRANSITION
 func _deferred_goto_scene(scene : Resource) -> void:
-	play_transition()
+	
+	# We fade out to mask the transition
+	transition.margin_bottom = UI.margin_bottom
+	transition.margin_right = UI.margin_right
+
+	transition_tween.interpolate_property(transition, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
+	transition_tween.start()
+	yield(transition_tween,"tween_completed")
+	
 	# It is now safe to remove the current scene
 	current_scene.free()
 	
@@ -65,22 +73,19 @@ func _deferred_goto_scene(scene : Resource) -> void:
 	get_tree().get_root().add_child(current_scene)
 	get_tree().set_current_scene(current_scene)
 	
+	# We fade in to smooth the transition
+	transition_tween.interpolate_property(transition, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.5, Tween.TRANS_SINE, Tween.EASE_IN)
+	transition_tween.start()
+	yield(transition_tween,"tween_completed")
+
+	transition.margin_bottom = 0
+	transition.margin_right = 0
 
 func travel_to_map(map_name : String, access_point : int) -> void:
 	campaign.cur_map.name = map_name
 	campaign.cur_map.access_point = access_point
 	
 	goto_scene(MAP)
-
-func play_transition() -> void:
-	transition.margin_bottom = UI.margin_bottom
-	transition.margin_right = UI.margin_right
-	
-	animation_player.play("transitions")
-	yield(animation_player, "animation_finished")
-	
-	transition.margin_bottom = 0
-	transition.margin_right = 0
 
 func on_window_resize() -> void:
 	UI.margin_bottom = get_viewport().get_visible_rect().size.y
