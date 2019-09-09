@@ -6,6 +6,11 @@ static func get_path(path : String) -> String:
 static func load_img(direction : String) -> Resource:
 	var path : String = get_path(direction)
 	
+	var file_exists := File.new().file_exists(path)
+	if not file_exists:
+		print("Error loading image at -> " + path + " <- Please check that the image exists and the name is correct")
+		return null
+	
 	var img : Image = Image.new()
 	var itex : ImageTexture = ImageTexture.new()
 	
@@ -20,7 +25,7 @@ static func load_json(path : String):
 	
 	var status : int = file.open(get_path(path), file.READ)
 	if status != OK:
-		print("Error when opening campaign file, error is: " + String(status))
+		print("Error when opening json file, error is: " + String(status))
 		return
 	
 	data = parse_json(file.get_as_text()) as Dictionary
