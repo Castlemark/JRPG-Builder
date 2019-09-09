@@ -12,7 +12,10 @@ var type := STATIC
 var duration := 0.0
 var frames := 0
 
+var elapsed_frame_time := 0.0
+
 func initialize(detail_info : Dictionary) -> void:
+	# JSON Fields check
 	if not _minimal_info_fields_exist(detail_info):
 		return
 	
@@ -25,10 +28,22 @@ func initialize(detail_info : Dictionary) -> void:
 		self.translation = Vector3(detail_info.x, 0 , - detail_info.y)
 		
 		if type == ANIMATED:
+			# JSON Fields check (optionals)
 			if not _optional_info_fields_exist(detail_info):
 				return
 			
 			_configure_animation(detail_info.animation_data)
+
+func _process(delta: float) -> void:
+	if type == ANIMATED:
+		if elapsed_frame_time >= duration/frames:
+			if sprite.frame == (frames - 1):
+				sprite.frame = 0;
+			else:
+				sprite.frame += 1;
+			elapsed_frame_time = 0.0
+		
+		elapsed_frame_time += delta
 
 func _is_valid_type(type : int) -> bool:
 	return type == STATIC or type == ANIMATED
@@ -36,10 +51,8 @@ func _is_valid_type(type : int) -> bool:
 func _configure_animation(animation_info : Dictionary):
 	sprite.vframes = animation_info.vframes
 	sprite.hframes = animation_info.hframes
+	frames = animation_info.total_frames
 	duration = animation_info.duration
-
-func _process(delta: float) -> void:
-	pass
 
 func _minimal_info_fields_exist(info : Dictionary) -> bool:
 	var valid : bool = info.has("x") \
