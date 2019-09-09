@@ -17,7 +17,6 @@ Below you'll find some deadlines for the various modules, when a module is marke
         - [x] Background art
 - [ ] <u>Map interaction Sprint - 12/07/19</u>
     - [ ] Map module V-2
-        - [ ] Shaders
         - [ ] Individual art
     - [ ] Character and Enemy module **(final)**
         - [ ] Enemy
