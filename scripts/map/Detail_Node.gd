@@ -22,8 +22,10 @@ func initialize(detail_info : Dictionary) -> void:
 	var path : String = "res://campaigns/" + GM.campaign.name + "/maps/" + GM.campaign.cur_map.name + "/detail_art/" + detail_info.filepath + ".png"
 	var detail_img := Utils.load_img(path)
 	
-	if detail_img != null and _is_valid_type(detail_info.type):
-		sprite.texture = detail_img
+	if _is_valid_type(detail_info.type):
+		if detail_img != null:
+			sprite.texture = detail_img
+		
 		type = detail_info.type
 		self.translation = Vector3(detail_info.x, 0 , - detail_info.y)
 		
