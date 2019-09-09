@@ -65,6 +65,21 @@
             ]
         }
     ],
+    "detail_art":
+    [
+        {
+			"x": 13,
+			"y": 8,
+			"filepath" : "Lantern",
+			"type": 0,
+			"animation_data":
+            {
+                "hframes": 1,
+    			"vframes": 1,
+    			"duration": 1.0
+            }
+		}
+    ],
     "backgroung_info":
     {
         "x_offset": 1,

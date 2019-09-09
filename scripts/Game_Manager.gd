@@ -5,7 +5,7 @@ class_name Game_Manager
 var campaign : Dictionary = {
 	"name": "example_campaign",
 	"cur_map": {
-			"name": null,
+		"name": null,
 		"access_point": null
 	}
 }

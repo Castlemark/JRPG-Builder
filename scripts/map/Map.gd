@@ -7,11 +7,13 @@ const TILE_SIZE = 1000
 var navigation_node_res : Resource = preload("res://scenes/map/Navigation_Node.tscn")
 var between_node_res : Resource = preload("res://scenes/map/Between_node.tscn")
 var background_tile_res : Resource = preload("res://scenes/map/Background_Tile.tscn")
+var detail_node_res : Resource = preload("res://scenes/map/Detail_Node.tscn")
 
 onready var GM := $"/root/Game_Manager"
 onready var navigation_nodes := $Navigation_Nodes as Spatial
 onready var between_nodes := $Between_Nodes as Spatial
 onready var background := $Backgorund as Spatial
+onready var details := $Details as Spatial
 onready var player_avatar := $Player_Avatar as Player_Avatar
 onready var camera := $Player_Avatar/Camera as Map_Camera
 
@@ -24,7 +26,7 @@ var map_img : Texture
 func _ready() -> void:
 	initialize(GM.campaign.cur_map.name, GM.campaign.cur_map.access_point)
 
-func initialize(map_name : String, acces_point : int):
+func initialize(map_name : String, acces_point : int) -> void:
 	
 	var map_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map.json")
 	
@@ -37,6 +39,7 @@ func initialize(map_name : String, acces_point : int):
 	instantiate_navigation_nodes(map_data.navigation_nodes as Array)
 	instantiate_between_nodes(map_data.navigation_nodes as Array)
 	instantiate_background_map(Vector2(map_data.backgroung_info.x_offset, map_data.backgroung_info.y_offset))
+	instantiate_details(map_data.detail_art)
 	
 
 	player_avatar.initialize(navigation_nodes.get_child(acces_point), avatar_img)
@@ -76,19 +79,26 @@ func instantiate_between_nodes(node_list : Array) -> void:
 		
 		counter += 1
 
-func instantiate_background_map(offset : Vector2):
+func instantiate_background_map(offset : Vector2) -> void:
 	var map_size := Vector2(4000, 4000)
 	if map_img != null:
 		map_size = map_img.get_size()
 	
-	for i in range(0, map_size.x, 1000):
-		for j in range(0, map_size.y, 1000):
+	for i in range(0, map_size.x, TILE_SIZE):
+		for j in range(0, map_size.y, TILE_SIZE):
 			var back_tile = background_tile_res.instance()
 			
 			back_tile.initialize(Vector2(i, j), 
 			                     map_img, 
 			                     Vector2(i/100.0 - 10 * offset.x, map_size.y/100.0 - j/100.0 - 10 * (offset.y + 1)))
 			background.add_child(back_tile, true)
+
+func instantiate_details(details_list : Array) -> void:
+	for detail_info in details_list:
+		var detail_node = detail_node_res.instance()
+		details.add_child(detail_node, true)
+		detail_node.initialize(detail_info)
+		
 
 func _on_Navigation_Node_clicked_destination(node : Navigation_Node) -> void:
 	if node.is_connected_to(player_avatar.current_node, navigation_nodes.get_children()) and !player_avatar.is_moving():
