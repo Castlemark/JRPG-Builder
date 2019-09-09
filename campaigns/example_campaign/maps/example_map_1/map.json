@@ -71,14 +71,21 @@
 			"x": 13,
 			"y": 8,
 			"filepath" : "Lantern",
-			"type": 0,
+			"type": 0
+		},
+        {
+            "x": 10,
+			"y": 20,
+			"filepath" : "SmallProps_Torch",
+			"type": 1,
 			"animation_data":
             {
-                "hframes": 1,
+                "hframes": 6,
     			"vframes": 1,
+                "total_frames": 6,
     			"duration": 1.0
             }
-		}
+        }
     ],
     "backgroung_info":
     {
