@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Between_node.gd"
 }, {
+"base": "Spatial",
+"class": "Detail_Node",
+"language": "GDScript",
+"path": "res://scripts/map/Detail_Node.gd"
+}, {
 "base": "Node",
 "class": "Game_Manager",
 "language": "GDScript",
@@ -57,11 +62,17 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
-"path": "res://scripts/Utils.gd"
+"path": "res://scripts/Utilities/Utils.gd"
+}, {
+"base": "Node",
+"class": "Validators",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Validators.gd"
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
 "Between_node": "",
+"Detail_Node": "",
 "Game_Manager": "",
 "Generic_Action": "",
 "Map": "",
@@ -69,7 +80,8 @@ _global_script_class_icons={
 "Navigation_Node": "",
 "Player_Avatar": "",
 "Travel_Action": "",
-"Utils": ""
+"Utils": "",
+"Validators": ""
 }
 
 [application]
@@ -91,8 +103,8 @@ gdscript/warnings/return_value_discarded=false
 
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1920
+window/size/height=1080
 
 [importer_defaults]
 
@@ -138,4 +150,3 @@ reset_camera_map={
 [rendering]
 
 quality/filters/anisotropic_filter_level=1
-environment/default_environment="res://default_env.tres"

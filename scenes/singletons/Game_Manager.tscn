@@ -1,21 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scripts/Game_Manager.gd" type="Script" id=1]
-
-[sub_resource type="Animation" id=1]
-resource_name = "transitions"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
-}
 
 [node name="Game_Manager" type="Node"]
 script = ExtResource( 1 )
@@ -25,9 +10,9 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Transition" type="ColorRect" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 40.0
 margin_bottom = 40.0
-color = Color( 0, 0, 0, 0 )
+color = Color( 0, 0, 0, 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Transition"]
-anims/transitions = SubResource( 1 )
+[node name="Tween" type="Tween" parent="UI/Transition"]
