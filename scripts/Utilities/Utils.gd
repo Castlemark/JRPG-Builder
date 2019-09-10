@@ -31,7 +31,7 @@ static func load_json(path : String):
 	var json_data : String = file.get_as_text()
 	var validation : String = validate_json(json_data)
 	if not validation.empty():
-		printerr("File at -> " + path + " <- doesn't have the correct format, error was: \n	line " + validation)
+		print("File at -> " + path + " <- doesn't have the correct format, error was: \n	line " + validation)
 		return null
 	
 	data = parse_json(json_data) as Dictionary

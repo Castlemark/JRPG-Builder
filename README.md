@@ -19,9 +19,10 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Map module V-2
         - [x] Individual art
     - [ ] Character and Enemy module **(final)**
+        - [ ] Characters
         - [ ] Enemy
         - [ ] Equipment
-        - [ ] Stats
+        - [ ] Stats (characters and enemies)
         - [ ] Abilities
         - [ ] Items
 - [ ] <u>Structure Sprint - 23/08/19</u>
@@ -51,6 +52,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
         - [ ] Final AI
         - [ ] Wave combat
 - [ ] <u>Content creation Sprint - 24/12/19</u>
+    - [ ] Save states
     - [ ] Create Campaign **(final)**
     - [ ] Documentation **(final)**
     - [ ] Memoria

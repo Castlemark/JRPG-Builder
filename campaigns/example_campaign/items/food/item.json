@@ -1,0 +1,14 @@
+{
+    "type": "consumable",
+    "data":
+    {
+        "price": 200,
+        "effect":
+        {
+            "type": "heal",
+            "value": 30,
+            "delay": 0,
+            "duration": 1
+        }
+    }
+}

@@ -54,10 +54,10 @@ static func action_is_valid(action : String, data : Dictionary) -> bool:
 			valid = data.has(field)
 			
 			if not valid:
-				printerr("action " + action + " has all required fields, but it's data field is missing the " + field + " field")
+				printerr("action " + action + " has all required fields, but it's data field is missing the " + field + " f ield")
 				return false
 		
 		return true
 	
-	printerr("action \"" + action + "\" has all required fields, but is not a valid action type, please check the documentation to see all valid action types")
+	printerr("action \"" + action + "\" is not a valid action type, valid types are: \n	" + String(_action_types.keys()))
 	return false

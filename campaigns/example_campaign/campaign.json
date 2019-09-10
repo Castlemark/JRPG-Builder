@@ -1,4 +1,11 @@
 {
     "map_name": "example_map_1",
-    "access_point": 0
+    "access_point": 0,
+    "inventory":
+    [
+        "mace",
+        "mace",
+        "food",
+        "crown"
+    ]
 }
