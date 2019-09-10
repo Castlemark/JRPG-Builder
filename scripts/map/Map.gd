@@ -29,6 +29,13 @@ func _ready() -> void:
 func initialize(map_name : String, acces_point : int) -> void:
 	
 	var map_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map.json")
+	# Check file exists
+	if map_data == null:
+		return
+	
+	# Check all necessary fields exist
+	if not Validators.minimal_info_fields_exist(map_data, ["navigation_nodes", "detail_art", "background_info", "name"], "map has missing required fields, " + Validators.check_docu, "name"):
+		return
 	
 	path_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_path.png")
 	intersection_img = Utils.load_img("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_intersection.png")
@@ -38,14 +45,17 @@ func initialize(map_name : String, acces_point : int) -> void:
 	
 	instantiate_navigation_nodes(map_data.navigation_nodes as Array)
 	instantiate_between_nodes(map_data.navigation_nodes as Array)
-	instantiate_background_map(Vector2(map_data.backgroung_info.x_offset, map_data.backgroung_info.y_offset))
+	instantiate_background_map(map_data.background_info)
 	instantiate_details(map_data.detail_art)
 	
-
-	player_avatar.initialize(navigation_nodes.get_child(acces_point), avatar_img)
-	
+	player_avatar.initialize(navigation_nodes.get_child(acces_point) as Navigation_Node, avatar_img)
 
 func instantiate_navigation_nodes(node_list : Array) -> void:
+	for node in node_list:
+		# JSON Validation
+		if not Validators.minimal_info_fields_exist(node, ["x", "y", "connected_nodes", "actions"], "A navigation node has missing required fields, " + Validators.check_docu, ""):
+			return
+	
 	var counter : int = 0
 	for node in node_list:
 		var nav_node = navigation_node_res.instance()
@@ -57,17 +67,24 @@ func instantiate_navigation_nodes(node_list : Array) -> void:
 func instantiate_between_nodes(node_list : Array) -> void:
 	var nav_nodes : Array = navigation_nodes.get_children()
 	
+	for node in node_list:
+		# JSON Validation
+		if not Validators.minimal_info_fields_exist(node, ["x", "y", "connected_nodes", "actions"], "A navigation node has missing required fields, between nodes cannot be created as a result of this", ""):
+			return
+	
 	var counter : int = 0
 	for node in node_list:
 		for connection in node.connected_nodes:
-			var unique : bool = true
+			var unique := true
 			for child in between_nodes.get_children():
 				if String(counter) in child.name and String(connection) in child.name:
 					unique = false
 					break
 			
 			#we check if the between node has been created and if the connection exists in both parties
-			if unique and counter in nav_nodes[connection].connected_nodes and connection in nav_nodes[counter].connected_nodes:
+			if unique \
+			   and (counter in nav_nodes[connection].connected_nodes) \
+			   and (connection in nav_nodes[counter].connected_nodes):
 				var bet_node = between_node_res.instance()
 				
 				var from : Vector3 = nav_nodes[counter].translation
@@ -76,10 +93,17 @@ func instantiate_between_nodes(node_list : Array) -> void:
 				bet_node.initialize(from, to, between_img)
 				bet_node.name = String(counter) + "_to_" + String(connection)
 				between_nodes.add_child(bet_node)
+			
+			# TODO warn here if 2 connected nodes do not appear as connected in "connected_nodes" of both parties
 		
 		counter += 1
 
-func instantiate_background_map(offset : Vector2) -> void:
+func instantiate_background_map(background_info : Dictionary) -> void:
+	if not Validators.minimal_info_fields_exist(background_info, ["x_offset", "y_offset"], "background_info has missing required fields, " + Validators.check_docu, ""):
+		return
+	
+	var offset := Vector2(background_info.x_offset, background_info.y_offset)
+	
 	var map_size := Vector2(4000, 4000)
 	if map_img != null:
 		map_size = map_img.get_size()
@@ -95,6 +119,10 @@ func instantiate_background_map(offset : Vector2) -> void:
 
 func instantiate_details(details_list : Array) -> void:
 	for detail_info in details_list:
+		# JSON Fields check
+		if not Validators.minimal_info_fields_exist(detail_info, ["x", "y", "filepath"], "detail doesn't have the necessary fields to initialize properly, " + Validators.check_docu, "filepath"):
+			return
+		
 		var detail_node = detail_node_res.instance()
 		details.add_child(detail_node, true)
 		detail_node.initialize(detail_info)

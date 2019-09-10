@@ -11,7 +11,11 @@ func initialize(nav_node : Navigation_Node, avatar_img : Texture) -> void:
 	tween = $Tween as Tween
 	skin = $Skin as Sprite3D
 	
-	translation = nav_node.translation + Vector3(0, 0.26, 0)
+	var position := Vector3(0, 0, 0)
+	if nav_node != null:
+		position = nav_node.translation
+	
+	translation = position + Vector3(0, 0.26, 0)
 	current_node = nav_node
 	
 	if avatar_img != null:

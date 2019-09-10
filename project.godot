@@ -62,7 +62,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
-"path": "res://scripts/Utils.gd"
+"path": "res://scripts/Utilities/Utils.gd"
+}, {
+"base": "Node",
+"class": "Validators",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Validators.gd"
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
@@ -75,7 +80,8 @@ _global_script_class_icons={
 "Navigation_Node": "",
 "Player_Avatar": "",
 "Travel_Action": "",
-"Utils": ""
+"Utils": "",
+"Validators": ""
 }
 
 [application]
