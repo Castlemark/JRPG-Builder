@@ -53,6 +53,13 @@ func set_up_skin(connected_nodes_num : int) -> void:
 
 func set_up_actions(actions_list : Array):
 	for i in actions_list:
+		
+		if not Validators.minimal_info_fields_exist(i, ["type", "data"], "action has missing required fields, " + Validators.check_docu, "type"):
+			return
+		
+		if not Validators.action_is_valid(i.type as String, i.data):
+			return
+		
 		match (i.type as String):
 			"travel":
 				var action := Travel_Action.new()

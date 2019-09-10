@@ -1,4 +1,5 @@
 {
+    "name" : "example_map_1",
     "navigation_nodes":
     [
         {
@@ -70,14 +71,12 @@
         {
 			"x": 13,
 			"y": 8,
-			"filepath" : "Lantern",
-			"type": 0
+			"filepath" : "Lantern"
 		},
         {
             "x": 10,
 			"y": 20,
 			"filepath" : "SmallProps_Torch",
-			"type": 1,
 			"animation_data":
             {
                 "hframes": 6,
@@ -87,7 +86,7 @@
             }
         }
     ],
-    "backgroung_info":
+    "background_info":
     {
         "x_offset": 1,
         "y_offset": 1

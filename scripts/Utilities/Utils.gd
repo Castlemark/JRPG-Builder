@@ -25,10 +25,16 @@ static func load_json(path : String):
 	
 	var status : int = file.open(get_path(path), file.READ)
 	if status != OK:
-		print("Error when opening json file, error is: " + String(status))
-		return
+		print("Error when opening file at -> " + path + " <-. Please make sure the file exists, is in it's expected location and has it's appropriate name, error is: \n	" + String(status))
+		return null
 	
-	data = parse_json(file.get_as_text()) as Dictionary
+	var json_data : String = file.get_as_text()
+	var validation : String = validate_json(json_data)
+	if not validation.empty():
+		printerr("File at -> " + path + " <- doesn't have the correct format, error was: \n	line " + validation)
+		return null
+	
+	data = parse_json(json_data) as Dictionary
 	file.close()
 	
 	return data
