@@ -116,12 +116,21 @@ margin_top = 29.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="Missions" type="Tabs" parent="Game_Menu"]
+[node name="Journal" type="Tabs" parent="Game_Menu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="Encyclopedia" type="Tabs" parent="Game_Menu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 39.0
 margin_right = -5.0
 margin_bottom = -5.0
 [connection signal="pressed" from="Game_Menu/Inventory/Filter bar/All" to="." method="_on_pressed"]

@@ -1,0 +1,16 @@
+{
+    "target_amount": 1,
+    "side": "allies",
+    "cost": 30,
+    "delay": 1,
+    "damage": 0,
+    "effect":
+    {
+        "type": "health",
+        "receiver" : "same",
+        "amount": 0.25,
+        "duration": 0
+    },
+    "hits": 1,
+    "description": "Restore your allies, keep them fighting"
+}

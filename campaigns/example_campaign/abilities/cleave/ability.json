@@ -1,0 +1,16 @@
+{
+    "target_amount": 1,
+    "side": "enemies",
+    "cost": 30,
+    "delay": 0,
+    "damage": 0.9,
+    "effect":
+    {
+        "type": "health",
+        "receiver" : "same",
+        "amount": -0.1,
+        "duration": 3
+    },
+    "hits": 1,
+    "description": "Cut your enemies in half and make them bleed!"
+}
