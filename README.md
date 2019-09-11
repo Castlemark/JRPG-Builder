@@ -21,10 +21,9 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [ ] Character and Enemy module **(final)**
         - [ ] Characters
         - [ ] Enemy
-        - [ ] Equipment
-        - [ ] Stats (characters and enemies)
+        - [x] Equipment
         - [ ] Abilities
-        - [ ] Items
+        - [x] Items
 - [ ] <u>Structure Sprint - 23/08/19</u>
     - [ ] Story module V-1
         - [ ] NPC

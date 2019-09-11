@@ -21,7 +21,7 @@ const MAP : Resource = preload("res://scenes/map/Map.tscn")
 
 onready var transition : ColorRect = $UI/Transition as ColorRect
 onready var transition_tween : Tween = $UI/Transition/Tween as Tween
-onready var menus : Control = $Menus as Menu_Manager
+onready var menus : Menu_Manager = $Menus as Menu_Manager
 
 
 func _ready() -> void:
