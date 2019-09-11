@@ -34,7 +34,8 @@ func _ready() -> void:
 	var campaign_data : Dictionary = Utils.load_json("res://campaigns/" + campaign.name + "/campaign.json")
 	campaign.cur_map.name = campaign_data.map_name
 	campaign.cur_map.access_point = campaign_data.access_point
-	menus.initialize(campaign_data.inventory)
+	menus.initialize_inventory(campaign_data.inventory)
+	menus.initialize_party(campaign_data.party)
 	################
 	
 	### CONFIG ###

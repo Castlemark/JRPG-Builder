@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Between_node.gd"
 }, {
+"base": "Button",
+"class": "Character_UI",
+"language": "GDScript",
+"path": "res://scripts/ui/Character_UI.gd"
+}, {
 "base": "Spatial",
 "class": "Detail_Node",
 "language": "GDScript",
@@ -82,6 +87,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Background_Tile": "",
 "Between_node": "",
+"Character_UI": "",
 "Detail_Node": "",
 "Game_Manager": "",
 "Generic_Action": "",
@@ -117,6 +123,8 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1920
 window/size/height=1080
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [importer_defaults]
 

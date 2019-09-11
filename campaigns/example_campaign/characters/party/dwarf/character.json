@@ -1,11 +1,26 @@
 {
+    "start_level": 1,
     "min_stats":
     {
-
+        "strength": 5,
+        "dexterity": 2,
+        "constitution": 3,
+        "memory": 1,
+        "critic": 0.1,
+        "defence": 0,
+        "alt_defence": 0,
+        "speed": 2
     },
     "max_stats":
     {
-
+        "strength": 50,
+        "dexterity": 20,
+        "constitution": 30,
+        "memory": 12,
+        "critic": 0.2,
+        "defence": 20,
+        "alt_defence": 8,
+        "speed": 15
     },
     "abilities":
     [

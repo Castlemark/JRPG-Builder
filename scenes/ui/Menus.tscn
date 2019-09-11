@@ -112,16 +112,120 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
-margin_top = 29.0
+margin_top = 39.0
 margin_right = -5.0
 margin_bottom = -5.0
+
+[node name="Party" type="VBoxContainer" parent="Game_Menu/Party"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.2
+
+[node name="Party_Label" type="Label" parent="Game_Menu/Party/Party"]
+margin_right = 1373.0
+margin_bottom = 22.0
+text = "Party"
+valign = 1
+
+[node name="BG" type="Panel" parent="Game_Menu/Party/Party"]
+margin_top = 26.0
+margin_right = 1373.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Game_Menu/Party/Party/BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="Char_Container" type="HBoxContainer" parent="Game_Menu/Party/Party/BG/Scroll"]
+margin_right = 1363.0
+margin_bottom = 88.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Equipment" type="VBoxContainer" parent="Game_Menu/Party"]
+editor/display_folded = true
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.35
+anchor_bottom = 0.95
+margin_right = -13.0
+
+[node name="Equipment_Label" type="Label" parent="Game_Menu/Party/Equipment"]
+margin_right = 444.0
+margin_bottom = 22.0
+text = "Equipment"
+valign = 1
+
+[node name="Preview" type="Panel" parent="Game_Menu/Party/Equipment"]
+margin_top = 26.0
+margin_right = 444.0
+margin_bottom = 615.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Data" type="VBoxContainer" parent="Game_Menu/Party"]
+editor/display_folded = true
+anchor_left = 0.35
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = 13.0
+
+[node name="Stats_Label" type="Label" parent="Game_Menu/Party/Data"]
+margin_right = 902.0
+margin_bottom = 22.0
+text = "Stats"
+valign = 1
+
+[node name="Stats" type="Panel" parent="Game_Menu/Party/Data"]
+margin_top = 26.0
+margin_right = 902.0
+margin_bottom = 305.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Abilities_Label" type="Label" parent="Game_Menu/Party/Data"]
+margin_top = 309.0
+margin_right = 902.0
+margin_bottom = 331.0
+text = "Abilities"
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game_Menu/Party/Data"]
+margin_top = 335.0
+margin_right = 902.0
+margin_bottom = 615.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 26
+
+[node name="Abilities" type="Panel" parent="Game_Menu/Party/Data/HBoxContainer"]
+margin_right = 438.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Preview" type="Panel" parent="Game_Menu/Party/Data/HBoxContainer"]
+margin_left = 464.0
+margin_right = 902.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Journal" type="Tabs" parent="Game_Menu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
-margin_top = 29.0
+margin_top = 39.0
 margin_right = -5.0
 margin_bottom = -5.0
 

@@ -19,7 +19,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Map module V-2
         - [x] Individual art
     - [ ] Character and Enemy module **(final)**
-        - [ ] Characters
+        - [x] Characters
         - [ ] Enemy
         - [x] Equipment
         - [ ] Abilities

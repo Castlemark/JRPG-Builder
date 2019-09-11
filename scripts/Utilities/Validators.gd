@@ -12,6 +12,18 @@ const item_types := {
 	"equipment" : ["price", "slot", "stats", "min_level", "rarity"],
 	"quest_object" : ["keyword"]
 }
+const effect_types := {
+	"strength": [], "dexterity": [], "constitution": [], "memory": [], "critic": [], "defence": [], "alt_defence": [], "speed": [],
+	"health": [],
+	"evasion": [],
+	"shield": [],
+	"none": []
+}
+const receiver_types := {
+	"same": [],
+	"complementary": [],
+	"opposite": []
+}
 
 const stats := ["strength", "dexterity", "constitution", "memory", "critic", "defence", "alt_defence", "speed"]
 
@@ -54,18 +66,18 @@ static func optional_info_field_exists(info : Dictionary, parent_field : String,
 	
 	return valid
 
-static func type_is_valid(action : String, valid_types: Dictionary, data : Dictionary) -> bool:
+static func type_is_valid(type : String, valid_types: Dictionary, data : Dictionary) -> bool:
 	var valid:= true
 	
-	if action in valid_types.keys():
-		for field in valid_types.get(action):
+	if type in valid_types.keys():
+		for field in valid_types.get(type):
 			valid = data.has(field)
 			
 			if not valid:
-				printerr("type " + action + " is valid, but it's at least missing the \"" + field + "\" field")
+				printerr("type " + type + " is valid, but it's at least missing the \"" + field + "\" field")
 				return false
 		
 		return true
 	
-	printerr("action \"" + action + "\" is not a valid action type, valid types are: \n	" + String(valid_types.keys()))
+	printerr("type \"" + type + "\" is not a valid type, valid types are: \n	" + String(valid_types.keys()))
 	return false

@@ -1,6 +1,12 @@
 {
     "map_name": "example_map_1",
     "access_point": 0,
+    "party":
+    [
+        "dwarf",
+        "dwarf",
+        "dwarf"
+    ],
     "inventory":
     [
         "mace",
