@@ -1,5 +1,5 @@
 {
-    "name" : "example_map_1",
+    "name" : "example_map_2",
     "navigation_nodes":
     [
         {
@@ -59,8 +59,8 @@
                 "type" : "travel",
                 "data" :
                 {
-                  "map_name" : "example_map_2",
-                  "access_point" : 3
+                  "map_name" : "example_map_1",
+                  "access_point" : 1
                 }
               }
             ]
@@ -68,27 +68,11 @@
     ],
     "detail_art":
     [
-        {
-			"x": 13,
-			"y": 8,
-			"filepath" : "Lantern"
-		},
-        {
-            "x": 10,
-			"y": 20,
-			"filepath" : "SmallProps_Torch",
-			"animation_data":
-            {
-                "hframes": 6,
-    			"vframes": 1,
-                "total_frames": 6,
-    			"duration": 1.0
-            }
-        }
+
     ],
     "background_info":
     {
-        "x_offset": 1,
+        "x_offset": 2,
         "y_offset": 1
     }
 }

@@ -5,3 +5,14 @@
 [node name="Game_Manager" type="Node"]
 script = ExtResource( 1 )
 
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Transition" type="ColorRect" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Tween" type="Tween" parent="UI/Transition"]

@@ -9,37 +9,79 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite3D",
+"class": "Background_Tile",
+"language": "GDScript",
+"path": "res://scripts/map/Background_Tile.gd"
+}, {
 "base": "Position3D",
 "class": "Between_node",
 "language": "GDScript",
-"path": "res://scripts/Between_node.gd"
+"path": "res://scripts/map/Between_node.gd"
+}, {
+"base": "Spatial",
+"class": "Detail_Node",
+"language": "GDScript",
+"path": "res://scripts/map/Detail_Node.gd"
+}, {
+"base": "Node",
+"class": "Game_Manager",
+"language": "GDScript",
+"path": "res://scripts/Game_Manager.gd"
+}, {
+"base": "Node",
+"class": "Generic_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Generic_Action.gd"
 }, {
 "base": "Spatial",
 "class": "Map",
 "language": "GDScript",
-"path": "res://scripts/Map.gd"
+"path": "res://scripts/map/Map.gd"
+}, {
+"base": "Camera",
+"class": "Map_Camera",
+"language": "GDScript",
+"path": "res://scripts/map/Camera.gd"
 }, {
 "base": "Position3D",
 "class": "Navigation_Node",
 "language": "GDScript",
-"path": "res://scripts/Navigation_Node.gd"
+"path": "res://scripts/map/Navigation_Node.gd"
 }, {
 "base": "Position3D",
 "class": "Player_Avatar",
 "language": "GDScript",
-"path": "res://scripts/Player_Avatar.gd"
+"path": "res://scripts/map/Player_Avatar.gd"
+}, {
+"base": "Generic_Action",
+"class": "Travel_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Travel_Action.gd"
 }, {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
-"path": "res://scripts/Utils.gd"
+"path": "res://scripts/Utilities/Utils.gd"
+}, {
+"base": "Node",
+"class": "Validators",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Validators.gd"
 } ]
 _global_script_class_icons={
+"Background_Tile": "",
 "Between_node": "",
+"Detail_Node": "",
+"Game_Manager": "",
+"Generic_Action": "",
 "Map": "",
+"Map_Camera": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
-"Utils": ""
+"Travel_Action": "",
+"Utils": "",
+"Validators": ""
 }
 
 [application]
@@ -52,10 +94,17 @@ config/icon="res://icon.png"
 
 Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
 
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/unused_argument=false
+gdscript/warnings/narrowing_conversion=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1920
+window/size/height=1080
 
 [importer_defaults]
 
@@ -68,7 +117,7 @@ texture={
 "detect_3d": false,
 "flags/anisotropic": false,
 "flags/filter": true,
-"flags/mipmaps": true,
+"flags/mipmaps": false,
 "flags/repeat": true,
 "flags/srgb": 1,
 "process/HDR_as_SRGB": false,
@@ -87,7 +136,17 @@ texture={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+reset_camera_map={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+"click right mouse"={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+quality/filters/anisotropic_filter_level=1
