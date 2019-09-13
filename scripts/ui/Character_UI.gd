@@ -2,6 +2,8 @@ extends Button
 
 class_name Character_UI
 
+signal character_selected(character_data)
+
 onready var GM := $"/root/Game_Manager"
 
 onready var name_label : Label = $HBoxContainer/VBoxContainer/Name as Label
@@ -22,3 +24,9 @@ func initialize(character : Dictionary) -> void:
 	var img : Texture = Utils.load_img("res://campaigns/" + GM.campaign.name + "/characters/party/" + character.name + "/icon.png")
 	if img != null:
 		icon_rect.texture = img
+	
+	self.connect("focus_entered", self, "_on_focus")
+
+
+func _on_focus() -> void:
+	emit_signal("character_selected", self.data)

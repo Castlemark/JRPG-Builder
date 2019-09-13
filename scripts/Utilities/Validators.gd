@@ -17,6 +17,7 @@ const effect_types := {
 	"health": [],
 	"evasion": [],
 	"shield": [],
+	"strain": [],
 	"none": []
 }
 const receiver_types := {

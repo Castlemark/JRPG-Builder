@@ -9,6 +9,7 @@ onready var GM := $"/root/Game_Manager"
 onready var inventory_container : GridContainer = $Game_Menu/Inventory/Scroll/Grid as GridContainer
 onready var character_container : HBoxContainer = $Game_Menu/Party/Party/BG/Scroll/Char_Container as HBoxContainer
 onready var button_group : ButtonGroup = ($"Game_Menu/Inventory/Filter bar/All" as CheckBox).group 
+onready var stats_container : HBoxContainer = $Game_Menu/Party/Data/Stats/HBoxContainer as HBoxContainer
 
 func _ready():
 	self.visible = false
@@ -58,6 +59,7 @@ func initialize_party(character_list : Array) -> void:
 		var character_node : Character_UI = character_res.instance()
 		character_container.add_child(character_node, true)
 		character_node.initialize(character_data)
+		character_node.connect("character_selected", self, "_on_player_select")
 	pass
 
 func _on_pressed() -> void:
@@ -76,6 +78,10 @@ func _on_pressed() -> void:
 			_set_items_visibility(get_tree().get_nodes_in_group("equipment"), false)
 			_set_items_visibility(get_tree().get_nodes_in_group("consumable"), false)
 			_set_items_visibility(get_tree().get_nodes_in_group("quest_object"), true)
+
+func _on_player_select(data : Dictionary) -> void:
+	# TODO we need to interpolate the stats data
+	print(String(data))
 
 func _set_items_visibility(items: Array, visible : bool) -> void:
 	for item in items:

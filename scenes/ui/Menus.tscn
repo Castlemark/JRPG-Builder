@@ -20,6 +20,7 @@ rect_min_size = Vector2( 500, 500 )
 tab_align = 0
 
 [node name="Inventory" type="Tabs" parent="Game_Menu"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -32,7 +33,7 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
-margin_left = 3.8147e-006
+margin_left = 3.8147e-06
 margin_top = 30.0
 rect_min_size = Vector2( 400, 370 )
 
@@ -108,7 +109,6 @@ custom_constants/hseparation = 10
 columns = 5
 
 [node name="Party" type="Tabs" parent="Game_Menu"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -131,7 +131,7 @@ valign = 1
 [node name="BG" type="Panel" parent="Game_Menu/Party/Party"]
 margin_top = 26.0
 margin_right = 1373.0
-margin_bottom = 124.0
+margin_bottom = 123.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -145,7 +145,7 @@ margin_bottom = -5.0
 
 [node name="Char_Container" type="HBoxContainer" parent="Game_Menu/Party/Party/BG/Scroll"]
 margin_right = 1363.0
-margin_bottom = 88.0
+margin_bottom = 87.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -172,7 +172,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Data" type="VBoxContainer" parent="Game_Menu/Party"]
-editor/display_folded = true
 anchor_left = 0.35
 anchor_top = 0.2
 anchor_right = 0.95
@@ -191,6 +190,109 @@ margin_right = 902.0
 margin_bottom = 305.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game_Menu/Party/Data/Stats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Hard" type="VBoxContainer" parent="Game_Menu/Party/Data/Stats/HBoxContainer"]
+margin_right = 425.0
+margin_bottom = 259.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Strength" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_right = 425.0
+margin_bottom = 22.0
+text = "Strength:"
+
+[node name="Dexterity" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 26.0
+margin_right = 425.0
+margin_bottom = 48.0
+text = "Dexterity:"
+
+[node name="Constitution" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 52.0
+margin_right = 425.0
+margin_bottom = 74.0
+text = "Constitution:"
+
+[node name="Memory" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 78.0
+margin_right = 425.0
+margin_bottom = 100.0
+text = "Memory:"
+
+[node name="Critic" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 104.0
+margin_right = 425.0
+margin_bottom = 126.0
+text = "Critic:"
+
+[node name="Defence" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 130.0
+margin_right = 425.0
+margin_bottom = 152.0
+text = "Defence:"
+
+[node name="Alt Defence" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 156.0
+margin_right = 425.0
+margin_bottom = 178.0
+text = "Alt. Defence:"
+
+[node name="Speed" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Hard"]
+margin_top = 182.0
+margin_right = 425.0
+margin_bottom = 204.0
+text = "Speed:"
+
+[node name="MarginContainer" type="MarginContainer" parent="Game_Menu/Party/Data/Stats/HBoxContainer"]
+editor/display_folded = true
+margin_left = 429.0
+margin_right = 453.0
+margin_bottom = 259.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="VSeparator" type="VSeparator" parent="Game_Menu/Party/Data/Stats/HBoxContainer/MarginContainer"]
+margin_left = 10.0
+margin_right = 14.0
+margin_bottom = 259.0
+
+[node name="Soft" type="VBoxContainer" parent="Game_Menu/Party/Data/Stats/HBoxContainer"]
+margin_left = 457.0
+margin_right = 882.0
+margin_bottom = 259.0
+size_flags_horizontal = 3
+
+[node name="HP" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Soft"]
+margin_right = 425.0
+margin_bottom = 22.0
+text = "HP:"
+
+[node name="Shield" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Soft"]
+margin_top = 26.0
+margin_right = 425.0
+margin_bottom = 48.0
+text = "Shield:"
+
+[node name="Strain" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Soft"]
+margin_top = 52.0
+margin_right = 425.0
+margin_bottom = 74.0
+text = "Strain:"
+
+[node name="Evasion" type="Label" parent="Game_Menu/Party/Data/Stats/HBoxContainer/Soft"]
+margin_top = 78.0
+margin_right = 425.0
+margin_bottom = 100.0
+text = "Evasion:"
 
 [node name="Abilities_Label" type="Label" parent="Game_Menu/Party/Data"]
 margin_top = 309.0
