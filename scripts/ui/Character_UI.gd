@@ -2,7 +2,7 @@ extends Button
 
 class_name Character_UI
 
-signal character_selected(character_data)
+signal character_selected(character_data, abilities_data)
 
 onready var GM := $"/root/Game_Manager"
 
@@ -14,10 +14,12 @@ const _LEVEL = "Level "
 const _MAX_LEVEL = 30
 
 var data : Dictionary = {}
+var abilities : Array = []
 var current_stats : Dictionary = {}
 
-func initialize(character : Dictionary) -> void:
+func initialize(character : Dictionary, abilities_data : Array) -> void:
 	data = character
+	abilities = abilities_data
 	
 	current_stats = _calculate_current_stats(data.min_stats, data.max_stats, data.start_level)
 	
@@ -55,4 +57,4 @@ func _calculate_current_stats(min_stats : Dictionary, max_stats : Dictionary, cu
 	return stats
 
 func _on_focus() -> void:
-	emit_signal("character_selected", self.current_stats)
+	emit_signal("character_selected", self.current_stats, self.abilities)

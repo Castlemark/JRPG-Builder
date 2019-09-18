@@ -4,11 +4,14 @@ class_name Menu_Manager
 
 var item_res : Resource = preload("res://scenes/ui/inventory/Item.tscn")
 var character_res : Resource = preload("res://scenes/ui/party/Character_UI.tscn")
+var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
 
 onready var GM := $"/root/Game_Manager"
 onready var inventory_container : GridContainer = $Game_Menu/Inventory/Scroll/Grid as GridContainer
+onready var button_group_inventory : ButtonGroup = ($"Game_Menu/Inventory/Filter bar/All" as CheckBox).group
 onready var character_container : HBoxContainer = $Game_Menu/Party/Party/BG/Scroll/Char_Container as HBoxContainer
-onready var button_group : ButtonGroup = ($"Game_Menu/Inventory/Filter bar/All" as CheckBox).group 
+onready var character_ability_container : GridContainer = $Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/Container as GridContainer
+onready var character_ability_description : Label = $Game_Menu/Party/Data/HBoxContainer/Preview/Description as Label
 
 func _ready():
 	self.visible = false
@@ -43,9 +46,12 @@ func initialize_party(character_list : Array) -> void:
 		if not _validate_character(character_data, character):
 			continue
 		
+		var abilities_data := []
 		var abilities_valid := true
 		for ability in character_data.abilities:
 			var ability_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/abilities/" + ability + "/ability.json")
+			ability_data["name"] = ability
+			abilities_data.append(ability_data)
 			if abilities_valid:
 				abilities_valid = _validate_ability(ability_data, ability)
 		
@@ -57,12 +63,15 @@ func initialize_party(character_list : Array) -> void:
 		
 		var character_node : Character_UI = character_res.instance()
 		character_container.add_child(character_node, true)
-		character_node.initialize(character_data)
+		character_node.initialize(character_data, abilities_data)
 		character_node.connect("character_selected", self, "_on_player_select")
 	pass
 
+func _on_ability_pressed(data : Dictionary) -> void:
+	character_ability_description.text = String(data)
+
 func _on_filter_pressed() -> void:
-	match button_group.get_pressed_button().name:
+	match button_group_inventory.get_pressed_button().name:
 		"All":
 			_set_items_visibility(inventory_container.get_children(), true)
 		"Equipment":
@@ -78,8 +87,9 @@ func _on_filter_pressed() -> void:
 			_set_items_visibility(get_tree().get_nodes_in_group("consumable"), false)
 			_set_items_visibility(get_tree().get_nodes_in_group("quest_object"), true)
 
-func _on_player_select(data : Dictionary) -> void:
-	# TODO we need to interpolate the stats data
+func _on_player_select(data : Dictionary, abilities : Array) -> void:
+	character_ability_description.text = ""
+	
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.strength))
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.dexterity))
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.constitution))
@@ -94,6 +104,26 @@ func _on_player_select(data : Dictionary) -> void:
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.strain))
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion))
 	
+	_update_character_abilites(abilities)
+
+func _update_character_abilites(abilities_data : Array) -> void:
+	var difference : int =  abilities_data.size() - (character_ability_container.get_child_count() - 2)
+	
+	if difference > 0:
+		for i in range(abs(difference)):
+			var character_ability_node : Button = character_ability_res.instance()
+			character_ability_container.add_child(character_ability_node, true)
+			character_ability_container.move_child(character_ability_node, 0)
+	elif difference < 0:
+		for i in range(abs(difference)):
+			var node_to_delete = character_ability_container.get_child(0)
+			character_ability_container.remove_child(node_to_delete)
+			node_to_delete.queue_free()
+	
+	for i in range(abilities_data.size()):
+		var ability_node : Character_Ability = character_ability_container.get_child(i) as Character_Ability
+		ability_node.initialize(abilities_data[i])
+		ability_node.connect("ability_pressed", self, "_on_ability_pressed")
 
 func _set_items_visibility(items: Array, visible : bool) -> void:
 	for item in items:

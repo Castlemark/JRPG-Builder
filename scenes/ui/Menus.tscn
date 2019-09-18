@@ -150,7 +150,6 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Equipment" type="VBoxContainer" parent="Game_Menu/Party"]
-editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.2
 anchor_right = 0.35
@@ -317,21 +316,32 @@ size_flags_vertical = 3
 [node name="Scroll" type="ScrollContainer" parent="Game_Menu/Party/Data/HBoxContainer/Abilities"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
+margin_left = 12.0
 margin_top = 8.0
+margin_bottom = -8.0
 scroll_horizontal_enabled = false
 
-[node name="GridContainer" type="GridContainer" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll"]
-margin_right = 135.0
-margin_bottom = 100.0
+[node name="Container" type="GridContainer" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll"]
+margin_right = 426.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/vseparation = 8
 custom_constants/hseparation = 8
 columns = 3
 
-[node name="Button" type="Button" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/GridContainer"]
-margin_right = 135.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 135, 100 )
+[node name="Inv_Fill1" type="Panel" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/Container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 209.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+
+[node name="Inv_Fill2" type="Panel" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/Container"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 217.0
+margin_right = 426.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
 
 [node name="Preview" type="Panel" parent="Game_Menu/Party/Data/HBoxContainer"]
 margin_left = 464.0
@@ -339,6 +349,11 @@ margin_right = 902.0
 margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Description" type="Label" parent="Game_Menu/Party/Data/HBoxContainer/Preview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+autowrap = true
 
 [node name="Journal" type="Tabs" parent="Game_Menu"]
 visible = false
@@ -357,7 +372,7 @@ margin_left = 5.0
 margin_top = 39.0
 margin_right = -5.0
 margin_bottom = -5.0
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/All" to="." method="_on_pressed"]
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Equipment" to="." method="_on_pressed"]
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Consumables" to="." method="_on_pressed"]
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Quest_Items" to="." method="_on_pressed"]
+[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/All" to="." method="_on_filter_pressed"]
+[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Equipment" to="." method="_on_filter_pressed"]
+[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Consumables" to="." method="_on_filter_pressed"]
+[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Quest_Items" to="." method="_on_filter_pressed"]
