@@ -9,7 +9,6 @@ onready var GM := $"/root/Game_Manager"
 onready var inventory_container : GridContainer = $Game_Menu/Inventory/Scroll/Grid as GridContainer
 onready var character_container : HBoxContainer = $Game_Menu/Party/Party/BG/Scroll/Char_Container as HBoxContainer
 onready var button_group : ButtonGroup = ($"Game_Menu/Inventory/Filter bar/All" as CheckBox).group 
-onready var stats_container : HBoxContainer = $Game_Menu/Party/Data/Stats/HBoxContainer as HBoxContainer
 
 func _ready():
 	self.visible = false
@@ -62,7 +61,7 @@ func initialize_party(character_list : Array) -> void:
 		character_node.connect("character_selected", self, "_on_player_select")
 	pass
 
-func _on_pressed() -> void:
+func _on_filter_pressed() -> void:
 	match button_group.get_pressed_button().name:
 		"All":
 			_set_items_visibility(inventory_container.get_children(), true)
@@ -81,7 +80,15 @@ func _on_pressed() -> void:
 
 func _on_player_select(data : Dictionary) -> void:
 	# TODO we need to interpolate the stats data
-	print(String(data))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(data.max_stats.strength)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(data.max_stats.dexterity)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(data.max_stats.constitution)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Memory as Label).text = "Memory: " + String(data.max_stats.memory)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(data.max_stats.critic * 100) + "%"
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(data.max_stats.defence)
+	($"Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(data.max_stats.alt_defence)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(data.max_stats.speed)
+	
 
 func _set_items_visibility(items: Array, visible : bool) -> void:
 	for item in items:
