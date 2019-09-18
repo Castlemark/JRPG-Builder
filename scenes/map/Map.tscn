@@ -22,7 +22,7 @@ transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
 
 [node name="Player_Avatar" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, -5.06639e-07, 0, 5.06639e-07, 1, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, -5.06639e-007, 0, 5.06639e-007, 1, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="Player_Avatar"]
 editor/display_folded = true

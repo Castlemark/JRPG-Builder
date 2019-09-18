@@ -33,7 +33,7 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
-margin_left = 3.8147e-06
+margin_left = 3.8147e-006
 margin_top = 30.0
 rect_min_size = Vector2( 400, 370 )
 
@@ -313,6 +313,25 @@ margin_right = 438.0
 margin_bottom = 280.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Game_Menu/Party/Data/HBoxContainer/Abilities"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll"]
+margin_right = 135.0
+margin_bottom = 100.0
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 3
+
+[node name="Button" type="Button" parent="Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/GridContainer"]
+margin_right = 135.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 135, 100 )
 
 [node name="Preview" type="Panel" parent="Game_Menu/Party/Data/HBoxContainer"]
 margin_left = 464.0

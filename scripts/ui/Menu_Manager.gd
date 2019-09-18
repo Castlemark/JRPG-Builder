@@ -80,14 +80,19 @@ func _on_filter_pressed() -> void:
 
 func _on_player_select(data : Dictionary) -> void:
 	# TODO we need to interpolate the stats data
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(data.max_stats.strength)
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(data.max_stats.dexterity)
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(data.max_stats.constitution)
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Memory as Label).text = "Memory: " + String(data.max_stats.memory)
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(data.max_stats.critic * 100) + "%"
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(data.max_stats.defence)
-	($"Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(data.max_stats.alt_defence)
-	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(data.max_stats.speed)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.strength))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.dexterity))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.constitution))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Memory as Label).text = "Memory: " + String(round(data.memory))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.critic * 100)) + "%"
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.defence))
+	($"Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(round(data.alt_defence))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.speed))
+	
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(data.hp)
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.shield))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.strain))
+	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion))
 	
 
 func _set_items_visibility(items: Array, visible : bool) -> void:
