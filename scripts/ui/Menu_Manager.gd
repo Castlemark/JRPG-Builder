@@ -70,10 +70,10 @@ func initialize_party(character_list : Array) -> void:
 	pass
 
 func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Description as Label).text = data.description
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = data.description
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
 	
 	var targets : String = "Targets "
 	match (data.target_amount as int):
@@ -84,7 +84,7 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 		3:
 			targets += "all "
 	targets += data.side
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Targets as Label).text = targets
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Targets as Label).text = targets
 	
 	var damage : String = "Damage: " + String(data.damage) + " "
 	match (data.hits as int):
@@ -99,7 +99,7 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 		damage += "in " + String(data.delay) + turns
 	if data.damage == 0:
 		damage = " Damage: none"
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Damage as Label).text = damage
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = damage
 	
 	var effect : String = "Effect: " + data.effect.type + "\n    "
 	match (data.effect.receiver as String):
@@ -124,17 +124,17 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 			turns += "s"
 		effect += "for " + String(data.effect.duration) + turns
 	if data.effect.type == "none":
-		effect = "Effect: none"
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Effect as Label).text = effect
+		effect = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Effect as Label).text = effect
 
 func _reset_ability_preview():
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = null
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Name as Label).text = ""
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Description as Label).text = ""
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Level as Label).text = ""
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Targets as Label).text = ""
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Damage as Label).text = ""
-	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Effect as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = null
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Targets as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/Scroll/VBoxContainer/Effect as Label).text = ""
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:
