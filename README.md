@@ -22,7 +22,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
         - [x] Characters
         - [ ] Enemy
         - [x] Equipment
-        - [ ] Abilities
+        - [x] Abilities
         - [x] Items
 - [ ] <u>Structure Sprint - 23/08/19</u>
     - [ ] Story module V-1
