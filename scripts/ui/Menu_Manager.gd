@@ -180,6 +180,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			var character_ability_node : Button = character_ability_res.instance()
 			character_ability_container.add_child(character_ability_node, true)
 			character_ability_container.move_child(character_ability_node, 0)
+			character_ability_node.connect("ability_pressed", self, "_on_ability_pressed")
 	elif difference < 0:
 		for i in range(abs(difference)):
 			var node_to_delete = character_ability_container.get_child(0)
@@ -189,7 +190,6 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 	for i in range(abilities_data.size()):
 		var ability_node : Character_Ability = character_ability_container.get_child(i) as Character_Ability
 		ability_node.initialize(abilities_data[i])
-		ability_node.connect("ability_pressed", self, "_on_ability_pressed")
 
 func _set_items_visibility(items: Array, visible : bool) -> void:
 	for item in items:

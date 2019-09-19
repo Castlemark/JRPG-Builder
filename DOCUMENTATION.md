@@ -2,6 +2,8 @@
 
 >   As of now this documentation shouldn't be taken seriously, what you'll read here are notes taken by the dev team  to remember certain things.
 
+Journal can be triggered by combat, reach map node, buy item, kill amount monsters, ... Most probably will be definied in the campaign file
+
 *   Map files (map.json):
 
     *   Fields:
