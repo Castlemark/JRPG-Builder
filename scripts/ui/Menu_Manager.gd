@@ -11,7 +11,6 @@ onready var inventory_container : GridContainer = $Game_Menu/Inventory/Scroll/Gr
 onready var button_group_inventory : ButtonGroup = ($"Game_Menu/Inventory/Filter bar/All" as CheckBox).group
 onready var character_container : HBoxContainer = $Game_Menu/Party/Party/BG/Scroll/Char_Container as HBoxContainer
 onready var character_ability_container : GridContainer = $Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/Container as GridContainer
-onready var character_ability_description : VBoxContainer = $Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer as VBoxContainer
 
 func _ready():
 	self.visible = false
