@@ -391,6 +391,7 @@ margin_top = 62.0
 margin_right = 418.0
 margin_bottom = 84.0
 text = "Description: "
+autowrap = true
 
 [node name="HSeparator2" type="HSeparator" parent="Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer"]
 margin_top = 88.0

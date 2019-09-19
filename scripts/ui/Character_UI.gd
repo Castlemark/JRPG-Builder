@@ -38,23 +38,23 @@ func initialize(character : Dictionary, abilities_data : Array) -> void:
 func _calculate_current_stats(min_stats : Dictionary, max_stats : Dictionary, current_level : int) -> Dictionary:
 	var stats = {}
 	
-	stats["strength"] = min_stats.strength + ((current_level - 1) * (max_stats.strength - min_stats.strength)/_MAX_LEVEL)
-	stats["dexterity"] = min_stats.dexterity + (current_level - 1) * (max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
-	stats["constitution"] = min_stats.constitution + (current_level - 1) * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
-	stats["memory"] = min_stats.memory + (current_level - 1) * (max_stats.memory - min_stats.memory)/_MAX_LEVEL
-	stats["critic"] = min_stats.critic + (current_level - 1) * (max_stats.critic - min_stats.critic)/_MAX_LEVEL
-	stats["defence"] = min_stats.defence + (current_level - 1) * (max_stats.defence - min_stats.defence)/_MAX_LEVEL
-	stats["alt_defence"] = min_stats.alt_defence + (current_level - 1) * (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL
-	stats["speed"] = min_stats.speed + (current_level - 1) * (max_stats.speed - min_stats.speed)/_MAX_LEVEL
+	stats["strength"] = min_stats.strength + ((current_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
+	stats["dexterity"] = min_stats.dexterity + (current_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
+	stats["constitution"] = min_stats.constitution + (current_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
+	stats["memory"] = min_stats.memory + (current_level - 1) * float(max_stats.memory - min_stats.memory)/_MAX_LEVEL
+	stats["critic"] = min_stats.critic + (current_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
+	stats["defence"] = min_stats.defence + (current_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
+	stats["alt_defence"] = min_stats.alt_defence + (current_level - 1) * float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL
+	stats["speed"] = min_stats.speed + (current_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
 	
-	stats["hp"] = (min_stats.constitution + 1/4 * min_stats.strength + 1/3 * min_stats.defence \
-		+ (current_level - 1) * ((max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3 * min_stats.defence + (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-	stats["shield"] = (1/4 * min_stats.constitution + min_stats.alt_defence + 1/3 * min_stats.defence \
-		+ (current_level - 1) * ( 1/4 * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL + 1/3 * min_stats.defence + (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-	stats["strain"] = (1/2 * min_stats.speed + min_stats.strength + 1/3 * min_stats.alt_defence \
-		+ (current_level - 1) * (1/2 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3 * min_stats.defence + (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL)) * 10
-	stats["evasion"] = (min_stats.speed + 1/2 * min_stats.critic * 100 + 1/4 * min_stats.defence \
-		+ (current_level - 1) * ((max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4 * min_stats.defence + (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+	stats["hp"] = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
+		+ (current_level - 1) * (float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+	stats["shield"] = (1/4.0 * min_stats.constitution + float(min_stats.alt_defence) + 1/3.0 * min_stats.defence \
+		+ (current_level - 1) * ( 1/4.0 * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+	stats["strain"] = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.alt_defence \
+		+ (current_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL)) * 10
+	stats["evasion"] = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
+		+ (current_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
 	
 	return stats
 
