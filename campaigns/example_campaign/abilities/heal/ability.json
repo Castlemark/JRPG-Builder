@@ -1,4 +1,5 @@
 {
+    "min_level": 1,
     "target_amount": 1,
     "side": "allies",
     "cost": 30,

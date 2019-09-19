@@ -2,7 +2,7 @@ extends Button
 
 class_name Character_Ability
 
-signal ability_pressed(ability_data)
+signal ability_pressed(ability_data, icon)
 
 onready var GM := $"/root/Game_Manager"
 
@@ -21,4 +21,4 @@ func initialize(ability_data : Dictionary) -> void:
 		ability_icon.texture = img
 
 func _on_Ability_pressed() -> void:
-	emit_signal("ability_pressed", data)
+	emit_signal("ability_pressed", data, ability_icon.texture)

@@ -11,7 +11,7 @@ onready var inventory_container : GridContainer = $Game_Menu/Inventory/Scroll/Gr
 onready var button_group_inventory : ButtonGroup = ($"Game_Menu/Inventory/Filter bar/All" as CheckBox).group
 onready var character_container : HBoxContainer = $Game_Menu/Party/Party/BG/Scroll/Char_Container as HBoxContainer
 onready var character_ability_container : GridContainer = $Game_Menu/Party/Data/HBoxContainer/Abilities/Scroll/Container as GridContainer
-onready var character_ability_description : Label = $Game_Menu/Party/Data/HBoxContainer/Preview/Description as Label
+onready var character_ability_description : VBoxContainer = $Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer as VBoxContainer
 
 func _ready():
 	self.visible = false
@@ -50,8 +50,10 @@ func initialize_party(character_list : Array) -> void:
 		var abilities_valid := true
 		for ability in character_data.abilities:
 			var ability_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/abilities/" + ability + "/ability.json")
-			ability_data["name"] = ability
-			abilities_data.append(ability_data)
+			if ability_data != null:
+				ability_data["name"] = ability
+				abilities_data.append(ability_data)
+			
 			if abilities_valid:
 				abilities_valid = _validate_ability(ability_data, ability)
 		
@@ -67,8 +69,72 @@ func initialize_party(character_list : Array) -> void:
 		character_node.connect("character_selected", self, "_on_player_select")
 	pass
 
-func _on_ability_pressed(data : Dictionary) -> void:
-	character_ability_description.text = String(data)
+func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Description as Label).text = data.description
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
+	
+	var targets : String = "Targets "
+	match (data.target_amount as int):
+		1:
+			targets += "1 "
+		2:
+			targets += "2 "
+		3:
+			targets += "all "
+	targets += data.side
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Targets as Label).text = targets
+	
+	var damage : String = "Damage: " + String(data.damage) + " "
+	match (data.hits as int):
+		-1:
+			damage += "until miss "
+		_:
+			damage += "x " + String(data.hits)
+	if data.delay > 0:
+		var turns := " turn"
+		if data.delay != 1:
+			turns += "s"
+		damage += "in " + String(data.delay) + turns
+	if data.damage == 0:
+		damage = " Damage: none"
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Damage as Label).text = damage
+	
+	var effect : String = "Effect: " + data.effect.type + "\n    "
+	match (data.effect.receiver as String):
+		"same":
+			effect += "Targets same character"
+		"complementary":
+			var aux_targets : PoolStringArray = targets.split(" ")
+			aux_targets.insert(2, "complementary")
+			effect += aux_targets.join(" ")
+		"opposite":
+			var aux_targets : PoolStringArray = targets.split(" ")
+			aux_targets.insert(2, "opposite")
+			if "enemies" in aux_targets:
+				aux_targets.set(3, "allies")
+			elif "allies" in aux_targets:
+				aux_targets.set(3, "enemies")
+			effect += aux_targets.join(" ")
+	effect += "\n    Applies " + String(data.effect.amount) + " "
+	if (data.effect.duration as int) > 0:
+		var turns := " turn"
+		if data.effect.duration != 1:
+			turns += "s"
+		effect += "for " + String(data.effect.duration) + turns
+	if data.effect.type == "none":
+		effect = "Effect: none"
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Effect as Label).text = effect
+
+func _reset_ability_preview():
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = null
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/HBoxContainer/Name as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Description as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Level as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Targets as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Damage as Label).text = ""
+	($Game_Menu/Party/Data/HBoxContainer/Preview/VBoxContainer/Effect as Label).text = ""
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:
@@ -88,7 +154,6 @@ func _on_filter_pressed() -> void:
 			_set_items_visibility(get_tree().get_nodes_in_group("quest_object"), true)
 
 func _on_player_select(data : Dictionary, abilities : Array) -> void:
-	character_ability_description.text = ""
 	
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.strength))
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.dexterity))
@@ -104,9 +169,10 @@ func _on_player_select(data : Dictionary, abilities : Array) -> void:
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.strain))
 	($Game_Menu/Party/Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion))
 	
-	_update_character_abilites(abilities)
+	_update_character_abilites_panel(abilities)
+	_reset_ability_preview()
 
-func _update_character_abilites(abilities_data : Array) -> void:
+func _update_character_abilites_panel(abilities_data : Array) -> void:
 	var difference : int =  abilities_data.size() - (character_ability_container.get_child_count() - 2)
 	
 	if difference > 0:
@@ -160,7 +226,7 @@ func _validate_character(character_data, character : String) -> bool:
 func _validate_ability(ability_data, ability : String) -> bool:
 	if ability_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(ability_data, ["target_amount", "side", "cost", "delay", "damage", "effect", "hits", "description"], "ability is missing required fields", "", ability):
+	if not Validators.minimal_info_fields_exist(ability_data, [ "min_level", "target_amount", "side", "cost", "delay", "damage", "effect", "hits", "description"], "ability is missing required fields", "", ability):
 		return false
 	if not Validators.minimal_info_fields_exist(ability_data.effect, ["type", "receiver", "amount", "duration"], "ability is missing required fields in \"effect\" field", "", ability):
 		return false
