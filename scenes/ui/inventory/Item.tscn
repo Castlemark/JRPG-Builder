@@ -8,6 +8,7 @@ margin_right = 1027.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 125, 200 )
 size_flags_horizontal = 3
+toggle_mode = true
 shortcut_in_tooltip = false
 script = ExtResource( 1 )
 

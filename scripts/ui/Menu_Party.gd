@@ -5,6 +5,9 @@ class_name Menu_Party
 var character_res : Resource = preload("res://scenes/ui/party/Character_UI.tscn")
 var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
 
+var character_button_group := ButtonGroup.new()
+var ability_button_group := ButtonGroup.new()
+
 onready var GM := $"/root/Game_Manager"
 onready var character_container : HBoxContainer = $Party/BG/Scroll/Char_Container as HBoxContainer
 onready var character_ability_container : GridContainer = $Data/HBoxContainer/Abilities/Scroll/Container as GridContainer
@@ -44,6 +47,7 @@ func initialize_party(character_list : Array) -> void:
 		character_container.add_child(character_node, true)
 		character_node.initialize(character_data, abilities_data)
 		character_node.connect("character_selected", self, "_on_player_select")
+		character_node.group = character_button_group
 	pass
 
 func _validate_character(character_data, character : String) -> bool:
@@ -165,6 +169,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			character_ability_container.add_child(character_ability_node, true)
 			character_ability_container.move_child(character_ability_node, 0)
 			character_ability_node.connect("ability_pressed", self, "_on_ability_pressed")
+			character_ability_node.group = ability_button_group
 	elif difference < 0:
 		for i in range(abs(difference)):
 			var node_to_delete = character_ability_container.get_child(0)
@@ -174,3 +179,4 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 	for i in range(abilities_data.size()):
 		var ability_node : Character_Ability = character_ability_container.get_child(i) as Character_Ability
 		ability_node.initialize(abilities_data[i])
+		ability_node.pressed = false

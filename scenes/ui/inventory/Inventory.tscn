@@ -84,8 +84,8 @@ margin_bottom = -10.0
 rect_min_size = Vector2( 400, 360 )
 
 [node name="Grid" type="GridContainer" parent="Scroll"]
-margin_right = 1353.4
-margin_bottom = 688.0
+margin_right = 1699.0
+margin_bottom = 882.4
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10

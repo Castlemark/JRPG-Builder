@@ -33,7 +33,7 @@ func initialize(character : Dictionary, abilities_data : Array) -> void:
 	if img != null:
 		icon_rect.texture = img
 	
-	self.connect("focus_entered", self, "_on_focus")
+	self.connect("toggled", self, "_on_toggled")
 
 func _calculate_current_stats(min_stats : Dictionary, max_stats : Dictionary, current_level : int) -> Dictionary:
 	var stats = {}
@@ -58,5 +58,6 @@ func _calculate_current_stats(min_stats : Dictionary, max_stats : Dictionary, cu
 	
 	return stats
 
-func _on_focus() -> void:
-	emit_signal("character_selected", self.current_stats, self.abilities)
+func _on_toggled(pressed_button : bool) -> void:
+	if pressed_button:
+		emit_signal("character_selected", self.current_stats, self.abilities)
