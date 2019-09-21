@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Manager.gd" type="Script" id=2]
-
-[sub_resource type="ButtonGroup" id=1]
+[ext_resource path="res://scenes/ui/inventory/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/ui/Menu_Party.gd" type="Script" id=4]
 
 [node name="Menus" type="Control"]
 anchor_right = 1.0
@@ -19,7 +19,9 @@ anchor_bottom = 0.9
 rect_min_size = Vector2( 500, 500 )
 tab_align = 0
 
-[node name="Inventory" type="Tabs" parent="Game_Menu"]
+[node name="Inventory" parent="Game_Menu" instance=ExtResource( 3 )]
+
+[node name="Party" type="Tabs" parent="Game_Menu"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,96 +29,9 @@ margin_left = 5.0
 margin_top = 39.0
 margin_right = -5.0
 margin_bottom = -5.0
-
-[node name="BG" type="Panel" parent="Game_Menu/Inventory"]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.95
-margin_left = 3.8147e-006
-margin_top = 30.0
-rect_min_size = Vector2( 400, 370 )
-
-[node name="Filter bar" type="HBoxContainer" parent="Game_Menu/Inventory"]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.05
-margin_bottom = 25.0
-
-[node name="All" type="CheckBox" parent="Game_Menu/Inventory/Filter bar"]
-margin_right = 45.0
-margin_bottom = 25.0
-pressed = true
-group = SubResource( 1 )
-text = "All"
-
-[node name="VSeparator" type="VSeparator" parent="Game_Menu/Inventory/Filter bar"]
-margin_left = 49.0
-margin_right = 53.0
-margin_bottom = 25.0
-
-[node name="Equipment" type="CheckBox" parent="Game_Menu/Inventory/Filter bar"]
-margin_left = 57.0
-margin_right = 154.0
-margin_bottom = 25.0
-group = SubResource( 1 )
-text = "Equipment"
-
-[node name="VSeparator2" type="VSeparator" parent="Game_Menu/Inventory/Filter bar"]
-margin_left = 158.0
-margin_right = 162.0
-margin_bottom = 25.0
-
-[node name="Consumables" type="CheckBox" parent="Game_Menu/Inventory/Filter bar"]
-margin_left = 166.0
-margin_right = 280.0
-margin_bottom = 25.0
-group = SubResource( 1 )
-text = "Consumables"
-
-[node name="VSeparator3" type="VSeparator" parent="Game_Menu/Inventory/Filter bar"]
-margin_left = 284.0
-margin_right = 288.0
-margin_bottom = 25.0
-
-[node name="Quest_Items" type="CheckBox" parent="Game_Menu/Inventory/Filter bar"]
-margin_left = 292.0
-margin_right = 401.0
-margin_bottom = 25.0
-group = SubResource( 1 )
-text = "Quest Items"
-
-[node name="Scroll" type="ScrollContainer" parent="Game_Menu/Inventory"]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.95
-margin_left = 10.0
-margin_top = 40.0
-margin_right = -10.0
-margin_bottom = -10.0
-rect_min_size = Vector2( 400, 360 )
-
-[node name="Grid" type="GridContainer" parent="Game_Menu/Inventory/Scroll"]
-margin_right = 1353.4
-margin_bottom = 688.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/vseparation = 10
-custom_constants/hseparation = 10
-columns = 5
-
-[node name="Party" type="Tabs" parent="Game_Menu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 39.0
-margin_right = -5.0
-margin_bottom = -5.0
+script = ExtResource( 4 )
 
 [node name="Party" type="VBoxContainer" parent="Game_Menu/Party"]
-editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
@@ -151,7 +66,6 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Equipment" type="VBoxContainer" parent="Game_Menu/Party"]
-editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.2
 anchor_right = 0.35
@@ -438,7 +352,3 @@ margin_left = 5.0
 margin_top = 39.0
 margin_right = -5.0
 margin_bottom = -5.0
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/All" to="." method="_on_filter_pressed"]
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Equipment" to="." method="_on_filter_pressed"]
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Consumables" to="." method="_on_filter_pressed"]
-[connection signal="pressed" from="Game_Menu/Inventory/Filter bar/Quest_Items" to="." method="_on_filter_pressed"]
