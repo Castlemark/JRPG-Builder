@@ -1,18 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scripts/ui/Menu_Party.gd" type="Script" id=1]
+[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/ui/Menu_Party.gd" type="Script" id=2]
 
 [node name="Party" type="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
-margin_top = 39.0
+margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Party" type="VBoxContainer" parent="."]
-editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
@@ -20,14 +21,14 @@ anchor_bottom = 0.2
 
 [node name="Party_Label" type="Label" parent="Party"]
 margin_right = 1719.0
-margin_bottom = 14.0
+margin_bottom = 22.0
 text = "Party"
 valign = 1
 
 [node name="BG" type="Panel" parent="Party"]
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 1719.0
-margin_bottom = 155.0
+margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -41,7 +42,7 @@ margin_bottom = -5.0
 
 [node name="Char_Container" type="HBoxContainer" parent="Party/BG/Scroll"]
 margin_right = 1709.0
-margin_bottom = 127.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -56,14 +57,14 @@ margin_right = -13.0
 
 [node name="Equipment_Label" type="Label" parent="Equipment"]
 margin_right = 560.0
-margin_bottom = 14.0
+margin_bottom = 22.0
 text = "Equipment"
 valign = 1
 
 [node name="Preview" type="Panel" parent="Equipment"]
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 560.0
-margin_bottom = 777.0
+margin_bottom = 802.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -77,14 +78,14 @@ margin_left = 13.0
 
 [node name="Stats_Label" type="Label" parent="Data"]
 margin_right = 1133.0
-margin_bottom = 14.0
+margin_bottom = 22.0
 text = "Stats"
 valign = 1
 
 [node name="Stats" type="Panel" parent="Data"]
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 1133.0
-margin_bottom = 386.0
+margin_bottom = 399.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -98,117 +99,117 @@ margin_bottom = -10.0
 
 [node name="Hard" type="VBoxContainer" parent="Data/Stats/HBoxContainer"]
 margin_right = 540.0
-margin_bottom = 348.0
+margin_bottom = 353.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Strength" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
 margin_right = 540.0
-margin_bottom = 14.0
+margin_bottom = 22.0
 text = "Strength:"
 
 [node name="Dexterity" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 540.0
-margin_bottom = 32.0
+margin_bottom = 48.0
 text = "Dexterity:"
 
 [node name="Constitution" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 36.0
+margin_top = 52.0
 margin_right = 540.0
-margin_bottom = 50.0
+margin_bottom = 74.0
 text = "Constitution:"
 
 [node name="Memory" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 54.0
+margin_top = 78.0
 margin_right = 540.0
-margin_bottom = 68.0
+margin_bottom = 100.0
 text = "Memory:"
 
 [node name="Critic" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 72.0
+margin_top = 104.0
 margin_right = 540.0
-margin_bottom = 86.0
+margin_bottom = 126.0
 text = "Critic:"
 
 [node name="Defence" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 90.0
+margin_top = 130.0
 margin_right = 540.0
-margin_bottom = 104.0
+margin_bottom = 152.0
 text = "Defence:"
 
 [node name="Alt Defence" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 108.0
+margin_top = 156.0
 margin_right = 540.0
-margin_bottom = 122.0
+margin_bottom = 178.0
 text = "Alt. Defence:"
 
 [node name="Speed" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 126.0
+margin_top = 182.0
 margin_right = 540.0
-margin_bottom = 140.0
+margin_bottom = 204.0
 text = "Speed:"
 
 [node name="MarginContainer" type="MarginContainer" parent="Data/Stats/HBoxContainer"]
 editor/display_folded = true
 margin_left = 544.0
 margin_right = 568.0
-margin_bottom = 348.0
+margin_bottom = 353.0
 custom_constants/margin_right = 10
 custom_constants/margin_left = 10
 
 [node name="VSeparator" type="VSeparator" parent="Data/Stats/HBoxContainer/MarginContainer"]
 margin_left = 10.0
 margin_right = 14.0
-margin_bottom = 348.0
+margin_bottom = 353.0
 
 [node name="Soft" type="VBoxContainer" parent="Data/Stats/HBoxContainer"]
 margin_left = 572.0
 margin_right = 1113.0
-margin_bottom = 348.0
+margin_bottom = 353.0
 size_flags_horizontal = 3
 
 [node name="HP" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
 margin_right = 541.0
-margin_bottom = 14.0
+margin_bottom = 22.0
 text = "HP:"
 
 [node name="Shield" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 541.0
-margin_bottom = 32.0
+margin_bottom = 48.0
 text = "Shield:"
 
 [node name="Strain" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 36.0
+margin_top = 52.0
 margin_right = 541.0
-margin_bottom = 50.0
+margin_bottom = 74.0
 text = "Strain:"
 
 [node name="Evasion" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 54.0
+margin_top = 78.0
 margin_right = 541.0
-margin_bottom = 68.0
+margin_bottom = 100.0
 text = "Evasion:"
 
 [node name="Abilities_Label" type="Label" parent="Data"]
-margin_top = 390.0
+margin_top = 403.0
 margin_right = 1133.0
-margin_bottom = 404.0
+margin_bottom = 425.0
 text = "Abilities"
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Data"]
-margin_top = 408.0
+margin_top = 429.0
 margin_right = 1133.0
-margin_bottom = 777.0
+margin_bottom = 802.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 26
 
 [node name="Abilities" type="Panel" parent="Data/HBoxContainer"]
 margin_right = 553.0
-margin_bottom = 369.0
+margin_bottom = 373.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -222,7 +223,7 @@ scroll_horizontal_enabled = false
 
 [node name="Container" type="GridContainer" parent="Data/HBoxContainer/Abilities/Scroll"]
 margin_right = 541.0
-margin_bottom = 353.0
+margin_bottom = 357.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 8
@@ -245,7 +246,7 @@ size_flags_horizontal = 3
 [node name="Preview" type="Panel" parent="Data/HBoxContainer"]
 margin_left = 579.0
 margin_right = 1133.0
-margin_bottom = 369.0
+margin_bottom = 373.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -260,7 +261,7 @@ scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Data/HBoxContainer/Preview/Scroll"]
 margin_right = 534.0
-margin_bottom = 349.0
+margin_bottom = 353.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -277,9 +278,9 @@ stretch_mode = 5
 
 [node name="Name" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer"]
 margin_left = 54.0
-margin_top = 18.0
+margin_top = 14.0
 margin_right = 534.0
-margin_bottom = 32.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 
 [node name="HSeparator" type="HSeparator" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
@@ -290,30 +291,30 @@ margin_bottom = 58.0
 [node name="Description" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
 margin_top = 62.0
 margin_right = 534.0
-margin_bottom = 76.0
+margin_bottom = 84.0
 autowrap = true
 
 [node name="HSeparator2" type="HSeparator" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
-margin_top = 80.0
-margin_right = 534.0
-margin_bottom = 84.0
-
-[node name="Level" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
 margin_top = 88.0
 margin_right = 534.0
-margin_bottom = 102.0
+margin_bottom = 92.0
+
+[node name="Level" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
+margin_top = 96.0
+margin_right = 534.0
+margin_bottom = 118.0
 
 [node name="Targets" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
-margin_top = 106.0
+margin_top = 122.0
 margin_right = 534.0
-margin_bottom = 120.0
+margin_bottom = 144.0
 
 [node name="Damage" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
-margin_top = 124.0
+margin_top = 148.0
 margin_right = 534.0
-margin_bottom = 138.0
+margin_bottom = 170.0
 
 [node name="Effect" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
-margin_top = 142.0
+margin_top = 174.0
 margin_right = 534.0
-margin_bottom = 156.0
+margin_bottom = 196.0
