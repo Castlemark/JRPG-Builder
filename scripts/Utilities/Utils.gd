@@ -3,7 +3,7 @@ class_name Utils
 static func get_path(path : String) -> String:
 	return ProjectSettings.globalize_path(path)
 
-static func load_img(direction : String) -> Resource:
+static func _read_img(direction : String) -> Image:
 	var path : String = get_path(direction)
 	
 	var file_exists := File.new().file_exists(path)
@@ -15,8 +15,20 @@ static func load_img(direction : String) -> Resource:
 	var itex : ImageTexture = ImageTexture.new()
 	
 	img.load(path)
-	itex.create_from_image(img)
+	return img
+
+static func load_img_3D(direction : String) -> Resource:
+	var img : Image = _read_img(direction)
+	var itex : ImageTexture = ImageTexture.new()
 	
+	itex.create_from_image(img, 20)
+	return itex
+
+static func load_img_GUI(direction : String) -> Resource:
+	var img : Image = _read_img(direction)
+	var itex : ImageTexture = ImageTexture.new()
+	
+	itex.create_from_image(img, 8)
 	return itex
 
 static func load_json(path : String):

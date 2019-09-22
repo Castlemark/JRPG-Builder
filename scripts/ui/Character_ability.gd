@@ -13,10 +13,10 @@ var data : Dictionary = {}
 
 func initialize(ability_data : Dictionary) -> void:
 	data = ability_data
-	
+
 	label.text = (data.name as String).replace("_", " ")
-	
-	var img : Texture = Utils.load_img("res://campaigns/" + GM.campaign.name + "/abilities/" + data.name + "/icon.png")
+
+	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/abilities/" + data.name + "/icon.png")
 	if img != null:
 		ability_icon.texture = img
 

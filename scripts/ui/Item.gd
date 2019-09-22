@@ -11,14 +11,14 @@ var data : Dictionary = {}
 
 func initialize(item : Dictionary) -> void:
 	data = item.data
-	
+
 	self.add_to_group(item.type)
 	label.text = item.name
-	
+
 	var tooltip := String(data)
 	tooltip = tooltip.substr(1, tooltip.length() - 1).replace(",", "\n")
 	self.hint_tooltip = tooltip
-	
-	var img : Texture = Utils.load_img("res://campaigns/" + GM.campaign.name + "/items/" + item.name + "/item.png")
+
+	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/items/" + item.name + "/item.png")
 	if img != null:
 		image.texture = img
