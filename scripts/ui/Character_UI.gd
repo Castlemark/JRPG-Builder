@@ -41,7 +41,6 @@ func _calculate_current_stats(min_stats : Dictionary, max_stats : Dictionary, cu
 	stats["strength"] = min_stats.strength + ((current_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
 	stats["dexterity"] = min_stats.dexterity + (current_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
 	stats["constitution"] = min_stats.constitution + (current_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
-	stats["memory"] = min_stats.memory + (current_level - 1) * float(max_stats.memory - min_stats.memory)/_MAX_LEVEL
 	stats["critic"] = min_stats.critic + (current_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
 	stats["defence"] = min_stats.defence + (current_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
 	stats["alt_defence"] = min_stats.alt_defence + (current_level - 1) * float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL

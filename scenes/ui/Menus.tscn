@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://default_assets/theme/theme_buttons.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Manager.gd" type="Script" id=2]
 [ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=3]
-[ext_resource path="res://default_assets/theme/backpack.png" type="Texture" id=4]
-[ext_resource path="res://default_assets/theme/team.png" type="Texture" id=5]
-[ext_resource path="res://default_assets/theme/encyclopedia.png" type="Texture" id=6]
-[ext_resource path="res://default_assets/theme/settings.png" type="Texture" id=7]
+[ext_resource path="res://default_assets/user_interface/backpack.png" type="Texture" id=4]
+[ext_resource path="res://default_assets/user_interface/team.png" type="Texture" id=5]
+[ext_resource path="res://default_assets/user_interface/encyclopedia.png" type="Texture" id=6]
+[ext_resource path="res://default_assets/user_interface/settings.png" type="Texture" id=7]
 [ext_resource path="res://scenes/ui/inventory/Inventory.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/ui/party/Party.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ui/encyclopedia/Encyclopedia.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -98,10 +99,7 @@ visible = false
 [node name="Party" parent="Content" instance=ExtResource( 9 )]
 visible = false
 
-[node name="Encyclopedia" type="Tabs" parent="Content"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Encyclopedia" parent="Content" instance=ExtResource( 10 )]
 
 [node name="Settings" type="Tabs" parent="Content"]
 visible = false

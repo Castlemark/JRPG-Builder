@@ -15,7 +15,7 @@ static func load_img(direction : String) -> Resource:
 	var itex : ImageTexture = ImageTexture.new()
 	
 	img.load(path)
-	itex.create_from_image(img, 16)
+	itex.create_from_image(img)
 	
 	return itex
 

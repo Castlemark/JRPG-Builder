@@ -54,7 +54,7 @@ func _update_current_screen(section : Button) -> void:
 		current_screen = SCREEN_NONE
 		
 		animation_in_progress = true
-		tween.interpolate_property(self, "margin_top", null, MIN_SIZE, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(self, "margin_top", null, MIN_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 		tween.start()
 		yield(tween,"tween_completed")
 		animation_in_progress = false
@@ -68,7 +68,7 @@ func _update_current_screen(section : Button) -> void:
 		current_screen = section.name
 		
 		animation_in_progress = true
-		tween.interpolate_property(self, "margin_top", null, MAX_SIZE, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(self, "margin_top", null, MAX_SIZE, 0.5, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 		tween.start()
 		yield(tween,"tween_completed")
 		animation_in_progress = false

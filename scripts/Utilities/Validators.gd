@@ -26,7 +26,7 @@ const receiver_types := {
 	"opposite": []
 }
 
-const stats := ["strength", "dexterity", "constitution", "memory", "critic", "defence", "alt_defence", "speed"]
+const stats := ["strength", "dexterity", "constitution", "critic", "defence", "alt_defence", "speed"]
 
 static func minimal_info_fields_exist(info : Dictionary, fields : Array, msg : String, name_field : String, id : String = "") -> bool:
 	var valid := true

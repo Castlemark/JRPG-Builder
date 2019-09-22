@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-7ef6af8ad0b93613f24f4e37d93d8c47.s3tc.stex"
-path.etc2="res://.import/icon.png-7ef6af8ad0b93613f24f4e37d93d8c47.etc2.stex"
+path.s3tc="res://.import/encyclopedia.png-0c088f9d88d9faf233e7f9710757af16.s3tc.stex"
+path.etc2="res://.import/encyclopedia.png-0c088f9d88d9faf233e7f9710757af16.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://campaigns/example_campaign/abilities/cleave/icon.png"
-dest_files=[ "res://.import/icon.png-7ef6af8ad0b93613f24f4e37d93d8c47.s3tc.stex", "res://.import/icon.png-7ef6af8ad0b93613f24f4e37d93d8c47.etc2.stex" ]
+source_file="res://default_assets/user_interface/encyclopedia.png"
+dest_files=[ "res://.import/encyclopedia.png-0c088f9d88d9faf233e7f9710757af16.s3tc.stex", "res://.import/encyclopedia.png-0c088f9d88d9faf233e7f9710757af16.etc2.stex" ]
 
 [params]
 

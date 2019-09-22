@@ -1,0 +1,460 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/ui/Menu_Encyclopedia.gd" type="Script" id=2]
+[ext_resource path="res://default_assets/user_interface/encyclopedia/journal.png" type="Texture" id=3]
+[ext_resource path="res://default_assets/user_interface/encyclopedia/bestiary.png" type="Texture" id=4]
+[ext_resource path="res://default_assets/user_interface/encyclopedia/abilities.png" type="Texture" id=5]
+[ext_resource path="res://default_assets/user_interface/encyclopedia/stats.png" type="Texture" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=7]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[node name="Encyclopedia" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+custom_constants/separation = 26
+
+[node name="Selector" type="VBoxContainer" parent="HBoxContainer"]
+editor/display_folded = true
+margin_right = 125.0
+margin_bottom = 972.0
+rect_min_size = Vector2( 125, 0 )
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Selector"]
+margin_right = 125.0
+margin_bottom = 22.0
+text = "Categories"
+
+[node name="BG" type="Panel" parent="HBoxContainer/Selector"]
+margin_top = 26.0
+margin_right = 125.0
+margin_bottom = 567.0
+rect_min_size = Vector2( 0, 541 )
+size_flags_horizontal = 3
+
+[node name="Container" type="VBoxContainer" parent="HBoxContainer/Selector/BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 7
+alignment = 1
+
+[node name="Journal" type="Button" parent="HBoxContainer/Selector/BG/Container"]
+editor/display_folded = true
+margin_right = 105.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 0, 125 )
+toggle_mode = true
+group = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Selector/BG/Container/Journal"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+custom_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Selector/BG/Container/Journal/VBoxContainer"]
+margin_right = 101.0
+margin_bottom = 101.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/Selector/BG/Container/Journal/VBoxContainer"]
+margin_top = 101.0
+margin_right = 101.0
+margin_bottom = 123.0
+text = "Journal"
+align = 1
+
+[node name="Bestiary" type="Button" parent="HBoxContainer/Selector/BG/Container"]
+editor/display_folded = true
+margin_top = 132.0
+margin_right = 105.0
+margin_bottom = 257.0
+rect_min_size = Vector2( 0, 125 )
+toggle_mode = true
+group = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Selector/BG/Container/Bestiary"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+custom_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Selector/BG/Container/Bestiary/VBoxContainer"]
+margin_right = 101.0
+margin_bottom = 101.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/Selector/BG/Container/Bestiary/VBoxContainer"]
+margin_top = 101.0
+margin_right = 101.0
+margin_bottom = 123.0
+text = "Bestiary"
+align = 1
+
+[node name="Abilities" type="Button" parent="HBoxContainer/Selector/BG/Container"]
+editor/display_folded = true
+margin_top = 264.0
+margin_right = 105.0
+margin_bottom = 389.0
+rect_min_size = Vector2( 0, 125 )
+toggle_mode = true
+group = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Selector/BG/Container/Abilities"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+custom_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Selector/BG/Container/Abilities/VBoxContainer"]
+margin_right = 101.0
+margin_bottom = 101.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/Selector/BG/Container/Abilities/VBoxContainer"]
+margin_top = 101.0
+margin_right = 101.0
+margin_bottom = 123.0
+text = "Abilities"
+align = 1
+
+[node name="Stats" type="Button" parent="HBoxContainer/Selector/BG/Container"]
+editor/display_folded = true
+margin_top = 396.0
+margin_right = 105.0
+margin_bottom = 521.0
+rect_min_size = Vector2( 0, 125 )
+toggle_mode = true
+group = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Selector/BG/Container/Stats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = -2.0
+custom_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/Selector/BG/Container/Stats/VBoxContainer"]
+margin_right = 101.0
+margin_bottom = 101.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/Selector/BG/Container/Stats/VBoxContainer"]
+margin_top = 101.0
+margin_right = 101.0
+margin_bottom = 123.0
+text = "Statistics"
+align = 1
+
+[node name="Content" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 151.0
+margin_right = 1302.0
+margin_bottom = 972.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Content"]
+margin_right = 1151.0
+margin_bottom = 22.0
+
+[node name="BG" type="Panel" parent="HBoxContainer/Content"]
+margin_top = 26.0
+margin_right = 1151.0
+margin_bottom = 972.0
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="HBoxContainer/Content/BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+scroll_horizontal_enabled = false
+
+[node name="Grid" type="GridContainer" parent="HBoxContainer/Content/BG/Scroll"]
+margin_right = 1131.0
+margin_bottom = 926.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 5
+
+[node name="Inv_Fill_1" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 275.0
+size_flags_horizontal = 3
+
+[node name="Inv_Fill_2" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 285.0
+margin_right = 560.0
+size_flags_horizontal = 3
+
+[node name="Inv_Fill_3" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 570.0
+margin_right = 845.0
+size_flags_horizontal = 3
+
+[node name="Inv_Fill_4" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 855.0
+margin_right = 1130.0
+size_flags_horizontal = 3
+
+[node name="Enemy_Preview" type="VBoxContainer" parent="HBoxContainer"]
+editor/display_folded = true
+margin_left = 1328.0
+margin_right = 1728.0
+margin_bottom = 972.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Enemy_Preview"]
+margin_right = 400.0
+margin_bottom = 22.0
+text = "Preview"
+
+[node name="BG" type="Panel" parent="HBoxContainer/Enemy_Preview"]
+margin_top = 26.0
+margin_right = 400.0
+margin_bottom = 466.0
+rect_min_size = Vector2( 0, 440 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Enemy_Preview/BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+rect_pivot_offset = Vector2( -375.8, 231.95 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Color_BG" type="ColorRect" parent="HBoxContainer/Enemy_Preview/BG/VBoxContainer"]
+margin_right = 380.0
+margin_bottom = 380.0
+rect_min_size = Vector2( 0, 380 )
+size_flags_horizontal = 3
+
+[node name="Sprite" type="Sprite" parent="HBoxContainer/Enemy_Preview/BG/VBoxContainer/Color_BG"]
+position = Vector2( 190, 190 )
+scale = Vector2( 5.95, 5.95 )
+texture = ExtResource( 7 )
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Enemy_Preview/BG/VBoxContainer"]
+margin_top = 384.0
+margin_right = 380.0
+margin_bottom = 394.0
+custom_constants/margin_top = 10
+
+[node name="Name" type="Label" parent="HBoxContainer/Enemy_Preview/BG/VBoxContainer"]
+margin_top = 398.0
+margin_right = 380.0
+margin_bottom = 420.0
+text = "NAME"
+align = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Enemy_Preview/BG/VBoxContainer"]
+margin_top = 424.0
+margin_right = 380.0
+margin_bottom = 424.0
+
+[node name="Stats_Label" type="Label" parent="HBoxContainer/Enemy_Preview"]
+margin_top = 470.0
+margin_right = 400.0
+margin_bottom = 492.0
+text = "Stats"
+align = 1
+
+[node name="Abilities" type="Panel" parent="HBoxContainer/Enemy_Preview"]
+margin_top = 496.0
+margin_right = 400.0
+margin_bottom = 772.0
+rect_min_size = Vector2( 0, 170 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Stats" type="VBoxContainer" parent="HBoxContainer/Enemy_Preview/Abilities"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Container" type="HBoxContainer" parent="HBoxContainer/Enemy_Preview/Abilities/Stats"]
+margin_right = 380.0
+margin_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Hard" type="VBoxContainer" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container"]
+margin_right = 180.0
+margin_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Strength" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_right = 180.0
+margin_bottom = 22.0
+text = "Strength: "
+
+[node name="Dexterity" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_top = 26.0
+margin_right = 180.0
+margin_bottom = 48.0
+text = "Dexterity: "
+
+[node name="Constitution" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_top = 52.0
+margin_right = 180.0
+margin_bottom = 74.0
+text = "Constitution: "
+
+[node name="Critic" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_top = 78.0
+margin_right = 180.0
+margin_bottom = 100.0
+text = "Critic: "
+
+[node name="Defence" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_top = 104.0
+margin_right = 180.0
+margin_bottom = 126.0
+text = "Defence: "
+
+[node name="Alt_Defence" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_top = 130.0
+margin_right = 180.0
+margin_bottom = 152.0
+text = "Alt. Defence: "
+
+[node name="Speed" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+margin_top = 156.0
+margin_right = 180.0
+margin_bottom = 178.0
+text = "Speed: "
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container"]
+editor/display_folded = true
+margin_left = 184.0
+margin_right = 196.0
+margin_bottom = 256.0
+custom_constants/margin_right = 4
+custom_constants/margin_left = 4
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/MarginContainer"]
+margin_left = 4.0
+margin_right = 8.0
+margin_bottom = 256.0
+
+[node name="Soft" type="VBoxContainer" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container"]
+margin_left = 200.0
+margin_right = 380.0
+margin_bottom = 256.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HP" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
+margin_right = 180.0
+margin_bottom = 22.0
+text = "HP: "
+
+[node name="Shield" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
+margin_top = 26.0
+margin_right = 180.0
+margin_bottom = 48.0
+text = "Shield: "
+
+[node name="Strain" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
+margin_top = 52.0
+margin_right = 180.0
+margin_bottom = 74.0
+text = "Strain: "
+
+[node name="Evasion" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
+margin_top = 78.0
+margin_right = 180.0
+margin_bottom = 100.0
+text = "Evasion: "
+
+[node name="Damage" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
+margin_top = 104.0
+margin_right = 180.0
+margin_bottom = 126.0
+text = "Damage: "
+
+[node name="Abilities_Label" type="Label" parent="HBoxContainer/Enemy_Preview"]
+margin_top = 776.0
+margin_right = 400.0
+margin_bottom = 798.0
+text = "Abilities"
+align = 1
+
+[node name="Abilities2" type="Panel" parent="HBoxContainer/Enemy_Preview"]
+margin_top = 802.0
+margin_right = 400.0
+margin_bottom = 972.0
+rect_min_size = Vector2( 0, 170 )
+
+[node name="Scroll" type="ScrollContainer" parent="HBoxContainer/Enemy_Preview/Abilities2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+rect_min_size = Vector2( 0, 150 )
+scroll_vertical_enabled = false
+
+[node name="Container" type="HBoxContainer" parent="HBoxContainer/Enemy_Preview/Abilities2/Scroll"]
+margin_right = 380.0
+margin_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

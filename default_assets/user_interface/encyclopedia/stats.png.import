@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/encyclopedia.png-beddb9d0ca9cea8c90a51403f24041fb.s3tc.stex"
-path.etc2="res://.import/encyclopedia.png-beddb9d0ca9cea8c90a51403f24041fb.etc2.stex"
+path.s3tc="res://.import/stats.png-e0c27b72238a5a75ca3906e19a9e588b.s3tc.stex"
+path.etc2="res://.import/stats.png-e0c27b72238a5a75ca3906e19a9e588b.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://default_assets/theme/encyclopedia.png"
-dest_files=[ "res://.import/encyclopedia.png-beddb9d0ca9cea8c90a51403f24041fb.s3tc.stex", "res://.import/encyclopedia.png-beddb9d0ca9cea8c90a51403f24041fb.etc2.stex" ]
+source_file="res://default_assets/user_interface/encyclopedia/stats.png"
+dest_files=[ "res://.import/stats.png-e0c27b72238a5a75ca3906e19a9e588b.s3tc.stex", "res://.import/stats.png-e0c27b72238a5a75ca3906e19a9e588b.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=0
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
