@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex"
-path.etc2="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex"
+path.s3tc="res://.import/attack.png-1f873416ca93b4de549e3a385375bd3c.s3tc.stex"
+path.etc2="res://.import/attack.png-1f873416ca93b4de549e3a385375bd3c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex", "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex" ]
+source_file="res://campaigns/example_campaign/characters/enemies/Skeleton/attack.png"
+dest_files=[ "res://.import/attack.png-1f873416ca93b4de549e3a385375bd3c.s3tc.stex", "res://.import/attack.png-1f873416ca93b4de549e3a385375bd3c.etc2.stex" ]
 
 [params]
 

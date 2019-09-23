@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Encyclopedia_Enemy.gd"
 }, {
+"base": "VBoxContainer",
+"class": "Enemy_preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Enemy_Preview.gd"
+}, {
 "base": "Node",
 "class": "Game_Manager",
 "language": "GDScript",
@@ -116,6 +121,7 @@ _global_script_class_icons={
 "Character_UI": "",
 "Detail_Node": "",
 "Encyclopedia_Enemy": "",
+"Enemy_preview": "",
 "Game_Manager": "",
 "Generic_Action": "",
 "Item": "",

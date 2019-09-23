@@ -1,0 +1,24 @@
+{
+    "stats":
+    {
+        "strength": 6,
+        "dexterity": 12,
+        "constitution":6,
+        "critic": 0.2,
+        "defence": 1,
+        "alt_defence": 1,
+        "speed": 5
+    },
+    "abilities":
+    [
+        "backstab",
+        "cleave"
+    ],
+    "animation_data":
+    {
+        "hframes": 8,
+        "vframes": 1,
+        "total_frames": 8,
+        "duration": 1.5
+    }
+}
