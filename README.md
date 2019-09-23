@@ -15,12 +15,12 @@ Below you'll find some deadlines for the various modules, when a module is marke
         - [x] Navigation
         - [x] Inter-map movement
         - [x] Background art
-- [ ] <u>Map interaction Sprint - 12/07/19</u>
+- [x] <u>Map interaction Sprint - 12/07/19</u>
     - [x] Map module V-2
         - [x] Individual art
-    - [ ] Character and Enemy module **(final)**
+    - [x] Character and Enemy module **(final)**
         - [x] Characters
-        - [ ] Enemy
+        - [x] Enemy
         - [x] Equipment
         - [x] Abilities
         - [x] Items
@@ -44,7 +44,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [ ] Map module V-4 **(final)**
         - [ ] Inventory
         - [ ] Character management
-        - [ ] Bestiary
+        - [x] Bestiary
         - [ ] Journal
 - [ ] <u>Combat Sprint - 08/11/19</u>
     - [ ] Combat module V-2 **(final)**
