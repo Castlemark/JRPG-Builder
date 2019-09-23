@@ -57,7 +57,7 @@ func set_up_actions(actions_list : Array):
 		if not Validators.minimal_info_fields_exist(i, ["type", "data"], "action has missing required fields, " + Validators.check_docu, "type"):
 			return
 		
-		if not Validators.action_is_valid(i.type as String, i.data):
+		if not Validators.type_is_valid(i.type as String, Validators.action_types, i.data):
 			return
 		
 		match (i.type as String):

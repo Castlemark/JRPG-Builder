@@ -4,8 +4,9 @@
 -   [x] External Loading: https://www.reddit.com/r/godot/comments/8ete52/how_do_i_load_files_from_game_directory_after/
 -   [ ] Godot unzip: https://github.com/jellehermsen/gdunzip
 -   [x] Godot RPG Tutorial: https://www.youtube.com/playlist?list=PLhqJJNjsQ7KHaAQcGij5SmOPpFjrDTHUq
--   [ ] Godot Grass shader: https://www.youtube.com/watch?v=uMB3-g8v1B0
+-   [x] Godot Grass shader: https://www.youtube.com/watch?v=uMB3-g8v1B0
 -   [x] Custom draw in 3D: https://godotengine.org/qa/2762/draw-line-in-3d
+-   [ ] GUI Skinning: https://docs.godotengine.org/en/3.1/tutorials/gui/gui_skinning.html
 -   [x] Clickable node:
     -   https://godotengine.org/qa/3719/how-to-get-a-node-by-mouse-click
     -   https://www.reddit.com/r/godot/comments/4hy5it/how_to_get_a_node_by_mouse_click/

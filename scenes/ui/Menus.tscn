@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://default_assets/theme/theme_buttons.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/ui/Menu_Manager.gd" type="Script" id=2]
+[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=3]
+[ext_resource path="res://default_assets/user_interface/backpack.png" type="Texture" id=4]
+[ext_resource path="res://default_assets/user_interface/team.png" type="Texture" id=5]
+[ext_resource path="res://default_assets/user_interface/encyclopedia.png" type="Texture" id=6]
+[ext_resource path="res://default_assets/user_interface/settings.png" type="Texture" id=7]
+[ext_resource path="res://scenes/ui/inventory/Inventory.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/ui/party/Party.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/ui/encyclopedia/Encyclopedia.tscn" type="PackedScene" id=10]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[node name="Menus" type="VBoxContainer"]
+anchor_left = 0.1
+anchor_top = 1.0
+anchor_right = 0.9
+anchor_bottom = 1.0
+margin_top = -1072.0
+margin_bottom = 3.0
+grow_vertical = 0
+theme = ExtResource( 1 )
+custom_constants/separation = 8
+alignment = 2
+script = ExtResource( 2 )
+
+[node name="Sections" type="HBoxContainer" parent="."]
+margin_right = 1536.0
+margin_bottom = 66.0
+
+[node name="Tabs" type="HBoxContainer" parent="Sections"]
+margin_right = 774.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="Inventory" type="Button" parent="Sections/Tabs"]
+margin_right = 257.0
+margin_bottom = 66.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+group = SubResource( 1 )
+text = "  Inventory  "
+icon = ExtResource( 4 )
+
+[node name="Party" type="Button" parent="Sections/Tabs"]
+margin_left = 265.0
+margin_right = 462.0
+margin_bottom = 66.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+group = SubResource( 1 )
+text = "  Party  "
+icon = ExtResource( 5 )
+
+[node name="Encyclopedia" type="Button" parent="Sections/Tabs"]
+margin_left = 470.0
+margin_right = 774.0
+margin_bottom = 66.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+group = SubResource( 1 )
+text = "  Encyclopedia  "
+icon = ExtResource( 6 )
+
+[node name="Controls" type="HBoxContainer" parent="Sections"]
+margin_left = 778.0
+margin_right = 1536.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+alignment = 2
+
+[node name="Settings" type="Button" parent="Sections/Controls"]
+margin_left = 528.0
+margin_right = 758.0
+margin_bottom = 66.0
+custom_fonts/font = ExtResource( 3 )
+toggle_mode = true
+group = SubResource( 1 )
+text = "  Settings  "
+icon = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Content" type="Panel" parent="."]
+margin_top = 74.0
+margin_right = 1536.0
+margin_bottom = 1075.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Inventory" parent="Content" instance=ExtResource( 8 )]
+visible = false
+
+[node name="Party" parent="Content" instance=ExtResource( 9 )]
+visible = false
+
+[node name="Encyclopedia" parent="Content" instance=ExtResource( 10 )]
+
+[node name="Settings" type="Tabs" parent="Content"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+[connection signal="toggled" from="Sections/Tabs/Inventory" to="." method="_on_section_toggled"]
+[connection signal="toggled" from="Sections/Tabs/Party" to="." method="_on_section_toggled"]
+[connection signal="toggled" from="Sections/Tabs/Encyclopedia" to="." method="_on_section_toggled"]
+[connection signal="toggled" from="Sections/Controls/Settings" to="." method="_on_section_toggled"]
