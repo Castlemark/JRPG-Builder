@@ -1,0 +1,17 @@
+{
+    "min_level": 3,
+    "target_amount": 3,
+    "side": "enemies",
+    "cost": 50,
+    "delay": 0,
+    "damage": 0.3,
+    "effect":
+    {
+        "type": "evasion",
+        "receiver" : "same",
+        "amount": -0.25,
+        "duration": 2
+    },
+    "hits": 1,
+    "description": "Destroy them all"
+}

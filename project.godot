@@ -19,10 +19,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Between_node.gd"
 }, {
+"base": "Button",
+"class": "Character_Ability",
+"language": "GDScript",
+"path": "res://scripts/ui/Character_ability.gd"
+}, {
+"base": "Button",
+"class": "Character_UI",
+"language": "GDScript",
+"path": "res://scripts/ui/Character_UI.gd"
+}, {
 "base": "Spatial",
 "class": "Detail_Node",
 "language": "GDScript",
 "path": "res://scripts/map/Detail_Node.gd"
+}, {
+"base": "Button",
+"class": "Encyclopedia_Enemy",
+"language": "GDScript",
+"path": "res://scripts/ui/Encyclopedia_Enemy.gd"
+}, {
+"base": "VBoxContainer",
+"class": "Enemy_preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Enemy_Preview.gd"
 }, {
 "base": "Node",
 "class": "Game_Manager",
@@ -34,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/actions/Generic_Action.gd"
 }, {
+"base": "Button",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scripts/ui/Item.gd"
+}, {
 "base": "Spatial",
 "class": "Map",
 "language": "GDScript",
@@ -43,6 +68,26 @@ _global_script_classes=[ {
 "class": "Map_Camera",
 "language": "GDScript",
 "path": "res://scripts/map/Camera.gd"
+}, {
+"base": "Tabs",
+"class": "Menu_Encyclopedia",
+"language": "GDScript",
+"path": "res://scripts/ui/Menu_Encyclopedia.gd"
+}, {
+"base": "Tabs",
+"class": "Menu_Inventory",
+"language": "GDScript",
+"path": "res://scripts/ui/Menu_Inventory.gd"
+}, {
+"base": "VBoxContainer",
+"class": "Menu_Manager",
+"language": "GDScript",
+"path": "res://scripts/ui/Menu_Manager.gd"
+}, {
+"base": "Tabs",
+"class": "Menu_Party",
+"language": "GDScript",
+"path": "res://scripts/ui/Menu_Party.gd"
 }, {
 "base": "Position3D",
 "class": "Navigation_Node",
@@ -72,11 +117,20 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Background_Tile": "",
 "Between_node": "",
+"Character_Ability": "",
+"Character_UI": "",
 "Detail_Node": "",
+"Encyclopedia_Enemy": "",
+"Enemy_preview": "",
 "Game_Manager": "",
 "Generic_Action": "",
+"Item": "",
 "Map": "",
 "Map_Camera": "",
+"Menu_Encyclopedia": "",
+"Menu_Inventory": "",
+"Menu_Manager": "",
+"Menu_Party": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
 "Travel_Action": "",
@@ -105,6 +159,8 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1920
 window/size/height=1080
+window/stretch/mode="2d"
+window/stretch/aspect="keep_height"
 
 [importer_defaults]
 
@@ -119,7 +175,7 @@ texture={
 "flags/filter": true,
 "flags/mipmaps": false,
 "flags/repeat": true,
-"flags/srgb": 1,
+"flags/srgb": 0,
 "process/HDR_as_SRGB": false,
 "process/fix_alpha_border": true,
 "process/invert_color": false,
@@ -144,6 +200,28 @@ reset_camera_map={
 "click right mouse"={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+ui_inventory={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":73,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_pause={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_party={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_encyclopedia={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
 
