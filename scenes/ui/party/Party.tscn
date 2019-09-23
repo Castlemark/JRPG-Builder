@@ -81,6 +81,7 @@ text = "Stats"
 valign = 1
 
 [node name="Stats" type="Panel" parent="Data"]
+editor/display_folded = true
 margin_top = 26.0
 margin_right = 1133.0
 margin_bottom = 399.0
@@ -190,6 +191,12 @@ margin_right = 541.0
 margin_bottom = 100.0
 text = "Evasion:"
 
+[node name="Damage" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
+margin_top = 104.0
+margin_right = 541.0
+margin_bottom = 126.0
+text = "Damage:"
+
 [node name="Abilities_Label" type="Label" parent="Data"]
 margin_top = 403.0
 margin_right = 1133.0
@@ -206,6 +213,7 @@ size_flags_vertical = 3
 custom_constants/separation = 26
 
 [node name="Abilities" type="Panel" parent="Data/HBoxContainer"]
+editor/display_folded = true
 margin_right = 553.0
 margin_bottom = 373.0
 size_flags_horizontal = 3
@@ -264,6 +272,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
+editor/display_folded = true
 margin_right = 534.0
 margin_bottom = 50.0
 

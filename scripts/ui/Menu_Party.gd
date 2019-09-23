@@ -75,6 +75,8 @@ func _validate_ability(ability_data, ability : String) -> bool:
 	return true
 
 func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
+	var stats : Dictionary = (character_button_group.get_pressed_button() as Character_UI).get_stats()
+	
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = data.description
@@ -91,7 +93,7 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 	targets += data.side
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Targets as Label).text = targets
 	
-	var damage : String = "Damage: " + String(data.damage) + " "
+	var damage : String = "Damage: " + String(data.damage * stats.damage) + " HP "
 	match (data.hits as int):
 		-1:
 			damage += "until miss "
@@ -122,7 +124,7 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 			elif "allies" in aux_targets:
 				aux_targets.set(3, "enemies")
 			effect += aux_targets.join(" ")
-	effect += "\n    Applies " + String(data.effect.amount) + " "
+	effect += "\n    Applies " + String(data.effect.amount * stats.damage) + " "
 	if (data.effect.duration as int) > 0:
 		var turns := " turn"
 		if data.effect.duration != 1:
@@ -155,6 +157,7 @@ func _on_player_select(data : Dictionary, abilities : Array) -> void:
 	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.shield))
 	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.strain))
 	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion))
+	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.damage))
 	
 	_update_character_abilites_panel(abilities)
 	_reset_ability_preview()

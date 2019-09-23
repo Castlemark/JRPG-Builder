@@ -8,6 +8,7 @@ const MAX_SIZE := -1072
 
 onready var inventory_menu : Menu_Inventory = $Content/Inventory as Menu_Inventory
 onready var party_menu : Menu_Party = $Content/Party as Menu_Party
+onready var encyclopedia_menu : Menu_Encyclopedia = $Content/Encyclopedia as Menu_Encyclopedia
 
 onready var inventory_button : Button = $Sections/Tabs/Inventory as Button
 onready var party_button : Button = $Sections/Tabs/Party as Button
@@ -21,6 +22,11 @@ onready var content_panel : Panel = $Content as Panel
 var menu_up : bool
 var animation_in_progress : bool
 var current_screen : String
+
+func initialize(campaign_data : Dictionary) -> void:
+	inventory_menu.initialize_inventory(campaign_data.inventory)
+	party_menu.initialize_party(campaign_data.party)
+	encyclopedia_menu.initialize_encyclopedia([], [])
 
 func _ready() -> void:
 	_wipe_all_menus()
