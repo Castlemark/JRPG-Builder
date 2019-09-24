@@ -120,7 +120,11 @@ func instantiate_background_map(background_info : Dictionary) -> void:
 func instantiate_details(details_list : Array) -> void:
 	for detail_info in details_list:
 		# JSON Fields check
-		if not Validators.minimal_info_fields_exist(detail_info, ["x", "y", "filepath"], "detail doesn't have the necessary fields to initialize properly, " + Validators.check_docu, "filepath"):
+		if not Validators.minimal_info_fields_exist(detail_info, ["x", "y", "rotation", "filepath"], "detail doesn't have the necessary fields to initialize properly, " + Validators.check_docu, "filepath"):
+			return
+		
+		if not (detail_info.rotation == 0 or detail_info.rotation == 1):
+			print("Detail contains rotation field, but value is not valid, it must be either 0 for horizontal or 1 for vertical")
 			return
 
 		var detail_node = detail_node_res.instance()
