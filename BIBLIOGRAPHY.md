@@ -21,3 +21,6 @@
     -   https://www.youtube.com/watch?v=phA51SdFXCs&app=desktop
     -   https://www.youtube.com/watch?v=RcuwFOEHN-U&app=desktop
     -   http://fede0d.github.io/blog/2016/02/07/Godot-Extra-Tips-2.html
+-   [ ] Jitter-free pixel art :
+    *    https://github.com/CptPotato/GodotThings/tree/master/SmoothPixelFiltering
+    *   https://www.youtube.com/watch?v=2JbhkZe22bE
