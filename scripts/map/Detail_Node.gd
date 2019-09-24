@@ -19,6 +19,9 @@ func initialize(detail_info : Dictionary) -> void:
 		sprite.texture = detail_img
 	
 	self.translation = Vector3(detail_info.x, 0 , - detail_info.y)
+	if detail_info.rotation == 1:
+		sprite.transform = Transform(Vector3(4, 0, 0), Vector3(3, 1.732, 0), Vector3(0, 0, 4), Vector3(0, 0, 0))
+		self.rotation_degrees = Vector3(0, 90, 0)
 	
 	if Validators.optional_info_field_exists(detail_info, "animation_data", ["hframes", "vframes", "total_frames", "duration"], "detail is marked as animated, but it's missing some of the requeried animation_data fields, " + Validators.check_docu, "filepath"):
 		_configure_animation(detail_info.animation_data)

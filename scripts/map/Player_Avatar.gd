@@ -25,7 +25,7 @@ func move_to_pos(destination_node : Navigation_Node ) -> void:
 	var target := destination_node.translation + Vector3(0, 0.26, 0)
 	var origin := translation
 	
-	var duration : float = (destination_node.translation - translation).length() / 10.0
+	var duration : float = (destination_node.translation - translation).length() / 20.0
 	
 	tween.interpolate_property(self, "translation", origin, target, duration, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.start()

@@ -23,7 +23,7 @@ static func load_img_3D(direction : String) -> Resource:
 		return null
 	var itex : ImageTexture = ImageTexture.new()
 	
-	itex.create_from_image(img, 16)
+	itex.create_from_image(img, 20)
 	return itex
 
 static func load_img_GUI(direction : String) -> Resource:
