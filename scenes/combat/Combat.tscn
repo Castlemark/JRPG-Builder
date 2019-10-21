@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://default_assets/theme/theme_combat.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/Combat/Combat_Manager.gd" type="Script" id=2]
+
+[node name="Combat" type="Panel"]
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+margin_top = -3.0
+margin_bottom = -1083.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]

@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Character_UI.gd"
 }, {
+"base": "Panel",
+"class": "Combat_Manager",
+"language": "GDScript",
+"path": "res://scripts/Combat/Combat_Manager.gd"
+}, {
+"base": "Generic_Action",
+"class": "Combat_Trigger_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Combat_Trigger_Action.gd"
+}, {
 "base": "Spatial",
 "class": "Detail_Node",
 "language": "GDScript",
@@ -119,6 +129,8 @@ _global_script_class_icons={
 "Between_node": "",
 "Character_Ability": "",
 "Character_UI": "",
+"Combat_Manager": "",
+"Combat_Trigger_Action": "",
 "Detail_Node": "",
 "Encyclopedia_Enemy": "",
 "Enemy_preview": "",

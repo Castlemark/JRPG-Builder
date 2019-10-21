@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/map/Map.gd" type="Script" id=1]
 [ext_resource path="res://scenes/map/Player_Avatar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/map/Camera.gd" type="Script" id=3]
+[ext_resource path="res://scenes/combat/Combat.tscn" type="PackedScene" id=4]
 
 [node name="Map" type="Spatial"]
 script = ExtResource( 1 )
@@ -22,7 +23,6 @@ transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
 
 [node name="Player_Avatar" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, -5.06639e-007, 0, 5.06639e-007, 1, 0, 0, 0 )
 
 [node name="Camera" type="Camera" parent="Player_Avatar"]
 editor/display_folded = true
@@ -32,3 +32,5 @@ fov = 90.0
 script = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="Player_Avatar/Camera"]
+
+[node name="Combat" parent="." instance=ExtResource( 4 )]

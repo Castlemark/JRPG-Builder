@@ -31,6 +31,7 @@ margin_right = 1536.0
 margin_bottom = 66.0
 
 [node name="Tabs" type="HBoxContainer" parent="Sections"]
+editor/display_folded = true
 margin_right = 774.0
 margin_bottom = 66.0
 size_flags_horizontal = 3

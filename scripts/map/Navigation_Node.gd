@@ -60,12 +60,17 @@ func set_up_actions(actions_list : Array):
 		if not Validators.type_is_valid(i.type as String, Validators.action_types, i.data):
 			return
 		
+		var action : Generic_Action
 		match (i.type as String):
 			"travel":
-				var action := Travel_Action.new()
+				action = Travel_Action.new()
 				action.name = "Travel_Action"
-				action.initialize(i.data)
-				actions.add_child(action, true)
+			"combat":
+				action = Combat_Trigger_Action.new()
+				action.name = "Combat_Action"
+		
+		action.initialize(i.data)
+		actions.add_child(action, true)
 
 func is_connected_to(node : Navigation_Node, all_nodes : Array) -> bool:
 	for i in connected_nodes:
