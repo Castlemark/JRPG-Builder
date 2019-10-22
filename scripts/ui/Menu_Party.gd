@@ -43,14 +43,14 @@ func initialize_party(character_list : Array) -> void:
 		
 		var equipments_data := {}
 		var equpment_valid := true
-		for equipment in character_data.equipment.keys():
-			var equipment_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + character_data.equipment.get(equipment) + "/item.json")
+		for slot in character_data.equipment.keys():
+			var equipment_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + character_data.equipment.get(slot) + "/item.json")
 			if equipment_data != null:
-				equipment_data["name"] = equipment
-				equipments_data[equipment] = equipment_data
+				equipment_data["name"] = slot
+				equipments_data[slot] = equipment_data
 			
 			if equpment_valid:
-				abilities_valid = _validate_equipment(equipment_data, equipment)
+				equpment_valid = _validate_equipment(equipment_data, character_data.equipment.get(slot), slot)
 		
 		if not equpment_valid:
 			print(character + "character is valid, but at least one of its equipments is invalid or may not exist, please check the messages above to see what equipments")
@@ -91,14 +91,16 @@ func _validate_ability(ability_data, ability : String) -> bool:
 		return false
 	return true
 
-func _validate_equipment(equipment_data, equipment : String) -> bool:
+func _validate_equipment(equipment_data, equipment : String, expected_slot : String) -> bool:
 	if equipment_data == null:
 		return false
 	if not Validators.minimal_info_fields_exist(equipment_data, ["type", "data"], "item is missing required fields", "", equipment):
 		return false
 	if not Validators.type_is_valid(equipment_data.type, Validators.item_types, equipment_data.data):
 		return false
-	
+	if  not (equipment_data.type == "equipment" && equipment_data.data.slot == expected_slot):
+		print(equipment + " equipment was valid, but is in a wrong slot, please make sure the equipment is in it's valid slot")
+		return false
 	return true
 
 func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
