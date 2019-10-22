@@ -21,17 +21,19 @@ func _input(event: InputEvent) -> void:
 			emit_signal("combat_finished")
 
 func start_encounter() -> void:
-	tween.interpolate_property(self, "margin_top", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	print("starting encounter")
+	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
 	
 	_start_combat()
 	yield(self, "combat_finished")
 	
-	tween.interpolate_property(self, "margin_top", null, MIN_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
+	tween.interpolate_property(self, "margin_bottom", null, MIN_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
 	
+	print("ending encounter")
 	emit_signal("encounter_finished")
 
 func _start_combat() -> void:

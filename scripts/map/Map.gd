@@ -17,6 +17,8 @@ onready var details := $Details as Spatial
 onready var player_avatar := $Player_Avatar as Player_Avatar
 onready var camera := $Player_Avatar/Camera as Map_Camera
 
+onready var combat_manager := $Combat as Combat_Manager
+
 var path_img : Texture
 var intersection_img : Texture
 var between_img : Texture

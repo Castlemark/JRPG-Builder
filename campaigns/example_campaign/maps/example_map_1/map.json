@@ -48,7 +48,12 @@
             "x": 47,
             "y": 33,
             "connected_nodes":[6,8],
-            "actions": []
+            "actions": [
+                {
+                  "type" : "combat",
+                  "data" : {}
+                }
+            ]
         },
         {
             "x": 85,

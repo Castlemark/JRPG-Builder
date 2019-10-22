@@ -7,4 +7,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func execute() -> void:
+	
+	var current_scene : Node = $"/root/Game_Manager".current_scene
+	if current_scene.name == "Map":
+		current_scene.combat_manager.start_encounter()
 	pass

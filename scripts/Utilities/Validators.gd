@@ -5,7 +5,8 @@ class_name Validators
 const check_docu := "please check the documentation to know the necessary fields"
 
 const action_types := {
-	"travel" : ["map_name", "access_point"]
+	"travel" : ["map_name", "access_point"],
+	"combat" : []
 }
 const item_types := {
 	"consumable" : ["price", "effect"],
