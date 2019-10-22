@@ -29,6 +29,7 @@ func set_data(enemy_data : Dictionary, abilities_data : Array, is_animated : boo
 	data = enemy_data
 	enemy_name.text = data.name
 	
+	_calculate_stats(data.stats)
 	_set_stats(data.stats, abilities_data)
 	
 	elapsed_frame_time = 0.0
@@ -62,6 +63,13 @@ func _process(delta: float) -> void:
 		
 		elapsed_frame_time += delta
 
+func _calculate_stats(stats : Dictionary) -> void:
+	stats["hp"] = (stats.constitution + 1/4.0 * float(stats.strength) + 1/3.0 * stats.defence) * 4
+	stats["shield"] = (1/4.0 * stats.constitution + float(stats.alt_defence) + 1/3.0 * stats.defence) * 4
+	stats["strain"] = (1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.alt_defence) * 4
+	stats["evasion"] = (float(stats.speed) + 1/2.0 * stats.critic * 100 + 1/4.0 * stats.defence) * 0.4
+	stats["damage"] = (1/4.0 * stats.strength + 1/4.0 * stats.dexterity + 1/8.0 * stats.speed) * 4
+
 func _set_up_animation(animation_info : Dictionary) -> void:
 	sprite.vframes = animation_info.vframes
 	sprite.hframes = animation_info.hframes
@@ -78,11 +86,11 @@ func _set_stats(stats : Dictionary, abilities : Array) -> void:
 	($Abilities/Stats/Container/Hard/Alt_Defence as Label).text = "Alt Defence: " +  String(round(stats.alt_defence))
 	($Abilities/Stats/Container/Hard/Speed as Label).text = "Speed: " +  String(round(stats.speed))
 	
-	($Abilities/Stats/Container/Soft/HP as Label).text = "HP: " + String(round((stats.constitution + 1/4.0 * float(stats.strength) + 1/3.0 * stats.defence) * 4))
-	($Abilities/Stats/Container/Soft/Shield as Label).text = "Shield: " + String(round((1/4.0 * stats.constitution + float(stats.alt_defence) + 1/3.0 * stats.defence) * 4))
-	($Abilities/Stats/Container/Soft/Strain as Label).text = "Strain: " + String(round((1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.alt_defence) * 4))
-	($Abilities/Stats/Container/Soft/Evasion as Label).text = "Evasion: " + String(round((float(stats.speed) + 1/2.0 * stats.critic * 100 + 1/4.0 * stats.defence) * 4))
-	($Abilities/Stats/Container/Soft/Damage as Label).text = "Base Damage: " + String(round((1/4.0 * stats.strength + 1/4.0 * stats.dexterity + 1/8.0 * stats.speed) * 4))
+	($Abilities/Stats/Container/Soft/HP as Label).text = "HP: " + String(round(stats.hp))
+	($Abilities/Stats/Container/Soft/Shield as Label).text = "Shield: " + String(round(stats.shield))
+	($Abilities/Stats/Container/Soft/Strain as Label).text = "Strain: " + String(round(stats.strain))
+	($Abilities/Stats/Container/Soft/Evasion as Label).text = "Evasion: " + String(round(stats.evasion)) + "%"
+	($Abilities/Stats/Container/Soft/Damage as Label).text = "Base Damage: " + String(round(stats.damage))
 	
 	_update_character_abilites_panel(abilities)
 	

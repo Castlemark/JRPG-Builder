@@ -156,7 +156,7 @@ func _on_player_select(data : Dictionary, abilities : Array) -> void:
 	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.hp))
 	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.shield))
 	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.strain))
-	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion))
+	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion)) + "%"
 	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.damage))
 	
 	_update_character_abilites_panel(abilities)
