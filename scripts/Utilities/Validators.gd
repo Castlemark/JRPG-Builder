@@ -13,6 +13,16 @@ const item_types := {
 	"equipment" : ["price", "slot", "stats", "min_level", "rarity"],
 	"quest_object" : ["keyword"]
 }
+
+const equipment_types := {
+	"head" : [],
+	"torso" : [],
+	"accessory_1" : [],
+	"accessory_2" : [],
+	"accessory_3" : [],
+	"weapon" : []
+}
+
 const effect_types := {
 	"strength": [], "dexterity": [], "constitution": [], "memory": [], "critic": [], "defence": [], "alt_defence": [], "speed": [],
 	"health": [],

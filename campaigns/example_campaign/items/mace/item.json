@@ -3,7 +3,7 @@
     "data":
     {
         "price": 100,
-        "slot": "1_hand",
+        "slot": "hands",
         "stats":
         {
             "strength": 5,

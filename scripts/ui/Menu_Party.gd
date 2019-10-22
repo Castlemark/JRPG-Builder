@@ -41,11 +41,26 @@ func initialize_party(character_list : Array) -> void:
 			print(character + " character is valid, but at least one of its abilities is invalid or may not exist, please check the messages above to see what abilities")
 			continue
 		
+		var equipments_data := {}
+		var equpment_valid := true
+		for equipment in character_data.equipment.keys():
+			var equipment_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + character_data.equipment.get(equipment) + "/item.json")
+			if equipment_data != null:
+				equipment_data["name"] = equipment
+				equipments_data[equipment] = equipment_data
+			
+			if equpment_valid:
+				abilities_valid = _validate_equipment(equipment_data, equipment)
+		
+		if not equpment_valid:
+			print(character + "character is valid, but at least one of its equipments is invalid or may not exist, please check the messages above to see what equipments")
+			continue
+		
 		character_data["name"] = character
 		
 		var character_node : Character_UI = character_res.instance()
 		character_container.add_child(character_node, true)
-		character_node.initialize(character_data, abilities_data)
+		character_node.initialize(character_data, abilities_data, equipments_data)
 		character_node.connect("character_selected", self, "_on_player_select")
 		character_node.group = character_button_group
 	pass
@@ -53,7 +68,9 @@ func initialize_party(character_list : Array) -> void:
 func _validate_character(character_data, character : String) -> bool:
 	if character_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(character_data, ["start_level", "min_stats", "max_stats", "abilities"], "character is missing required fields", "", character):
+	if not Validators.minimal_info_fields_exist(character_data, ["start_level", "min_stats", "max_stats", "abilities", "equipment"], "character is missing required fields", "", character):
+		return false
+	if not Validators.minimal_info_fields_exist(character_data.equipment, ["legs", "torso", "accessory_1", "accessory_2", "accessory_3", "weapon"], "character is missing required fields", "", character):
 		return false
 	if not Validators.minimal_info_fields_exist(character_data.min_stats, Validators.stats, "character is missing required fields in \"min_stats\" field", "", character):
 		return false
@@ -72,6 +89,16 @@ func _validate_ability(ability_data, ability : String) -> bool:
 		return false
 	if not Validators.type_is_valid(ability_data.effect.receiver, Validators.receiver_types, {}):
 		return false
+	return true
+
+func _validate_equipment(equipment_data, equipment : String) -> bool:
+	if equipment_data == null:
+		return false
+	if not Validators.minimal_info_fields_exist(equipment_data, ["type", "data"], "item is missing required fields", "", equipment):
+		return false
+	if not Validators.type_is_valid(equipment_data.type, Validators.item_types, equipment_data.data):
+		return false
+	
 	return true
 
 func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:

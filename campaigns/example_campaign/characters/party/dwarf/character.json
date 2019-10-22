@@ -24,5 +24,14 @@
     [
         "cleave",
         "grapeshot_blast"
-    ]
+    ],
+    "equipment":
+    {
+        "legs": "mace",
+        "torso": "mace",
+        "accessory_1": "mace",
+        "accessory_2": "mace",
+        "accessory_3": "mace",
+        "weapon": "mace"
+    }
 }

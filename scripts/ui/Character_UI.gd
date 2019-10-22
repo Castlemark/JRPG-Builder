@@ -15,12 +15,14 @@ const _MAX_LEVEL = 30
 
 var data : Dictionary = {}
 var abilities : Array = []
+var equipment : Dictionary = {}
 var current_stats : Dictionary = {}
 var current_level : int;
 
-func initialize(character : Dictionary, abilities_data : Array) -> void:
+func initialize(character : Dictionary, abilities_data : Array, equipment_data : Dictionary) -> void:
 	data = character
 	abilities = abilities_data
+	equipment = equipment_data
 
 	current_level = data.start_level
 	current_stats = _calculate_current_stats(data.min_stats, data.max_stats, current_level)

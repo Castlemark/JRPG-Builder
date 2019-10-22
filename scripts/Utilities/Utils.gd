@@ -12,7 +12,6 @@ static func _read_img(direction : String) -> Image:
 		return null
 	
 	var img : Image = Image.new()
-	var itex : ImageTexture = ImageTexture.new()
 	
 	img.load(path)
 	return img
@@ -37,7 +36,6 @@ static func load_img_GUI(direction : String) -> Resource:
 
 static func _read_directory(direction : String) -> Directory:
 	var path : String = get_path(direction)
-	var files = []
 	var dir = Directory.new()
 	var open_dir_status : int = dir.open(path)
 	if open_dir_status != OK:
