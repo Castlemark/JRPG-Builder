@@ -3,7 +3,7 @@
     "data":
     {
         "price": 100,
-        "slot": "weapon",
+        "slot": "accessory",
         "stats":
         {
             "strength": 5,

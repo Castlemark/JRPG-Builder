@@ -98,7 +98,12 @@ func _validate_equipment(equipment_data, equipment : String, expected_slot : Str
 		return false
 	if not Validators.type_is_valid(equipment_data.type, Validators.item_types, equipment_data.data):
 		return false
-	if  not (equipment_data.type == "equipment" && equipment_data.data.slot == expected_slot):
+	if not equipment_data.type == "equipment":
+		print("the item is valid but is not an equipment piece, please make sure you try to equip an equipment item")
+		return false
+	if not Validators.type_is_valid(equipment_data.data.slot, Validators.equipment_types, equipment_data):
+		return false
+	if  not (equipment_data.data.slot as String).is_subsequence_of(expected_slot):
 		print(equipment + " equipment was valid, but is in a wrong slot, please make sure the equipment is in it's valid slot")
 		return false
 	return true

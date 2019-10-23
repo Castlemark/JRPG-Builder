@@ -27,11 +27,11 @@
     ],
     "equipment":
     {
-        "legs": "mace",
-        "torso": "mace",
-        "accessory_1": "mace",
-        "accessory_2": "mace",
-        "accessory_3": "mace",
+        "legs": "pants",
+        "torso": "breastplate",
+        "accessory_1": "horn of power",
+        "accessory_2": "lucky amulet",
+        "accessory_3": "tribal necklace",
         "weapon": "mace"
     }
 }

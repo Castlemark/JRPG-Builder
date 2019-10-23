@@ -3,7 +3,7 @@
     "data":
     {
         "price": 100,
-        "slot": "weapon",
+        "slot": "torso",
         "stats":
         {
             "strength": 5,

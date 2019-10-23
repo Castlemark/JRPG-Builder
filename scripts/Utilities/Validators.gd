@@ -15,11 +15,9 @@ const item_types := {
 }
 
 const equipment_types := {
-	"head" : [],
+	"legs" : [],
 	"torso" : [],
-	"accessory_1" : [],
-	"accessory_2" : [],
-	"accessory_3" : [],
+	"accessory" : [],
 	"weapon" : []
 }
 
