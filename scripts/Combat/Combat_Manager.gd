@@ -17,10 +17,12 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if _combat_started:
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_pressed("ui_select"):
 			emit_signal("combat_finished")
 
 func start_encounter() -> void:
+	self.grab_focus()
+	
 	print("starting encounter")
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()

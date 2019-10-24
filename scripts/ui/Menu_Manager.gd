@@ -6,6 +6,8 @@ const SCREEN_NONE := "None"
 const MIN_SIZE := 74
 const MAX_SIZE := -1072
 
+onready var GM := $"/root/Game_Manager"
+
 onready var inventory_menu : Menu_Inventory = $Content/Inventory as Menu_Inventory
 onready var party_menu : Menu_Party = $Content/Party as Menu_Party
 onready var encyclopedia_menu : Menu_Encyclopedia = $Content/Encyclopedia as Menu_Encyclopedia
@@ -29,12 +31,16 @@ func initialize(campaign_data : Dictionary) -> void:
 	encyclopedia_menu.initialize_encyclopedia([], [])
 
 func _ready() -> void:
+	print(GM.campaign_data)
+	initialize(GM.campaign_data)
 	_wipe_all_menus()
 	self.margin_top = MIN_SIZE
 	
 	menu_up = false
 	animation_in_progress = false
 	current_screen = SCREEN_NONE
+	
+	GM.menus = self
 
 func _input(event : InputEvent) -> void:
 	if not animation_in_progress:
