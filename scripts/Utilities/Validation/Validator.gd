@@ -3,7 +3,7 @@ class_name Validator
 # MAP
 
 static func map_is_valid(map_data : Dictionary) -> bool:
-	if not Generic_Validators.minimal_info_fields_exist(map_data, Data.Validation.map_fields, "map has missing required fields, " + Data.Validation.check_docu, "name"):
+	if not Generic_Validators.minimal_info_fields_exist(map_data, Data.Validation.map_fields, "map has missing or incorrect required fields, " + Data.Validation.check_docu, "name"):
 		return false
 	
 	for node in map_data.navigation_nodes:
@@ -20,12 +20,12 @@ static func map_is_valid(map_data : Dictionary) -> bool:
 	return true
 
 static func _nav_node_is_valid(node_data : Dictionary) -> bool:
-	if Generic_Validators.minimal_info_fields_exist(node_data, Data.Validation.nav_node_fields,  "A navigation node has missing required fields, " + Data.Validation.check_docu, ""):
+	if Generic_Validators.minimal_info_fields_exist(node_data, Data.Validation.nav_node_fields,  "A navigation node has missing or incorrect required fields, " + Data.Validation.check_docu, ""):
 		return true
 	return false
 
 static func _map_bg_is_valid(background_info : Dictionary) -> bool:
-	if Generic_Validators.minimal_info_fields_exist(background_info, Data.Validation.bg_map_fields, "background_info has missing required fields, " + Data.Validation.check_docu, ""):
+	if Generic_Validators.minimal_info_fields_exist(background_info, Data.Validation.bg_map_fields, "background_info has missing or incorrect required fields, " + Data.Validation.check_docu, ""):
 		return true
 	return false
 
@@ -39,9 +39,9 @@ static func _map_detail_is_valid(detail_info : Dictionary) -> bool:
 static func enemy_is_valid(enemy_data, enemy_name : String) -> bool:
 	if enemy_data == null:
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(enemy_data, Data.Validation.enemy_fields, "enemy is missing some required fields", "", enemy_name):
+	if not Generic_Validators.minimal_info_fields_exist(enemy_data, Data.Validation.enemy_fields, "enemy has missing or incorrect some required fields", "", enemy_name):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(enemy_data.stats, Data.Validation.stats, "enemy is missing some field in it's \"stats\" field", "", enemy_name):
+	if not Generic_Validators.minimal_info_fields_exist(enemy_data.stats, Data.Validation.stats, "enemy has missing or incorrect some field in it's \"stats\" field", "", enemy_name):
 		return false
 	return true
 
@@ -50,9 +50,9 @@ static func enemy_is_valid(enemy_data, enemy_name : String) -> bool:
 static func ability_is_valid(ability_data, ability : String) -> bool:
 	if ability_data == null:
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(ability_data, Data.Validation.ability_fields, "ability is missing required fields", "", ability):
+	if not Generic_Validators.minimal_info_fields_exist(ability_data, Data.Validation.ability_fields, "ability has missing or incorrect required fields", "", ability):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(ability_data.effect, Data.Validation.ability_effect_fields, "ability is missing required fields in \"effect\" field", "", ability):
+	if not Generic_Validators.minimal_info_fields_exist(ability_data.effect, Data.Validation.ability_effect_fields, "ability has missing or incorrect required fields in \"effect\" field", "", ability):
 		return false
 	if not Generic_Validators.type_is_valid(ability_data.effect.type, Data.Validation.effect_types, {}):
 		return false
@@ -66,7 +66,7 @@ static func ability_is_valid(ability_data, ability : String) -> bool:
 static func item_is_valid(item_data, item : String) -> bool:
 	if item_data == null:
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(item_data, Data.Validation.type_data, "item is missing required fields", "", item):
+	if not Generic_Validators.minimal_info_fields_exist(item_data, Data.Validation.type_data, "item has missing or incorrect required fields", "", item):
 		return false
 	if not Generic_Validators.type_is_valid(item_data.type, Data.Validation.item_types, item_data.data):
 		return false
@@ -74,9 +74,9 @@ static func item_is_valid(item_data, item : String) -> bool:
 	var valid := true
 	match item_data.type:
 		"consumable":
-			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.effect, Data.Validation.item_effect_fields, "item consumable is missing fields in it's \"effect\" field", "", item)
+			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.effect, Data.Validation.consumable_effect_fields, "item consumable has missing or incorrect fields in it's \"effect\" field", "", item)
 		"equipment":
-			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.stats, Data.Validation.stats, "item equipment is missing fields in it's \"stats\" field", "", item)
+			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.stats, Data.Validation.stats, "item equipment has missing or incorrect fields in it's \"stats\" field", "", item)
 	
 	return valid
 
@@ -85,7 +85,7 @@ static func item_is_valid(item_data, item : String) -> bool:
 static func equipment_is_valid(equipment_data, equipment : String, expected_slot : String) -> bool:
 	if equipment_data == null:
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(equipment_data, Data.Validation.type_data, "item is missing required fields", "", equipment):
+	if not Generic_Validators.minimal_info_fields_exist(equipment_data, Data.Validation.type_data, "item has missing or incorrect required fields", "", equipment):
 		return false
 	if not Generic_Validators.type_is_valid(equipment_data.type, Data.Validation.item_types, equipment_data.data):
 		return false
@@ -104,12 +104,12 @@ static func equipment_is_valid(equipment_data, equipment : String, expected_slot
 static func character_is_valid(character_data, character : String) -> bool:
 	if character_data == null:
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(character_data, Data.Validation.char_fields, "character is missing required fields", "", character):
+	if not Generic_Validators.minimal_info_fields_exist(character_data, Data.Validation.char_fields, "character has missing or incorrect required fields", "", character):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character is missing required fields", "", character):
+	if not Generic_Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character has missing or incorrect required fields", "", character):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(character_data.min_stats, Data.Validation.stats, "character is missing required fields in \"min_stats\" field", "", character):
+	if not Generic_Validators.minimal_info_fields_exist(character_data.min_stats, Data.Validation.stats, "character has missing or incorrect required fields in \"min_stats\" field", "", character):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(character_data.max_stats, Data.Validation.stats, "character is missing required fields in \"max_stats\" field", "", character):
+	if not Generic_Validators.minimal_info_fields_exist(character_data.max_stats, Data.Validation.stats, "character has missing or incorrect required fields in \"max_stats\" field", "", character):
 		return false
 	return true
