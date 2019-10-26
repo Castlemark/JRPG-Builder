@@ -63,22 +63,22 @@ func _scan_enemies() -> void:
 func _validate_enemy(enemy_data, enemy_name : String) -> bool:
 	if enemy_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(enemy_data, ["stats", "abilities"], "enemy is missing some required fields", "", enemy_name):
+	if not Validators.minimal_info_fields_exist(enemy_data, Data.Validation.enemy_fields, "enemy is missing some required fields", "", enemy_name):
 		return false
-	if not Validators.minimal_info_fields_exist(enemy_data.stats, Validators.stats, "enemy is missing some field in it's \"stats\" field", "", enemy_name):
+	if not Validators.minimal_info_fields_exist(enemy_data.stats, Data.Validation.stats, "enemy is missing some field in it's \"stats\" field", "", enemy_name):
 		return false
 	return true
 
 func _validate_ability(ability_data, ability : String) -> bool:
 	if ability_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(ability_data, [ "min_level", "target_amount", "side", "cost", "delay", "damage", "effect", "hits", "description"], "ability is missing required fields", "", ability):
+	if not Validators.minimal_info_fields_exist(ability_data, Data.Validation.ability_fields, "ability is missing required fields", "", ability):
 		return false
-	if not Validators.minimal_info_fields_exist(ability_data.effect, ["type", "receiver", "amount", "duration"], "ability is missing required fields in \"effect\" field", "", ability):
+	if not Validators.minimal_info_fields_exist(ability_data.effect, Data.Validation.ability_effect_fields, "ability is missing required fields in \"effect\" field", "", ability):
 		return false
-	if not Validators.type_is_valid(ability_data.effect.type, Validators.effect_types, {}):
+	if not Validators.type_is_valid(ability_data.effect.type, Data.Validation.effect_types, {}):
 		return false
-	if not Validators.type_is_valid(ability_data.effect.receiver, Validators.receiver_types, {}):
+	if not Validators.type_is_valid(ability_data.effect.receiver, Data.Validation.receiver_types, {}):
 		return false
 	return true
 

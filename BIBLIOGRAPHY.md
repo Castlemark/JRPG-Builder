@@ -1,19 +1,12 @@
 # TO-LOOK
 
 - [x] Godot Singleton
-
 - [x] External Loading: https://www.reddit.com/r/godot/comments/8ete52/how_do_i_load_files_from_game_directory_after/
-
 - [ ] Godot unzip: https://github.com/jellehermsen/gdunzip
-
 - [x] Godot RPG Tutorial: https://www.youtube.com/playlist?list=PLhqJJNjsQ7KHaAQcGij5SmOPpFjrDTHUq
-
 - [x] Godot Grass shader: https://www.youtube.com/watch?v=uMB3-g8v1B0
-
 - [x] Custom draw in 3D: https://godotengine.org/qa/2762/draw-line-in-3d
-
 - [x] GUI Skinning: https://docs.godotengine.org/en/3.1/tutorials/gui/gui_skinning.html
-
 - [x] Clickable node:
   
   - https://godotengine.org/qa/3719/how-to-get-a-node-by-mouse-click
@@ -21,7 +14,6 @@
   - https://godotengine.org/qa/21150/how-to-get-a-node-on-which-user-clicked-in-3d
   - https://godotengine.org/qa/13504/how-can-i-get-the-mouse-event-in-a-object
   - https://github.com/godotengine/godot/issues/21194
-
 - [x] Background Art
   
   - https://godotengine.org/qa/3164/how-to-make-a-tiled-repeating-background
@@ -30,14 +22,13 @@
   - https://www.youtube.com/watch?v=phA51SdFXCs&app=desktop
   - https://www.youtube.com/watch?v=RcuwFOEHN-U&app=desktop
   - http://fede0d.github.io/blog/2016/02/07/Godot-Extra-Tips-2.html
-
 - [ ] Jitter-free pixel art :
   
   * https://github.com/CptPotato/GodotThings/tree/master/SmoothPixelFiltering
   * https://www.youtube.com/watch?v=2JbhkZe22bE
-
 - [ ] Custom Shaders:
   
   * [https://thebookofshaders.com/](https://thebookofshaders.com/)
-  
   * [https://www.youtube.com/watch?v=K9FBpJ2Ypb4&feature=youtu.be](https://www.youtube.com/watch?v=K9FBpJ2Ypb4&feature=youtu.be)
+- [ ] Control clip content:
+    *   https://github.com/godotengine/godot/issues/7005

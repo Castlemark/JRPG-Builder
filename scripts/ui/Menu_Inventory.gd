@@ -31,17 +31,17 @@ func initialize_inventory(item_list : Array) -> void:
 func _validate_item(item_data, item : String) -> bool:
 	if item_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(item_data, ["type", "data"], "item is missing required fields", "", item):
+	if not Validators.minimal_info_fields_exist(item_data, Data.Validation.type_data, "item is missing required fields", "", item):
 		return false
-	if not Validators.type_is_valid(item_data.type, Validators.item_types, item_data.data):
+	if not Validators.type_is_valid(item_data.type, Data.Validation.item_types, item_data.data):
 		return false
 	
 	var valid := true
 	match item_data.type:
 		"consumable":
-			valid = Validators.minimal_info_fields_exist(item_data.data.effect, ["type", "value", "delay", "duration"], "item consumable is missing fields in it's \"effect\" field", "", item)
+			valid = Validators.minimal_info_fields_exist(item_data.data.effect, Data.Validation.item_effect_fields, "item consumable is missing fields in it's \"effect\" field", "", item)
 		"equipment":
-			valid = Validators.minimal_info_fields_exist(item_data.data.stats, Validators.stats, "item equipment is missing fields in it's \"stats\" field", "", item)
+			valid = Validators.minimal_info_fields_exist(item_data.data.stats, Data.Validation.stats, "item equipment is missing fields in it's \"stats\" field", "", item)
 	
 	return valid
 

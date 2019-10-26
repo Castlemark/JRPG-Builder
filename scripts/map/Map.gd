@@ -36,7 +36,7 @@ func initialize(map_name : String, acces_point : int) -> void:
 		return
 
 	# Check all necessary fields exist
-	if not Validators.minimal_info_fields_exist(map_data, ["navigation_nodes", "detail_art", "background_info", "name"], "map has missing required fields, " + Validators.check_docu, "name"):
+	if not Validators.minimal_info_fields_exist(map_data, Data.Validation.map_fields, "map has missing required fields, " + Data.Validation.check_docu, "name"):
 		return
 
 	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_path.png")
@@ -55,7 +55,7 @@ func initialize(map_name : String, acces_point : int) -> void:
 func instantiate_navigation_nodes(node_list : Array) -> void:
 	for node in node_list:
 		# JSON Validation
-		if not Validators.minimal_info_fields_exist(node, ["x", "y", "connected_nodes", "actions"], "A navigation node has missing required fields, " + Validators.check_docu, ""):
+		if not Validators.minimal_info_fields_exist(node, Data.Validation.nav_node_fields, "A navigation node has missing required fields, " + Data.Validation.check_docu, ""):
 			return
 
 	var counter : int = 0
@@ -71,7 +71,7 @@ func instantiate_between_nodes(node_list : Array) -> void:
 
 	for node in node_list:
 		# JSON Validation
-		if not Validators.minimal_info_fields_exist(node, ["x", "y", "connected_nodes", "actions"], "A navigation node has missing required fields, between nodes cannot be created as a result of this", ""):
+		if not Validators.minimal_info_fields_exist(node, Data.Validation.nav_node_fields, "A navigation node has missing required fields, between nodes cannot be created as a result of this", ""):
 			return
 
 	var counter : int = 0
@@ -101,7 +101,7 @@ func instantiate_between_nodes(node_list : Array) -> void:
 		counter += 1
 
 func instantiate_background_map(background_info : Dictionary) -> void:
-	if not Validators.minimal_info_fields_exist(background_info, ["x_offset", "y_offset"], "background_info has missing required fields, " + Validators.check_docu, ""):
+	if not Validators.minimal_info_fields_exist(background_info, Data.Validation.bg_map_fields, "background_info has missing required fields, " + Data.Validation.check_docu, ""):
 		return
 
 	var offset := Vector2(background_info.x_offset, background_info.y_offset)
@@ -122,7 +122,7 @@ func instantiate_background_map(background_info : Dictionary) -> void:
 func instantiate_details(details_list : Array) -> void:
 	for detail_info in details_list:
 		# JSON Fields check
-		if not Validators.minimal_info_fields_exist(detail_info, ["x", "y", "rotation", "filepath"], "detail doesn't have the necessary fields to initialize properly, " + Validators.check_docu, "filepath"):
+		if not Validators.minimal_info_fields_exist(detail_info, Data.Validation.detail_fields, "detail doesn't have the necessary fields to initialize properly, " + Data.Validation.check_docu, "filepath"):
 			return
 		
 		if not (detail_info.rotation == 0 or detail_info.rotation == 1):

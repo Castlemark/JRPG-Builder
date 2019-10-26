@@ -31,7 +31,7 @@ func initialize(enemy_data : Dictionary, abilities_data : Array) -> void:
 	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/hit.png")
 	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/miss.png")
 	
-	if Validators.optional_info_field_exists(data, "animation_data", ["hframes", "vframes", "total_frames", "duration"], "detail is marked as animated, but it's missing some of the requeried animation_data fields, " + Validators.check_docu, "filepath"):
+	if Validators.optional_info_field_exists(data, "animation_data", Data.Validation.animation_data, "detail is marked as animated, but it's missing some of the requeried animation_data fields, " + Data.Validation.check_docu, "filepath"):
 		is_animated = true
 	
 

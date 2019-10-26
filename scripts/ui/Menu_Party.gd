@@ -68,40 +68,40 @@ func initialize_party(character_list : Array) -> void:
 func _validate_character(character_data, character : String) -> bool:
 	if character_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(character_data, ["start_level", "min_stats", "max_stats", "abilities", "equipment"], "character is missing required fields", "", character):
+	if not Validators.minimal_info_fields_exist(character_data, Data.Validation.char_fields, "character is missing required fields", "", character):
 		return false
-	if not Validators.minimal_info_fields_exist(character_data.equipment, ["legs", "torso", "accessory_1", "accessory_2", "accessory_3", "weapon"], "character is missing required fields", "", character):
+	if not Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character is missing required fields", "", character):
 		return false
-	if not Validators.minimal_info_fields_exist(character_data.min_stats, Validators.stats, "character is missing required fields in \"min_stats\" field", "", character):
+	if not Validators.minimal_info_fields_exist(character_data.min_stats, Data.Validation.stats, "character is missing required fields in \"min_stats\" field", "", character):
 		return false
-	if not Validators.minimal_info_fields_exist(character_data.max_stats, Validators.stats, "character is missing required fields in \"max_stats\" field", "", character):
+	if not Validators.minimal_info_fields_exist(character_data.max_stats, Data.Validation.stats, "character is missing required fields in \"max_stats\" field", "", character):
 		return false
 	return true
 
 func _validate_ability(ability_data, ability : String) -> bool:
 	if ability_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(ability_data, [ "min_level", "target_amount", "side", "cost", "delay", "damage", "effect", "hits", "description"], "ability is missing required fields", "", ability):
+	if not Validators.minimal_info_fields_exist(ability_data, Data.Validation.ability_fields, "ability is missing required fields", "", ability):
 		return false
-	if not Validators.minimal_info_fields_exist(ability_data.effect, ["type", "receiver", "amount", "duration"], "ability is missing required fields in \"effect\" field", "", ability):
+	if not Validators.minimal_info_fields_exist(ability_data.effect, Data.Validation.ability_effect_fields, "ability is missing required fields in \"effect\" field", "", ability):
 		return false
-	if not Validators.type_is_valid(ability_data.effect.type, Validators.effect_types, {}):
+	if not Validators.type_is_valid(ability_data.effect.type, Data.Validation.effect_types, {}):
 		return false
-	if not Validators.type_is_valid(ability_data.effect.receiver, Validators.receiver_types, {}):
+	if not Validators.type_is_valid(ability_data.effect.receiver, Data.Validation.receiver_types, {}):
 		return false
 	return true
 
 func _validate_equipment(equipment_data, equipment : String, expected_slot : String) -> bool:
 	if equipment_data == null:
 		return false
-	if not Validators.minimal_info_fields_exist(equipment_data, ["type", "data"], "item is missing required fields", "", equipment):
+	if not Validators.minimal_info_fields_exist(equipment_data, Data.Validation.type_data, "item is missing required fields", "", equipment):
 		return false
-	if not Validators.type_is_valid(equipment_data.type, Validators.item_types, equipment_data.data):
+	if not Validators.type_is_valid(equipment_data.type, Data.Validation.item_types, equipment_data.data):
 		return false
 	if not equipment_data.type == "equipment":
 		print("the item is valid but is not an equipment piece, please make sure you try to equip an equipment item")
 		return false
-	if not Validators.type_is_valid(equipment_data.data.slot, Validators.equipment_types, equipment_data):
+	if not Validators.type_is_valid(equipment_data.data.slot, Data.Validation.equipment_types, equipment_data):
 		return false
 	if  not (equipment_data.data.slot as String).is_subsequence_of(expected_slot):
 		print(equipment + " equipment was valid, but is in a wrong slot, please make sure the equipment is in it's valid slot")

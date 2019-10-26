@@ -2,41 +2,6 @@ extends Node
 
 class_name Validators
 
-const check_docu := "please check the documentation to know the necessary fields"
-
-const action_types := {
-	"travel" : ["map_name", "access_point"],
-	"combat" : []
-}
-const item_types := {
-	"consumable" : ["price", "effect"],
-	"equipment" : ["price", "slot", "stats", "min_level", "rarity"],
-	"quest_object" : ["keyword"]
-}
-
-const equipment_types := {
-	"legs" : [],
-	"torso" : [],
-	"accessory" : [],
-	"weapon" : []
-}
-
-const effect_types := {
-	"strength": [], "dexterity": [], "constitution": [], "memory": [], "critic": [], "defence": [], "alt_defence": [], "speed": [],
-	"health": [],
-	"evasion": [],
-	"shield": [],
-	"strain": [],
-	"none": []
-}
-const receiver_types := {
-	"same": [],
-	"complementary": [],
-	"opposite": []
-}
-
-const stats := ["strength", "dexterity", "constitution", "critic", "defence", "alt_defence", "speed"]
-
 static func minimal_info_fields_exist(info : Dictionary, fields : Array, msg : String, name_field : String, id : String = "") -> bool:
 	var valid := true
 	var missing_fields := []
