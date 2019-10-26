@@ -23,7 +23,7 @@ func initialize_party(character_list : Array) -> void:
 	
 	for character in character_list:
 		var character_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/characters/party/" + character + "/character.json")
-		if not _validate_character(character_data, character):
+		if not Validator.character_is_valid(character_data, character):
 			continue
 		
 		var abilities_data := []
@@ -35,7 +35,7 @@ func initialize_party(character_list : Array) -> void:
 				abilities_data.append(ability_data)
 			
 			if abilities_valid:
-				abilities_valid = _validate_ability(ability_data, ability)
+				abilities_valid = Validator.ability_is_valid(ability_data, ability)
 		
 		if not abilities_valid:
 			print(character + " character is valid, but at least one of its abilities is invalid or may not exist, please check the messages above to see what abilities")
@@ -50,7 +50,7 @@ func initialize_party(character_list : Array) -> void:
 				equipments_data[slot] = equipment_data
 			
 			if equpment_valid:
-				equpment_valid = _validate_equipment(equipment_data, character_data.equipment.get(slot), slot)
+				equpment_valid = Validator.equipment_is_valid(equipment_data, character_data.equipment.get(slot), slot)
 		
 		if not equpment_valid:
 			print(character + "character is valid, but at least one of its equipments is invalid or may not exist, please check the messages above to see what equipments")
@@ -64,49 +64,6 @@ func initialize_party(character_list : Array) -> void:
 		character_node.connect("character_selected", self, "_on_player_select")
 		character_node.group = character_button_group
 	pass
-
-func _validate_character(character_data, character : String) -> bool:
-	if character_data == null:
-		return false
-	if not Validators.minimal_info_fields_exist(character_data, Data.Validation.char_fields, "character is missing required fields", "", character):
-		return false
-	if not Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character is missing required fields", "", character):
-		return false
-	if not Validators.minimal_info_fields_exist(character_data.min_stats, Data.Validation.stats, "character is missing required fields in \"min_stats\" field", "", character):
-		return false
-	if not Validators.minimal_info_fields_exist(character_data.max_stats, Data.Validation.stats, "character is missing required fields in \"max_stats\" field", "", character):
-		return false
-	return true
-
-func _validate_ability(ability_data, ability : String) -> bool:
-	if ability_data == null:
-		return false
-	if not Validators.minimal_info_fields_exist(ability_data, Data.Validation.ability_fields, "ability is missing required fields", "", ability):
-		return false
-	if not Validators.minimal_info_fields_exist(ability_data.effect, Data.Validation.ability_effect_fields, "ability is missing required fields in \"effect\" field", "", ability):
-		return false
-	if not Validators.type_is_valid(ability_data.effect.type, Data.Validation.effect_types, {}):
-		return false
-	if not Validators.type_is_valid(ability_data.effect.receiver, Data.Validation.receiver_types, {}):
-		return false
-	return true
-
-func _validate_equipment(equipment_data, equipment : String, expected_slot : String) -> bool:
-	if equipment_data == null:
-		return false
-	if not Validators.minimal_info_fields_exist(equipment_data, Data.Validation.type_data, "item is missing required fields", "", equipment):
-		return false
-	if not Validators.type_is_valid(equipment_data.type, Data.Validation.item_types, equipment_data.data):
-		return false
-	if not equipment_data.type == "equipment":
-		print("the item is valid but is not an equipment piece, please make sure you try to equip an equipment item")
-		return false
-	if not Validators.type_is_valid(equipment_data.data.slot, Data.Validation.equipment_types, equipment_data):
-		return false
-	if  not (equipment_data.data.slot as String).is_subsequence_of(expected_slot):
-		print(equipment + " equipment was valid, but is in a wrong slot, please make sure the equipment is in it's valid slot")
-		return false
-	return true
 
 func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 	var stats : Dictionary = (character_button_group.get_pressed_button() as Character_UI).get_stats()

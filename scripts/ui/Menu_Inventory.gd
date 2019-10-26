@@ -15,10 +15,9 @@ func _ready():
 
 
 func initialize_inventory(item_list : Array) -> void:
-	# TODO check items are valid
 	for item in item_list:
 		var item_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + item + "/item.json")
-		if not _validate_item(item_data, item):
+		if not Validator.item_is_valid(item_data, item):
 			continue
 		
 		item_data["name"] = item
@@ -27,23 +26,6 @@ func initialize_inventory(item_list : Array) -> void:
 		inventory_container.add_child(item_node, true)
 		item_node.initialize(item_data)
 		item_node.group = item_button_group
-
-func _validate_item(item_data, item : String) -> bool:
-	if item_data == null:
-		return false
-	if not Validators.minimal_info_fields_exist(item_data, Data.Validation.type_data, "item is missing required fields", "", item):
-		return false
-	if not Validators.type_is_valid(item_data.type, Data.Validation.item_types, item_data.data):
-		return false
-	
-	var valid := true
-	match item_data.type:
-		"consumable":
-			valid = Validators.minimal_info_fields_exist(item_data.data.effect, Data.Validation.item_effect_fields, "item consumable is missing fields in it's \"effect\" field", "", item)
-		"equipment":
-			valid = Validators.minimal_info_fields_exist(item_data.data.stats, Data.Validation.stats, "item equipment is missing fields in it's \"stats\" field", "", item)
-	
-	return valid
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:

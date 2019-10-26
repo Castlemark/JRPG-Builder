@@ -1,6 +1,4 @@
-extends Node
-
-class_name Validators
+class_name Generic_Validators
 
 static func minimal_info_fields_exist(info : Dictionary, fields : Array, msg : String, name_field : String, id : String = "") -> bool:
 	var valid := true

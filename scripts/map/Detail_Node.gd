@@ -23,7 +23,7 @@ func initialize(detail_info : Dictionary) -> void:
 		sprite.transform = Transform(Vector3(4, 0, 0), Vector3(3, 1.732, 0), Vector3(0, 0, 4), Vector3(0, 0, 0))
 		self.rotation_degrees = Vector3(0, 90, 0)
 	
-	if Validators.optional_info_field_exists(detail_info, "animation_data", Data.Validation.animation_data, "detail is marked as animated, but it's missing some of the requeried animation_data fields, " + Data.Validation.check_docu, "filepath"):
+	if Generic_Validators.optional_info_field_exists(detail_info, "animation_data", Data.Validation.animation_data, "detail is marked as animated, but it's missing some of the requeried animation_data fields, " + Data.Validation.check_docu, "filepath"):
 		_configure_animation(detail_info.animation_data)
 
 func _process(delta: float) -> void:

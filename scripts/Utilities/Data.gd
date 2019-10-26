@@ -60,5 +60,3 @@ class Validation:
 	
 	# ENEMY
 	const enemy_fields := ["stats", "abilities"]
-	
-	
