@@ -109,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Menu_Party.gd"
 }, {
+"base": "Reference",
+"class": "Model",
+"language": "GDScript",
+"path": "res://scripts/Model.gd"
+}, {
 "base": "Position3D",
 "class": "Navigation_Node",
 "language": "GDScript",
@@ -155,6 +160,7 @@ _global_script_class_icons={
 "Menu_Inventory": "",
 "Menu_Manager": "",
 "Menu_Party": "",
+"Model": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
 "Travel_Action": "",
