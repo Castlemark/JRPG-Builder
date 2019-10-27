@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/actions/Combat_Trigger_Action.gd"
 }, {
+"base": "Reference",
+"class": "Data",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Data.gd"
+}, {
 "base": "Spatial",
 "class": "Detail_Node",
 "language": "GDScript",
@@ -63,6 +68,11 @@ _global_script_classes=[ {
 "class": "Generic_Action",
 "language": "GDScript",
 "path": "res://scripts/map/actions/Generic_Action.gd"
+}, {
+"base": "Reference",
+"class": "Generic_Validators",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Validation/Generic_Validators.gd"
 }, {
 "base": "Button",
 "class": "Item",
@@ -99,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Menu_Party.gd"
 }, {
+"base": "Reference",
+"class": "Model",
+"language": "GDScript",
+"path": "res://scripts/Model.gd"
+}, {
 "base": "Position3D",
 "class": "Navigation_Node",
 "language": "GDScript",
@@ -119,10 +134,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Utilities/Utils.gd"
 }, {
-"base": "Node",
-"class": "Validators",
+"base": "Reference",
+"class": "Validator",
 "language": "GDScript",
-"path": "res://scripts/Utilities/Validators.gd"
+"path": "res://scripts/Utilities/Validation/Validator.gd"
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
@@ -131,11 +146,13 @@ _global_script_class_icons={
 "Character_UI": "",
 "Combat_Manager": "",
 "Combat_Trigger_Action": "",
+"Data": "",
 "Detail_Node": "",
 "Encyclopedia_Enemy": "",
 "Enemy_preview": "",
 "Game_Manager": "",
 "Generic_Action": "",
+"Generic_Validators": "",
 "Item": "",
 "Map": "",
 "Map_Camera": "",
@@ -143,11 +160,12 @@ _global_script_class_icons={
 "Menu_Inventory": "",
 "Menu_Manager": "",
 "Menu_Party": "",
+"Model": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
 "Travel_Action": "",
 "Utils": "",
-"Validators": ""
+"Validator": ""
 }
 
 [application]

@@ -31,7 +31,6 @@ func initialize(campaign_data : Dictionary) -> void:
 	encyclopedia_menu.initialize_encyclopedia([], [])
 
 func _ready() -> void:
-	print(GM.campaign_data)
 	initialize(GM.campaign_data)
 	_wipe_all_menus()
 	self.margin_top = MIN_SIZE

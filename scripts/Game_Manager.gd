@@ -36,7 +36,6 @@ func _ready() -> void:
 	campaign_data = Utils.load_json("res://campaigns/" + campaign.name + "/campaign.json")
 	campaign.cur_map.name = campaign_data.map_name
 	campaign.cur_map.access_point = campaign_data.access_point
-	#menus.initialize(campaign_data)
 	################
 	
 	### CONFIG ###

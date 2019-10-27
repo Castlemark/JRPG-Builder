@@ -54,10 +54,10 @@ func set_up_skin(connected_nodes_num : int) -> void:
 func set_up_actions(actions_list : Array):
 	for i in actions_list:
 		
-		if not Validators.minimal_info_fields_exist(i, ["type", "data"], "action has missing required fields, " + Validators.check_docu, "type"):
+		if not Generic_Validators.minimal_info_fields_exist(i, Data.Validation.type_data, "action has missing or incorrect required fields, " + Data.Validation.check_docu, "type"):
 			return
 		
-		if not Validators.type_is_valid(i.type as String, Validators.action_types, i.data):
+		if not Generic_Validators.type_is_valid(i.type as String, Data.Validation.action_types, i.data):
 			return
 		
 		var action : Generic_Action
