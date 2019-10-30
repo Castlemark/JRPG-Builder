@@ -6,6 +6,8 @@ signal combat_finished()
 
 onready var background : TextureRect = $BackgroundLayer/Background
 
+onready var ally_top : 
+
 var _combat_started := false
 
 func _ready() -> void:

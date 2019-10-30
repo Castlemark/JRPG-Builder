@@ -1,13 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://campaigns/example_campaign/characters/party/dwarf/idle.png" type="Texture" id=3]
-[ext_resource path="res://campaigns/example_campaign/characters/party/dwarf/attack.png" type="Texture" id=4]
-[ext_resource path="res://campaigns/example_campaign/characters/party/dwarf/hit.png" type="Texture" id=5]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/hit.png" type="Texture" id=6]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/attack.png" type="Texture" id=7]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/idle.png" type="Texture" id=8]
+[ext_resource path="res://scenes/combat/Character_Combat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/hit.png" type="Texture" id=4]
+[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/attack.png" type="Texture" id=5]
+[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/idle.png" type="Texture" id=6]
 
 [node name="Combat" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,49 +25,33 @@ current = true
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Allies" type="Node2D" parent="Characters"]
-editor/display_folded = true
 
-[node name="Top" type="Position2D" parent="Characters/Allies"]
+[node name="Top" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -500, 200 )
-z_index = 2
 
-[node name="Sprite" type="Sprite" parent="Characters/Allies/Top"]
-texture = ExtResource( 3 )
-
-[node name="Middle" type="Position2D" parent="Characters/Allies"]
+[node name="Middle" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -200, 0 )
-z_index = 1
 
-[node name="Sprite" type="Sprite" parent="Characters/Allies/Middle"]
-texture = ExtResource( 4 )
-
-[node name="Bottom" type="Position2D" parent="Characters/Allies"]
+[node name="Bottom" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -500, -200 )
 
-[node name="Sprite" type="Sprite" parent="Characters/Allies/Bottom"]
-texture = ExtResource( 5 )
-
 [node name="Enemies" type="Node2D" parent="Characters"]
-editor/display_folded = true
 
-[node name="Top" type="Position2D" parent="Characters/Enemies"]
+[node name="Top" type="Sprite" parent="Characters/Enemies"]
 position = Vector2( 500, 200 )
-z_index = 2
-
-[node name="Sprite" type="Sprite" parent="Characters/Enemies/Top"]
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 
 [node name="Middle" type="Position2D" parent="Characters/Enemies"]
 position = Vector2( 200, 0 )
 z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Characters/Enemies/Middle"]
-texture = ExtResource( 7 )
+texture = ExtResource( 5 )
 
 [node name="Bottom" type="Position2D" parent="Characters/Enemies"]
 position = Vector2( 500, -200 )
 
 [node name="Sprite" type="Sprite" parent="Characters/Enemies/Bottom"]
-texture = ExtResource( 8 )
+texture = ExtResource( 6 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
