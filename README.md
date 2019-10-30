@@ -14,7 +14,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
   - [x] Map module V-1
     - [x] Navigation
     - [x] Inter-map movement
-    - [x] Background art
+      - [x] Background art
 - [x] <u>Map interaction Sprint - 12/07/19</u>
   - [x] Map module V-2
     - [x] Individual art
@@ -49,7 +49,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
 - [ ] <u>Combat Sprint - 08/11/19</u>
   - [ ] Combat module V-2 **(final)**
     - [ ] Final AI
-    - [ ] Wave combat
+  - [ ] Wave combat
 - [ ] <u>Content creation Sprint - 24/12/19</u>
   - [ ] Save states
   - [ ] Create Campaign **(final)**

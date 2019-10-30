@@ -1,35 +1,31 @@
 extends Panel
 
-class_name Combat_Manager
+class_name Combat_Viewport
 
 signal encounter_finished()
-signal combat_finished()
 
 const MIN_SIZE := -1083
 const MAX_SIZE := -82
 
 onready var tween : Tween = $Tween as Tween
 
-var _combat_started := false
+# Min Resolution for the viewport is 1472x934, but can get wider
+onready var viewport : Viewport = $ViewportContainer/Viewport as Viewport
+onready var combat_controller : Combat = $ViewportContainer/Viewport/Combat as Combat
 
 func _ready() -> void:
 	self.margin_bottom = MIN_SIZE
 
-func _input(event: InputEvent) -> void:
-	if _combat_started:
-		if event.is_action_pressed("ui_select"):
-			emit_signal("combat_finished")
-
 func start_encounter() -> void:
-	self.grab_focus()
 	
 	print("starting encounter")
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
 	
-	_start_combat()
-	yield(self, "combat_finished")
+	print(viewport.size)
+	combat_controller.start_combat()
+	yield(combat_controller, "combat_finished")
 	
 	tween.interpolate_property(self, "margin_bottom", null, MIN_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
@@ -37,7 +33,3 @@ func start_encounter() -> void:
 	
 	print("ending encounter")
 	emit_signal("encounter_finished")
-
-func _start_combat() -> void:
-	_combat_started = true
-	pass
