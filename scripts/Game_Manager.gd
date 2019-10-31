@@ -16,6 +16,7 @@ var UI : Dictionary = {
 }
 
 var campaign_data : Dictionary = {}
+var campaign_data_model := Model.Campaign_Data.new()
 
 var current_scene : Node = null
 
@@ -33,6 +34,9 @@ func _ready() -> void:
 	#############
 	
 	### CAMPAIGN ###
+	var campaign_loader := Loaders.Campaign_Loader.new()
+	campaign_data_model = campaign_loader.load_campaign(campaign.name)
+	
 	campaign_data = Utils.load_json("res://campaigns/" + campaign.name + "/campaign.json")
 	campaign.cur_map.name = campaign_data.map_name
 	campaign.cur_map.access_point = campaign_data.access_point
@@ -49,7 +53,6 @@ func _ready() -> void:
 func goto_scene(scene : Resource) -> void:
 	call_deferred("_deferred_goto_scene", scene)
 
-# IMPROVE TRANSITION
 func _deferred_goto_scene(scene : Resource) -> void:
 	
 	# We fade out to mask the transition

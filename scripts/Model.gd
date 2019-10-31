@@ -1,10 +1,35 @@
 class_name Model
 
+class Campaign_Data:
+	var name : String
+	
+	var maps : Dictionary
+	var cur_map : Map_Data
+	
+	var items : Dictionary
+	var abilities : Dictionary
+	
+	var characters: Dictionary
+	var npcs : Dictionary
+	var enemies : Dictionary
+
+class Party_Data:
+	var first_character : Character_Data
+	var second_character : Character_Data
+	var third_character : Character_Data
+	
+	var all_characters : Dictionary
+	
+	var inventory : Array
+	var money : int
+	
+
 class Map_Data:
 	var name : String
 	var navigation_nodes : Array
 	var detail_art : Array
 	var background_info : BG_Data
+	var access_point : int
 	
 	class BG_Data:
 		var x_offset : float
@@ -18,19 +43,11 @@ class Map_Data:
 		
 		class Action_Data:
 			var type : String
-			var data
-			
-			class Travel_Action_Data:
-				var map_name : String
-				var access_point: int
-			
-			class Combat_Action_Data:
-				# TODO replace with real body
-				var dummy
+			var data : Dictionary
 	
 	class Detail_Art_Data:
-		var x : int
-		var y : int
+		var x : float
+		var y : float
 		var rotation : int
 		var filepath : String
 		var animation_data : Animation_Data
@@ -49,7 +66,7 @@ class Item_Data:
 		class Quest_Object_Data:
 			var keyword : String
 		
-		class Equipment_Data:
+		class Equipment_Item_Data:
 			var price : int
 			var slot : String
 			var stats : Stats_Data
@@ -60,7 +77,7 @@ class Character_Data:
 	var start_level : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
-	var cur_stats: Stats_Data
+	var cur_stats : Stats_Data
 	var cur_calc_stats : Calc_Stats_Data
 	var abilities : Array
 	var equipment : Equipment_Data
@@ -119,4 +136,3 @@ class Animation_Data:
 	var vframes : int
 	var total_frames : int
 	var duration : float
-	
