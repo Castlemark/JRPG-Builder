@@ -26,10 +26,11 @@ var avatar_img : Texture
 var map_img : Texture
 
 func _ready() -> void:
+	if GM.campaign_data_model == null:
+		return
 	initialize(GM.campaign_data_model.maps.get(GM.campaign_data_model.cur_map))
 
 func initialize(map) -> void:
-	
 	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map_nodes/node_path.png")
 	intersection_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map_nodes/node_intersection.png")
 	between_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map_nodes/node_between.png")
