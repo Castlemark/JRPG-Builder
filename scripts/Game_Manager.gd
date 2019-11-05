@@ -40,6 +40,9 @@ func _ready() -> void:
 	campaign_data = Utils.load_json("res://campaigns/" + campaign.name + "/campaign.json")
 	campaign.cur_map.name = campaign_data.map_name
 	campaign.cur_map.access_point = campaign_data.access_point
+	
+	# TODO Change when menu implemented
+	#(current_scene as Map).initialize(campaign_data_model.maps.get(campaign_data_model.cur_map))
 	################
 	
 	### CONFIG ###

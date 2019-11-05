@@ -4,7 +4,7 @@ class Campaign_Data:
 	var name : String
 	
 	var maps : Dictionary
-	var cur_map : Map_Data
+	var cur_map : String
 	
 	var items : Dictionary
 	var abilities : Dictionary

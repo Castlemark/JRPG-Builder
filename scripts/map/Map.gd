@@ -26,39 +26,29 @@ var avatar_img : Texture
 var map_img : Texture
 
 func _ready() -> void:
-	initialize(GM.campaign.cur_map.name, GM.campaign.cur_map.access_point)
+	initialize(GM.campaign_data_model.maps.get(GM.campaign_data_model.cur_map))
 
-func initialize(map_name : String, acces_point : int) -> void:
-
-	var map_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map.json")
-	# Check file exists
-	if map_data == null:
-		return
-
-	# Check all necessary fields exist
-	if not Validator.map_is_valid(map_data):
-		return
+func initialize(map) -> void:
 	
+	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map_nodes/node_path.png")
+	intersection_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map_nodes/node_intersection.png")
+	between_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map_nodes/node_between.png")
+	avatar_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/player_avatar.png")
+	map_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map.name + "/map.png")
 
-	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_path.png")
-	intersection_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_intersection.png")
-	between_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map_nodes/node_between.png")
-	avatar_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/player_avatar.png")
-	map_img = Utils.load_img_3D("res://campaigns/" + GM.campaign.name + "/maps/" + map_name + "/map.png")
+	instantiate_navigation_nodes(map.navigation_nodes as Array)
+	instantiate_between_nodes(map.navigation_nodes as Array)
+	instantiate_background_map(map.background_info)
+	instantiate_details(map.detail_art)
 
-	instantiate_navigation_nodes(map_data.navigation_nodes as Array)
-	instantiate_between_nodes(map_data.navigation_nodes as Array)
-	instantiate_background_map(map_data.background_info)
-	instantiate_details(map_data.detail_art)
-
-	player_avatar.initialize(navigation_nodes.get_child(acces_point) as Navigation_Node, avatar_img)
+	player_avatar.initialize(navigation_nodes.get_child(map.access_point) as Navigation_Node, avatar_img)
 
 func instantiate_navigation_nodes(node_list : Array) -> void:
 	var counter : int = 0
 	for node in node_list:
 		var nav_node = navigation_node_res.instance()
 		navigation_nodes.add_child(nav_node, true)
-		nav_node.initialize(node as Dictionary, counter, path_img, intersection_img)
+		nav_node.initialize(node, counter, path_img, intersection_img)
 
 		counter += 1
 
@@ -91,7 +81,7 @@ func instantiate_between_nodes(node_list : Array) -> void:
 
 		counter += 1
 
-func instantiate_background_map(background_info : Dictionary) -> void:
+func instantiate_background_map(background_info) -> void:
 	var offset := Vector2(background_info.x_offset, background_info.y_offset)
 
 	var map_size := Vector2(4000, 4000)

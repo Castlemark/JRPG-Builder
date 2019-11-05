@@ -18,23 +18,25 @@ class Campaign_Loader:
 			return null
 		campaign_data.maps = maps
 		
+		if not maps.has(campaign_dict.map_name):
+			print("Starting map \"" + campaign_dict.map_name + "\" does not exist or has not loaded correctly, please make sure the map exists and is in the correct place")
+			return null
+		campaign_data.cur_map = campaign_dict.map_name
+		
 		return campaign_data
 	
 	func load_all_maps(campaign_name : String) -> Dictionary:
 		print("########################\n##### LOADING MAPS #####\n########################")
 		
-		var load_correct = true
 		var map_names : Array = Utils.scan_directories_in_directory("res://campaigns/" + campaign_name + "/maps")
 		
 		if map_names == null:
-			load_correct = false
 			return {}
 		
 		var maps := {}
 		for map_name in map_names:
 			var map_data : Model.Map_Data = load_map(map_name, campaign_name)
 			if map_data == null:
-				load_correct = false
 				continue
 			
 			maps[map_name] = map_data
@@ -64,6 +66,7 @@ class Campaign_Loader:
 			var nav_node_data := Model.Map_Data.Nav_Node_Data.new()
 			
 			# Actions
+			nav_node_data.actions = []
 			for action_info in node_info.actions:
 				if not Generic_Validators.minimal_info_fields_exist(action_info, Data.Validation.type_data, "action has missing or incorrect required fields, " + Data.Validation.check_docu, "type"):
 					load_correct = false

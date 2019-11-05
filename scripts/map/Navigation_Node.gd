@@ -21,7 +21,7 @@ func _ready() -> void:
 #warning-ignore:return_value_discarded
 	self.connect("clicked_destination", $"/root/Map", "_on_Navigation_Node_clicked_destination")
 
-func initialize(node_info : Dictionary, node_index : int, path_img : Resource, intersection_img : Texture) -> void:
+func initialize(node_info, node_index : int, path_img : Resource, intersection_img : Texture) -> void:
 	skin  = ($Skin as Sprite3D)
 	events  = ($Events as Spatial)
 	actions = $Actions
@@ -53,13 +53,6 @@ func set_up_skin(connected_nodes_num : int) -> void:
 
 func set_up_actions(actions_list : Array):
 	for i in actions_list:
-		
-		if not Generic_Validators.minimal_info_fields_exist(i, Data.Validation.type_data, "action has missing or incorrect required fields, " + Data.Validation.check_docu, "type"):
-			return
-		
-		if not Generic_Validators.type_is_valid(i.type as String, Data.Validation.action_types, i.data):
-			return
-		
 		var action : Generic_Action
 		match (i.type as String):
 			"travel":
