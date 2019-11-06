@@ -12,13 +12,13 @@ class Campaign_Data:
 	var characters: Dictionary
 	var npcs : Dictionary
 	var enemies : Dictionary
+	
+	var party : Party_Data
 
 class Party_Data:
 	var first_character : Character_Data
 	var second_character : Character_Data
 	var third_character : Character_Data
-	
-	var all_characters : Dictionary
 	
 	var inventory : Array
 	var money : int
@@ -74,12 +74,13 @@ class Item_Data:
 			var rarity : int
 
 class Character_Data:
+	var name : String
 	var start_level : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
 	var cur_stats : Stats_Data
 	var cur_calc_stats : Calc_Stats_Data
-	var abilities : Array
+	var abilities : Dictionary
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
 	
@@ -92,12 +93,14 @@ class Character_Data:
 		var weapon : String
 
 class Enemy_Data:
+	var name : String
 	var stats : Stats_Data
 	var calc_stats : Calc_Stats_Data
-	var abilities : Array
+	var abilities : Dictionary
 	var animation_data : Animation_Data
 
 class Ability_Data:
+	var name : String
 	var min_level : int
 	var target_amount : int
 	var side : String

@@ -122,6 +122,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 	
 	
 	if difference > 0:
+# warning-ignore:unused_variable
 		for i in range(abs(difference)):
 			var character_ability_node : Button = character_ability_res.instance()
 			character_ability_container.add_child(character_ability_node, true)
@@ -129,6 +130,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			character_ability_node.connect("ability_pressed", self, "_on_ability_pressed")
 			character_ability_node.group = ability_button_group
 	elif difference < 0:
+# warning-ignore:unused_variable
 		for i in range(abs(difference)):
 			var node_to_delete = character_ability_container.get_child(0)
 			character_ability_container.remove_child(node_to_delete)
