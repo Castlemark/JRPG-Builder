@@ -21,14 +21,14 @@ func initialize(enemy_data : Model.Enemy_Data) -> void:
 	data = enemy_data
 	
 	label.text = data.name
-	var icon_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/icon.png")
+	var icon_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/characters/enemies/" + data.name + "/icon.png")
 	if icon_sprite != null:
 		enemy_icon.texture = icon_sprite
 	
-	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/idle.png")
-	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/attack.png")
-	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/hit.png")
-	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/miss.png")
+	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/characters/enemies/" + data.name + "/idle.png")
+	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/characters/enemies/" + data.name + "/attack.png")
+	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/characters/enemies/" + data.name + "/hit.png")
+	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/characters/enemies/" + data.name + "/miss.png")
 	
 	if data.animation_data != null:
 		is_animated = true

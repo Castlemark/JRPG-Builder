@@ -15,7 +15,6 @@ var UI : Dictionary = {
 	"margin_right": null
 }
 
-var campaign_data : Dictionary = {}
 var campaign_data_model := Model.Campaign_Data.new()
 
 var current_scene : Node = null
@@ -36,10 +35,6 @@ func _ready() -> void:
 	### CAMPAIGN ###
 	var campaign_loader := Loaders.Campaign_Loader.new()
 	campaign_data_model = campaign_loader.load_campaign(campaign.name)
-	
-	campaign_data = Utils.load_json("res://campaigns/" + campaign.name + "/campaign.json")
-	campaign.cur_map.name = campaign_data.map_name
-	campaign.cur_map.access_point = campaign_data.access_point
 	################
 	
 	### CONFIG ###
@@ -83,9 +78,7 @@ func _deferred_goto_scene(scene : Resource) -> void:
 	transition.margin_right = 0
 
 func travel_to_map(map_name : String, access_point : int) -> void:
-	campaign.cur_map.name = map_name
-	campaign.cur_map.access_point = access_point
-	
+	campaign_data_model.cur_map = map_name
 	goto_scene(MAP)
 
 func on_window_resize() -> void:

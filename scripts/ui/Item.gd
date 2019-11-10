@@ -18,6 +18,6 @@ func initialize(item) -> void:
 	var tooltip := String(data.name)
 	self.hint_tooltip = tooltip
 
-	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/items/" + data.name + "/item.png")
+	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/items/" + data.name + "/item.png")
 	if img != null:
 		image.texture = img

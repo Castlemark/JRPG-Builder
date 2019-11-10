@@ -25,13 +25,13 @@ var menu_up : bool
 var animation_in_progress : bool
 var current_screen : String
 
-func initialize(campaign_data : Dictionary) -> void:
+func initialize() -> void:
 	inventory_menu.initialize_inventory()
 	party_menu.initialize_party()
 	encyclopedia_menu.initialize_encyclopedia([], [])
 
 func _ready() -> void:
-	initialize(GM.campaign_data)
+	initialize()
 	_wipe_all_menus()
 	self.margin_top = MIN_SIZE
 	

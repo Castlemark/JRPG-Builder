@@ -15,6 +15,7 @@ class Campaign_Loader:
 		var campaign_dict = Utils.load_json("res://campaigns/" + campaign_name + "/campaign.json")
 		
 		campaign_data = Model.Campaign_Data.new()
+		campaign_data.name = campaign_name
 		
 		# MAPS
 		var maps : Dictionary = load_all_maps(campaign_name)
