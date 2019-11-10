@@ -275,6 +275,10 @@ ui_encyclopedia={
  ]
 }
 
+[network]
+
+limits/debugger_stdout/max_chars_per_second=32768
+
 [rendering]
 
 quality/filters/anisotropic_filter_level=1

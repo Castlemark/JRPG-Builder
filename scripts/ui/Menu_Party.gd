@@ -42,17 +42,17 @@ func initialize_party(character_list : Array) -> void:
 			continue
 		
 		var equipments_data := {}
-		var equpment_valid := true
+		var equipment_valid := true
 		for slot in character_data.equipment.keys():
 			var equipment_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + character_data.equipment.get(slot) + "/item.json")
 			if equipment_data != null:
 				equipment_data["name"] = slot
 				equipments_data[slot] = equipment_data
 			
-			if equpment_valid:
-				equpment_valid = Validator.equipment_is_valid(equipment_data, character_data.equipment.get(slot), slot)
+			if equipment_valid:
+				equipment_valid = Validator.equipment_is_valid(equipment_data, character_data.equipment.get(slot), slot)
 		
-		if not equpment_valid:
+		if not equipment_valid:
 			print(character + "character is valid, but at least one of its equipments is invalid or may not exist, please check the messages above to see what equipments")
 			continue
 		

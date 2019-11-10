@@ -54,6 +54,7 @@ class Map_Data:
 
 class Item_Data:
 		class Consumable_Data:
+			var name : String
 			var price : int
 			var effect : Item_Effect_Data
 			
@@ -64,9 +65,11 @@ class Item_Data:
 				var duration : int
 		
 		class Quest_Object_Data:
+			var name : String
 			var keyword : String
 		
 		class Equipment_Item_Data:
+			var name : String
 			var price : int
 			var slot : String
 			var stats : Stats_Data
@@ -76,6 +79,7 @@ class Item_Data:
 class Character_Data:
 	var name : String
 	var start_level : int
+	var cur_level : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
 	var cur_stats : Stats_Data
@@ -85,12 +89,12 @@ class Character_Data:
 	var animation_data : Animation_Data
 	
 	class Equipment_Data:
-		var legs : String
-		var torso : String
-		var accessory_1 : String
-		var accessory_2 : String
-		var accessory_3 : String
-		var weapon : String
+		var legs : Item_Data.Equipment_Item_Data
+		var torso : Item_Data.Equipment_Item_Data
+		var accessory_1 : Item_Data.Equipment_Item_Data
+		var accessory_2 : Item_Data.Equipment_Item_Data
+		var accessory_3 : Item_Data.Equipment_Item_Data
+		var weapon : Item_Data.Equipment_Item_Data
 
 class Enemy_Data:
 	var name : String

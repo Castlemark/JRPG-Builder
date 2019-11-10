@@ -2,6 +2,9 @@ class_name Loaders
 
 class Campaign_Loader:
 	
+	const _LEVEL = "Level "
+	const _MAX_LEVEL = 30
+	
 	var campaign_data : Model.Campaign_Data
 	
 	func load_campaign(campaign_name : String) -> Model.Campaign_Data:
@@ -30,6 +33,10 @@ class Campaign_Loader:
 		campaign_data.abilities = abilities
 		
 		# ITMES
+		var items : Dictionary = load_all_items(campaign_name)
+		if items.empty():
+			load_correct = false
+		campaign_data.items = items
 		
 		# CHARACTERS
 		var characters : Dictionary = load_all_characters(campaign_name)
@@ -44,16 +51,36 @@ class Campaign_Loader:
 		campaign_data.enemies = enemies
 		
 		# PARTY
+		var i = 0
+		var party := Model.Party_Data.new()
 		for character in campaign_dict.party:
 			if not characters.has(character):
 				load_correct = false
 				print("\nYour party has the character\"" + character + "\", but this character does not exist or has not loaded correctly, please make sure the character exists and is in the correct place")
+			else:
+				if i==0:
+					party.first_character = campaign_data.characters.get(character)
+				elif i==1:
+					party.second_character = campaign_data.characters.get(character)
+				elif i==2:
+					party.third_character = campaign_data.characters.get(character)
+				
+				i += 1
 		
 		#INVENTORY
+		for inventory_item in campaign_dict.inventory:
+			if not campaign_data.items.has(inventory_item):
+				load_correct = false
+				print("\nYour inventory has the item\"" + inventory_item  +"\", but this item does not exist or has not loaded correctly, please make sure the character exists and is in the correct place")
+			else:
+				party.inventory.append(campaign_data.items.get(inventory_item))
+		
+		party.money = 0
+		campaign_data.party = party
 		
 		# FINAL STEPS
 		if not load_correct:
-			print("\nCampaign \"" + campaign_name + "\" could not be loaded look above to see what were the errors")
+			print("\nCampaign \"" + campaign_name + "\" could not be loaded, look above to see what were the errors")
 			return null
 		
 		print(" ■■■■■■■■■■■■■■■■■■■■■■■■■■\nCAMPAIGN LOADED SUCESSFULLY!\n ■■■■■■■■■■■■■■■■■■■■■■■■■■")
@@ -212,8 +239,9 @@ class Campaign_Loader:
 		var character_data := Model.Character_Data.new()
 		character_data.name = character_name
 		
-		# Start Level
+		# Level
 		character_data.start_level = character_dict.start_level as int
+		character_data.cur_level = character_data.start_level as int
 		
 		# Min Stats
 		var min_stats := Model.Stats_Data.new()
@@ -240,8 +268,70 @@ class Campaign_Loader:
 		character_data.max_stats = max_stats
 		
 		# Cur Stats
-		character_data.cur_stats = null
-		character_data.cur_calc_stats = null
+		var cur_stats := Model.Stats_Data.new()
+		var calc_cur_stats := Model.Calc_Stats_Data.new()
+		
+		cur_stats.strength = min_stats.strength + ((character_data.cur_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
+		cur_stats.dexterity = min_stats.dexterity + (character_data.cur_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
+		cur_stats.constitution = min_stats.constitution + (character_data.cur_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
+		cur_stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
+		cur_stats.defence = min_stats.defence + (character_data.cur_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
+		cur_stats.alt_defence = min_stats.alt_defence + (character_data.cur_level - 1) * float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL
+		cur_stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
+		
+		calc_cur_stats.hp = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
+			+ (character_data.cur_level - 1) * (float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+		calc_cur_stats.shield = (1/4.0 * min_stats.constitution + float(min_stats.alt_defence) + 1/3.0 * min_stats.defence \
+			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+		calc_cur_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.alt_defence \
+			+ (character_data.cur_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL)) * 10
+		calc_cur_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
+			+ (character_data.cur_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL))
+		calc_cur_stats.damage = (1/4.0 * min_stats.strength + 1/4.0 * min_stats.dexterity + 1/8.0 * min_stats.speed \
+			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL + 1/4.0 * (max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL  + 1/8.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL)) * 10
+		
+		character_data.cur_stats = cur_stats
+		character_data.cur_calc_stats = calc_cur_stats
+		
+		# Equipment
+		var equipment := Model.Character_Data.Equipment_Data.new()
+		if not campaign_data.items.has(character_dict.equipment.legs):
+			print(character_data.name + "character is valid, but the \"" + character_dict.equipment.legs + "\" item on it's " + "legs" + " slot is invalid or may not exist, please check the messages above to see what equipments")
+			load_correct = false
+		else:
+			equipment.legs = campaign_data.items.get(character_dict.equipment.legs)
+		
+		if not campaign_data.items.has(character_dict.equipment.torso):
+			print(character_data.name + "character is valid, but the \"" + character_dict.equipment.torso + "\" item on it's " + "torso" + " slot is invalid or may not exist, please check the messages above to see what equipments")
+			load_correct = false
+		else:
+			equipment.torso = campaign_data.items.get(character_dict.equipment.torso)
+		
+		if not campaign_data.items.has(character_dict.equipment.accessory_1):
+			print(character_data.name + "character is valid, but the \"" + character_dict.equipment.accessory_1 + "\" item on it's " + "accessory_1" + " slot is invalid or may not exist, please check the messages above to see what equipments")
+			load_correct = false
+		else:
+			equipment.accessory_1 = campaign_data.items.get(character_dict.equipment.accessory_1)
+		
+		if not campaign_data.items.has(character_dict.equipment.accessory_2):
+			print(character_data.name + "character is valid, but the \"" + character_dict.equipment.accessory_2 + "\" item on it's " + "accessory_2" + " slot is invalid or may not exist, please check the messages above to see what equipments")
+			load_correct = false
+		else:
+			equipment.accessory_2 = campaign_data.items.get(character_dict.equipment.accessory_2)
+		
+		if not campaign_data.items.has(character_dict.equipment.accessory_3):
+			print(character_data.name + "character is valid, but the \"" + character_dict.equipment.accessory_3 + "\" item on it's " + "accessory_3" + " slot is invalid or may not exist, please check the messages above to see what equipments")
+			load_correct = false
+		else:
+			equipment.accessory_3 = campaign_data.items.get(character_dict.equipment.accessory_3)
+		
+		if not campaign_data.items.has(character_dict.equipment.weapon):
+			print(character_data.name + "character is valid, but the \"" + character_dict.equipment.weapon + "\" item on it's " + "weapon" + " slot is invalid or may not exist, please check the messages above to see what equipments")
+			load_correct = false
+		else:
+			equipment.weapon = campaign_data.items.get(character_dict.equipment.weapon)
+		
+		character_data.equipment = equipment
 		
 		# Animation Data
 		if Generic_Validators.optional_info_field_exists(character_dict, "animation_data", Data.Validation.animation_data, "character is marked as animated, but it's requeried animation_data fields are either missing or incorrect, " + Data.Validation.check_docu, "filepath"):
@@ -340,20 +430,90 @@ class Campaign_Loader:
 		return ability_data
 	
 	func load_all_items(campaign_name : String) -> Dictionary:
-		return {}
+		print("#########################\n##### LOADING ITEMS #####\n#########################")
+		
+		var load_correct = true
+		var item_names : Array = Utils.scan_directories_in_directory("res://campaigns/" + campaign_name + "/items")
+		
+		if item_names == null:
+			load_correct = false
+			return {}
+		
+		var items := {}
+		for item_name in item_names:
+			print("------------------------------------\nLoading item : " + item_name)
+			var item_dict : Dictionary = Utils.load_json("res://campaigns/" + campaign_name + "/items/" + item_name +"/item.json")
+			
+			if item_dict == null:
+				load_correct = false
+				print("	\nItem could not be loaded correctly\n------------------------------------")
+				continue
+			if not Validator.item_is_valid(item_dict, item_name):
+				load_correct = false
+				print("	\nItem could not be loaded correctly\n------------------------------------")
+				continue
+			
+			var item_data
+			match item_dict.type:
+				"equipment":
+					item_data = load_equipment(item_name, item_dict.data)
+				"quest_object":
+					item_data = load_quest_item(item_name, item_dict.data)
+				"consumable":
+					item_data = load_consumable(item_name, item_dict.data)
+			
+			print("	Successfully loaded item\n------------------------------------")
+			items[item_name] = item_data
+		
+		if not load_correct:
+			return {}
+		
+		return items
 	
-	func load_consumable(item_name : String, campaign_name : String) -> Model.Item_Data.Consumable_Data:
+	func load_consumable(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Consumable_Data:
 		var item_data := Model.Item_Data.Consumable_Data.new()
 		
-		return item_data
-	
-	func load_equipment(item_name : String, campaign_name : String) -> Model.Item_Data.Equipment_Item_Data:
-		var item_data := Model.Item_Data.Equipment_Item_Data.new()
+		item_data.name = item_name
+		item_data.price = item_dict.price as int
+		
+		var item_effect := Model.Item_Data.Consumable_Data.Item_Effect_Data.new()
+		item_effect.type = item_dict.effect.type
+		item_effect.value = item_dict.effect.delay as int
+		item_effect.delay = item_dict.effect.delay as int
+		item_effect.duration = item_dict.effect.duration as int
+		
+		item_data.effect = item_effect
 		
 		return item_data
 	
-	func load_quest_item(item_name : String, campaign_name : String) -> Model.Item_Data.Quest_Object_Data:
+	func load_equipment(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Equipment_Item_Data:
+		var item_data := Model.Item_Data.Equipment_Item_Data.new()
+		
+		item_data.name = item_name
+		item_data.price = item_dict.price as int
+		item_data.slot = item_dict.slot
+		item_data.min_level = item_dict.min_level as int
+		item_data.rarity = item_dict.rarity as int
+		
+		var item_stats := Model.Stats_Data.new()
+		item_stats.strength = item_dict.stats.strength as int
+		item_stats.dexterity = item_dict.stats.dexterity as int
+		item_stats.constitution = item_dict.stats.constitution as int
+		item_stats.memory = item_dict.stats.memory as int
+		item_stats.critic = item_dict.stats.critic
+		item_stats.defence = item_dict.stats.defence as int
+		item_stats.alt_defence = item_dict.stats.alt_defence as int
+		item_stats.speed = item_dict.stats.speed as int
+		
+		item_data.stats = item_stats
+		
+		return item_data
+	
+	func load_quest_item(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Quest_Object_Data:
 		var item_data := Model.Item_Data.Quest_Object_Data.new()
+		
+		item_data.name = item_name
+		item_data.keyword = item_dict.keyword
 		
 		return item_data
 	
@@ -411,6 +571,15 @@ class Campaign_Loader:
 		stats.speed = enemy_dict.stats.speed as int
 		
 		enemy_data.stats = stats
+		
+		var calc_stats := Model.Calc_Stats_Data.new()
+		calc_stats.hp = (stats.constitution + 1/4.0 * float(stats.strength) + 1/3.0 * stats.defence) * 4
+		calc_stats.shield = (1/4.0 * stats.constitution + float(stats.alt_defence) + 1/3.0 * stats.defence) * 4
+		calc_stats.strain = (1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.alt_defence) * 4
+		calc_stats.evasion = (float(stats.speed) + 1/2.0 * stats.critic * 100 + 1/4.0 * stats.defence) * 0.4
+		calc_stats.damage = (1/4.0 * stats.strength + 1/4.0 * stats.dexterity + 1/8.0 * stats.speed) * 4
+		
+		enemy_data.calc_stats = calc_stats
 		
 		# Abilities
 		enemy_data.abilities = {}
