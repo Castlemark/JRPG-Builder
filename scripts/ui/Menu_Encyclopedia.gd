@@ -29,7 +29,7 @@ func _initialize_stats(statistics : Array) -> void:
 
 func _scan_enemies() -> void:
 	
-	for enemy_data in GM.campaign_data_model.enemies.values():
+	for enemy_data in GM.campaign_data.enemies.values():
 		
 		var enemy_node : Encyclopedia_Enemy = enemy_encyclopedia.instance()
 		encyclopedia_container.add_child(enemy_node, true)

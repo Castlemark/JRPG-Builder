@@ -26,16 +26,16 @@ var avatar_img : Texture
 var map_img : Texture
 
 func _ready() -> void:
-	if GM.campaign_data_model == null:
+	if GM.campaign_data == null:
 		return
-	initialize(GM.campaign_data_model.maps.get(GM.campaign_data_model.cur_map))
+	initialize(GM.campaign_data.maps.get(GM.campaign_data.cur_map))
 
 func initialize(map) -> void:
-	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data_model.name + "/maps/" + map.name + "/map_nodes/node_path.png")
-	intersection_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data_model.name + "/maps/" + map.name + "/map_nodes/node_intersection.png")
-	between_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data_model.name + "/maps/" + map.name + "/map_nodes/node_between.png")
-	avatar_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data_model.name + "/maps/" + map.name + "/player_avatar.png")
-	map_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data_model.name + "/maps/" + map.name + "/map.png")
+	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map_nodes/node_path.png")
+	intersection_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map_nodes/node_intersection.png")
+	between_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map_nodes/node_between.png")
+	avatar_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/player_avatar.png")
+	map_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map.png")
 
 	instantiate_navigation_nodes(map.navigation_nodes as Array)
 	instantiate_between_nodes(map.navigation_nodes as Array)

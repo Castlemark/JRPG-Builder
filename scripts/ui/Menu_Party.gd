@@ -17,9 +17,9 @@ func _ready():
 
 func initialize_party() -> void:
 	# TODO check for duplicates (characters)
-	var character_list := [GM.campaign_data_model.party.first_character, \
-		GM.campaign_data_model.party.second_character, \
-		GM.campaign_data_model.party.third_character]
+	var character_list := [GM.campaign_data.party.first_character, \
+		GM.campaign_data.party.second_character, \
+		GM.campaign_data.party.third_character]
 	
 	for character in character_list:
 		var character_node : Character_UI = character_res.instance()

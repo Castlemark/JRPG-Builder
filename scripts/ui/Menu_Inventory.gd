@@ -15,7 +15,7 @@ func _ready():
 
 
 func initialize_inventory() -> void:
-	for item_data in GM.campaign_data_model.party.inventory:
+	for item_data in GM.campaign_data.party.inventory:
 		var item_node : Item = item_res.instance()
 		inventory_container.add_child(item_node, true)
 		item_node.initialize(item_data)

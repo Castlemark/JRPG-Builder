@@ -16,7 +16,7 @@ func initialize(ability_data) -> void:
 
 	label.text = (data.name as String).replace("_", " ")
 
-	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data_model.name + "/abilities/" + data.name + "/icon.png")
+	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/abilities/" + data.name + "/icon.png")
 	if img != null:
 		ability_icon.texture = img
 
