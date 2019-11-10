@@ -27,7 +27,7 @@ var current_screen : String
 
 func initialize(campaign_data : Dictionary) -> void:
 	inventory_menu.initialize_inventory(campaign_data.inventory)
-	party_menu.initialize_party(campaign_data.party)
+	party_menu.initialize_party()
 	encyclopedia_menu.initialize_encyclopedia([], [])
 
 func _ready() -> void:

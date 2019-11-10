@@ -15,58 +15,22 @@ onready var character_ability_container : GridContainer = $Data/HBoxContainer/Ab
 func _ready():
 	pass
 
-func initialize_party(character_list : Array) -> void:
-	# TODO check for duplicates (characters and abilities)
-	if character_list.size() > 3:
-		print("A party can't have more than 3 characters at a time, please modify the \"party\" field int your \"campaign.json\" file accordingly")
-		return
+func initialize_party() -> void:
+	# TODO check for duplicates (characters)
+	var character_list := [GM.campaign_data_model.party.first_character, \
+		GM.campaign_data_model.party.second_character, \
+		GM.campaign_data_model.party.third_character]
 	
 	for character in character_list:
-		var character_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/characters/party/" + character + "/character.json")
-		if not Validator.character_is_valid(character_data, character):
-			continue
-		
-		var abilities_data := []
-		var abilities_valid := true
-		for ability in character_data.abilities:
-			var ability_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/abilities/" + ability + "/ability.json")
-			if ability_data != null:
-				ability_data["name"] = ability
-				abilities_data.append(ability_data)
-			
-			if abilities_valid:
-				abilities_valid = Validator.ability_is_valid(ability_data, ability)
-		
-		if not abilities_valid:
-			print(character + " character is valid, but at least one of its abilities is invalid or may not exist, please check the messages above to see what abilities")
-			continue
-		
-		var equipments_data := {}
-		var equipment_valid := true
-		for slot in character_data.equipment.keys():
-			var equipment_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + character_data.equipment.get(slot) + "/item.json")
-			if equipment_data != null:
-				equipment_data["name"] = slot
-				equipments_data[slot] = equipment_data
-			
-			if equipment_valid:
-				equipment_valid = Validator.equipment_is_valid(equipment_data, character_data.equipment.get(slot), slot)
-		
-		if not equipment_valid:
-			print(character + "character is valid, but at least one of its equipments is invalid or may not exist, please check the messages above to see what equipments")
-			continue
-		
-		character_data["name"] = character
-		
 		var character_node : Character_UI = character_res.instance()
 		character_container.add_child(character_node, true)
-		character_node.initialize(character_data, abilities_data, equipments_data)
+		character_node.initialize(character)
 		character_node.connect("character_selected", self, "_on_player_select")
 		character_node.group = character_button_group
 	pass
 
-func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
-	var stats : Dictionary = (character_button_group.get_pressed_button() as Character_UI).get_stats()
+func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
+	var calc_stats : Model.Calc_Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.cur_calc_stats
 	
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
@@ -84,7 +48,7 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 	targets += data.side
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Targets as Label).text = targets
 	
-	var damage : String = "Damage: " + String(data.damage * stats.damage) + " HP "
+	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
 	match (data.hits as int):
 		-1:
 			damage += "until miss "
@@ -115,7 +79,7 @@ func _on_ability_pressed(data : Dictionary, preview_icon : Texture) -> void:
 			elif "allies" in aux_targets:
 				aux_targets.set(3, "enemies")
 			effect += aux_targets.join(" ")
-	effect += "\n    Applies " + String(data.effect.amount * stats.damage) + " "
+	effect += "\n    Applies " + String(data.effect.amount * calc_stats.damage) + " "
 	if (data.effect.duration as int) > 0:
 		var turns := " turn"
 		if data.effect.duration != 1:
@@ -134,23 +98,23 @@ func _reset_ability_preview():
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = ""
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Effect as Label).text = ""
 
-func _on_player_select(data : Dictionary, abilities : Array) -> void:
+func _on_player_select(data : Model.Character_Data) -> void:
 	
-	($Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.strength))
-	($Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.dexterity))
-	($Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.constitution))
-	($Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.critic * 100)) + "%"
-	($Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.defence))
-	($"Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(round(data.alt_defence))
-	($Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.speed))
+	($Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.cur_stats.strength))
+	($Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.cur_stats.dexterity))
+	($Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.cur_stats.constitution))
+	($Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.cur_stats.critic * 100)) + "%"
+	($Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.cur_stats.defence))
+	($"Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(round(data.cur_stats.alt_defence))
+	($Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.cur_stats.speed))
 	
-	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.hp))
-	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.shield))
-	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.strain))
-	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.evasion)) + "%"
-	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.damage))
+	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.cur_calc_stats.hp))
+	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.cur_calc_stats.shield))
+	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.cur_calc_stats.strain))
+	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.cur_calc_stats.evasion)) + "%"
+	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.cur_calc_stats.damage))
 	
-	_update_character_abilites_panel(abilities)
+	_update_character_abilites_panel(data.abilities.values())
 	_reset_ability_preview()
 
 func _update_character_abilites_panel(abilities_data : Array) -> void:
