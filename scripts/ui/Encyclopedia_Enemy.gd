@@ -13,13 +13,12 @@ var attack_sprite : Texture
 var hit_sprite : Texture
 var miss_sprite : Texture
 
-var data : Dictionary = {}
-var abilities_data : Array = []
+var data := Model.Enemy_Data.new()
+
 var is_animated : bool = false
 
-func initialize(enemy_data : Dictionary, abilities_data : Array) -> void:
+func initialize(enemy_data : Model.Enemy_Data) -> void:
 	data = enemy_data
-	self.abilities_data = abilities_data
 	
 	label.text = data.name
 	var icon_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/icon.png")
@@ -31,11 +30,9 @@ func initialize(enemy_data : Dictionary, abilities_data : Array) -> void:
 	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/hit.png")
 	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign.name + "/characters/enemies/" + data.name + "/miss.png")
 	
-	if Generic_Validators.optional_info_field_exists(data, "animation_data", Data.Validation.animation_data, "detail is marked as animated, but it's requeried animation_data fields are either missing or incorrect, " + Data.Validation.check_docu, "filepath"):
+	if data.animation_data != null:
 		is_animated = true
-	
-
 
 func _on_Enemy_toggled(button_pressed: bool) -> void:
 	if button_pressed:
-		emit_signal("enemy_ui_pressed", data, abilities_data, is_animated, [idle_sprite, attack_sprite, hit_sprite, miss_sprite])
+		emit_signal("enemy_ui_pressed", data, data.abilities, is_animated, [idle_sprite, attack_sprite, hit_sprite, miss_sprite])

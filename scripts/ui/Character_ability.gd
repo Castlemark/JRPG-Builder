@@ -9,9 +9,9 @@ onready var GM := $"/root/Game_Manager"
 onready var label : Label = $VBoxContainer/Label
 onready var ability_icon : TextureRect = $VBoxContainer/Icon
 
-var data : Dictionary = {}
+var data := Model.Ability_Data.new()
 
-func initialize(ability_data : Dictionary) -> void:
+func initialize(ability_data) -> void:
 	data = ability_data
 
 	label.text = (data.name as String).replace("_", " ")
