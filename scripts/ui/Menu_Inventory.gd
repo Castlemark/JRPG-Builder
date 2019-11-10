@@ -14,14 +14,8 @@ func _ready():
 	pass
 
 
-func initialize_inventory(item_list : Array) -> void:
-	for item in item_list:
-		var item_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + item + "/item.json")
-		if not Validator.item_is_valid(item_data, item):
-			continue
-		
-		item_data["name"] = item
-		
+func initialize_inventory() -> void:
+	for item_data in GM.campaign_data_model.party.inventory:
 		var item_node : Item = item_res.instance()
 		inventory_container.add_child(item_node, true)
 		item_node.initialize(item_data)

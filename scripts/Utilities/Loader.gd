@@ -472,6 +472,7 @@ class Campaign_Loader:
 	
 	func load_consumable(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Consumable_Data:
 		var item_data := Model.Item_Data.Consumable_Data.new()
+		item_data.type = "consumable"
 		
 		item_data.name = item_name
 		item_data.price = item_dict.price as int
@@ -488,6 +489,7 @@ class Campaign_Loader:
 	
 	func load_equipment(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Equipment_Item_Data:
 		var item_data := Model.Item_Data.Equipment_Item_Data.new()
+		item_data.type = "equipment"
 		
 		item_data.name = item_name
 		item_data.price = item_dict.price as int
@@ -513,6 +515,7 @@ class Campaign_Loader:
 		var item_data := Model.Item_Data.Quest_Object_Data.new()
 		
 		item_data.name = item_name
+		item_data.type = "quest_object"
 		item_data.keyword = item_dict.keyword
 		
 		return item_data

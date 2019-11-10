@@ -26,7 +26,7 @@ var animation_in_progress : bool
 var current_screen : String
 
 func initialize(campaign_data : Dictionary) -> void:
-	inventory_menu.initialize_inventory(campaign_data.inventory)
+	inventory_menu.initialize_inventory()
 	party_menu.initialize_party()
 	encyclopedia_menu.initialize_encyclopedia([], [])
 

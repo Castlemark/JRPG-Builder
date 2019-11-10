@@ -54,6 +54,7 @@ class Map_Data:
 
 class Item_Data:
 		class Consumable_Data:
+			var type : String
 			var name : String
 			var price : int
 			var effect : Item_Effect_Data
@@ -65,10 +66,12 @@ class Item_Data:
 				var duration : int
 		
 		class Quest_Object_Data:
+			var type : String
 			var name : String
 			var keyword : String
 		
 		class Equipment_Item_Data:
+			var type : String
 			var name : String
 			var price : int
 			var slot : String
