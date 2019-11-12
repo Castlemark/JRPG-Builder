@@ -19,12 +19,10 @@ func _ready() -> void:
 func start_encounter() -> void:
 	
 	print("starting encounter")
+	combat_controller.start_combat()
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
-	
-	print(viewport.size)
-	combat_controller.start_combat()
 	yield(combat_controller, "combat_finished")
 	
 	tween.interpolate_property(self, "margin_bottom", null, MIN_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)

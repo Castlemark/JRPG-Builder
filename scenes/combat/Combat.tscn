@@ -26,32 +26,27 @@ current = true
 
 [node name="Allies" type="Node2D" parent="Characters"]
 
-[node name="Top" parent="Characters/Allies" instance=ExtResource( 3 )]
+[node name="First" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -500, 200 )
 
-[node name="Middle" parent="Characters/Allies" instance=ExtResource( 3 )]
+[node name="Second" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -200, 0 )
 
-[node name="Bottom" parent="Characters/Allies" instance=ExtResource( 3 )]
+[node name="Third" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -500, -200 )
 
 [node name="Enemies" type="Node2D" parent="Characters"]
 
-[node name="Top" type="Sprite" parent="Characters/Enemies"]
+[node name="First" type="Sprite" parent="Characters/Enemies"]
 position = Vector2( 500, 200 )
 texture = ExtResource( 4 )
 
-[node name="Middle" type="Position2D" parent="Characters/Enemies"]
+[node name="Second" type="Sprite" parent="Characters/Enemies"]
 position = Vector2( 200, 0 )
-z_index = 1
-
-[node name="Sprite" type="Sprite" parent="Characters/Enemies/Middle"]
 texture = ExtResource( 5 )
 
-[node name="Bottom" type="Position2D" parent="Characters/Enemies"]
+[node name="Third" type="Sprite" parent="Characters/Enemies"]
 position = Vector2( 500, -200 )
-
-[node name="Sprite" type="Sprite" parent="Characters/Enemies/Bottom"]
 texture = ExtResource( 6 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
