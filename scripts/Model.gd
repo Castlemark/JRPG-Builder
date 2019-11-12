@@ -34,6 +34,7 @@ class Map_Data:
 	class BG_Data:
 		var x_offset : float
 		var y_offset : float
+		var scale : float
 	
 	class Nav_Node_Data:
 		var x : float
@@ -90,6 +91,7 @@ class Character_Data:
 	var abilities : Dictionary
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
+	var scale : float
 	
 	class Equipment_Data:
 		var legs : Item_Data.Equipment_Item_Data
@@ -105,6 +107,7 @@ class Enemy_Data:
 	var calc_stats : Calc_Stats_Data
 	var abilities : Dictionary
 	var animation_data : Animation_Data
+	var scale : float
 
 class Ability_Data:
 	var name : String
@@ -117,6 +120,7 @@ class Ability_Data:
 	var effect : Ability_Effect_Data
 	var hits : int
 	var description : String
+	var scale : float
 	
 	class Ability_Effect_Data:
 		var type : String

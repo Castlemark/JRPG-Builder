@@ -13,5 +13,6 @@
         "duration": 2
     },
     "hits": 1,
-    "description": "Destroy them all"
+    "description": "Destroy them all",
+    "scale": 1
 }

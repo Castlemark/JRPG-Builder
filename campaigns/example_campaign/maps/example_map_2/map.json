@@ -73,6 +73,7 @@
     "background_info":
     {
         "x_offset": 2,
-        "y_offset": 1
+        "y_offset": 1,
+        "scale" : 1
     }
 }

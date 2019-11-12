@@ -188,6 +188,12 @@ class Campaign_Loader:
 		var background_data := Model.Map_Data.BG_Data.new()
 		background_data.x_offset = map_dict.background_info.x_offset
 		background_data.y_offset = map_dict.background_info.y_offset
+		if map_dict.background_info.scale == 0:
+			load_correct = false
+			print("\"background_info\" field in map has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
+			background_data.scale = 1
+		else:
+			background_data.scale = map_dict.background_info.scale
 		
 		map_data.background_info = background_data
 		
@@ -243,6 +249,14 @@ class Campaign_Loader:
 		# Level
 		character_data.start_level = character_dict.start_level as int
 		character_data.cur_level = character_data.start_level as int
+		
+		# Scale
+		if character_dict.scale == 0:
+			load_correct = false
+			print("Character has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
+			character_data.scale = 1
+		else:
+			character_data.scale = character_dict.scale
 		
 		# Min Stats
 		var min_stats := Model.Stats_Data.new()
@@ -414,6 +428,12 @@ class Campaign_Loader:
 		ability_data.damage = ability_dict.damage
 		ability_data.hits = ability_dict.hits as int
 		ability_data.description = ability_dict.description
+		if ability_dict.scale == 0:
+			load_correct = false
+			print("Ability has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
+			ability_data.scale = 1
+		else:
+			ability_data.scale = ability_dict.scale
 		
 		# Ability Effect
 		var effect_data := Model.Ability_Data.Ability_Effect_Data.new()
@@ -563,6 +583,14 @@ class Campaign_Loader:
 		
 		var enemy_data := Model.Enemy_Data.new()
 		enemy_data.name = enemy_name
+		
+		# Scale
+		if enemy_dict.scale == 0:
+			load_correct = false
+			print("Enemy has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
+			enemy_data.scale = 1
+		else:
+			enemy_data.scale = enemy_dict.scale
 		
 		# Stats
 		var stats := Model.Stats_Data.new()

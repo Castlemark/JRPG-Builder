@@ -13,5 +13,6 @@
     [
         "grapeshot_blast",
         "cleave"
-    ]
+    ],
+    "scale": 1
 }

@@ -40,5 +40,6 @@
         "vframes": 1,
         "total_frames": 8,
         "duration": 1.5
-    }
+    },
+    "scale": 1
 }

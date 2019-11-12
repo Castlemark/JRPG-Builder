@@ -13,5 +13,6 @@
         "duration": 0
     },
     "hits": -1,
-    "description": "Stab and stab until you can't stab no more"
+    "description": "Stab and stab until you can't stab no more",
+    "scale": 1
 }

@@ -82,6 +82,7 @@ func instantiate_between_nodes(node_list : Array) -> void:
 
 		counter += 1
 
+# TODO refactor and implement scale factor
 func instantiate_background_map(background_info) -> void:
 	var offset := Vector2(background_info.x_offset, background_info.y_offset)
 

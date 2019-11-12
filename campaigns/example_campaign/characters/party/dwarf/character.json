@@ -33,5 +33,6 @@
         "accessory_2": "lucky amulet",
         "accessory_3": "tribal necklace",
         "weapon": "mace"
-    }
+    },
+    "scale": 1
 }

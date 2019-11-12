@@ -47,12 +47,12 @@ class Validation:
 	const type_data := [{"type" : TEXT}, {"data" : DICTIONARY}] # Used for items and actions
 	
 	# CHARACTER
-	const char_fields := [{"start_level" : NUMBER}, {"min_stats" : DICTIONARY}, {"max_stats" : DICTIONARY}, {"abilities" : ARRAY}, {"equipment" : DICTIONARY}]
+	const char_fields := [{"start_level" : NUMBER}, {"min_stats" : DICTIONARY}, {"max_stats" : DICTIONARY}, {"abilities" : ARRAY}, {"equipment" : DICTIONARY}, {"scale": NUMBER}]
 	const stats := [{"strength" : NUMBER}, {"dexterity" : NUMBER}, {"constitution" : NUMBER}, {"critic" : NUMBER}, {"defence" : NUMBER}, {"alt_defence" : NUMBER}, {"speed" : NUMBER}]
 	const char_slots := [{"legs" : TEXT}, {"torso" : TEXT}, {"accessory_1" : TEXT}, {"accessory_2" : TEXT}, {"accessory_3" : TEXT}, {"weapon" : TEXT}]
 	
 	# ABILITY
-	const ability_fields := [ {"min_level" : NUMBER}, {"target_amount" : NUMBER}, {"side" : TEXT}, {"cost" : NUMBER}, {"delay" : NUMBER}, {"damage" : NUMBER}, {"effect" : DICTIONARY}, {"hits" : NUMBER}, {"description" : TEXT}]
+	const ability_fields := [ {"min_level" : NUMBER}, {"target_amount" : NUMBER}, {"side" : TEXT}, {"cost" : NUMBER}, {"delay" : NUMBER}, {"damage" : NUMBER}, {"effect" : DICTIONARY}, {"hits" : NUMBER}, {"description" : TEXT}, {"scale": NUMBER}]
 	const ability_effect_fields := [{"type" : TEXT}, {"receiver" : TEXT}, {"amount" : NUMBER}, {"duration" : NUMBER}]
 	
 	# ITEM
@@ -61,8 +61,8 @@ class Validation:
 	# MAP
 	const map_fields := [{"navigation_nodes" : ARRAY}, {"detail_art" : ARRAY}, {"background_info" : DICTIONARY}, {"name" : TEXT}]
 	const nav_node_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"connected_nodes" : ARRAY}, {"actions" : ARRAY}]
-	const bg_map_fields := [{"x_offset" : NUMBER}, {"y_offset" : NUMBER}]
+	const bg_map_fields := [{"x_offset" : NUMBER}, {"y_offset" : NUMBER}, {"scale": NUMBER}]
 	const detail_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"rotation" : NUMBER}, {"filepath" : TEXT}]
 	
 	# ENEMY
-	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}]
+	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"scale": NUMBER}]
