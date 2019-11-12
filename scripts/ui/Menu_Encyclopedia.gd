@@ -28,7 +28,8 @@ func _initialize_stats(statistics : Array) -> void:
 	pass
 
 func _scan_enemies() -> void:
-	
+	if GM.campaign_data == null: 
+		return
 	for enemy_data in GM.campaign_data.enemies.values():
 		
 		var enemy_node : Encyclopedia_Enemy = enemy_encyclopedia.instance()

@@ -57,7 +57,7 @@ class Campaign_Loader:
 		for character in campaign_dict.party:
 			if not characters.has(character):
 				load_correct = false
-				print("\nYour party has the character\"" + character + "\", but this character does not exist or has not loaded correctly, please make sure the character exists and is in the correct place")
+				print("\nYour party has the character \"" + character + "\", but this character does not exist or has not loaded correctly, please make sure the character exists and is in the correct place")
 			else:
 				if i==0:
 					party.first_character = campaign_data.characters.get(character)

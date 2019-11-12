@@ -1,0 +1,44 @@
+{
+    "start_level": 1,
+    "min_stats":
+    {
+        "strength": 8,
+        "dexterity": 4,
+        "constitution": 1,
+        "critic": 0.15,
+        "defence": 1,
+        "alt_defence": 3,
+        "speed": 2
+    },
+    "max_stats":
+    {
+        "strength": 120,
+        "dexterity": 60,
+        "constitution": 20,
+        "critic": 0.3,
+        "defence": 25,
+        "alt_defence": 15,
+        "speed": 17
+    },
+    "abilities":
+    [
+        "cleave",
+        "backstab"
+    ],
+    "equipment":
+    {
+        "legs": "pants",
+        "torso": "breastplate",
+        "accessory_1": "horn of power",
+        "accessory_2": "lucky amulet",
+        "accessory_3": "tribal necklace",
+        "weapon": "mace"
+    },
+    "animation_data":
+    {
+        "hframes": 16,
+        "vframes": 1,
+        "total_frames": 8,
+        "duration": 1.5
+    }
+}

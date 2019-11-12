@@ -15,6 +15,8 @@ func _ready():
 
 
 func initialize_inventory() -> void:
+	if GM.campaign_data == null: 
+		return
 	for item_data in GM.campaign_data.party.inventory:
 		var item_node : Item = item_res.instance()
 		inventory_container.add_child(item_node, true)

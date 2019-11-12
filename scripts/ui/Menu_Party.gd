@@ -16,6 +16,8 @@ func _ready():
 	pass
 
 func initialize_party() -> void:
+	if GM.campaign_data == null: 
+		return
 	# TODO check for duplicates (characters)
 	var character_list := [GM.campaign_data.party.first_character, \
 		GM.campaign_data.party.second_character, \
