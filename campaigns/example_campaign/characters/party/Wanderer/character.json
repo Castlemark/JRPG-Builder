@@ -2,27 +2,27 @@
     "start_level": 1,
     "min_stats":
     {
-        "strength": 8,
-        "dexterity": 4,
-        "constitution": 1,
-        "critic": 0.15,
-        "defence": 1,
-        "alt_defence": 3,
-        "speed": 2
+        "strength": 2,
+        "dexterity": 8,
+        "constitution": 6,
+        "critic": 0.05,
+        "defence": 5,
+        "alt_defence": 2,
+        "speed": 8
     },
     "max_stats":
     {
-        "strength": 120,
-        "dexterity": 60,
-        "constitution": 20,
-        "critic": 0.3,
-        "defence": 25,
-        "alt_defence": 15,
-        "speed": 17
+        "strength": 40,
+        "dexterity": 120,
+        "constitution": 100,
+        "critic": 0.2,
+        "defence": 70,
+        "alt_defence": 45,
+        "speed": 80
     },
     "abilities":
     [
-        "cleave",
+        "heal",
         "backstab"
     ],
     "equipment":
@@ -41,5 +41,5 @@
         "total_frames": 16,
         "duration": 1.5
     },
-    "scale": 1
+    "scale": 8
 }
