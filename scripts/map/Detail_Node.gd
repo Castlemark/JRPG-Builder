@@ -15,6 +15,8 @@ func initialize(detail_info) -> void:
 	var path : String = "res://campaigns/" + GM.campaign_data.name + "/maps/" + GM.campaign_data.cur_map + "/detail_art/" + detail_info.filepath + ".png"
 	var detail_img := Utils.load_img_3D(path)
 	
+	sprite.scale *= detail_info.scale
+	
 	if detail_img != null:
 		sprite.texture = detail_img
 	

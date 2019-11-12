@@ -62,7 +62,7 @@ class Validation:
 	const map_fields := [{"navigation_nodes" : ARRAY}, {"detail_art" : ARRAY}, {"background_info" : DICTIONARY}, {"name" : TEXT}]
 	const nav_node_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"connected_nodes" : ARRAY}, {"actions" : ARRAY}]
 	const bg_map_fields := [{"x_offset" : NUMBER}, {"y_offset" : NUMBER}, {"scale": NUMBER}]
-	const detail_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"rotation" : NUMBER}, {"filepath" : TEXT}]
+	const detail_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"scale": NUMBER}, {"rotation" : NUMBER}, {"filepath" : TEXT}]
 	
 	# ENEMY
 	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"scale": NUMBER}]

@@ -171,6 +171,14 @@ class Campaign_Loader:
 			detail_data.y = detail_info.y
 			detail_data.rotation = detail_info.rotation as int
 			detail_data.filepath = detail_info.filepath
+			
+			if detail_info.scale < 1:
+				load_correct = false
+				print("detail " + detail_data.filepath + " in map has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
+				detail_data.scale = 1
+			else:
+				detail_data.scale = detail_info.scale
+			
 			if Generic_Validators.optional_info_field_exists(detail_info, "animation_data", Data.Validation.animation_data, "detail is marked as animated, but it's requeried animation_data fields are either missing or incorrect, " + Data.Validation.check_docu, "filepath"):
 				var animation_data := Model.Animation_Data.new()
 				animation_data.hframes = detail_info.animation_data.hframes as int
@@ -188,7 +196,7 @@ class Campaign_Loader:
 		var background_data := Model.Map_Data.BG_Data.new()
 		background_data.x_offset = map_dict.background_info.x_offset
 		background_data.y_offset = map_dict.background_info.y_offset
-		if map_dict.background_info.scale == 0:
+		if map_dict.background_info.scale < 1:
 			load_correct = false
 			print("\"background_info\" field in map has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			background_data.scale = 1
@@ -251,7 +259,7 @@ class Campaign_Loader:
 		character_data.cur_level = character_data.start_level as int
 		
 		# Scale
-		if character_dict.scale == 0:
+		if character_dict.scale < 1:
 			load_correct = false
 			print("Character has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			character_data.scale = 1
@@ -428,7 +436,7 @@ class Campaign_Loader:
 		ability_data.damage = ability_dict.damage
 		ability_data.hits = ability_dict.hits as int
 		ability_data.description = ability_dict.description
-		if ability_dict.scale == 0:
+		if ability_dict.scale < 1:
 			load_correct = false
 			print("Ability has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			ability_data.scale = 1
@@ -585,7 +593,7 @@ class Campaign_Loader:
 		enemy_data.name = enemy_name
 		
 		# Scale
-		if enemy_dict.scale == 0:
+		if enemy_dict.scale < 1:
 			load_correct = false
 			print("Enemy has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			enemy_data.scale = 1

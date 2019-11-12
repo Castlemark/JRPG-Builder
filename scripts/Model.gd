@@ -49,6 +49,7 @@ class Map_Data:
 	class Detail_Art_Data:
 		var x : float
 		var y : float
+		var scale : float
 		var rotation : int
 		var filepath : String
 		var animation_data : Animation_Data
