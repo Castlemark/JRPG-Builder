@@ -44,3 +44,14 @@ position = Vector2( 200, 0 )
 position = Vector2( 500, -200 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="End_Turn" type="Button" parent="UILayer"]
+anchor_left = 0.45
+anchor_top = 1.0
+anchor_right = 0.55
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -80.0
+margin_right = 7.0
+text = "END TURN"
+[connection signal="pressed" from="UILayer/End_Turn" to="." method="_on_End_Turn_pressed"]

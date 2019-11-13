@@ -4,7 +4,7 @@ class_name Character_Combat
 
 onready var GM := $"/root/Game_Manager"
 
-var character := Model.Character_Data.new()
+var data := Model.Character_Data.new()
 
 var idle_sprite : Texture
 var attack_sprite : Texture
@@ -28,18 +28,18 @@ func _process(delta: float) -> void:
 		elapsed_frame_time += delta
 
 func prepare_for_combat(character_data) -> void:
-	character = character_data
+	data = character_data
 	
-	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + character.name + "/idle.png")
-	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + character.name + "/attack.png")
-	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + character.name + "/hit.png")
-	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + character.name + "/miss.png")
+	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + data.name + "/idle.png")
+	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + data.name + "/attack.png")
+	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + data.name + "/hit.png")
+	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + data.name + "/miss.png")
 	
 	self.texture = idle_sprite
-	self.scale *= character.scale
+	self.scale *= data.scale
 	
-	if character.animation_data != null:
-		_configure_animation(character.animation_data)
+	if data.animation_data != null:
+		_configure_animation(data.animation_data)
 
 func _configure_animation(animation_info) -> void:
 	self.vframes = animation_info.vframes
