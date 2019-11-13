@@ -16,10 +16,10 @@ onready var combat_controller : Combat = $ViewportContainer/Viewport/Combat as C
 func _ready() -> void:
 	self.margin_bottom = MIN_SIZE
 
-func start_encounter() -> void:
+func start_encounter(combat_data : Dictionary) -> void:
 	
 	print("starting encounter")
-	combat_controller.start_combat()
+	combat_controller.start_combat(combat_data)
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")

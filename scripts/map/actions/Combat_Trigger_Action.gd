@@ -10,5 +10,5 @@ func execute() -> void:
 	
 	var current_scene : Node = $"/root/Game_Manager".current_scene
 	if current_scene.name == "Map":
-		current_scene.combat_viewport.start_encounter()
+		current_scene.combat_viewport.start_encounter(self.data)
 	pass

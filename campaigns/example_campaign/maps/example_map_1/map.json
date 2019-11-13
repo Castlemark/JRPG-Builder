@@ -51,7 +51,15 @@
             "actions": [
                 {
                   "type" : "combat",
-                  "data" : {}
+                  "data" : 
+                  {
+                    "enemies" : 
+                    [
+                        "Burning Ghoul",
+                        "Heavy Bandit",
+                        "Skeleton"
+                    ] 
+                  }
                 }
             ]
         },

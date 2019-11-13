@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/combat/Character_Combat.tscn" type="PackedScene" id=3]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/hit.png" type="Texture" id=4]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/attack.png" type="Texture" id=5]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/idle.png" type="Texture" id=6]
+[ext_resource path="res://scenes/combat/Enemy_Combat.tscn" type="PackedScene" id=4]
 
 [node name="Combat" type="Node2D"]
 script = ExtResource( 1 )
@@ -37,16 +35,12 @@ position = Vector2( -500, -200 )
 
 [node name="Enemies" type="Node2D" parent="Characters"]
 
-[node name="First" type="Sprite" parent="Characters/Enemies"]
-position = Vector2( 500, 200 )
-texture = ExtResource( 4 )
+[node name="First" parent="Characters/Enemies" instance=ExtResource( 4 )]
 
-[node name="Second" type="Sprite" parent="Characters/Enemies"]
+[node name="Second" parent="Characters/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 200, 0 )
-texture = ExtResource( 5 )
 
-[node name="Third" type="Sprite" parent="Characters/Enemies"]
+[node name="Third" parent="Characters/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 500, -200 )
-texture = ExtResource( 6 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]

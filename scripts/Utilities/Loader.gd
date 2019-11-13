@@ -17,16 +17,6 @@ class Campaign_Loader:
 		campaign_data = Model.Campaign_Data.new()
 		campaign_data.name = campaign_name
 		
-		# MAPS
-		var maps : Dictionary = load_all_maps(campaign_name)
-		if maps.empty():
-			load_correct = false
-		elif not maps.has(campaign_dict.map_name):
-			load_correct = false
-			print("\nStarting map \"" + campaign_dict.map_name + "\" does not exist or has not loaded correctly, please make sure the map exists and is in the correct place")
-		campaign_data.maps = maps
-		campaign_data.cur_map = campaign_dict.map_name
-		
 		# ABILITIES
 		var abilities : Dictionary = load_all_abilities(campaign_name)
 		if abilities.empty():
@@ -39,17 +29,17 @@ class Campaign_Loader:
 			load_correct = false
 		campaign_data.items = items
 		
+		# ENEMIES
+		var enemies : Dictionary = load_all_enemies(campaign_name)
+		if enemies.empty():
+			load_correct = false
+		campaign_data.enemies = enemies
+		
 		# CHARACTERS
 		var characters : Dictionary = load_all_characters(campaign_name)
 		if characters.empty():
 			load_correct = false
 		campaign_data.characters = characters
-		
-		# ENEMIES
-		var enemies : Dictionary = load_all_enemies(campaign_name)
-		if characters.empty():
-			load_correct = false
-		campaign_data.enemies = enemies
 		
 		# PARTY
 		var i = 0
@@ -78,6 +68,16 @@ class Campaign_Loader:
 		
 		party.money = 0
 		campaign_data.party = party
+		
+		# MAPS
+		var maps : Dictionary = load_all_maps(campaign_name)
+		if maps.empty():
+			load_correct = false
+		elif not maps.has(campaign_dict.map_name):
+			load_correct = false
+			print("\nStarting map \"" + campaign_dict.map_name + "\" does not exist or has not loaded correctly, please make sure the map exists and is in the correct place")
+		campaign_data.maps = maps
+		campaign_data.cur_map = campaign_dict.map_name
 		
 		# FINAL STEPS
 		if not load_correct:
@@ -145,6 +145,19 @@ class Campaign_Loader:
 				if not Generic_Validators.type_is_valid(action_info.type as String, Data.Validation.action_types, action_info.data):
 					load_correct = false
 					continue
+				
+				if action_info.type == "combat":
+					if action_info.data.enemies.size() < 1 || action_info.data.enemies.size() > 3:
+						load_correct = false
+						print("Action combat has " + action_info.data.enemies.size() as String + " enemies, but can only have between 1 and 3 enemies")
+					
+					for enemy in action_info.data.enemies:
+						if not campaign_data.enemies.has(enemy):
+							load_correct = false
+							print("Action combat has the necessary fields, but enenmy \"" + enemy + "\" could not be loaded or does not exist")
+				
+				if not load_correct:
+					continue 
 				
 				var action_data := Model.Map_Data.Nav_Node_Data.Action_Data.new()
 				action_data.type = action_info.type
