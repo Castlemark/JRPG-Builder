@@ -27,6 +27,7 @@ alignment = 2
 script = ExtResource( 2 )
 
 [node name="Sections" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_right = 1536.0
 margin_bottom = 66.0
 

@@ -52,7 +52,7 @@ func _configure_animation(animation_info) -> void:
 
 func duplicate_data(data) -> void:
 	stats = Model.Stats_Data.new()
-	stats.duplicate(data.cur_stats)
+	stats.duplicate(data.stats)
 	
 	calc_stats = Model.Calc_Stats_Data.new()
-	calc_stats.duplicate(data.cur_calc_stats)
+	calc_stats.duplicate(data.calc_stats)

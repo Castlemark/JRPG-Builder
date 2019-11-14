@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/combat/Character_Combat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/combat/Enemy_Combat.tscn" type="PackedScene" id=4]
+[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/icon.png" type="Texture" id=5]
+[ext_resource path="res://campaigns/example_campaign/characters/enemies/Heavy Bandit/icon.png" type="Texture" id=6]
+[ext_resource path="res://campaigns/example_campaign/characters/party/Breaker/icon.png" type="Texture" id=7]
+[ext_resource path="res://campaigns/example_campaign/characters/party/dwarf/icon.png" type="Texture" id=8]
+[ext_resource path="res://campaigns/example_campaign/characters/party/Wanderer/icon.png" type="Texture" id=9]
 
 [node name="Combat" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,6 +26,7 @@ stretch_mode = 6
 current = true
 
 [node name="Characters" type="Node2D" parent="."]
+position = Vector2( 0, -100 )
 
 [node name="Allies" type="Node2D" parent="Characters"]
 
@@ -46,12 +52,104 @@ position = Vector2( 500, -200 )
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="End_Turn" type="Button" parent="UILayer"]
-anchor_left = 0.45
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.55
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -8.0
-margin_top = -80.0
-margin_right = 7.0
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = -50.0
 text = "END TURN"
+clip_text = true
+
+[node name="Panel" type="Panel" parent="UILayer"]
+anchor_left = 1.0
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.7
+margin_left = -80.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+margin_bottom = -3.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="UILayer/Panel/VBoxContainer"]
+margin_right = 74.0
+margin_bottom = 14.0
+text = "Turn Order"
+align = 1
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 18.0
+margin_right = 74.0
+margin_bottom = 22.0
+
+[node name="TextureRect" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 26.0
+margin_right = 74.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 102.0
+margin_right = 74.0
+margin_bottom = 174.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect3" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 178.0
+margin_right = 74.0
+margin_bottom = 250.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 254.0
+margin_right = 74.0
+margin_bottom = 326.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect5" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 330.0
+margin_right = 74.0
+margin_bottom = 402.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="TextureRect6" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+margin_top = 406.0
+margin_right = 74.0
+margin_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
 [connection signal="pressed" from="UILayer/End_Turn" to="." method="_on_End_Turn_pressed"]

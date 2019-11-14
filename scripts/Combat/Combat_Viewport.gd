@@ -5,7 +5,7 @@ class_name Combat_Viewport
 signal encounter_finished()
 
 const MIN_SIZE := -1083
-const MAX_SIZE := -82
+const MAX_SIZE := 43
 
 onready var tween : Tween = $Tween as Tween
 
@@ -14,6 +14,7 @@ onready var viewport : Viewport = $ViewportContainer/Viewport as Viewport
 onready var combat_controller : Combat = $ViewportContainer/Viewport/Combat as Combat
 
 func _ready() -> void:
+	$ViewportContainer.visible = false
 	self.margin_bottom = MIN_SIZE
 
 func start_encounter(combat_data : Dictionary) -> void:
@@ -23,8 +24,11 @@ func start_encounter(combat_data : Dictionary) -> void:
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
+	$ViewportContainer.visible = true
+	print(viewport.size)
 	yield(combat_controller, "combat_finished")
 	
+	$ViewportContainer.visible = false
 	tween.interpolate_property(self, "margin_bottom", null, MIN_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
