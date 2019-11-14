@@ -133,11 +133,19 @@ class Stats_Data:
 	var strength : int
 	var dexterity : int
 	var constitution : int
-	var memory : int
 	var critic : float
 	var defence : int
 	var alt_defence : int
 	var speed : int
+	
+	func duplicate(data):
+		self.strength = data.strength
+		self.dexterity = data.dexterity
+		self.constitution = data.constitution
+		self.critic = data.critic
+		self.defence = data.defence
+		self.alt_defence = data.alt_defence
+		self.speed = data.speed
 
 class Calc_Stats_Data:
 	var hp : int
@@ -145,6 +153,13 @@ class Calc_Stats_Data:
 	var strain : int
 	var evasion : int
 	var damage : int
+	
+	func duplicate(data):
+		self.hp = data.hp
+		self.shield = data.shield
+		self.strain = data.strain
+		self.evasion = data.evasion
+		self.damage = data.damage
 
 class Animation_Data:
 	var hframes : int

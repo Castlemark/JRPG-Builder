@@ -28,7 +28,7 @@ class Validation:
 	}
 	
 	const effect_types := {
-		"strength": [], "dexterity": [], "constitution": [], "memory": [], "critic": [], "defence": [], "alt_defence": [], "speed": [],
+		"strength": [], "dexterity": [], "constitution": [], "critic": [], "defence": [], "alt_defence": [], "speed": [],
 		"health": [],
 		"evasion": [],
 		"shield": [],

@@ -5,6 +5,8 @@ class_name Enemy_Combat
 onready var GM := $"/root/Game_Manager"
 
 var data := Model.Enemy_Data.new()
+var stats : Model.Stats_Data
+var calc_stats : Model.Calc_Stats_Data
 
 var idle_sprite : Texture
 var attack_sprite : Texture
@@ -29,6 +31,7 @@ func _process(delta: float) -> void:
 
 func prepare_for_combat(enemy_data : Model.Enemy_Data) -> void:
 	data = enemy_data
+	duplicate_data(data)
 	
 	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/idle.png")
 	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/attack.png")
@@ -46,3 +49,10 @@ func _configure_animation(animation_info) -> void:
 	self.hframes = animation_info.hframes
 	self.frames = animation_info.total_frames
 	self.duration = animation_info.duration
+
+func duplicate_data(data) -> void:
+	stats = Model.Stats_Data.new()
+	stats.duplicate(data.cur_stats)
+	
+	calc_stats = Model.Calc_Stats_Data.new()
+	calc_stats.duplicate(data.cur_calc_stats)

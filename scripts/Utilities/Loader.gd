@@ -543,7 +543,6 @@ class Campaign_Loader:
 		item_stats.strength = item_dict.stats.strength as int
 		item_stats.dexterity = item_dict.stats.dexterity as int
 		item_stats.constitution = item_dict.stats.constitution as int
-		item_stats.memory = item_dict.stats.memory as int
 		item_stats.critic = item_dict.stats.critic
 		item_stats.defence = item_dict.stats.defence as int
 		item_stats.alt_defence = item_dict.stats.alt_defence as int
