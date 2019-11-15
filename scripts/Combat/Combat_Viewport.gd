@@ -25,7 +25,6 @@ func start_encounter(combat_data : Dictionary) -> void:
 	tween.start()
 	yield(tween,"tween_completed")
 	$ViewportContainer.visible = true
-	print(viewport.size)
 	yield(combat_controller, "combat_finished")
 	
 	$ViewportContainer.visible = false

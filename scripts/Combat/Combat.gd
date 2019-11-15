@@ -93,6 +93,7 @@ func _execute_combat_loop() -> void:
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
 		
+		# Apply transparency via modulate to indicate selected character
 		
 		yield(self, "turn_finished")
 		_cur_fighter += 1
