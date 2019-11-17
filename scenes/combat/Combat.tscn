@@ -1,14 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/combat/Character_Combat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/combat/Enemy_Combat.tscn" type="PackedScene" id=4]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/icon.png" type="Texture" id=5]
-[ext_resource path="res://campaigns/example_campaign/characters/enemies/Heavy Bandit/icon.png" type="Texture" id=6]
-[ext_resource path="res://campaigns/example_campaign/characters/party/Breaker/icon.png" type="Texture" id=7]
-[ext_resource path="res://campaigns/example_campaign/characters/party/dwarf/icon.png" type="Texture" id=8]
-[ext_resource path="res://campaigns/example_campaign/characters/party/Wanderer/icon.png" type="Texture" id=9]
+[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=5]
 
 [node name="Combat" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,48 +25,150 @@ current = true
 position = Vector2( 0, -100 )
 
 [node name="Allies" type="Node2D" parent="Characters"]
+position = Vector2( -150, 0 )
 
 [node name="First" parent="Characters/Allies" instance=ExtResource( 3 )]
-position = Vector2( -500, 200 )
+position = Vector2( -500, -200 )
+texture = ExtResource( 2 )
 
 [node name="Second" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -200, 0 )
+texture = ExtResource( 2 )
 
 [node name="Third" parent="Characters/Allies" instance=ExtResource( 3 )]
-position = Vector2( -500, -200 )
+position = Vector2( -500, 200 )
+texture = ExtResource( 2 )
 
 [node name="Enemies" type="Node2D" parent="Characters"]
+position = Vector2( 150, 0 )
 
 [node name="First" parent="Characters/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 500, -200 )
+texture = ExtResource( 2 )
 
 [node name="Second" parent="Characters/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 200, 0 )
+texture = ExtResource( 2 )
 
 [node name="Third" parent="Characters/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 500, -200 )
+texture = ExtResource( 2 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="End_Turn" type="Button" parent="UILayer"]
+[node name="UI" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 5 )
+
+[node name="Menu" type="Panel" parent="UILayer/UI"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 100.0
-margin_bottom = -50.0
+margin_left = -200.0
+margin_top = -328.0
+margin_right = 200.0
+margin_bottom = -248.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/separation = 4
+
+[node name="Attack" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+text = "ATTACK"
+
+[node name="VSeparator" type="VSeparator" parent="UILayer/UI/Menu/HBoxContainer"]
+margin_left = 126.0
+margin_right = 130.0
+margin_bottom = 72.0
+
+[node name="Inventory" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
+margin_left = 134.0
+margin_right = 256.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+text = "INVENTORY"
+
+[node name="VSeparator2" type="VSeparator" parent="UILayer/UI/Menu/HBoxContainer"]
+margin_left = 260.0
+margin_right = 264.0
+margin_bottom = 72.0
+
+[node name="End_Turn" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
+margin_left = 268.0
+margin_right = 392.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
 text = "END TURN"
 clip_text = true
 
-[node name="Panel" type="Panel" parent="UILayer"]
+[node name="SubMenu" type="Panel" parent="UILayer/UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -298.1
+margin_top = -232.0
+margin_right = 301.9
+margin_bottom = -16.0
+
+[node name="Abilities" type="Control" parent="UILayer/UI/SubMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/SubMenu/Abilities"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VSeparator" type="VSeparator" parent="UILayer/UI/SubMenu/Abilities"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_bottom = -4.0
+
+[node name="Inventory" type="Control" parent="UILayer/UI/SubMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/SubMenu/Inventory"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VSeparator" type="VSeparator" parent="UILayer/UI/SubMenu/Inventory"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = 4.0
+margin_right = 4.0
+margin_bottom = -4.0
+
+[node name="Queue" type="Panel" parent="UILayer/UI"]
+editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 0.25
 anchor_right = 1.0
 anchor_bottom = 0.7
 margin_left = -80.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Queue"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 3.0
@@ -81,70 +179,70 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="UILayer/Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="UILayer/UI/Queue/VBoxContainer"]
 margin_right = 74.0
-margin_bottom = 14.0
+margin_bottom = 22.0
 text = "Turn Order"
 align = 1
 clip_text = true
 
-[node name="HSeparator" type="HSeparator" parent="UILayer/Panel/VBoxContainer"]
-margin_top = 18.0
-margin_right = 74.0
-margin_bottom = 22.0
-
-[node name="TextureRect" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UILayer/UI/Queue/VBoxContainer"]
 margin_top = 26.0
 margin_right = 74.0
-margin_bottom = 98.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
+margin_bottom = 30.0
 
-[node name="TextureRect2" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
-margin_top = 102.0
+[node name="Icon1" type="TextureRect" parent="UILayer/UI/Queue/VBoxContainer"]
+margin_top = 34.0
 margin_right = 74.0
-margin_bottom = 174.0
+margin_bottom = 105.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 6 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="TextureRect3" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
-margin_top = 178.0
+[node name="Icon2" type="TextureRect" parent="UILayer/UI/Queue/VBoxContainer"]
+margin_top = 109.0
 margin_right = 74.0
-margin_bottom = 250.0
+margin_bottom = 180.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 7 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="TextureRect4" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
-margin_top = 254.0
+[node name="Icon3" type="TextureRect" parent="UILayer/UI/Queue/VBoxContainer"]
+margin_top = 184.0
 margin_right = 74.0
-margin_bottom = 326.0
+margin_bottom = 255.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 8 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="TextureRect5" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
-margin_top = 330.0
+[node name="Icon4" type="TextureRect" parent="UILayer/UI/Queue/VBoxContainer"]
+margin_top = 259.0
 margin_right = 74.0
-margin_bottom = 402.0
+margin_bottom = 330.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 9 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="TextureRect6" type="TextureRect" parent="UILayer/Panel/VBoxContainer"]
-margin_top = 406.0
+[node name="Icon5" type="TextureRect" parent="UILayer/UI/Queue/VBoxContainer"]
+margin_top = 334.0
+margin_right = 74.0
+margin_bottom = 405.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Icon6" type="TextureRect" parent="UILayer/UI/Queue/VBoxContainer"]
+margin_top = 409.0
 margin_right = 74.0
 margin_bottom = 480.0
 size_flags_horizontal = 3
@@ -152,4 +250,133 @@ size_flags_vertical = 3
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
-[connection signal="pressed" from="UILayer/End_Turn" to="." method="_on_End_Turn_pressed"]
+
+[node name="Tween" type="Tween" parent="UILayer/UI/Queue"]
+
+[node name="Allies_Status" type="Panel" parent="UILayer/UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -860.0
+margin_top = -232.0
+margin_right = -313.0
+margin_bottom = -16.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Allies_Status"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+alignment = 1
+
+[node name="Status" type="Control" parent="UILayer/UI/Allies_Status/VBoxContainer"]
+margin_right = 539.0
+margin_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LifeBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status"]
+anchor_top = 0.5
+anchor_right = 0.65
+anchor_bottom = 1.0
+
+[node name="ShieldBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status"]
+anchor_left = 0.65
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnergyBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status"]
+anchor_left = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="Label" type="Label" parent="UILayer/UI/Allies_Status/VBoxContainer/Status"]
+anchor_right = 0.35
+anchor_bottom = 0.5
+text = "CharacterName"
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UILayer/UI/Allies_Status/VBoxContainer"]
+margin_top = 65.0
+margin_right = 539.0
+margin_bottom = 69.0
+
+[node name="Status2" type="Control" parent="UILayer/UI/Allies_Status/VBoxContainer"]
+editor/display_folded = true
+margin_top = 73.0
+margin_right = 539.0
+margin_bottom = 134.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LifeBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status2"]
+anchor_top = 0.5
+anchor_right = 0.65
+anchor_bottom = 1.0
+
+[node name="ShieldBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status2"]
+anchor_left = 0.65
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnergyBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status2"]
+anchor_left = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="Label" type="Label" parent="UILayer/UI/Allies_Status/VBoxContainer/Status2"]
+anchor_right = 0.35
+anchor_bottom = 0.5
+text = "CharacterName"
+valign = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UILayer/UI/Allies_Status/VBoxContainer"]
+margin_top = 138.0
+margin_right = 539.0
+margin_bottom = 142.0
+
+[node name="Status3" type="Control" parent="UILayer/UI/Allies_Status/VBoxContainer"]
+editor/display_folded = true
+margin_top = 146.0
+margin_right = 539.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LifeBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status3"]
+anchor_top = 0.5
+anchor_right = 0.65
+anchor_bottom = 1.0
+
+[node name="ShieldBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status3"]
+anchor_left = 0.65
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnergyBar" type="ProgressBar" parent="UILayer/UI/Allies_Status/VBoxContainer/Status3"]
+anchor_left = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="Label" type="Label" parent="UILayer/UI/Allies_Status/VBoxContainer/Status3"]
+anchor_right = 0.35
+anchor_bottom = 0.5
+text = "CharacterName"
+valign = 1
+
+[node name="Enemies_Status" type="Panel" parent="UILayer/UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 318.0
+margin_top = -232.0
+margin_right = 865.0
+margin_bottom = -16.0
+[connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/End_Turn" to="." method="_on_End_Turn_pressed"]

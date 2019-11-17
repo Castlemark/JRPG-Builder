@@ -12,6 +12,7 @@ var idle_sprite : Texture
 var attack_sprite : Texture
 var hit_sprite : Texture
 var miss_sprite : Texture
+var icon_sprite : Texture
 
 var duration := 0.0
 var frames := 0
@@ -37,6 +38,7 @@ func prepare_for_combat(enemy_data : Model.Enemy_Data) -> void:
 	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/attack.png")
 	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/hit.png")
 	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/miss.png")
+	icon_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/icon.png")
 	
 	self.texture = idle_sprite
 	self.scale *= data.scale
