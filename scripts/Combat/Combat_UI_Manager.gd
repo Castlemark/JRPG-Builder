@@ -155,59 +155,58 @@ func _on_Items_pressed() -> void:
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
 	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.cur_calc_stats
 	
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = data.description
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
-#
-#	var targets : String = "Targets "
-#	match (data.target_amount as int):
-#		1:
-#			targets += "1 "
-#		2:
-#			targets += "2 "
-#		3:
-#			targets += "all "
-#	targets += data.side
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Targets as Label).text = targets
-#
-#	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
-#	match (data.hits as int):
-#		-1:
-#			damage += "until miss "
-#		_:
-#			damage += "x " + String(data.hits)
-#	if data.delay > 0:
-#		var turns := " turn"
-#		if data.delay != 1:
-#			turns += "s"
-#		damage += "in " + String(data.delay) + turns
-#	if data.damage == 0:
-#		damage = " Damage: none"
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = damage
-#
-#	var effect : String = "Effect: " + data.effect.type + "\n    "
-#	match (data.effect.receiver as String):
-#		"same":
-#			effect += "Targets same character"
-#		"complementary":
-#			var aux_targets : PoolStringArray = targets.split(" ")
-#			aux_targets.insert(2, "complementary")
-#			effect += aux_targets.join(" ")
-#		"opposite":
-#			var aux_targets : PoolStringArray = targets.split(" ")
-#			aux_targets.insert(2, "opposite")
-#			if "enemies" in aux_targets:
-#				aux_targets.set(3, "allies")
-#			elif "allies" in aux_targets:
-#				aux_targets.set(3, "enemies")
-#			effect += aux_targets.join(" ")
-#	effect += "\n    Applies " + String(data.effect.amount * calc_stats.damage) + " "
-#	if (data.effect.duration as int) > 0:
-#		var turns := " turn"
-#		if data.effect.duration != 1:
-#			turns += "s"
-#		effect += "for " + String(data.effect.duration) + turns
-#	if data.effect.type == "none":
-#		effect = ""
-#	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Effect as Label).text = effect
+	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
+	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
+	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
+	
+	var targets : String = "Targets "
+	match (data.target_amount as int):
+		1:
+			targets += "1 "
+		2:
+			targets += "2 "
+		3:
+			targets += "all "
+	targets += data.side
+	($Submenu/Description/Scroll/VBoxContainer/Targets as Label).text = targets
+	
+	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
+	match (data.hits as int):
+		-1:
+			damage += "until miss "
+		_:
+			damage += "x " + String(data.hits)
+	if data.delay > 0:
+		var turns := " turn"
+		if data.delay != 1:
+			turns += "s"
+		damage += "in " + String(data.delay) + turns
+	if data.damage == 0:
+		damage = " Damage: none"
+	($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = damage
+	
+	var effect : String = "Effect: " + data.effect.type + "\n    "
+	match (data.effect.receiver as String):
+		"same":
+			effect += "Targets same character"
+		"complementary":
+			var aux_targets : PoolStringArray = targets.split(" ")
+			aux_targets.insert(2, "complementary")
+			effect += aux_targets.join(" ")
+		"opposite":
+			var aux_targets : PoolStringArray = targets.split(" ")
+			aux_targets.insert(2, "opposite")
+			if "enemies" in aux_targets:
+				aux_targets.set(3, "allies")
+			elif "allies" in aux_targets:
+				aux_targets.set(3, "enemies")
+			effect += aux_targets.join(" ")
+	effect += "\n    Applies " + String(data.effect.amount * calc_stats.damage) + " "
+	if (data.effect.duration as int) > 0:
+		var turns := " turn"
+		if data.effect.duration != 1:
+			turns += "s"
+		effect += "for " + String(data.effect.duration) + turns
+	if data.effect.type == "none":
+		effect = ""
+	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = effect

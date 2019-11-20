@@ -128,6 +128,7 @@ margin_right = 1311.0
 margin_bottom = -32.0
 
 [node name="Grid" type="Panel" parent="UILayer/UI/Submenu"]
+editor/display_folded = true
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_right = -4.0
@@ -194,7 +195,76 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 
+[node name="Scroll" type="ScrollContainer" parent="UILayer/UI/Submenu/Description"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Submenu/Description/Scroll"]
+margin_right = 338.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ttile" type="HBoxContainer" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_right = 338.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 0, 65 )
+
+[node name="Icon" type="TextureRect" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer/Ttile"]
+margin_right = 65.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 65, 65 )
+size_flags_vertical = 3
+expand = true
+stretch_mode = 6
+
+[node name="Name" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer/Ttile"]
+margin_left = 69.0
+margin_right = 338.0
+margin_bottom = 65.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_top = 69.0
+margin_right = 338.0
+margin_bottom = 73.0
+size_flags_horizontal = 3
+
+[node name="Description" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_top = 77.0
+margin_right = 338.0
+margin_bottom = 99.0
+autowrap = true
+
+[node name="HSeparator2" type="HSeparator" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_top = 103.0
+margin_right = 338.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+
+[node name="Targets" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_top = 111.0
+margin_right = 338.0
+margin_bottom = 133.0
+
+[node name="Damage" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_top = 137.0
+margin_right = 338.0
+margin_bottom = 159.0
+
+[node name="Effect" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+margin_top = 163.0
+margin_right = 338.0
+margin_bottom = 185.0
+
 [node name="Queue" type="Control" parent="UILayer/UI"]
+editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -243.0
@@ -202,6 +272,7 @@ margin_right = 243.0
 margin_bottom = 80.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/Queue"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 32.0
@@ -269,6 +340,7 @@ stretch_mode = 7
 [node name="Tween" type="Tween" parent="UILayer/UI/Queue"]
 
 [node name="Allies_Status" type="Control" parent="UILayer/UI"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
@@ -291,6 +363,7 @@ margin_top = 146.0
 margin_bottom = 215.0
 
 [node name="Enemies_Status" type="Control" parent="UILayer/UI"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 1343.0
