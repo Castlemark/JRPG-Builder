@@ -63,7 +63,7 @@ func start_combat(combat_data : Dictionary) -> void:
 	
 	_turn_order = [ally_first, ally_second, ally_third, enemy_first, enemy_second, enemy_third]
 	_update_turn_order()
-	UI.indicate_cur_fighter(_cur_fighter, _turn_order.size())
+	UI.indicate_cur_fighter(_cur_fighter, _turn_order)
 	UI.update_status()
 	
 	_combat_started = true
@@ -120,7 +120,7 @@ func _execute_combat_loop() -> void:
 		if _cur_fighter >= _turn_order.size():
 			print("New Round")
 			_update_turn_order()
-		UI.indicate_cur_fighter(_cur_fighter, _turn_order.size())
+		UI.indicate_cur_fighter(_cur_fighter, _turn_order)
 	
 	_display_combat_end()
 

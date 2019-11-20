@@ -71,7 +71,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -196.0
-margin_top = -358.0
+margin_top = -318.0
 margin_right = 204.0
 margin_bottom = -278.0
 
@@ -86,7 +86,7 @@ custom_constants/separation = 4
 
 [node name="Attack" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
 margin_right = 122.0
-margin_bottom = 72.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 toggle_mode = true
 group = SubResource( 1 )
@@ -95,12 +95,12 @@ text = "ATTACK"
 [node name="VSeparator" type="VSeparator" parent="UILayer/UI/Menu/HBoxContainer"]
 margin_left = 126.0
 margin_right = 130.0
-margin_bottom = 72.0
+margin_bottom = 32.0
 
 [node name="Inventory" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
 margin_left = 134.0
 margin_right = 256.0
-margin_bottom = 72.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 toggle_mode = true
 group = SubResource( 1 )
@@ -109,18 +109,17 @@ text = "ITEMS"
 [node name="VSeparator2" type="VSeparator" parent="UILayer/UI/Menu/HBoxContainer"]
 margin_left = 260.0
 margin_right = 264.0
-margin_bottom = 72.0
+margin_bottom = 32.0
 
 [node name="End_Turn" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
 margin_left = 268.0
 margin_right = 392.0
-margin_bottom = 72.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "END TURN"
 clip_text = true
 
 [node name="Submenu" type="Control" parent="UILayer/UI"]
-editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 611.0
@@ -134,6 +133,7 @@ anchor_bottom = 1.0
 margin_right = -4.0
 
 [node name="Abilities" type="ScrollContainer" parent="UILayer/UI/Submenu/Grid"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -143,9 +143,25 @@ margin_bottom = -4.0
 scroll_horizontal_enabled = false
 
 [node name="Container" type="GridContainer" parent="UILayer/UI/Submenu/Grid/Abilities"]
+margin_right = 338.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 3
 
+[node name="Inv_Fill1" type="Control" parent="UILayer/UI/Submenu/Grid/Abilities/Container"]
+margin_right = 167.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+
+[node name="Inv_Fill2" type="Control" parent="UILayer/UI/Submenu/Grid/Abilities/Container"]
+margin_left = 171.0
+margin_right = 338.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+
 [node name="Items" type="ScrollContainer" parent="UILayer/UI/Submenu/Grid"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -155,7 +171,22 @@ margin_bottom = -4.0
 scroll_horizontal_enabled = false
 
 [node name="Container" type="GridContainer" parent="UILayer/UI/Submenu/Grid/Items"]
+margin_right = 338.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 3
+
+[node name="Inv_Fill1" type="Control" parent="UILayer/UI/Submenu/Grid/Items/Container"]
+margin_right = 167.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+
+[node name="Inv_Fill2" type="Control" parent="UILayer/UI/Submenu/Grid/Items/Container"]
+margin_left = 171.0
+margin_right = 338.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
 
 [node name="Description" type="Panel" parent="UILayer/UI/Submenu"]
 anchor_left = 0.5
@@ -280,4 +311,6 @@ margin_bottom = 142.0
 [node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 146.0
 margin_bottom = 215.0
+[connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/Attack" to="UILayer/UI" method="_on_Attack_pressed"]
+[connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/Inventory" to="UILayer/UI" method="_on_Items_pressed"]
 [connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/End_Turn" to="UILayer/UI" method="_on_End_Turn_pressed"]
