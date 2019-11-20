@@ -40,6 +40,7 @@ var cur_battler
 
 func _ready() -> void:
 	queue_tween.connect("tween_completed", self, "_on_tween_completed")
+	
 
 func get_nodes(ally_array : Array, enemy_array : Array) -> void:
 	allies = ally_array
@@ -52,7 +53,6 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 	cur_battler = turn_order[fighter_pos]
 	
 	attack_button.pressed = true
-	attack_button.grab_focus()
 	_on_Attack_pressed()
 	
 	# We hide the menus when the cur fighter isn't a party character
@@ -61,6 +61,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		submenu.visible = true
 		
 		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values())
+		abilities_grid.get_child(0).grab_focus()
 	else:
 		#menu.visible = false # TODO Remove comment when enemies end turn by themselves
 		submenu.visible = false
@@ -93,6 +94,10 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			abilities_grid.add_child(character_ability_node, true)
 			abilities_grid.move_child(character_ability_node, 0)
 			character_ability_node.connect("ability_pressed", self, "_on_ability_pressed")
+			character_ability_node.connect("ability_focus_entered", self, "_on_ability_grab")
+			character_ability_node.connect("abilty_focus_exited", self, "_on_ability_released")
+			character_ability_node.connect("ability_mouse_entered", self, "_on_ability_grab")
+			character_ability_node.connect("ability_mouse_exited", self, "_on_ability_released")
 	elif difference < 0:
 # warning-ignore:unused_variable
 		for i in range(abs(difference)):
@@ -152,7 +157,7 @@ func _on_Items_pressed() -> void:
 	items_container.visible = true
 	abilities_container.visible = false
 
-func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
+func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void:
 	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.cur_calc_stats
 	
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
@@ -210,3 +215,18 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	if data.effect.type == "none":
 		effect = ""
 	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = effect
+
+func _on_ability_released() -> void:
+	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = null
+	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = ""
+	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = ""
+	($Submenu/Description/Scroll/VBoxContainer/Targets as Label).text = ""
+	($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = ""
+	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = ""
+
+func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
+	print("i shall now use " + data.name +  " in my turn as " + cur_battler.data.name)
+	
+	 # Here we implement what happens when the player chooses an ability
+	
+	_on_End_Turn_pressed()

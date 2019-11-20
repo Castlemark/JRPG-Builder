@@ -128,7 +128,6 @@ margin_right = 1311.0
 margin_bottom = -32.0
 
 [node name="Grid" type="Panel" parent="UILayer/UI/Submenu"]
-editor/display_folded = true
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_right = -4.0
