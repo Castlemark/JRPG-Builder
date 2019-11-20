@@ -3,7 +3,6 @@ extends Node2D
 class_name Combat
 
 signal combat_finished()
-signal turn_finished()
 
 onready var GM := $"/root/Game_Manager"
 
@@ -17,19 +16,13 @@ onready var enemy_first : Sprite = $Characters/Enemies/First as Enemy_Combat
 onready var enemy_second : Sprite = $Characters/Enemies/Second as Enemy_Combat
 onready var enemy_third : Sprite = $Characters/Enemies/Third as Enemy_Combat
 
-onready var UI : Control = $UILayer/UI as Control
-onready var queue_container : VBoxContainer = $UILayer/UI/Queue/VBoxContainer as VBoxContainer
-onready var queue_tween : Tween = $UILayer/UI/Queue/Tween as Tween
-
-var _tween_values = [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3)]
+onready var UI : Combat_UI_Manager = $UILayer/UI as Combat_UI_Manager
 
 var _combat_started := false
 var _turn_order := []
 var _cur_fighter : int = 0
 
-
 func _ready() -> void:
-	queue_tween.connect("tween_completed", self, "_on_tween_completed")
 	background.visible = false
 	UI.visible = false
 	pass
@@ -53,25 +46,32 @@ func start_combat(combat_data : Dictionary) -> void:
 			enemy_first.visible = false
 			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_third.visible = false
+			
+			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_second])
 		2:
 			enemy_first.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[1]))
 			enemy_third.visible = false
+			
+			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_first, enemy_second])
 		3:
 			enemy_first.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[1]))
 			enemy_third.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[2]))
+			
+			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_first, enemy_second, enemy_third])
 	
 	_turn_order = [ally_first, ally_second, ally_third, enemy_first, enemy_second, enemy_third]
 	_update_turn_order()
-	_indicate_cur_fighter()
+	UI.indicate_cur_fighter(_cur_fighter, _turn_order.size())
+	UI.update_status()
 	
 	_combat_started = true
 	_execute_combat_loop()
 
 func _end_combat() -> void:
 	background.visible = false
-	UI.visible = true
+	UI.visible = false
 	
 	enemy_first.visible = true
 	enemy_second.visible = true
@@ -90,11 +90,7 @@ func _update_turn_order() -> void:
 	
 	_turn_order.sort_custom(self, "_priority_sort")
 	
-	for i in range(0, 6):
-		if i < _turn_order.size():
-			(queue_container.get_child(i + 2) as TextureRect).texture = _turn_order[i].icon_sprite
-		else:
-			queue_container.get_child(i + 2).visible = false
+	UI.update_queue(_turn_order)
 	
 	_cur_fighter = 0
 
@@ -119,16 +115,12 @@ func _execute_combat_loop() -> void:
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
 		
-		# Apply transparency via modulate to indicate selected character
-		
-		yield(self, "turn_finished")
-		(queue_container.get_child(_cur_fighter + 2) as TextureRect).modulate = Color(1, 1, 1, 1)
-		queue_tween.stop_all()
+		yield(UI, "turn_finished")
 		_cur_fighter += 1
 		if _cur_fighter >= _turn_order.size():
 			print("New Round")
 			_update_turn_order()
-		_indicate_cur_fighter()
+		UI.indicate_cur_fighter(_cur_fighter, _turn_order.size())
 	
 	_display_combat_end()
 
@@ -137,19 +129,3 @@ func _combat_is_in_progress() -> bool:
 
 func _display_combat_end() -> void:
 	pass
-
-func _on_End_Turn_pressed() -> void:
-	emit_signal("turn_finished")
-
-func _indicate_cur_fighter():
-	_tween_values = [Color(1, 1, 1, 1), Color(0.3, 0.3, 0.3, 1)]
-	queue_tween.interpolate_property(queue_container.get_child(_cur_fighter + 2), "modulate", _tween_values[0], _tween_values[1], 1.5,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	queue_tween.start()
-	
-	_tween_values.invert()
-
-func _on_tween_completed(object : Object, key : NodePath):
-	queue_tween.interpolate_property(queue_container.get_child(_cur_fighter + 2), "modulate", _tween_values[0], _tween_values[1], 1.5,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	queue_tween.start()
-	
-	_tween_values.invert()

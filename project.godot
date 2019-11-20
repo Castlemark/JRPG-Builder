@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Background_Tile.gd"
 }, {
+"base": "Panel",
+"class": "Battler_UI_Controller",
+"language": "GDScript",
+"path": "res://scripts/Combat/Battler_UI_Controller.gd"
+}, {
 "base": "Position3D",
 "class": "Between_node",
 "language": "GDScript",
@@ -43,6 +48,11 @@ _global_script_classes=[ {
 "class": "Combat_Trigger_Action",
 "language": "GDScript",
 "path": "res://scripts/map/actions/Combat_Trigger_Action.gd"
+}, {
+"base": "Control",
+"class": "Combat_UI_Manager",
+"language": "GDScript",
+"path": "res://scripts/Combat/Combat_UI_Manager.gd"
 }, {
 "base": "Panel",
 "class": "Combat_Viewport",
@@ -161,12 +171,14 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
+"Battler_UI_Controller": "",
 "Between_node": "",
 "Character_Ability": "",
 "Character_Combat": "",
 "Character_UI": "",
 "Combat": "",
 "Combat_Trigger_Action": "",
+"Combat_UI_Manager": "",
 "Combat_Viewport": "",
 "Data": "",
 "Detail_Node": "",

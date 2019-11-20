@@ -213,7 +213,6 @@ size_flags_vertical = 3
 custom_constants/separation = 26
 
 [node name="Abilities" type="Panel" parent="Data/HBoxContainer"]
-editor/display_folded = true
 margin_right = 553.0
 margin_bottom = 373.0
 size_flags_horizontal = 3
