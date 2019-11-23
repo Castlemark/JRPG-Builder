@@ -15,8 +15,6 @@ func initialize(detail_info) -> void:
 	var path : String = "res://campaigns/" + GM.campaign_data.name + "/maps/" + GM.campaign_data.cur_map + "/detail_art/" + detail_info.filepath + ".png"
 	var detail_img := Utils.load_img_3D(path)
 	
-	sprite.scale *= detail_info.scale
-	
 	if detail_img != null:
 		sprite.texture = detail_img
 	
@@ -24,6 +22,8 @@ func initialize(detail_info) -> void:
 	if detail_info.rotation == 1:
 		sprite.transform = Transform(Vector3(4, 0, 0), Vector3(3, 1.732, 0), Vector3(0, 0, 4), Vector3(0, 0, 0))
 		self.rotation_degrees = Vector3(0, 90, 0)
+	
+	self.scale *= detail_info.scale
 	
 	if detail_info.animation_data != null:
 		_configure_animation(detail_info.animation_data)
