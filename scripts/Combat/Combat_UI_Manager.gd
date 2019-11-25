@@ -2,7 +2,7 @@ extends Control
 
 class_name Combat_UI_Manager
 
-signal turn_finished()
+signal ability_chosen(ability_data)
 
 var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
 
@@ -81,6 +81,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 	queue_tween.interpolate_property(queue_container.get_child(fighter_pos), "rect_min_size", Vector2(_min_turn_size, _min_turn_size),Vector2(_max_turn_size, _max_turn_size), 0.1,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	queue_tween.interpolate_property(queue_container.get_child(prev_fighter), "rect_min_size", Vector2(_max_turn_size, _max_turn_size), Vector2(_min_turn_size, _min_turn_size), 0.1,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	queue_tween.start()
+	yield(queue_tween, "tween_all_completed")
 	
 	_tween_values.invert()
 
@@ -145,9 +146,9 @@ func update_queue(turn_order : Array) -> void:
 		else:
 			queue_container.get_child(i).visible = false
 
-func _on_End_Turn_pressed() -> void:
+func _on_End_Turn_pressed(data) -> void:
 	end_turn_button.pressed = false
-	emit_signal("turn_finished")
+	emit_signal("ability_chosen", data)
 
 func _on_Attack_pressed() -> void:
 	abilities_container.visible = true
@@ -225,8 +226,4 @@ func _on_ability_released() -> void:
 	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = ""
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	print("i shall now use " + data.name +  " in my turn as " + cur_battler.data.name)
-	
-	 # Here we implement what happens when the player chooses an ability
-	
-	_on_End_Turn_pressed()
+	_on_End_Turn_pressed(data)

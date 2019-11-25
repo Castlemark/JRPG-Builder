@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/combat/Character_Combat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/combat/Enemy_Combat.tscn" type="PackedScene" id=4]
-[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=5]
-[ext_resource path="res://scripts/Combat/Combat_UI_Manager.gd" type="Script" id=6]
-[ext_resource path="res://scenes/combat/Character_UI_Status.tscn" type="PackedScene" id=7]
+[ext_resource path="res://default_assets/combat/attack_bg.png" type="Texture" id=5]
+[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=6]
+[ext_resource path="res://scripts/Combat/Combat_UI_Manager.gd" type="Script" id=7]
+[ext_resource path="res://scenes/combat/Character_UI_Status.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -14,6 +15,7 @@
 script = ExtResource( 1 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = -1
 
 [node name="Background" type="TextureRect" parent="BackgroundLayer"]
@@ -26,6 +28,7 @@ stretch_mode = 6
 current = true
 
 [node name="Characters" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, -100 )
 
 [node name="Allies" type="Node2D" parent="Characters"]
@@ -57,13 +60,21 @@ texture = ExtResource( 2 )
 [node name="Third" parent="Characters/Enemies" instance=ExtResource( 4 )]
 texture = ExtResource( 2 )
 
+[node name="Attack_BG" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1920, 1080 )
+texture = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="Attack_BG"]
+
 [node name="UILayer" type="CanvasLayer" parent="."]
+layer = 5
 
 [node name="UI" type="Control" parent="UILayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 5 )
-script = ExtResource( 6 )
+theme = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="Menu" type="Panel" parent="UILayer/UI"]
 anchor_left = 0.5
@@ -120,6 +131,7 @@ text = "END TURN"
 clip_text = true
 
 [node name="Submenu" type="Control" parent="UILayer/UI"]
+editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 611.0
@@ -271,7 +283,6 @@ margin_right = 243.0
 margin_bottom = 80.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/Queue"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 32.0
@@ -351,13 +362,13 @@ margin_bottom = -32.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Status" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Status" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
 
-[node name="Status2" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Status2" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 73.0
 margin_bottom = 142.0
 
-[node name="Status3" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Status3" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 146.0
 margin_bottom = 215.0
 
@@ -374,15 +385,16 @@ margin_bottom = -32.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Status" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Status" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
 
-[node name="Status2" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Status2" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 73.0
 margin_bottom = 142.0
 
-[node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 146.0
 margin_bottom = 215.0
+[connection signal="ability_chosen" from="UILayer/UI" to="." method="figther_ability_chosen"]
 [connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/Attack" to="UILayer/UI" method="_on_Attack_pressed"]
 [connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/Inventory" to="UILayer/UI" method="_on_Items_pressed"]
-[connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/End_Turn" to="UILayer/UI" method="_on_End_Turn_pressed"]
+[connection signal="pressed" from="UILayer/UI/Menu/HBoxContainer/End_Turn" to="UILayer/UI" method="_on_End_Turn_pressed" binds= [ false ]]

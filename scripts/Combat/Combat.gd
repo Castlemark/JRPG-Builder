@@ -3,6 +3,7 @@ extends Node2D
 class_name Combat
 
 signal combat_finished()
+signal turn_finished()
 
 onready var GM := $"/root/Game_Manager"
 
@@ -17,6 +18,9 @@ onready var enemy_second : Sprite = $Characters/Enemies/Second as Enemy_Combat
 onready var enemy_third : Sprite = $Characters/Enemies/Third as Enemy_Combat
 
 onready var UI : Combat_UI_Manager = $UILayer/UI as Combat_UI_Manager
+
+onready var attack_bg : Sprite = $Attack_BG as Sprite
+onready var attack_bg_tween : Tween = $Attack_BG/Tween as Tween
 
 var _combat_started := false
 var _turn_order := []
@@ -115,7 +119,7 @@ func _execute_combat_loop() -> void:
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
 		
-		yield(UI, "turn_finished")
+		yield(self, "turn_finished")
 		_cur_fighter += 1
 		if _cur_fighter >= _turn_order.size():
 			print("New Round")
@@ -129,3 +133,29 @@ func _combat_is_in_progress() -> bool:
 
 func _display_combat_end() -> void:
 	pass
+
+func figther_ability_chosen(data) -> void:
+	
+	if data is bool:
+		print("no ability chosen")
+	else:
+		var ability : Model.Ability_Data = data
+		var emiter : Character_Combat = _turn_order[_cur_fighter]
+		
+		emiter.z_index = 1
+		
+		attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.75), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		attack_bg_tween.start()
+		yield(attack_bg_tween, "tween_completed")
+		
+		for i in range(0, ability.hits):
+			emiter.play_animation("attack")
+			yield(emiter, "special_animation_finished")
+		
+		attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		attack_bg_tween.start()
+		yield(attack_bg_tween, "tween_completed")
+		
+		emiter.z_index = 0
+	
+	emit_signal("turn_finished")
