@@ -122,6 +122,8 @@ class Ability_Data:
 	var hits : int
 	var description : String
 	var scale : float
+	var effect_texture : Texture
+	var icon_texture : Texture
 	
 	class Ability_Effect_Data:
 		var type : String

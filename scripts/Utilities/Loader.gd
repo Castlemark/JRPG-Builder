@@ -465,6 +465,13 @@ class Campaign_Loader:
 		
 		ability_data.effect = effect_data
 		
+		#Textures
+		ability_data.icon_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/abilities/" + ability_name + "/icon.png")
+		ability_data.effect_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/abilities/" + ability_name + "/effect.png")
+		
+		if ability_data.icon_texture == null or ability_data.effect_texture == null:
+			load_correct = false
+		
 		if not load_correct:
 			return null
 		

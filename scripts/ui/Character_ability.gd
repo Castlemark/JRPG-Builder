@@ -10,7 +10,6 @@ signal abilty_focus_exited()
 signal ability_mouse_entered(ability_data, icon)
 signal ability_mouse_exited()
 
-onready var GM := $"/root/Game_Manager"
 
 onready var label : Label = $VBoxContainer/Label
 onready var ability_icon : TextureRect = $VBoxContainer/Icon
@@ -22,7 +21,7 @@ func initialize(ability_data) -> void:
 
 	label.text = (data.name as String).replace("_", " ")
 
-	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/abilities/" + data.name + "/icon.png")
+	var img : Texture = data.icon_texture
 	if img != null:
 		ability_icon.texture = img
 
