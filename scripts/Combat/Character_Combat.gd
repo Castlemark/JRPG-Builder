@@ -21,6 +21,9 @@ var frames := 0
 
 var elapsed_frame_time := 0.0
 
+func _ready() -> void:
+	self.texture = idle_sprite
+
 func _process(delta: float) -> void:
 	if frames > 1:
 		if elapsed_frame_time >= duration/frames:
@@ -28,6 +31,8 @@ func _process(delta: float) -> void:
 				self.frame = 0;
 				if self.texture != idle_sprite:
 					self.texture = idle_sprite
+# warning-ignore:integer_division
+					self.offset = Vector2(0, -idle_sprite.get_height() / vframes)
 					emit_signal("special_animation_finished")
 			else:
 				self.frame += 1;
@@ -37,6 +42,8 @@ func _process(delta: float) -> void:
 			elapsed_frame_time = 0.0
 			if self.texture != idle_sprite:
 				self.texture = idle_sprite
+# warning-ignore:integer_division
+				self.offset = Vector2(0, -idle_sprite.get_height() / vframes)
 				emit_signal("special_animation_finished")
 	
 	elapsed_frame_time += delta
@@ -51,11 +58,13 @@ func prepare_for_combat(character_data) -> void:
 	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + data.name + "/miss.png")
 	icon_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + data.name + "/icon.png")
 	
-	self.texture = idle_sprite
-	self.scale *= data.scale
-	
 	if data.animation_data != null:
 		_configure_animation(data.animation_data)
+	
+	self.texture = idle_sprite
+	self.scale *= data.scale
+# warning-ignore:integer_division
+	self.offset = Vector2(0,-idle_sprite.get_height() / vframes)
 
 func _configure_animation(animation_info) -> void:
 	self.vframes = animation_info.vframes
@@ -69,14 +78,20 @@ func play_animation(animation : String) -> void:
 			elapsed_frame_time = 0.0
 			self.frame = 0
 			self.texture = attack_sprite
+# warning-ignore:integer_division
+			self.offset = Vector2(0, -attack_sprite.get_height() / vframes)
 		"hit":
 			elapsed_frame_time = 0.0
 			self.frame = 0
 			self.texture = hit_sprite
+# warning-ignore:integer_division
+			self.offset = Vector2(0, -hit_sprite.get_height() / vframes)
 		"miss":
 			elapsed_frame_time = 0.0
 			self.frame = 0
 			self.texture = miss_sprite
+# warning-ignore:integer_division
+			self.offset = Vector2(0, -miss_sprite.get_height() / vframes)
 		_:
 			print("Animation " + animation + " is not valid")
 

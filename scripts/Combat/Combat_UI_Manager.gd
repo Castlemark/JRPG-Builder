@@ -3,6 +3,7 @@ extends Control
 class_name Combat_UI_Manager
 
 signal ability_chosen(ability_data)
+signal battler_selected(battler_data)
 
 var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
 
@@ -62,6 +63,8 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		
 		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values())
 		abilities_grid.get_child(0).grab_focus()
+		_on_ability_released()
+		_on_ability_grab(abilities_grid.get_child(0).data, abilities_grid.get_child(0).ability_icon.texture)
 	else:
 		#menu.visible = false # TODO Remove comment when enemies end turn by themselves
 		submenu.visible = false
@@ -99,6 +102,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			character_ability_node.connect("abilty_focus_exited", self, "_on_ability_released")
 			character_ability_node.connect("ability_mouse_entered", self, "_on_ability_grab")
 			character_ability_node.connect("ability_mouse_exited", self, "_on_ability_released")
+			character_ability_node.group = ability_button_group
 	elif difference < 0:
 # warning-ignore:unused_variable
 		for i in range(abs(difference)):
@@ -120,22 +124,26 @@ func _on_tween_completed(object : Object, key : NodePath):
 func update_status() -> void:
 	for i in range(0, allies.size()):
 		(allies_status[i] as Battler_UI_Controller).set_all_stats(\
+			allies[i].data.name, \
 			allies[i].calc_stats.hp, \
 			allies[i].data.cur_calc_stats.hp, \
 			allies[i].calc_stats.shield, \
 			allies[i].data.cur_calc_stats.shield, \
 			allies[i].calc_stats.strain, \
-			allies[i].data.cur_calc_stats.strain \
+			allies[i].data.cur_calc_stats.strain, \
+			allies[i] \
 		)
 	
 	for i in range (0, enemies.size()):
 		(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
+			enemies[i].data.name, \
 			enemies[i].calc_stats.hp, \
 			enemies[i].data.calc_stats.hp, \
 			enemies[i].calc_stats.shield, \
 			enemies[i].data.calc_stats.shield, \
 			enemies[i].calc_stats.strain, \
-			enemies[i].data.calc_stats.strain \
+			enemies[i].data.calc_stats.strain, \
+			enemies[i] \
 		)
 	pass
 
@@ -159,6 +167,9 @@ func _on_Items_pressed() -> void:
 	abilities_container.visible = false
 
 func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void:
+	_set_ability_view(data, preview_icon)
+
+func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> void:
 	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.cur_calc_stats
 	
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
@@ -218,12 +229,41 @@ func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void
 	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = effect
 
 func _on_ability_released() -> void:
-	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = null
-	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = ""
-	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = ""
-	($Submenu/Description/Scroll/VBoxContainer/Targets as Label).text = ""
-	($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = ""
-	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = ""
+	if ability_button_group.get_pressed_button() == null:
+		($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = null
+		($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = ""
+		($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = ""
+		($Submenu/Description/Scroll/VBoxContainer/Targets as Label).text = ""
+		($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = ""
+		($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = ""
+	else:
+		var pressed_ability : Character_Ability = ability_button_group.get_pressed_button() as Character_Ability
+		_set_ability_view(pressed_ability.data, pressed_ability.ability_icon.texture)
+	
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
+	enemies_status[0].deactivate_selection()
+	enemies_status[1].deactivate_selection()
+	enemies_status[2].deactivate_selection()
+	
+	allies_status[0].deactivate_selection()
+	allies_status[1].deactivate_selection()
+	allies_status[2].deactivate_selection()
+	
+	print("hola")
+	if data.side == "enemies":
+		enemies_status[0].activate_selection()
+		enemies_status[1].activate_selection()
+		enemies_status[2].activate_selection()
+		enemies_status[0].grab_focus()
+	else:
+		allies_status[0].activate_selection()
+		allies_status[1].activate_selection()
+		allies_status[2].activate_selection()
+		allies_status[0].grab_focus()
 	_on_End_Turn_pressed(data)
+
+func _on_Status_battler_selected(battler_data) -> void:
+	#menu.visible = false # TODO Remove comment when enemies end turn by themselves
+	submenu.visible = false
+	emit_signal("battler_selected", battler_data)

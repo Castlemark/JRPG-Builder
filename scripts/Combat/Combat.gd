@@ -5,6 +5,8 @@ class_name Combat
 signal combat_finished()
 signal turn_finished()
 
+signal battler_animations_completed()
+
 onready var GM := $"/root/Game_Manager"
 
 onready var background : TextureRect = $BackgroundLayer/Background as TextureRect
@@ -25,6 +27,11 @@ onready var attack_bg_tween : Tween = $Attack_BG/Tween as Tween
 var _combat_started := false
 var _turn_order := []
 var _cur_fighter : int = 0
+var _cur_ability : Model.Ability_Data
+
+var _yield_battler_counter := 0
+
+var _recevier_battler
 
 func _ready() -> void:
 	background.visible = false
@@ -134,28 +141,54 @@ func _combat_is_in_progress() -> bool:
 func _display_combat_end() -> void:
 	pass
 
-func figther_ability_chosen(data) -> void:
-	
+func _set_cur_ability(data) -> void:
 	if data is bool:
 		print("no ability chosen")
+		emit_signal("turn_finished")
 	else:
-		var ability : Model.Ability_Data = data
-		var emiter : Character_Combat = _turn_order[_cur_fighter]
+		_cur_ability = data
+
+#function called when a target for the ability is chosen
+func _play_ability(battler_data) -> void:
+	_recevier_battler = battler_data
+	
+	var emiter : Character_Combat = _turn_order[_cur_fighter]
+	
+	emiter.z_index = 1
+	_recevier_battler.z_index = 1
+	
+	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.75), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	attack_bg_tween.start()
+	yield(attack_bg_tween, "tween_completed")
+	
+# warning-ignore:unused_variable
+	for i in range(0, _cur_ability.hits):
+		emiter.play_animation("attack")
+		_recevier_battler.play_animation("hit")
 		
-		emiter.z_index = 1
-		
-		attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.75), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		attack_bg_tween.start()
-		yield(attack_bg_tween, "tween_completed")
-		
-		for i in range(0, ability.hits):
-			emiter.play_animation("attack")
-			yield(emiter, "special_animation_finished")
-		
-		attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		attack_bg_tween.start()
-		yield(attack_bg_tween, "tween_completed")
-		
-		emiter.z_index = 0
+		yield(self, "battler_animations_completed")
+	
+	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	attack_bg_tween.start()
+	yield(attack_bg_tween, "tween_completed")
+	
+	emiter.z_index = 0
+	_recevier_battler.z_index = 0
+	
+	if _cur_ability.side == "enemies":
+		UI.enemies_status[0].deactivate_selection()
+		UI.enemies_status[1].deactivate_selection()
+		UI.enemies_status[2].deactivate_selection()
+	else:
+		UI.allies_status[0].deactivate_selection()
+		UI.allies_status[1].deactivate_selection()
+		UI.allies_status[2].deactivate_selection()
 	
 	emit_signal("turn_finished")
+
+# This function is connected to players, when two animations are played (emiter and receiver) it notifies the interested parties
+func _update_yield_counter() -> void:
+	_yield_battler_counter += 1
+	if _yield_battler_counter >= 2:
+		emit_signal("battler_animations_completed")
+		_yield_battler_counter = 0

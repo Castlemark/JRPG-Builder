@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Background_Tile.gd"
 }, {
-"base": "Panel",
+"base": "Button",
 "class": "Battler_UI_Controller",
 "language": "GDScript",
 "path": "res://scripts/Combat/Battler_UI_Controller.gd"
