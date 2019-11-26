@@ -2,27 +2,27 @@ class_name Model
 
 class Campaign_Data:
 	var name : String
-	
+
 	var maps : Dictionary
 	var cur_map : String
-	
+
 	var items : Dictionary
 	var abilities : Dictionary
-	
+
 	var characters: Dictionary
 	var npcs : Dictionary
 	var enemies : Dictionary
-	
+
 	var party : Party_Data
 
 class Party_Data:
 	var first_character : Character_Data
 	var second_character : Character_Data
 	var third_character : Character_Data
-	
+
 	var inventory : Array
 	var money : int
-	
+
 
 class Map_Data:
 	var name : String
@@ -30,22 +30,22 @@ class Map_Data:
 	var detail_art : Array
 	var background_info : BG_Data
 	var access_point : int
-	
+
 	class BG_Data:
 		var x_offset : float
 		var y_offset : float
 		var scale : float
-	
+
 	class Nav_Node_Data:
 		var x : float
 		var y : float
 		var connected_nodes : Array
 		var actions : Array
-		
+
 		class Action_Data:
 			var type : String
 			var data : Dictionary
-	
+
 	class Detail_Art_Data:
 		var x : float
 		var y : float
@@ -60,18 +60,18 @@ class Item_Data:
 			var name : String
 			var price : int
 			var effect : Item_Effect_Data
-			
+
 			class Item_Effect_Data:
 				var type : String
 				var value : int
 				var delay : int
 				var duration : int
-		
+
 		class Quest_Object_Data:
 			var type : String
 			var name : String
 			var keyword : String
-		
+
 		class Equipment_Item_Data:
 			var type : String
 			var name : String
@@ -93,7 +93,7 @@ class Character_Data:
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
 	var scale : float
-	
+
 	class Equipment_Data:
 		var legs : Item_Data.Equipment_Item_Data
 		var torso : Item_Data.Equipment_Item_Data
@@ -113,7 +113,6 @@ class Enemy_Data:
 class Ability_Data:
 	var name : String
 	var min_level : int
-	var target_amount : int
 	var side : String
 	var cost : int
 	var delay : int
@@ -122,9 +121,8 @@ class Ability_Data:
 	var hits : int
 	var description : String
 	var scale : float
-	var effect_texture : Texture
 	var icon_texture : Texture
-	
+
 	class Ability_Effect_Data:
 		var type : String
 		var receiver : String
@@ -139,7 +137,7 @@ class Stats_Data:
 	var defence : int
 	var alt_defence : int
 	var speed : int
-	
+
 	func duplicate(data):
 		self.strength = data.strength
 		self.dexterity = data.dexterity
@@ -155,7 +153,7 @@ class Calc_Stats_Data:
 	var strain : int
 	var evasion : int
 	var damage : int
-	
+
 	func duplicate(data):
 		self.hp = data.hp
 		self.shield = data.shield

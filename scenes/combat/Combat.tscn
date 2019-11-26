@@ -137,6 +137,7 @@ margin_right = 1311.0
 margin_bottom = -32.0
 
 [node name="Grid" type="Panel" parent="UILayer/UI/Submenu"]
+editor/display_folded = true
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_right = -4.0
@@ -256,20 +257,15 @@ margin_right = 338.0
 margin_bottom = 107.0
 size_flags_horizontal = 3
 
-[node name="Targets" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+[node name="Damage" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
 margin_top = 111.0
 margin_right = 338.0
 margin_bottom = 133.0
 
-[node name="Damage" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+[node name="Effect" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
 margin_top = 137.0
 margin_right = 338.0
 margin_bottom = 159.0
-
-[node name="Effect" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
-margin_top = 163.0
-margin_right = 338.0
-margin_bottom = 185.0
 
 [node name="Queue" type="Control" parent="UILayer/UI"]
 editor/display_folded = true

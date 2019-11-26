@@ -1,6 +1,5 @@
 {
     "min_level": 3,
-    "target_amount": 3,
     "side": "enemies",
     "cost": 50,
     "delay": 0,

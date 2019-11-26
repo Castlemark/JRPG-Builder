@@ -176,17 +176,6 @@ func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> voi
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
 	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
 	
-	var targets : String = "Targets "
-	match (data.target_amount as int):
-		1:
-			targets += "1 "
-		2:
-			targets += "2 "
-		3:
-			targets += "all "
-	targets += data.side
-	($Submenu/Description/Scroll/VBoxContainer/Targets as Label).text = targets
-	
 	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
 	match (data.hits as int):
 		-1:
@@ -207,17 +196,9 @@ func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> voi
 		"same":
 			effect += "Targets same character"
 		"complementary":
-			var aux_targets : PoolStringArray = targets.split(" ")
-			aux_targets.insert(2, "complementary")
-			effect += aux_targets.join(" ")
+			effect += "Complementary"
 		"opposite":
-			var aux_targets : PoolStringArray = targets.split(" ")
-			aux_targets.insert(2, "opposite")
-			if "enemies" in aux_targets:
-				aux_targets.set(3, "allies")
-			elif "allies" in aux_targets:
-				aux_targets.set(3, "enemies")
-			effect += aux_targets.join(" ")
+			effect += "Opposite"
 	effect += "\n    Applies " + String(data.effect.amount * calc_stats.damage) + " "
 	if (data.effect.duration as int) > 0:
 		var turns := " turn"
@@ -233,7 +214,6 @@ func _on_ability_released() -> void:
 		($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = null
 		($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = ""
 		($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = ""
-		($Submenu/Description/Scroll/VBoxContainer/Targets as Label).text = ""
 		($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = ""
 		($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = ""
 	else:

@@ -157,7 +157,7 @@ func _play_ability(battler_data) -> void:
 	emiter.z_index = 1
 	_recevier_battler.z_index = 1
 	
-	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.75), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.85), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
 	
