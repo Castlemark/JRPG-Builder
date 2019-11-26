@@ -52,7 +52,7 @@ class Validation:
 	const char_slots := [{"legs" : TEXT}, {"torso" : TEXT}, {"accessory_1" : TEXT}, {"accessory_2" : TEXT}, {"accessory_3" : TEXT}, {"weapon" : TEXT}]
 
 	# ABILITY
-	const ability_fields := [ {"min_level" : NUMBER}, {"side" : TEXT}, {"cost" : NUMBER}, {"delay" : NUMBER}, {"damage" : NUMBER}, {"effect" : DICTIONARY}, {"hits" : NUMBER}, {"description" : TEXT}, {"scale": NUMBER}]
+	const ability_fields := [ {"min_level" : NUMBER}, {"side" : TEXT}, {"cost" : NUMBER}, {"delay" : NUMBER}, {"damage" : NUMBER}, {"effect" : DICTIONARY}, {"description" : TEXT}, {"scale": NUMBER}]
 	const ability_effect_fields := [{"type" : TEXT}, {"receiver" : TEXT}, {"amount" : NUMBER}, {"duration" : NUMBER}]
 
 	# ITEM

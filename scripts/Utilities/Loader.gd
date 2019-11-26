@@ -446,7 +446,6 @@ class Campaign_Loader:
 		ability_data.cost = ability_dict.cost as int
 		ability_data.delay = ability_dict.delay as int
 		ability_data.damage = ability_dict.damage
-		ability_data.hits = ability_dict.hits as int
 		ability_data.description = ability_dict.description
 		if ability_dict.scale < 1:
 			load_correct = false

@@ -161,12 +161,10 @@ func _play_ability(battler_data) -> void:
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
 	
-# warning-ignore:unused_variable
-	for i in range(0, _cur_ability.hits):
-		emiter.play_animation("attack")
-		_recevier_battler.play_animation("hit")
-		
-		yield(self, "battler_animations_completed")
+	emiter.play_animation("attack")
+	_recevier_battler.play_animation("hit")
+	
+	yield(self, "battler_animations_completed")
 	
 	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()

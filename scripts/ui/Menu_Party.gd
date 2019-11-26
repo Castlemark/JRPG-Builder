@@ -40,11 +40,7 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
 
 	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
-	match (data.hits as int):
-		-1:
-			damage += "until miss "
-		_:
-			damage += "x " + String(data.hits)
+
 	if data.delay > 0:
 		var turns := " turn"
 		if data.delay != 1:

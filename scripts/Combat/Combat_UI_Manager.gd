@@ -41,26 +41,26 @@ var cur_battler
 
 func _ready() -> void:
 	queue_tween.connect("tween_completed", self, "_on_tween_completed")
-	
+
 
 func get_nodes(ally_array : Array, enemy_array : Array) -> void:
 	allies = ally_array
 	enemies = enemy_array
-	
+
 	for i in range(enemies.size(), 3):
 		enemies_status[i].visible = false
 
 func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 	cur_battler = turn_order[fighter_pos]
-	
+
 	attack_button.pressed = true
 	_on_Attack_pressed()
-	
+
 	# We hide the menus when the cur fighter isn't a party character
 	if turn_order[fighter_pos] is Character_Combat:
 		menu.visible = true
 		submenu.visible = true
-		
+
 		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values())
 		abilities_grid.get_child(0).grab_focus()
 		_on_ability_released()
@@ -68,29 +68,29 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 	else:
 		#menu.visible = false # TODO Remove comment when enemies end turn by themselves
 		submenu.visible = false
-	
+
 	queue_tween.stop_all()
-	
+
 	_cur_fighter = fighter_pos
-	
+
 	var prev_fighter = fighter_pos - 1
 	if fighter_pos == 0:
 		prev_fighter = turn_order.size() - 1
-	
+
 	queue_container.get_child(prev_fighter).modulate = Color(1, 1, 1, 1)
-	
+
 	_tween_values = [Color(1, 1, 1, 1), Color(0.3, 0.3, 0.3, 1)]
 	queue_tween.interpolate_property(queue_container.get_child(fighter_pos), "modulate", _tween_values[0], _tween_values[1], 1.5,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	queue_tween.interpolate_property(queue_container.get_child(fighter_pos), "rect_min_size", Vector2(_min_turn_size, _min_turn_size),Vector2(_max_turn_size, _max_turn_size), 0.1,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	queue_tween.interpolate_property(queue_container.get_child(prev_fighter), "rect_min_size", Vector2(_max_turn_size, _max_turn_size), Vector2(_min_turn_size, _min_turn_size), 0.1,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	queue_tween.start()
 	yield(queue_tween, "tween_all_completed")
-	
+
 	_tween_values.invert()
 
 func _update_character_abilites_panel(abilities_data : Array) -> void:
 	var difference : int =  abilities_data.size() - (abilities_grid.get_child_count() - 2)
-	
+
 	if difference > 0:
 # warning-ignore:unused_variable
 		for i in range(abs(difference)):
@@ -109,7 +109,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			var node_to_delete = abilities_grid.get_child(0)
 			abilities_grid.remove_child(node_to_delete)
 			node_to_delete.queue_free()
-	
+
 	for i in range(abilities_data.size()):
 		var ability_node : Character_Ability = abilities_grid.get_child(i) as Character_Ability
 		ability_node.initialize(abilities_data[i])
@@ -118,7 +118,7 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 func _on_tween_completed(object : Object, key : NodePath):
 	queue_tween.interpolate_property(queue_container.get_child(_cur_fighter), "modulate", _tween_values[0], _tween_values[1], 1.5,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	queue_tween.start()
-	
+
 	_tween_values.invert()
 
 func update_status() -> void:
@@ -133,7 +133,7 @@ func update_status() -> void:
 			allies[i].data.cur_calc_stats.strain, \
 			allies[i] \
 		)
-	
+
 	for i in range (0, enemies.size()):
 		(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
 			enemies[i].data.name, \
@@ -171,17 +171,13 @@ func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void
 
 func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> void:
 	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.cur_calc_stats
-	
+
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
 	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
-	
+
 	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
-	match (data.hits as int):
-		-1:
-			damage += "until miss "
-		_:
-			damage += "x " + String(data.hits)
+
 	if data.delay > 0:
 		var turns := " turn"
 		if data.delay != 1:
@@ -190,7 +186,7 @@ func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> voi
 	if data.damage == 0:
 		damage = " Damage: none"
 	($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = damage
-	
+
 	var effect : String = "Effect: " + data.effect.type + "\n    "
 	match (data.effect.receiver as String):
 		"same":
@@ -219,17 +215,17 @@ func _on_ability_released() -> void:
 	else:
 		var pressed_ability : Character_Ability = ability_button_group.get_pressed_button() as Character_Ability
 		_set_ability_view(pressed_ability.data, pressed_ability.ability_icon.texture)
-	
+
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
 	enemies_status[0].deactivate_selection()
 	enemies_status[1].deactivate_selection()
 	enemies_status[2].deactivate_selection()
-	
+
 	allies_status[0].deactivate_selection()
 	allies_status[1].deactivate_selection()
 	allies_status[2].deactivate_selection()
-	
+
 	print("hola")
 	if data.side == "enemies":
 		enemies_status[0].activate_selection()
