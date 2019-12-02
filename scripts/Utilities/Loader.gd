@@ -447,24 +447,9 @@ class Campaign_Loader:
 		ability_data.min_level = ability_dict.min_level as int
 		ability_data.side = ability_dict.side
 		ability_data.cost = ability_dict.cost as int
-		ability_data.delay = ability_dict.delay as int
-		ability_data.damage = ability_dict.damage
+		ability_data.type = ability_dict.type
+		ability_data.amount = ability_dict.amount
 		ability_data.description = ability_dict.description
-		if ability_dict.scale < 1:
-			load_correct = false
-			print("Ability has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
-			ability_data.scale = 1
-		else:
-			ability_data.scale = ability_dict.scale
-
-		# Ability Effect
-		var effect_data := Model.Ability_Data.Ability_Effect_Data.new()
-		effect_data.type = ability_dict.effect.type
-		effect_data.receiver = ability_dict.effect.receiver
-		effect_data.amount = ability_dict.effect.amount as int
-		effect_data.duration = ability_dict.effect.duration as int
-
-		ability_data.effect = effect_data
 
 		#Textures
 		ability_data.icon_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/abilities/" + ability_name + "/icon.png")

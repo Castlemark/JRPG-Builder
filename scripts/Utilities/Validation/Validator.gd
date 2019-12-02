@@ -52,11 +52,7 @@ static func ability_is_valid(ability_data, ability : String) -> bool:
 		return false
 	if not Generic_Validators.minimal_info_fields_exist(ability_data, Data.Validation.ability_fields, "ability has missing or incorrect required fields", "", ability):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(ability_data.effect, Data.Validation.ability_effect_fields, "ability has missing or incorrect required fields in \"effect\" field", "", ability):
-		return false
-	if not Generic_Validators.type_is_valid(ability_data.effect.type, Data.Validation.effect_types, {}):
-		return false
-	if not Generic_Validators.type_is_valid(ability_data.effect.receiver, Data.Validation.receiver_types, {}):
+	if not Generic_Validators.type_is_valid(ability_data.type, Data.Validation.effect_types, {}):
 		return false
 	return true
 

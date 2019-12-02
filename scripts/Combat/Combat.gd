@@ -164,11 +164,9 @@ func _play_ability(battler_status) -> void:
 	emiter.play_animation("attack")
 	_recevier_battler.play_animation("hit")
 	
-	# We apply the damage
-	_recevier_battler.data.calc_stats.hp -= (round(_cur_ability.damage * emiter.data.calc_stats.damage) as int)
+	# We apply the effect
+	_apply_ability_effect(_recevier_battler, emiter)
 	battler_status.update_stats()
-	
-	# TODO We apply the effect
 	
 	# We check if receiver has died
 	if _recevier_battler.data.calc_stats.hp <= 0:
@@ -199,6 +197,8 @@ func _play_ability(battler_status) -> void:
 	
 	emit_signal("turn_finished")
 
+func _apply_ability_effect(receiver, emiter) -> void:
+	_recevier_battler.data.calc_stats.hp -= (round(_cur_ability.amount * emiter.data.calc_stats.damage) as int)
 # This function is connected to players, when two animations are played (emiter and receiver) it notifies the interested parties
 func _update_yield_counter() -> void:
 	_yield_battler_counter += 1

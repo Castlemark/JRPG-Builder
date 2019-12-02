@@ -115,19 +115,10 @@ class Ability_Data:
 	var min_level : int
 	var side : String
 	var cost : int
-	var delay : int
-	var damage : float
-	var effect : Ability_Effect_Data
-	var hits : int
+	var amount : float
+	var type : String
 	var description : String
-	var scale : float
 	var icon_texture : Texture
-
-	class Ability_Effect_Data:
-		var type : String
-		var receiver : String
-		var amount : int
-		var duration : int
 
 class Stats_Data:
 	var strength : int

@@ -217,6 +217,7 @@ Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
 [debug]
 
 gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/shadowed_variable=false
 gdscript/warnings/unused_class_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/narrowing_conversion=false

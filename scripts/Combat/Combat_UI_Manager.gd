@@ -176,34 +176,11 @@ func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> voi
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
 	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
 
-	var damage : String = "Damage: " + String(data.damage * calc_stats.damage) + " HP "
+	var damage : String = "Effect: " + String(data.amount * calc_stats.damage) + " " + data.type
 
-	if data.delay > 0:
-		var turns := " turn"
-		if data.delay != 1:
-			turns += "s"
-		damage += "in " + String(data.delay) + turns
-	if data.damage == 0:
-		damage = " Damage: none"
+	if data.amount == 0:
+		damage = " Effect: none"
 	($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = damage
-
-	var effect : String = "Effect: " + data.effect.type + "\n    "
-	match (data.effect.receiver as String):
-		"same":
-			effect += "Targets same character"
-		"complementary":
-			effect += "Complementary"
-		"opposite":
-			effect += "Opposite"
-	effect += "\n    Applies " + String(data.effect.amount * calc_stats.damage) + " "
-	if (data.effect.duration as int) > 0:
-		var turns := " turn"
-		if data.effect.duration != 1:
-			turns += "s"
-		effect += "for " + String(data.effect.duration) + turns
-	if data.effect.type == "none":
-		effect = ""
-	($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = effect
 
 func _on_ability_released() -> void:
 	if ability_button_group.get_pressed_button() == null:
