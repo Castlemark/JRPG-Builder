@@ -7,8 +7,6 @@ signal special_animation_finished()
 onready var GM := $"/root/Game_Manager"
 
 var data := Model.Enemy_Data.new()
-var stats : Model.Stats_Data
-var calc_stats : Model.Calc_Stats_Data
 
 var idle_sprite : Texture
 var attack_sprite : Texture
@@ -52,7 +50,6 @@ func _process(delta: float) -> void:
 
 func prepare_for_combat(enemy_data : Model.Enemy_Data) -> void:
 	data = enemy_data
-	duplicate_data(data)
 	
 	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/idle.png")
 	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/attack.png")
@@ -63,11 +60,11 @@ func prepare_for_combat(enemy_data : Model.Enemy_Data) -> void:
 	if data.animation_data != null:
 		_configure_animation(data.animation_data)
 	
-# warning-ignore:integer_division
-# warning-ignore:integer_division
-	self.offset = Vector2(-idle_sprite.get_width() / hframes, -idle_sprite.get_height() / vframes)
 	self.texture = idle_sprite
 	self.scale *= data.scale
+	# warning-ignore:integer_division
+	# warning-ignore:integer_division
+	self.offset = Vector2(-idle_sprite.get_width() / hframes, -idle_sprite.get_height() / vframes)
 
 func _configure_animation(animation_info) -> void:
 	self.vframes = animation_info.vframes
@@ -100,10 +97,3 @@ func play_animation(animation : String) -> void:
 			self.offset = Vector2(-miss_sprite.get_width() / hframes, -miss_sprite.get_height() / vframes)
 		_:
 			print("Animation " + animation + " is not valid")
-
-func duplicate_data(data) -> void:
-	stats = Model.Stats_Data.new()
-	stats.duplicate(data.stats)
-	
-	calc_stats = Model.Calc_Stats_Data.new()
-	calc_stats.duplicate(data.calc_stats)

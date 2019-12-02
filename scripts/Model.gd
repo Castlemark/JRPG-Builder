@@ -149,15 +149,21 @@ class Stats_Data:
 
 class Calc_Stats_Data:
 	var hp : int
+	var max_hp : int
 	var shield : int
+	var max_shield : int
 	var strain : int
+	var max_strain : int
 	var evasion : int
 	var damage : int
 
 	func duplicate(data):
 		self.hp = data.hp
+		self.max_hp = data.max_hp
 		self.shield = data.shield
+		self.max_shield = data.max_shield
 		self.strain = data.strain
+		self.max_strain = data.max_strain
 		self.evasion = data.evasion
 		self.damage = data.damage
 

@@ -317,10 +317,13 @@ class Campaign_Loader:
 
 		calc_cur_stats.hp = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+		calc_cur_stats.max_hp = calc_cur_stats.hp
 		calc_cur_stats.shield = (1/4.0 * min_stats.constitution + float(min_stats.alt_defence) + 1/3.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
+		calc_cur_stats.max_shield = calc_cur_stats.shield
 		calc_cur_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.alt_defence \
 			+ (character_data.cur_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL)) * 10
+		calc_cur_stats.max_strain = calc_cur_stats.strain
 		calc_cur_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL))
 		calc_cur_stats.damage = (1/4.0 * min_stats.strength + 1/4.0 * min_stats.dexterity + 1/8.0 * min_stats.speed \
@@ -631,8 +634,11 @@ class Campaign_Loader:
 
 		var calc_stats := Model.Calc_Stats_Data.new()
 		calc_stats.hp = (stats.constitution + 1/4.0 * float(stats.strength) + 1/3.0 * stats.defence) * 4
+		calc_stats.max_hp = calc_stats.hp
 		calc_stats.shield = (1/4.0 * stats.constitution + float(stats.alt_defence) + 1/3.0 * stats.defence) * 4
+		calc_stats.max_shield = calc_stats.shield
 		calc_stats.strain = (1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.alt_defence) * 4
+		calc_stats.max_strain = calc_stats.strain
 		calc_stats.evasion = (float(stats.speed) + 1/2.0 * stats.critic * 100 + 1/4.0 * stats.defence) * 0.4
 		calc_stats.damage = (1/4.0 * stats.strength + 1/4.0 * stats.dexterity + 1/8.0 * stats.speed) * 4
 

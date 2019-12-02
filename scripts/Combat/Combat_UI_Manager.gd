@@ -125,24 +125,24 @@ func update_status() -> void:
 	for i in range(0, allies.size()):
 		(allies_status[i] as Battler_UI_Controller).set_all_stats(\
 			allies[i].data.name, \
-			allies[i].calc_stats.hp, \
 			allies[i].data.cur_calc_stats.hp, \
-			allies[i].calc_stats.shield, \
+			allies[i].data.cur_calc_stats.max_hp, \
 			allies[i].data.cur_calc_stats.shield, \
-			allies[i].calc_stats.strain, \
+			allies[i].data.cur_calc_stats.max_shield, \
 			allies[i].data.cur_calc_stats.strain, \
+			allies[i].data.cur_calc_stats.max_strain, \
 			allies[i] \
 		)
 
 	for i in range (0, enemies.size()):
 		(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
 			enemies[i].data.name, \
-			enemies[i].calc_stats.hp, \
 			enemies[i].data.calc_stats.hp, \
-			enemies[i].calc_stats.shield, \
+			enemies[i].data.calc_stats.max_hp, \
 			enemies[i].data.calc_stats.shield, \
-			enemies[i].calc_stats.strain, \
+			enemies[i].data.calc_stats.max_shield, \
 			enemies[i].data.calc_stats.strain, \
+			enemies[i].data.calc_stats.max_strain, \
 			enemies[i] \
 		)
 	pass
