@@ -19,38 +19,37 @@ Below you'll find some deadlines for the various modules, when a module is marke
   - [x] Map module V-2
     - [x] Individual art
   - [x] Character and Enemy module **(final)**
-    - [x] Characters
-    - [x] Enemy
-    - [x] Equipment
-    - [x] Abilities
-    - [x] Items
+  - [x] Characters
+  - [x] Enemy
+  - [x] Equipment
+  - [x] Abilities
+  - [x] Items
 - [ ] <u>Structure Sprint - 23/08/19</u>
   - [ ] Story module V-1
-    - [ ] NPC
-    - [ ] Conversation
+  - [ ] NPC
+  - [ ] Conversation
   - [ ] Combat module V-1
-    - [ ] Combat logic
-    - [ ] Placeholder enemy AI
+  - [ ] Combat logic
+  - [ ] Placeholder enemy AI
   - [ ] Map module V-3
-    - [x] Combat trigger
-    - [ ] Treasure
-    - [ ] Shop, NPC
+  - [x] Combat trigger
+  - [ ] Treasure
+  - [ ] Shop, NPC
 - [ ] <u>Story Sprint - 04/10/19</u>
   - [ ] Story module V-2 **(final)**
-    - [ ] Cut-scene
-    - [ ] Campaign structure file
-    - [ ] Mission
+  - [ ] Cut-scene
+  - [ ] Campaign structure file
+  - [ ] Mission
   - [ ] Map module V-4 **(final)**
-    - [ ] Inventory
-    - [ ] Character management
-    - [x] Bestiary
-    - [ ] Journal
+  - [ ] Inventory
+  - [ ] Character management
+  - [x] Bestiary
+  - [ ] Journal
 - [ ] <u>Combat Sprint - 08/11/19</u>
   - [ ] Combat module V-2 **(final)**
-    - [ ] Final AI
+  - [ ] Final AI
 - [ ] <u>Content creation Sprint - 24/12/19</u>
   - [ ] Save states
   - [ ] Create Campaign **(final)**
   - [ ] Documentation **(final)**
   - [ ] Memoria
-- [ ] 
