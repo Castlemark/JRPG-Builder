@@ -87,8 +87,8 @@ class Character_Data:
 	var cur_level : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
-	var cur_stats : Stats_Data
-	var cur_calc_stats : Calc_Stats_Data
+	var stats : Stats_Data
+	var calc_stats : Calc_Stats_Data
 	var abilities : Dictionary
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data

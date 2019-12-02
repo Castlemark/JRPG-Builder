@@ -32,7 +32,7 @@ func initialize_party() -> void:
 	pass
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var calc_stats : Model.Calc_Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.cur_calc_stats
+	var calc_stats : Model.Calc_Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.calc_stats
 
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
@@ -78,19 +78,19 @@ func _reset_ability_preview():
 
 func _on_player_select(data : Model.Character_Data) -> void:
 
-	($Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.cur_stats.strength))
-	($Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.cur_stats.dexterity))
-	($Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.cur_stats.constitution))
-	($Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.cur_stats.critic * 100)) + "%"
-	($Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.cur_stats.defence))
-	($"Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(round(data.cur_stats.alt_defence))
-	($Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.cur_stats.speed))
+	($Data/Stats/HBoxContainer/Hard/Strength as Label).text = "Strength: " + String(round(data.stats.strength))
+	($Data/Stats/HBoxContainer/Hard/Dexterity as Label).text = "Dexterity: " + String(round(data.stats.dexterity))
+	($Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.stats.constitution))
+	($Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.stats.critic * 100)) + "%"
+	($Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.stats.defence))
+	($"Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(round(data.stats.alt_defence))
+	($Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.stats.speed))
 
-	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.cur_calc_stats.hp))
-	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.cur_calc_stats.shield))
-	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.cur_calc_stats.strain))
-	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.cur_calc_stats.evasion)) + "%"
-	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.cur_calc_stats.damage))
+	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.calc_stats.hp))
+	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.calc_stats.shield))
+	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.calc_stats.strain))
+	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.calc_stats.evasion)) + "%"
+	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.calc_stats.damage))
 
 	_update_character_abilites_panel(data.abilities.values())
 	_reset_ability_preview()

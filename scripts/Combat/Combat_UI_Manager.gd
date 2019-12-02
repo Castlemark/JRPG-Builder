@@ -125,12 +125,12 @@ func update_status() -> void:
 	for i in range(0, allies.size()):
 		(allies_status[i] as Battler_UI_Controller).set_all_stats(\
 			allies[i].data.name, \
-			allies[i].data.cur_calc_stats.hp, \
-			allies[i].data.cur_calc_stats.max_hp, \
-			allies[i].data.cur_calc_stats.shield, \
-			allies[i].data.cur_calc_stats.max_shield, \
-			allies[i].data.cur_calc_stats.strain, \
-			allies[i].data.cur_calc_stats.max_strain, \
+			allies[i].data.calc_stats.hp, \
+			allies[i].data.calc_stats.max_hp, \
+			allies[i].data.calc_stats.shield, \
+			allies[i].data.calc_stats.max_shield, \
+			allies[i].data.calc_stats.strain, \
+			allies[i].data.calc_stats.max_strain, \
 			allies[i] \
 		)
 
@@ -170,7 +170,7 @@ func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void
 	_set_ability_view(data, preview_icon)
 
 func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.cur_calc_stats
+	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.calc_stats
 
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)

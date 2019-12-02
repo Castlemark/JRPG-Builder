@@ -48,6 +48,7 @@ corner_radius_bottom_left = 4
 margin_right = 547.0
 margin_bottom = 69.0
 rect_min_size = Vector2( 547, 69 )
+focus_mode = 0
 button_mask = 0
 enabled_focus_mode = 0
 script = ExtResource( 1 )
@@ -127,4 +128,6 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "12/345"
 align = 1
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="." to="." method="_on_Status_pressed"]

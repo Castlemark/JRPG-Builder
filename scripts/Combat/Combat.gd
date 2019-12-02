@@ -109,13 +109,13 @@ func _priority_sort(a, b):
 	
 	var priority_a
 	if a is Character_Combat:
-		priority_a = 2 * a.data.cur_stats.speed + a.data.cur_stats.dexterity
+		priority_a = 2 * a.data.stats.speed + a.data.stats.dexterity
 	else:
 		priority_a = 2 * a.data.stats.speed + a.data.stats.dexterity
 	
 	var priority_b
 	if b is Character_Combat:
-		priority_b = 2 * b.data.cur_stats.speed + b.data.cur_stats.dexterity
+		priority_b = 2 * b.data.stats.speed + b.data.stats.dexterity
 	else:
 		priority_b = 2 * b.data.stats.speed + b.data.stats.dexterity
 	
@@ -149,8 +149,8 @@ func _set_cur_ability(data) -> void:
 		_cur_ability = data
 
 #function called when a target for the ability is chosen
-func _play_ability(battler_data) -> void:
-	_recevier_battler = battler_data
+func _play_ability(battler_status) -> void:
+	_recevier_battler = battler_status.data
 	
 	var emiter : Character_Combat = _turn_order[_cur_fighter]
 	
@@ -163,6 +163,9 @@ func _play_ability(battler_data) -> void:
 	
 	emiter.play_animation("attack")
 	_recevier_battler.play_animation("hit")
+	
+	_recevier_battler.data.calc_stats.hp -= (round(_cur_ability.damage * emiter.data.calc_stats.damage) as int)
+	battler_status.update_stats()
 	
 	yield(self, "battler_animations_completed")
 	

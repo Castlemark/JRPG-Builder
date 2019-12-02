@@ -304,33 +304,33 @@ class Campaign_Loader:
 		character_data.max_stats = max_stats
 
 		# Cur Stats
-		var cur_stats := Model.Stats_Data.new()
-		var calc_cur_stats := Model.Calc_Stats_Data.new()
+		var stats := Model.Stats_Data.new()
+		var calc_stats := Model.Calc_Stats_Data.new()
 
-		cur_stats.strength = min_stats.strength + ((character_data.cur_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
-		cur_stats.dexterity = min_stats.dexterity + (character_data.cur_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
-		cur_stats.constitution = min_stats.constitution + (character_data.cur_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
-		cur_stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
-		cur_stats.defence = min_stats.defence + (character_data.cur_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
-		cur_stats.alt_defence = min_stats.alt_defence + (character_data.cur_level - 1) * float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL
-		cur_stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
+		stats.strength = min_stats.strength + ((character_data.cur_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
+		stats.dexterity = min_stats.dexterity + (character_data.cur_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
+		stats.constitution = min_stats.constitution + (character_data.cur_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
+		stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
+		stats.defence = min_stats.defence + (character_data.cur_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
+		stats.alt_defence = min_stats.alt_defence + (character_data.cur_level - 1) * float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL
+		stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
 
-		calc_cur_stats.hp = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
+		calc_stats.hp = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-		calc_cur_stats.max_hp = calc_cur_stats.hp
-		calc_cur_stats.shield = (1/4.0 * min_stats.constitution + float(min_stats.alt_defence) + 1/3.0 * min_stats.defence \
+		calc_stats.max_hp = calc_stats.hp
+		calc_stats.shield = (1/4.0 * min_stats.constitution + float(min_stats.alt_defence) + 1/3.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-		calc_cur_stats.max_shield = calc_cur_stats.shield
-		calc_cur_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.alt_defence \
+		calc_stats.max_shield = calc_stats.shield
+		calc_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.alt_defence \
 			+ (character_data.cur_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL)) * 10
-		calc_cur_stats.max_strain = calc_cur_stats.strain
-		calc_cur_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
+		calc_stats.max_strain = calc_stats.strain
+		calc_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL))
-		calc_cur_stats.damage = (1/4.0 * min_stats.strength + 1/4.0 * min_stats.dexterity + 1/8.0 * min_stats.speed \
+		calc_stats.damage = (1/4.0 * min_stats.strength + 1/4.0 * min_stats.dexterity + 1/8.0 * min_stats.speed \
 			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL + 1/4.0 * (max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL  + 1/8.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL)) * 10
 
-		character_data.cur_stats = cur_stats
-		character_data.cur_calc_stats = calc_cur_stats
+		character_data.stats = stats
+		character_data.calc_stats = calc_stats
 
 		# Equipment
 		var equipment := Model.Character_Data.Equipment_Data.new()
