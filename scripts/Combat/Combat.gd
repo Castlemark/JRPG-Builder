@@ -164,8 +164,20 @@ func _play_ability(battler_status) -> void:
 	emiter.play_animation("attack")
 	_recevier_battler.play_animation("hit")
 	
+	# We apply the damage
 	_recevier_battler.data.calc_stats.hp -= (round(_cur_ability.damage * emiter.data.calc_stats.damage) as int)
 	battler_status.update_stats()
+	
+	# TODO We apply the effect
+	
+	# We check if receiver has died
+	if _recevier_battler.data.calc_stats.hp <= 0:
+		_recevier_battler.visible = false
+		battler_status.visible = false
+		_turn_order.erase(_recevier_battler)
+		UI.update_queue(_turn_order)
+	
+	# We check if the combat is over
 	
 	yield(self, "battler_animations_completed")
 	
