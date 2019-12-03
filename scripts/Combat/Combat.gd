@@ -172,14 +172,9 @@ func _play_ability(battler_status) -> void:
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
 	
-	emiter.play_animation("attack")
-	recevier_battler.play_animation("hit")
-	
 	# We apply the effect
 	_apply_ability_effect(recevier_battler, emiter)
 	UI.update_status_graphics()
-	
-	yield(self, "battler_animations_completed")
 	
 	# We check if receiver has died
 	if recevier_battler.data.calc_stats.hp <= 0:
@@ -209,6 +204,15 @@ func _play_ability(battler_status) -> void:
 func _apply_ability_effect(receiver, emiter) -> void:
 	var amount : int = (round(_cur_ability.amount * emiter.data.calc_stats.damage) as int)
 	emiter.data.calc_stats.strain -= _cur_ability.cost
+	
+	if amount > 0:
+		emiter.play_animation("attack")
+		receiver.play_animation("hit")
+	else:
+		emiter.play_animation("miss")
+		receiver.play_animation("miss")
+	
+	yield(self, "battler_animations_completed")
 	
 	match _cur_ability.type:
 		"health":
