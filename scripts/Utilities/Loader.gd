@@ -326,8 +326,10 @@ class Campaign_Loader:
 		calc_stats.max_strain = calc_stats.strain
 		calc_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL))
+		calc_stats.max_evasion = calc_stats.evasion
 		calc_stats.damage = (1/4.0 * min_stats.strength + 1/4.0 * min_stats.dexterity + 1/8.0 * min_stats.speed \
 			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL + 1/4.0 * (max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL  + 1/8.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL)) * 10
+		calc_stats.max_damage = calc_stats.damage
 
 		character_data.stats = stats
 		character_data.calc_stats = calc_stats

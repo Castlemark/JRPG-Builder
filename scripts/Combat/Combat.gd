@@ -31,8 +31,6 @@ var _cur_ability : Model.Ability_Data
 
 var _yield_battler_counter := 0
 
-var _recevier_battler
-
 func _ready() -> void:
 	background.visible = false
 	UI.visible = false
@@ -75,7 +73,7 @@ func start_combat(combat_data : Dictionary) -> void:
 	_turn_order = [ally_first, ally_second, ally_third, enemy_first, enemy_second, enemy_third]
 	_update_turn_order()
 	UI.indicate_cur_fighter(_cur_fighter, _turn_order)
-	UI.update_status()
+	UI.set_status()
 	
 	_combat_started = true
 	_execute_combat_loop()
@@ -136,10 +134,23 @@ func _execute_combat_loop() -> void:
 	_display_combat_end()
 
 func _combat_is_in_progress() -> bool:
-	return true
+	var allies_dead := true
+	var enemies_dead := true
+	
+	for battler in _turn_order:
+		if battler is Character_Combat:
+			if battler.data.calc_stats.hp > 0:
+				allies_dead = false
+			print("Char combat")
+		else:
+			if battler.data.calc_stats.hp > 0:
+				enemies_dead = false
+			print("Enem Combat")
+	
+	return not (allies_dead or enemies_dead)
 
 func _display_combat_end() -> void:
-	pass
+	_end_combat()
 
 func _set_cur_ability(data) -> void:
 	if data is bool:
@@ -150,41 +161,39 @@ func _set_cur_ability(data) -> void:
 
 #function called when a target for the ability is chosen
 func _play_ability(battler_status) -> void:
-	_recevier_battler = battler_status.data
+	var recevier_battler = battler_status.data
 	
 	var emiter : Character_Combat = _turn_order[_cur_fighter]
 	
 	emiter.z_index = 1
-	_recevier_battler.z_index = 1
+	recevier_battler.z_index = 1
 	
 	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.85), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
 	
 	emiter.play_animation("attack")
-	_recevier_battler.play_animation("hit")
+	recevier_battler.play_animation("hit")
 	
 	# We apply the effect
-	_apply_ability_effect(_recevier_battler, emiter)
-	battler_status.update_stats()
-	
-	# We check if receiver has died
-	if _recevier_battler.data.calc_stats.hp <= 0:
-		_recevier_battler.visible = false
-		battler_status.visible = false
-		_turn_order.erase(_recevier_battler)
-		UI.update_queue(_turn_order)
-	
-	# We check if the combat is over
+	_apply_ability_effect(recevier_battler, emiter)
+	UI.update_status_graphics()
 	
 	yield(self, "battler_animations_completed")
+	
+	# We check if receiver has died
+	if recevier_battler.data.calc_stats.hp <= 0:
+		recevier_battler.visible = false
+		battler_status.visible = false
+		_turn_order.erase(recevier_battler)
+		UI.update_queue(_turn_order)
 	
 	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
 	
 	emiter.z_index = 0
-	_recevier_battler.z_index = 0
+	recevier_battler.z_index = 0
 	
 	if _cur_ability.side == "enemies":
 		UI.enemies_status[0].deactivate_selection()
@@ -198,7 +207,23 @@ func _play_ability(battler_status) -> void:
 	emit_signal("turn_finished")
 
 func _apply_ability_effect(receiver, emiter) -> void:
-	_recevier_battler.data.calc_stats.hp -= (round(_cur_ability.amount * emiter.data.calc_stats.damage) as int)
+	var amount : int = (round(_cur_ability.amount * emiter.data.calc_stats.damage) as int)
+	emiter.data.calc_stats.strain -= _cur_ability.cost
+	
+	match _cur_ability.type:
+		"health":
+			receiver.data.calc_stats.hp -= amount
+		"evasion":
+			receiver.data.calc_stats.evasion -= amount
+		"shield":
+			receiver.data.calc_stats.shield -= amount
+		"strain":
+			receiver.data.calc_stats.strain -= amount
+		"damage":
+			receiver.data.calc_stats.damage -= amount
+
+
+
 # This function is connected to players, when two animations are played (emiter and receiver) it notifies the interested parties
 func _update_yield_counter() -> void:
 	_yield_battler_counter += 1

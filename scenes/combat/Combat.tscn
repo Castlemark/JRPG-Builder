@@ -355,17 +355,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Status" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
-focus_mode = 0
 
 [node name="Status2" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 73.0
 margin_bottom = 142.0
-focus_mode = 0
 
 [node name="Status3" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 146.0
 margin_bottom = 215.0
-focus_mode = 0
 
 [node name="Enemies_Status" type="Control" parent="UILayer/UI"]
 anchor_top = 1.0
@@ -380,17 +377,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Status" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
-focus_mode = 0
 
 [node name="Status2" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 73.0
 margin_bottom = 142.0
-focus_mode = 0
 
 [node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 146.0
 margin_bottom = 215.0
-focus_mode = 0
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Second" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Third" to="." method="_update_yield_counter"]

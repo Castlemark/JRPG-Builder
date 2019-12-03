@@ -49,7 +49,6 @@ margin_right = 547.0
 margin_bottom = 69.0
 rect_min_size = Vector2( 547, 69 )
 focus_mode = 0
-button_mask = 0
 enabled_focus_mode = 0
 script = ExtResource( 1 )
 

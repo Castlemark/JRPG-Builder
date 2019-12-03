@@ -37,24 +37,27 @@ func set_all_stats(name : String, cur_hp : int, total_hp : int, cur_shield : int
 	data = battler_data
 
 func update_stats():
-	tween.interpolate_property(lifebar, "value", null, data.data.calc_stats.hp, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	life_label.text = String(data.data.calc_stats.hp) + "/" + String(lifebar.max_value)
+	if data.data.calc_stats.hp != lifebar.value:
+		tween.interpolate_property(lifebar, "value", null, data.data.calc_stats.hp, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		life_label.text = String(data.data.calc_stats.hp) + "/" + String(lifebar.max_value)
 	
-	tween.interpolate_property(shieldbar, "value", null, data.data.calc_stats.shield, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	shield_label.text = String(data.data.calc_stats.shield) + "/" + String(shieldbar.max_value)
+	if data.data.calc_stats.shield != shieldbar.value:
+		tween.interpolate_property(shieldbar, "value", null, data.data.calc_stats.shield, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		shield_label.text = String(data.data.calc_stats.shield) + "/" + String(shieldbar.max_value)
 	
-	tween.interpolate_property(shieldbar, "value", null, data.data.calc_stats.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	energy_label.text = String(data.data.calc_stats.strain) + "/" + String(energybar.max_value)
+	if data.data.calc_stats.strain != energybar.value:
+		tween.interpolate_property(energybar, "value", null, data.data.calc_stats.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		energy_label.text = String(data.data.calc_stats.strain) + "/" + String(energybar.max_value)
 	
 	tween.start()
 
 func activate_selection() -> void:
-	self.button_mask = BUTTON_MASK_LEFT
-	self.enabled_focus_mode = Control.FOCUS_ALL
+	self.disabled = false
+	self.focus_mode = FOCUS_ALL
 
 func deactivate_selection() -> void:
-	self.button_mask = 0
-	self.enabled_focus_mode = Control.FOCUS_NONE
+	self.disabled = true
+	self.focus_mode = FOCUS_NONE
 
 func _on_Status_pressed() -> void:
 	emit_signal("battler_selected", self)

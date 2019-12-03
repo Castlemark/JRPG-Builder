@@ -28,12 +28,10 @@ class Validation:
 	}
 
 	const effect_types := {
-		"strength": [], "dexterity": [], "constitution": [], "critic": [], "defence": [], "alt_defence": [], "speed": [],
 		"health": [],
 		"evasion": [],
 		"shield": [],
-		"strain": [],
-		"none": []
+		"strain": []
 	}
 
 	const receiver_types := {

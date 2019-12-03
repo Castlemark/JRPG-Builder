@@ -61,7 +61,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		menu.visible = true
 		submenu.visible = true
 
-		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values())
+		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.calc_stats.strain)
 		abilities_grid.get_child(0).grab_focus()
 		_on_ability_released()
 		_on_ability_grab(abilities_grid.get_child(0).data, abilities_grid.get_child(0).ability_icon.texture)
@@ -88,7 +88,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 
 	_tween_values.invert()
 
-func _update_character_abilites_panel(abilities_data : Array) -> void:
+func _update_character_abilites_panel(abilities_data : Array, stamina_left : int) -> void:
 	var difference : int =  abilities_data.size() - (abilities_grid.get_child_count() - 2)
 
 	if difference > 0:
@@ -114,6 +114,12 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 		var ability_node : Character_Ability = abilities_grid.get_child(i) as Character_Ability
 		ability_node.initialize(abilities_data[i])
 		ability_node.pressed = false
+		if abilities_data[i].cost > stamina_left:
+			ability_node.disabled = true
+			ability_node.focus_mode = FOCUS_NONE
+		else:
+			ability_node.disabled = false
+			ability_node.focus_mode = FOCUS_ALL
 
 func _on_tween_completed(object : Object, key : NodePath):
 	queue_tween.interpolate_property(queue_container.get_child(_cur_fighter), "modulate", _tween_values[0], _tween_values[1], 1.5,Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -121,7 +127,7 @@ func _on_tween_completed(object : Object, key : NodePath):
 
 	_tween_values.invert()
 
-func update_status() -> void:
+func set_status() -> void:
 	for i in range(0, allies.size()):
 		(allies_status[i] as Battler_UI_Controller).set_all_stats(\
 			allies[i].data.name, \
@@ -145,7 +151,13 @@ func update_status() -> void:
 			enemies[i].data.calc_stats.max_strain, \
 			enemies[i] \
 		)
-	pass
+
+func update_status_graphics() -> void:
+	for i in range (0, allies.size()):
+		(allies_status[i] as Battler_UI_Controller).update_stats()
+	
+	for i in range (0, enemies.size()):
+		(enemies_status[i] as Battler_UI_Controller).update_stats()
 
 func update_queue(turn_order : Array) -> void:
 	for i in range(0, 6):
@@ -203,7 +215,6 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	allies_status[1].deactivate_selection()
 	allies_status[2].deactivate_selection()
 
-	print("hola")
 	if data.side == "enemies":
 		enemies_status[0].activate_selection()
 		enemies_status[1].activate_selection()
