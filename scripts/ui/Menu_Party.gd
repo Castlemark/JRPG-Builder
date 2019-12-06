@@ -38,6 +38,7 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = data.description
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
+	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Cost as Label).text = "Costs " + String(data.cost) + " stamina points"
 
 	var damage : String = "Effect: " + String(data.amount * calc_stats.damage) + " " + data.type
 
@@ -51,7 +52,7 @@ func _reset_ability_preview():
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = ""
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = ""
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Effect as Label).text = ""
+	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Cost as Label).text = ""
 
 func _on_player_select(data : Model.Character_Data) -> void:
 

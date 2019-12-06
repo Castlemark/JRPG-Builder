@@ -314,7 +314,7 @@ margin_top = 122.0
 margin_right = 534.0
 margin_bottom = 144.0
 
-[node name="Effect" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
+[node name="Cost" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
 margin_top = 148.0
 margin_right = 534.0
 margin_bottom = 170.0

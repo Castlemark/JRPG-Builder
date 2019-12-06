@@ -187,6 +187,7 @@ func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> voi
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
 	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
+	($Submenu/Description/Scroll/VBoxContainer/Cost as Label).text = "Costs " + String(data.cost) + " stamina points"
 
 	var damage : String = "Effect: " + String(data.amount * calc_stats.damage) + " " + data.type
 
@@ -200,7 +201,7 @@ func _on_ability_released() -> void:
 		($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = ""
 		($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = ""
 		($Submenu/Description/Scroll/VBoxContainer/Damage as Label).text = ""
-		($Submenu/Description/Scroll/VBoxContainer/Effect as Label).text = ""
+		($Submenu/Description/Scroll/VBoxContainer/Cost as Label).text = ""
 	else:
 		var pressed_ability : Character_Ability = ability_button_group.get_pressed_button() as Character_Ability
 		_set_ability_view(pressed_ability.data, pressed_ability.ability_icon.texture)

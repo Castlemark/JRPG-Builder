@@ -262,7 +262,7 @@ margin_top = 111.0
 margin_right = 338.0
 margin_bottom = 133.0
 
-[node name="Effect" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
+[node name="Cost" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
 margin_top = 137.0
 margin_right = 338.0
 margin_bottom = 159.0
