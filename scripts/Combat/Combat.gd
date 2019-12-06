@@ -43,6 +43,7 @@ func _input(event: InputEvent) -> void:
 
 func start_combat(combat_data : Dictionary) -> void:
 	# TODO Disable all Menu and bind inventory
+	background.texture = GM.campaign_data.maps[GM.campaign_data.cur_map].combat_background
 	background.visible = true
 	UI.visible = true
 	
@@ -176,6 +177,8 @@ func _play_ability(battler_status) -> void:
 	_apply_ability_effect(recevier_battler, emiter)
 	UI.update_status_graphics()
 	
+	yield(self, "battler_animations_completed")
+	
 	# We check if receiver has died
 	if recevier_battler.data.calc_stats.hp <= 0:
 		recevier_battler.visible = false
@@ -211,8 +214,6 @@ func _apply_ability_effect(receiver, emiter) -> void:
 	else:
 		emiter.play_animation("miss")
 		receiver.play_animation("miss")
-	
-	yield(self, "battler_animations_completed")
 	
 	match _cur_ability.type:
 		"health":

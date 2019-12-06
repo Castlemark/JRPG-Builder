@@ -217,6 +217,13 @@ class Campaign_Loader:
 			background_data.scale = map_dict.background_info.scale
 
 		map_data.background_info = background_data
+		
+		#Textures
+		map_data.combat_background = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/maps/" + map_name +  "/combat_background.png")
+
+		if map_data.combat_background == null:
+			print("	combat background could not be Loaded, please make sure the image exists and has the correct name")
+			load_correct = false
 
 		if not load_correct:
 			return null

@@ -30,6 +30,7 @@ class Map_Data:
 	var detail_art : Array
 	var background_info : BG_Data
 	var access_point : int
+	var combat_background : Texture
 
 	class BG_Data:
 		var x_offset : float
