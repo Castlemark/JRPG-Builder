@@ -183,6 +183,9 @@ func _play_ability(battler_status) -> void:
 	if recevier_battler.data.calc_stats.hp <= 0:
 		recevier_battler.visible = false
 		battler_status.visible = false
+		var dead_index = _turn_order.find(recevier_battler)
+		if dead_index <= _cur_fighter and dead_index >= 0:
+			_cur_fighter -= 1
 		_turn_order.erase(recevier_battler)
 		UI.update_queue(_turn_order)
 	
