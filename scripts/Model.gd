@@ -127,14 +127,11 @@ class Stats_Data:
 	var constitution : int
 	var critic : float
 	var defence : int
-	var alt_defence : int
 	var speed : int
 
 class Calc_Stats_Data:
 	var hp : int
 	var max_hp : int
-	var shield : int
-	var max_shield : int
 	var strain : int
 	var max_strain : int
 	var evasion : int

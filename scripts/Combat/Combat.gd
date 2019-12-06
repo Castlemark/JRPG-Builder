@@ -220,8 +220,6 @@ func _apply_ability_effect(receiver, emiter) -> void:
 			receiver.data.calc_stats.hp -= amount
 		"evasion":
 			receiver.data.calc_stats.evasion -= amount
-		"shield":
-			receiver.data.calc_stats.shield -= amount
 		"strain":
 			receiver.data.calc_stats.strain -= amount
 		"damage":

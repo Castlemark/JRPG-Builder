@@ -11,7 +11,6 @@
             "constitution": 3,
             "critic": 0.5,
             "defence": 0,
-            "alt_defence": 0,
             "speed": -2
         },
         "min_level": 3,

@@ -293,7 +293,6 @@ class Campaign_Loader:
 		min_stats.constitution = character_dict.min_stats.constitution as int
 		min_stats.critic = character_dict.min_stats.critic
 		min_stats.defence = character_dict.min_stats.defence as int
-		min_stats.alt_defence = character_dict.min_stats.alt_defence as int
 		min_stats.speed = character_dict.min_stats.speed as int
 
 		character_data.min_stats = min_stats
@@ -305,7 +304,6 @@ class Campaign_Loader:
 		max_stats.constitution = character_dict.max_stats.constitution as int
 		max_stats.critic = character_dict.max_stats.critic
 		max_stats.defence = character_dict.max_stats.defence as int
-		max_stats.alt_defence = character_dict.max_stats.alt_defence as int
 		max_stats.speed = character_dict.max_stats.speed as int
 
 		character_data.max_stats = max_stats
@@ -319,17 +317,13 @@ class Campaign_Loader:
 		stats.constitution = min_stats.constitution + (character_data.cur_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
 		stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
 		stats.defence = min_stats.defence + (character_data.cur_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
-		stats.alt_defence = min_stats.alt_defence + (character_data.cur_level - 1) * float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL
 		stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
 
 		calc_stats.hp = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
 		calc_stats.max_hp = calc_stats.hp
-		calc_stats.shield = (1/4.0 * min_stats.constitution + float(min_stats.alt_defence) + 1/3.0 * min_stats.defence \
-			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + float(max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-		calc_stats.max_shield = calc_stats.shield
-		calc_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.alt_defence \
-			+ (character_data.cur_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.alt_defence - min_stats.alt_defence)/_MAX_LEVEL)) * 10
+		calc_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.defence \
+			+ (character_data.cur_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
 		calc_stats.max_strain = calc_stats.strain
 		calc_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
 			+ (character_data.cur_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL))
@@ -547,7 +541,6 @@ class Campaign_Loader:
 		item_stats.constitution = item_dict.stats.constitution as int
 		item_stats.critic = item_dict.stats.critic
 		item_stats.defence = item_dict.stats.defence as int
-		item_stats.alt_defence = item_dict.stats.alt_defence as int
 		item_stats.speed = item_dict.stats.speed as int
 
 		item_data.stats = item_stats
@@ -621,7 +614,6 @@ class Campaign_Loader:
 		stats.constitution = enemy_dict.stats.constitution as int
 		stats.critic = enemy_dict.stats.critic
 		stats.defence = enemy_dict.stats.defence as int
-		stats.alt_defence = enemy_dict.stats.alt_defence as int
 		stats.speed = enemy_dict.stats.speed as int
 
 		enemy_data.stats = stats
@@ -629,9 +621,7 @@ class Campaign_Loader:
 		var calc_stats := Model.Calc_Stats_Data.new()
 		calc_stats.hp = (stats.constitution + 1/4.0 * float(stats.strength) + 1/3.0 * stats.defence) * 4
 		calc_stats.max_hp = calc_stats.hp
-		calc_stats.shield = (1/4.0 * stats.constitution + float(stats.alt_defence) + 1/3.0 * stats.defence) * 4
-		calc_stats.max_shield = calc_stats.shield
-		calc_stats.strain = (1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.alt_defence) * 4
+		calc_stats.strain = (1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.defence) * 4
 		calc_stats.max_strain = calc_stats.strain
 		calc_stats.evasion = (float(stats.speed) + 1/2.0 * stats.critic * 100 + 1/4.0 * stats.defence) * 0.4
 		calc_stats.damage = (1/4.0 * stats.strength + 1/4.0 * stats.dexterity + 1/8.0 * stats.speed) * 4

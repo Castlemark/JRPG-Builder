@@ -61,11 +61,9 @@ func _on_player_select(data : Model.Character_Data) -> void:
 	($Data/Stats/HBoxContainer/Hard/Constitution as Label).text = "Constitution: " + String(round(data.stats.constitution))
 	($Data/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.stats.critic * 100)) + "%"
 	($Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.stats.defence))
-	($"Data/Stats/HBoxContainer/Hard/Alt Defence" as Label).text = "Alt. Defence: " + String(round(data.stats.alt_defence))
 	($Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.stats.speed))
 
 	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.calc_stats.hp))
-	($Data/Stats/HBoxContainer/Soft/Shield as Label).text = "Shield: " + String(round(data.calc_stats.shield))
 	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.calc_stats.strain))
 	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.calc_stats.evasion)) + "%"
 	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.calc_stats.damage))

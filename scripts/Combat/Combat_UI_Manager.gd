@@ -133,8 +133,6 @@ func set_status() -> void:
 			allies[i].data.name, \
 			allies[i].data.calc_stats.hp, \
 			allies[i].data.calc_stats.max_hp, \
-			allies[i].data.calc_stats.shield, \
-			allies[i].data.calc_stats.max_shield, \
 			allies[i].data.calc_stats.strain, \
 			allies[i].data.calc_stats.max_strain, \
 			allies[i] \
@@ -145,8 +143,6 @@ func set_status() -> void:
 			enemies[i].data.name, \
 			enemies[i].data.calc_stats.hp, \
 			enemies[i].data.calc_stats.max_hp, \
-			enemies[i].data.calc_stats.shield, \
-			enemies[i].data.calc_stats.max_shield, \
 			enemies[i].data.calc_stats.strain, \
 			enemies[i].data.calc_stats.max_strain, \
 			enemies[i] \

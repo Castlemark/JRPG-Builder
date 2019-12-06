@@ -30,7 +30,6 @@ class Validation:
 	const effect_types := {
 		"health": [],
 		"evasion": [],
-		"shield": [],
 		"strain": []
 	}
 
@@ -46,7 +45,7 @@ class Validation:
 
 	# CHARACTER
 	const char_fields := [{"start_level" : NUMBER}, {"min_stats" : DICTIONARY}, {"max_stats" : DICTIONARY}, {"abilities" : ARRAY}, {"equipment" : DICTIONARY}, {"scale": NUMBER}]
-	const stats := [{"strength" : NUMBER}, {"dexterity" : NUMBER}, {"constitution" : NUMBER}, {"critic" : NUMBER}, {"defence" : NUMBER}, {"alt_defence" : NUMBER}, {"speed" : NUMBER}]
+	const stats := [{"strength" : NUMBER}, {"dexterity" : NUMBER}, {"constitution" : NUMBER}, {"critic" : NUMBER}, {"defence" : NUMBER}, {"speed" : NUMBER}]
 	const char_slots := [{"legs" : TEXT}, {"torso" : TEXT}, {"accessory_1" : TEXT}, {"accessory_2" : TEXT}, {"accessory_3" : TEXT}, {"weapon" : TEXT}]
 
 	# ABILITY

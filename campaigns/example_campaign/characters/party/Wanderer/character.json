@@ -7,7 +7,6 @@
         "constitution": 6,
         "critic": 0.05,
         "defence": 5,
-        "alt_defence": 2,
         "speed": 8
     },
     "max_stats":
@@ -17,7 +16,6 @@
         "constitution": 100,
         "critic": 0.2,
         "defence": 70,
-        "alt_defence": 45,
         "speed": 80
     },
     "abilities":

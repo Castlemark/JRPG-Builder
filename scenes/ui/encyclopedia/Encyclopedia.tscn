@@ -362,16 +362,10 @@ margin_right = 180.0
 margin_bottom = 126.0
 text = "Defence: "
 
-[node name="Alt_Defence" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
+[node name="Speed" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
 margin_top = 130.0
 margin_right = 180.0
 margin_bottom = 152.0
-text = "Alt. Defence: "
-
-[node name="Speed" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Hard"]
-margin_top = 156.0
-margin_right = 180.0
-margin_bottom = 178.0
 text = "Speed: "
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container"]
@@ -399,28 +393,22 @@ margin_right = 180.0
 margin_bottom = 22.0
 text = "HP: "
 
-[node name="Shield" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
+[node name="Strain" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
 margin_top = 26.0
 margin_right = 180.0
 margin_bottom = 48.0
-text = "Shield: "
-
-[node name="Strain" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
-margin_top = 52.0
-margin_right = 180.0
-margin_bottom = 74.0
 text = "Strain: "
 
 [node name="Evasion" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
-margin_top = 78.0
+margin_top = 52.0
 margin_right = 180.0
-margin_bottom = 100.0
+margin_bottom = 74.0
 text = "Evasion: "
 
 [node name="Damage" type="Label" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container/Soft"]
-margin_top = 104.0
+margin_top = 78.0
 margin_right = 180.0
-margin_bottom = 126.0
+margin_bottom = 100.0
 text = "Damage: "
 
 [node name="Abilities_Label" type="Label" parent="HBoxContainer/Enemy_Preview"]

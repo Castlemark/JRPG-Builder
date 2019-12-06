@@ -14,6 +14,7 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Party" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
@@ -48,6 +49,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Equipment" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.2
 anchor_right = 0.35
@@ -81,7 +83,6 @@ text = "Stats"
 valign = 1
 
 [node name="Stats" type="Panel" parent="Data"]
-editor/display_folded = true
 margin_top = 26.0
 margin_right = 1133.0
 margin_bottom = 399.0
@@ -137,16 +138,10 @@ margin_right = 540.0
 margin_bottom = 152.0
 text = "Defence:"
 
-[node name="Alt Defence" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
+[node name="Speed" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
 margin_top = 156.0
 margin_right = 540.0
 margin_bottom = 178.0
-text = "Alt. Defence:"
-
-[node name="Speed" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 182.0
-margin_right = 540.0
-margin_bottom = 204.0
 text = "Speed:"
 
 [node name="MarginContainer" type="MarginContainer" parent="Data/Stats/HBoxContainer"]
@@ -173,28 +168,22 @@ margin_right = 541.0
 margin_bottom = 22.0
 text = "HP:"
 
-[node name="Shield" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
+[node name="Strain" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
 margin_top = 26.0
 margin_right = 541.0
 margin_bottom = 48.0
-text = "Shield:"
-
-[node name="Strain" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 52.0
-margin_right = 541.0
-margin_bottom = 74.0
 text = "Strain:"
 
 [node name="Evasion" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 78.0
+margin_top = 52.0
 margin_right = 541.0
-margin_bottom = 100.0
+margin_bottom = 74.0
 text = "Evasion:"
 
 [node name="Damage" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 104.0
+margin_top = 78.0
 margin_right = 541.0
-margin_bottom = 126.0
+margin_bottom = 100.0
 text = "Damage:"
 
 [node name="Abilities_Label" type="Label" parent="Data"]
@@ -205,6 +194,7 @@ text = "Abilities"
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Data"]
+editor/display_folded = true
 margin_top = 429.0
 margin_right = 1133.0
 margin_bottom = 802.0
