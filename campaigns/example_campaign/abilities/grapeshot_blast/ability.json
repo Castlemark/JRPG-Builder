@@ -2,7 +2,7 @@
     "min_level": 3,
     "side": "enemies",
     "cost": 50,
-    "type": "health",
+    "type": "evasion",
     "amount": 0.3,
     "description": "Destroy them all"
 }

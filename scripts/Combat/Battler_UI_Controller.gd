@@ -12,6 +12,11 @@ onready var life_label : Label = $LifeBar/Label as Label
 onready var energybar : ProgressBar = $EnergyBar as ProgressBar
 onready var energy_label : Label = $EnergyBar/Label as Label
 
+onready var evasion_label : Label = $Evasion as Label
+onready var cur_evasion : float = 0.0
+onready var critic_label : Label = $Critic as Label
+onready var cur_critic : float = 0.0
+
 onready var tween : Tween = $Tween as Tween
 
 var data
@@ -27,6 +32,11 @@ func set_all_stats(name : String, cur_hp : int, total_hp : int, cur_energy : int
 	energybar.max_value = total_energy
 	energy_label.text = String(cur_energy) + "/" + String(total_energy)
 	
+	evasion_label.text = "Evasion " + String(battler_data.data.calc_stats.evasion) + "%"
+	cur_evasion = battler_data.data.calc_stats.evasion
+	critic_label.text = "Critic " + String(battler_data.data.stats.critic * 100) + "%"
+	cur_critic = battler_data.data.stats.critic
+	
 	data = battler_data
 
 func update_stats():
@@ -38,7 +48,24 @@ func update_stats():
 		tween.interpolate_property(energybar, "value", null, data.data.calc_stats.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		energy_label.text = String(data.data.calc_stats.strain) + "/" + String(energybar.max_value)
 	
+	if data.data.calc_stats.evasion != cur_evasion:
+		print("hola")
+		tween.interpolate_method(self, "_animate_evasion", null, data.data.calc_stats.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		cur_evasion = data.data.calc_stats.evasion
+	
+	if data.data.stats.critic != cur_critic:
+		tween.interpolate_method(self, "_animate_critic", null, data.data.stats.critic, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		cur_critic = data.data.stats.critic
+	
 	tween.start()
+
+# This method is designed to be called within the tween.interpolate_method() method
+func _animate_evasion(value : int) -> void:
+	evasion_label.text = "Evasion " + String(value) + "%"
+
+# This method is designed to be called within the tween.interpolate_method() method
+func _animate_critic(value : int) -> void:
+	critic_label.text = "Critic " + String(value) + "%"
 
 func activate_selection() -> void:
 	self.disabled = false

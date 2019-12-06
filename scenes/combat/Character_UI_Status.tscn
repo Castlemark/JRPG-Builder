@@ -47,6 +47,30 @@ margin_right = -4.0
 margin_bottom = -4.0
 text = "CharacterName"
 
+[node name="Evasion" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.75
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+text = "Evasion: XX%"
+align = 2
+valign = 1
+
+[node name="Critic" type="Label" parent="."]
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 2.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -4.0
+text = "Critic: XX%"
+align = 2
+valign = 1
+
 [node name="LifeBar" type="ProgressBar" parent="."]
 anchor_top = 0.5
 anchor_right = 0.65
