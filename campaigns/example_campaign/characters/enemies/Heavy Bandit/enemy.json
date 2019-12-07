@@ -6,7 +6,11 @@
         "constitution": 7,
         "critic": 0.15,
         "defence": 2,
-        "speed": 4
+        "speed": 4,
+        "health": 40,
+        "strain": 50,
+        "evasion": 0.04,
+        "damage": 18
     },
     "abilities":
     [

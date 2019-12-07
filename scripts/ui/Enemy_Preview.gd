@@ -29,7 +29,7 @@ func set_data(enemy_data : Model.Enemy_Data, abilities_data : Dictionary, is_ani
 	data = enemy_data
 	enemy_name.text = data.name
 	
-	_set_stats(data.stats, data.calc_stats, abilities_data.values())
+	_set_stats(data.stats, abilities_data.values())
 	
 	elapsed_frame_time = 0.0
 	sprite.frame = 0
@@ -68,7 +68,7 @@ func _set_up_animation(animation_info) -> void:
 	frames = animation_info.total_frames
 	duration = animation_info.duration
 
-func _set_stats(stats : Model.Stats_Data, calc_stats : Model.Calc_Stats_Data, abilities : Array) -> void:
+func _set_stats(stats : Model.Stats_Data, abilities : Array) -> void:
 	
 	($Abilities/Stats/Container/Hard/Strength as Label).text = "Strength: " +  String(round(stats.strength))
 	($Abilities/Stats/Container/Hard/Dexterity as Label).text = "Dexterity: " +  String(round(stats.dexterity))
@@ -77,10 +77,10 @@ func _set_stats(stats : Model.Stats_Data, calc_stats : Model.Calc_Stats_Data, ab
 	($Abilities/Stats/Container/Hard/Defence as Label).text = "Defence: " +  String(round(stats.defence))
 	($Abilities/Stats/Container/Hard/Speed as Label).text = "Speed: " +  String(round(stats.speed))
 	
-	($Abilities/Stats/Container/Soft/HP as Label).text = "HP: " + String(round(calc_stats.hp))
-	($Abilities/Stats/Container/Soft/Strain as Label).text = "Strain: " + String(round(calc_stats.strain))
-	($Abilities/Stats/Container/Soft/Evasion as Label).text = "Evasion: " + String(round(calc_stats.evasion)) + "%"
-	($Abilities/Stats/Container/Soft/Damage as Label).text = "Base Damage: " + String(round(calc_stats.damage))
+	($Abilities/Stats/Container/Soft/HP as Label).text = "HP: " + String(round(stats.health))
+	($Abilities/Stats/Container/Soft/Strain as Label).text = "Strain: " + String(round(stats.strain))
+	($Abilities/Stats/Container/Soft/Evasion as Label).text = "Evasion: " + String(round(stats.evasion * 100)) + "%"
+	($Abilities/Stats/Container/Soft/Damage as Label).text = "Base Damage: " + String(round(stats.damage))
 	
 	_update_character_abilites_panel(abilities)
 	

@@ -7,7 +7,11 @@
         "constitution": 6,
         "critic": 0.05,
         "defence": 5,
-        "speed": 8
+        "speed": 8,
+        "health": 81,
+        "strain": 76,
+        "evasion": 0.11,
+        "damage": 35
     },
     "max_stats":
     {
@@ -16,7 +20,11 @@
         "constitution": 100,
         "critic": 0.2,
         "defence": 70,
-        "speed": 80
+        "speed": 80,
+        "health": 243,
+        "strain": 223,
+        "evasion": 0.33,
+        "damage": 105
     },
     "abilities":
     [

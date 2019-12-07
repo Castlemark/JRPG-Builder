@@ -294,6 +294,14 @@ class Campaign_Loader:
 		min_stats.critic = character_dict.min_stats.critic
 		min_stats.defence = character_dict.min_stats.defence as int
 		min_stats.speed = character_dict.min_stats.speed as int
+		min_stats.health = character_dict.min_stats.health as int
+		min_stats.max_health = min_stats.health
+		min_stats.strain = character_dict.min_stats.strain as int
+		min_stats.max_strain = min_stats.strain
+		min_stats.evasion = character_dict.min_stats.evasion
+		min_stats.max_evasion = min_stats.evasion
+		min_stats.damage = character_dict.min_stats.damage as int
+		min_stats.max_damage = min_stats.damage
 
 		character_data.min_stats = min_stats
 
@@ -305,12 +313,19 @@ class Campaign_Loader:
 		max_stats.critic = character_dict.max_stats.critic
 		max_stats.defence = character_dict.max_stats.defence as int
 		max_stats.speed = character_dict.max_stats.speed as int
+		max_stats.health = character_dict.max_stats.health as int
+		max_stats.max_health = max_stats.health
+		max_stats.strain = character_dict.max_stats.strain as int
+		max_stats.max_strain = max_stats.strain
+		max_stats.evasion = character_dict.max_stats.evasion
+		max_stats.max_evasion = max_stats.evasion
+		max_stats.damage = character_dict.max_stats.damage as int
+		max_stats.max_damage = max_stats.damage
 
 		character_data.max_stats = max_stats
 
 		# Cur Stats
 		var stats := Model.Stats_Data.new()
-		var calc_stats := Model.Calc_Stats_Data.new()
 
 		stats.strength = min_stats.strength + ((character_data.cur_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
 		stats.dexterity = min_stats.dexterity + (character_data.cur_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
@@ -318,22 +333,16 @@ class Campaign_Loader:
 		stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
 		stats.defence = min_stats.defence + (character_data.cur_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
 		stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
-
-		calc_stats.hp = (min_stats.constitution + 1/4.0 * float(min_stats.strength) + 1/3.0 * min_stats.defence \
-			+ (character_data.cur_level - 1) * (float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL + 1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-		calc_stats.max_hp = calc_stats.hp
-		calc_stats.strain = (1/2.0 * min_stats.speed + float(min_stats.strength) + 1/3.0 * min_stats.defence \
-			+ (character_data.cur_level - 1) * (1/2.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL + float(max_stats.strength - min_stats.strength)/_MAX_LEVEL  + 1/3.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL)) * 10
-		calc_stats.max_strain = calc_stats.strain
-		calc_stats.evasion = (float(min_stats.speed) + 1/2.0 * min_stats.critic * 100 + 1/4.0 * min_stats.defence \
-			+ (character_data.cur_level - 1) * (float(max_stats.speed - min_stats.speed)/_MAX_LEVEL + 1/2.0 * ((max_stats.critic - min_stats.critic)/_MAX_LEVEL) * 100  + 1/4.0 * (max_stats.defence - min_stats.defence)/_MAX_LEVEL))
-		calc_stats.max_evasion = calc_stats.evasion
-		calc_stats.damage = (1/4.0 * min_stats.strength + 1/4.0 * min_stats.dexterity + 1/8.0 * min_stats.speed \
-			+ (character_data.cur_level - 1) * (1/4.0 * (max_stats.strength - min_stats.strength)/_MAX_LEVEL + 1/4.0 * (max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL  + 1/8.0 * (max_stats.speed - min_stats.speed)/_MAX_LEVEL)) * 10
-		calc_stats.max_damage = calc_stats.damage
+		stats.health = min_stats.health + ((character_data.cur_level - 1) * float(max_stats.health - min_stats.health)/_MAX_LEVEL)
+		stats.max_health = stats.health
+		stats.strain = min_stats.strain + ((character_data.cur_level - 1) * float(max_stats.strain - min_stats.strain)/_MAX_LEVEL)
+		stats.max_strain = stats.strain
+		stats.evasion = min_stats.evasion + ((character_data.cur_level - 1) * float(max_stats.evasion - min_stats.evasion)/_MAX_LEVEL)
+		stats.max_evasion = stats.evasion
+		stats.damage = min_stats.damage + ((character_data.cur_level - 1) * float(max_stats.damage - min_stats.damage)/_MAX_LEVEL)
+		stats.max_damage = stats.damage
 
 		character_data.stats = stats
-		character_data.calc_stats = calc_stats
 
 		# Equipment
 		var equipment := Model.Character_Data.Equipment_Data.new()
@@ -542,6 +551,14 @@ class Campaign_Loader:
 		item_stats.critic = item_dict.stats.critic
 		item_stats.defence = item_dict.stats.defence as int
 		item_stats.speed = item_dict.stats.speed as int
+		item_stats.health = item_dict.stats.health as int
+		item_stats.max_health = item_stats.health
+		item_stats.strain = item_dict.stats.strain as int
+		item_stats.max_strain = item_stats.strain
+		item_stats.evasion = item_dict.stats.evasion
+		item_stats.max_evasion = item_stats.evasion
+		item_stats.damage = item_dict.stats.damage as int
+		item_stats.max_damage = item_stats.max_damage
 
 		item_data.stats = item_stats
 
@@ -615,18 +632,16 @@ class Campaign_Loader:
 		stats.critic = enemy_dict.stats.critic
 		stats.defence = enemy_dict.stats.defence as int
 		stats.speed = enemy_dict.stats.speed as int
+		stats.health = enemy_dict.stats.health as int
+		stats.max_health = stats.health
+		stats.strain = enemy_dict.stats.strain as int
+		stats.max_strain = stats.strain
+		stats.evasion = enemy_dict.stats.evasion
+		stats.max_evasion = stats.evasion
+		stats.damage = enemy_dict.stats.damage as int
+		stats.max_damage = stats.damage
 
 		enemy_data.stats = stats
-
-		var calc_stats := Model.Calc_Stats_Data.new()
-		calc_stats.hp = (stats.constitution + 1/4.0 * float(stats.strength) + 1/3.0 * stats.defence) * 4
-		calc_stats.max_hp = calc_stats.hp
-		calc_stats.strain = (1/2.0 * stats.speed + float(stats.strength) + 1/3.0 * stats.defence) * 4
-		calc_stats.max_strain = calc_stats.strain
-		calc_stats.evasion = (float(stats.speed) + 1/2.0 * stats.critic * 100 + 1/4.0 * stats.defence) * 0.4
-		calc_stats.damage = (1/4.0 * stats.strength + 1/4.0 * stats.dexterity + 1/8.0 * stats.speed) * 4
-
-		enemy_data.calc_stats = calc_stats
 
 		# Abilities
 		enemy_data.abilities = {}

@@ -61,7 +61,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		menu.visible = true
 		submenu.visible = true
 
-		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.calc_stats.strain)
+		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.stats.strain)
 		abilities_grid.get_child(0).grab_focus()
 		_on_ability_released()
 		_on_ability_grab(abilities_grid.get_child(0).data, abilities_grid.get_child(0).ability_icon.texture)
@@ -131,20 +131,20 @@ func set_status() -> void:
 	for i in range(0, allies.size()):
 		(allies_status[i] as Battler_UI_Controller).set_all_stats(\
 			allies[i].data.name, \
-			allies[i].data.calc_stats.hp, \
-			allies[i].data.calc_stats.max_hp, \
-			allies[i].data.calc_stats.strain, \
-			allies[i].data.calc_stats.max_strain, \
+			allies[i].data.stats.health, \
+			allies[i].data.stats.max_health, \
+			allies[i].data.stats.strain, \
+			allies[i].data.stats.max_strain, \
 			allies[i] \
 		)
 
 	for i in range (0, enemies.size()):
 		(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
 			enemies[i].data.name, \
-			enemies[i].data.calc_stats.hp, \
-			enemies[i].data.calc_stats.max_hp, \
-			enemies[i].data.calc_stats.strain, \
-			enemies[i].data.calc_stats.max_strain, \
+			enemies[i].data.stats.health, \
+			enemies[i].data.stats.max_health, \
+			enemies[i].data.stats.strain, \
+			enemies[i].data.stats.max_strain, \
 			enemies[i] \
 		)
 
@@ -178,14 +178,14 @@ func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void
 	_set_ability_view(data, preview_icon)
 
 func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var calc_stats : Model.Calc_Stats_Data = cur_battler.data.calc_stats
+	var stats : Model.Stats_Data = cur_battler.data.stats
 
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
 	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
 	($Submenu/Description/Scroll/VBoxContainer/Cost as Label).text = "Costs " + String(data.cost) + " stamina points"
 
-	var damage : String = "Effect: " + String(data.amount * calc_stats.damage) + " " + data.type
+	var damage : String = "Effect: " + String(data.amount * stats.damage) + " " + data.type
 
 	if data.amount == 0:
 		damage = " Effect: none"

@@ -32,7 +32,7 @@ func initialize_party() -> void:
 	pass
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var calc_stats : Model.Calc_Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.calc_stats
+	var stats : Model.Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.stats
 
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
@@ -40,7 +40,7 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = "Level: " + String(data.min_level)
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Cost as Label).text = "Costs " + String(data.cost) + " stamina points"
 
-	var damage : String = "Effect: " + String(data.amount * calc_stats.damage) + " " + data.type
+	var damage : String = "Effect: " + String(data.amount * stats.damage) + " " + data.type
 
 	if data.amount == 0:
 		damage = " Effect: none"
@@ -63,10 +63,10 @@ func _on_player_select(data : Model.Character_Data) -> void:
 	($Data/Stats/HBoxContainer/Hard/Defence as Label).text = "Defence: " + String(round(data.stats.defence))
 	($Data/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.stats.speed))
 
-	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.calc_stats.hp))
-	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.calc_stats.strain))
-	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.calc_stats.evasion)) + "%"
-	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.calc_stats.damage))
+	($Data/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.stats.health))
+	($Data/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.stats.strain * 100))
+	($Data/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.stats.evasion)) + "%"
+	($Data/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.stats.damage))
 
 	_update_character_abilites_panel(data.abilities.values())
 	_reset_ability_preview()

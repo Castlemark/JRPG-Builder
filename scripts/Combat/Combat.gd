@@ -140,11 +140,11 @@ func _combat_is_in_progress() -> bool:
 	
 	for battler in _turn_order:
 		if battler is Character_Combat:
-			if battler.data.calc_stats.hp > 0:
+			if battler.data.stats.health > 0:
 				allies_dead = false
 			print("Char combat")
 		else:
-			if battler.data.calc_stats.hp > 0:
+			if battler.data.stats.health > 0:
 				enemies_dead = false
 			print("Enem Combat")
 	
@@ -180,7 +180,7 @@ func _play_ability(battler_status) -> void:
 	yield(self, "battler_animations_completed")
 	
 	# We check if receiver has died
-	if recevier_battler.data.calc_stats.hp <= 0:
+	if recevier_battler.data.stats.health <= 0:
 		recevier_battler.visible = false
 		battler_status.visible = false
 		var dead_index = _turn_order.find(recevier_battler)
@@ -208,8 +208,8 @@ func _play_ability(battler_status) -> void:
 	emit_signal("turn_finished")
 
 func _apply_ability_effect(receiver, emiter) -> void:
-	var amount : int = (round(_cur_ability.amount * emiter.data.calc_stats.damage) as int)
-	emiter.data.calc_stats.strain -= _cur_ability.cost
+	var amount : int = (round(_cur_ability.amount * emiter.data.stats.damage) as int)
+	emiter.data.stats.strain -= _cur_ability.cost
 	
 	if amount > 0:
 		emiter.play_animation("attack")
@@ -220,13 +220,13 @@ func _apply_ability_effect(receiver, emiter) -> void:
 	
 	match _cur_ability.type:
 		"health":
-			receiver.data.calc_stats.hp -= amount
+			receiver.data.stats.health -= amount
 		"evasion":
-			receiver.data.calc_stats.evasion -= amount
+			receiver.data.stats.evasion -= amount
 		"strain":
-			receiver.data.calc_stats.strain -= amount
+			receiver.data.stats.strain -= amount
 		"damage":
-			receiver.data.calc_stats.damage -= amount
+			receiver.data.stats.damage -= amount
 
 
 

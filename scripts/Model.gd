@@ -89,7 +89,6 @@ class Character_Data:
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
 	var stats : Stats_Data
-	var calc_stats : Calc_Stats_Data
 	var abilities : Dictionary
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
@@ -106,7 +105,6 @@ class Character_Data:
 class Enemy_Data:
 	var name : String
 	var stats : Stats_Data
-	var calc_stats : Calc_Stats_Data
 	var abilities : Dictionary
 	var animation_data : Animation_Data
 	var scale : float
@@ -128,14 +126,12 @@ class Stats_Data:
 	var critic : float
 	var defence : int
 	var speed : int
-
-class Calc_Stats_Data:
-	var hp : int
-	var max_hp : int
+	var health : int
+	var max_health : int
 	var strain : int
 	var max_strain : int
-	var evasion : int
-	var max_evasion : int
+	var evasion : float
+	var max_evasion : float
 	var damage : int
 	var max_damage : int
 
