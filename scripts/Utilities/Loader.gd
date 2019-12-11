@@ -288,11 +288,7 @@ class Campaign_Loader:
 
 		# Min Stats
 		var min_stats := Model.Stats_Data.new()
-		min_stats.strength = character_dict.min_stats.strength as int
-		min_stats.dexterity = character_dict.min_stats.dexterity as int
-		min_stats.constitution = character_dict.min_stats.constitution as int
 		min_stats.critic = character_dict.min_stats.critic
-		min_stats.defence = character_dict.min_stats.defence as int
 		min_stats.speed = character_dict.min_stats.speed as int
 		min_stats.health = character_dict.min_stats.health as int
 		min_stats.max_health = min_stats.health
@@ -307,11 +303,7 @@ class Campaign_Loader:
 
 		# Max Stats
 		var max_stats := Model.Stats_Data.new()
-		max_stats.strength = character_dict.max_stats.strength as int
-		max_stats.dexterity = character_dict.max_stats.dexterity as int
-		max_stats.constitution = character_dict.max_stats.constitution as int
 		max_stats.critic = character_dict.max_stats.critic
-		max_stats.defence = character_dict.max_stats.defence as int
 		max_stats.speed = character_dict.max_stats.speed as int
 		max_stats.health = character_dict.max_stats.health as int
 		max_stats.max_health = max_stats.health
@@ -327,11 +319,7 @@ class Campaign_Loader:
 		# Cur Stats
 		var stats := Model.Stats_Data.new()
 
-		stats.strength = min_stats.strength + ((character_data.cur_level - 1) * float(max_stats.strength - min_stats.strength)/_MAX_LEVEL)
-		stats.dexterity = min_stats.dexterity + (character_data.cur_level - 1) * float(max_stats.dexterity - min_stats.dexterity)/_MAX_LEVEL
-		stats.constitution = min_stats.constitution + (character_data.cur_level - 1) * float(max_stats.constitution - min_stats.constitution)/_MAX_LEVEL
 		stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
-		stats.defence = min_stats.defence + (character_data.cur_level - 1) * float(max_stats.defence - min_stats.defence)/_MAX_LEVEL
 		stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
 		stats.health = min_stats.health + ((character_data.cur_level - 1) * float(max_stats.health - min_stats.health)/_MAX_LEVEL)
 		stats.max_health = stats.health
@@ -545,11 +533,7 @@ class Campaign_Loader:
 		item_data.rarity = item_dict.rarity as int
 
 		var item_stats := Model.Stats_Data.new()
-		item_stats.strength = item_dict.stats.strength as int
-		item_stats.dexterity = item_dict.stats.dexterity as int
-		item_stats.constitution = item_dict.stats.constitution as int
 		item_stats.critic = item_dict.stats.critic
-		item_stats.defence = item_dict.stats.defence as int
 		item_stats.speed = item_dict.stats.speed as int
 		item_stats.health = item_dict.stats.health as int
 		item_stats.max_health = item_stats.health
@@ -626,11 +610,7 @@ class Campaign_Loader:
 
 		# Stats
 		var stats := Model.Stats_Data.new()
-		stats.strength = enemy_dict.stats.strength as int
-		stats.dexterity = enemy_dict.stats.dexterity as int
-		stats.constitution = enemy_dict.stats.constitution as int
 		stats.critic = enemy_dict.stats.critic
-		stats.defence = enemy_dict.stats.defence as int
 		stats.speed = enemy_dict.stats.speed as int
 		stats.health = enemy_dict.stats.health as int
 		stats.max_health = stats.health

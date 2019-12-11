@@ -70,11 +70,7 @@ func _set_up_animation(animation_info) -> void:
 
 func _set_stats(stats : Model.Stats_Data, abilities : Array) -> void:
 	
-	($Abilities/Stats/Container/Hard/Strength as Label).text = "Strength: " +  String(round(stats.strength))
-	($Abilities/Stats/Container/Hard/Dexterity as Label).text = "Dexterity: " +  String(round(stats.dexterity))
-	($Abilities/Stats/Container/Hard/Constitution as Label).text = "Constitution: " +  String(round(stats.constitution))
 	($Abilities/Stats/Container/Hard/Critic as Label).text = "Critic: " +  String(round(stats.critic * 100)) + "%"
-	($Abilities/Stats/Container/Hard/Defence as Label).text = "Defence: " +  String(round(stats.defence))
 	($Abilities/Stats/Container/Hard/Speed as Label).text = "Speed: " +  String(round(stats.speed))
 	
 	($Abilities/Stats/Container/Soft/HP as Label).text = "HP: " + String(round(stats.health))

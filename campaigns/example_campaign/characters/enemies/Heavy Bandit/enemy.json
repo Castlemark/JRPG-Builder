@@ -1,11 +1,7 @@
 {
     "stats":
     {
-        "strength": 10,
-        "dexterity": 8,
-        "constitution": 7,
         "critic": 0.15,
-        "defence": 2,
         "speed": 4,
         "health": 40,
         "strain": 50,

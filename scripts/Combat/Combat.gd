@@ -108,15 +108,15 @@ func _priority_sort(a, b):
 	
 	var priority_a
 	if a is Character_Combat:
-		priority_a = 2 * a.data.stats.speed + a.data.stats.dexterity
+		priority_a = 2 * a.data.stats.speed + a.data.stats.evasion
 	else:
-		priority_a = 2 * a.data.stats.speed + a.data.stats.dexterity
+		priority_a = 2 * a.data.stats.speed + a.data.stats.evasion
 	
 	var priority_b
 	if b is Character_Combat:
-		priority_b = 2 * b.data.stats.speed + b.data.stats.dexterity
+		priority_b = 2 * b.data.stats.speed + b.data.stats.evasion
 	else:
-		priority_b = 2 * b.data.stats.speed + b.data.stats.dexterity
+		priority_b = 2 * b.data.stats.speed + b.data.stats.evasion
 	
 	return priority_a > priority_b
 

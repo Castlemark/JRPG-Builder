@@ -120,11 +120,7 @@ class Ability_Data:
 	var icon_texture : Texture
 
 class Stats_Data:
-	var strength : int
-	var dexterity : int
-	var constitution : int
 	var critic : float
-	var defence : int
 	var speed : int
 	var health : int
 	var max_health : int

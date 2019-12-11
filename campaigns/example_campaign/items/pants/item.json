@@ -6,11 +6,7 @@
         "slot": "legs",
         "stats":
         {
-            "strength": 5,
-            "dexterity": 2,
-            "constitution": 3,
             "critic": 0.5,
-            "defence": 0,
             "speed": -2,
             "health": 0,
             "strain": 0,
