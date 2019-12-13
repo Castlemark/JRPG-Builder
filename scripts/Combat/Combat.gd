@@ -80,6 +80,15 @@ func start_combat(combat_data : Dictionary) -> void:
 	_execute_combat_loop()
 
 func _end_combat() -> void:
+	# We reset stamina of allies
+	if ally_first.visible:
+		ally_first.data.stats.strain = ally_first.data.stats.max_strain
+	if ally_second.visible:
+		ally_second.data.stats.strain = ally_second.data.stats.max_strain
+	if ally_third.visible:
+		ally_third.data.stats.strain = ally_third.data.stats.max_strain
+	
+	# We deactivate all relevant elements
 	background.visible = false
 	UI.visible = false
 	
@@ -124,6 +133,13 @@ func _execute_combat_loop() -> void:
 	# Turn logic goes inside the loop
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
+		
+		var battler = _turn_order[_cur_fighter]
+		if battler.data.stats.strain + int(battler.data.stats.max_strain / 10.0) > battler.data.stats.max_strain:
+			battler.data.stats.strain == battler.data.stats.max_strain
+		else:
+			battler.data.stats.strain += int(battler.data.stats.max_strain / 10.0)
+		UI.update_status_graphics()
 		
 		yield(self, "turn_finished")
 		_cur_fighter += 1
