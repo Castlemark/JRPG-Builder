@@ -95,8 +95,8 @@ func instantiate_background_map(background_info) -> void:
 			var back_tile = background_tile_res.instance()
 
 			back_tile.initialize(Vector2(i, j),
-			                     map_img,
-			                     Vector2(i/100.0 - 10 * offset.x, map_size.y/100.0 - j/100.0 - 10 * (offset.y + 1)))
+								 map_img,
+								 Vector2(i/100.0 - 10 * offset.x, map_size.y/100.0 - j/100.0 - 10 * (offset.y + 1)))
 			background.add_child(back_tile, true)
 
 func instantiate_details(details_list : Array) -> void:

@@ -85,11 +85,6 @@ _global_script_classes=[ {
 "path": "res://scripts/ui/Enemy_Preview.gd"
 }, {
 "base": "Node",
-"class": "Game_Manager",
-"language": "GDScript",
-"path": "res://scripts/Game_Manager.gd"
-}, {
-"base": "Node",
 "class": "Generic_Action",
 "language": "GDScript",
 "path": "res://scripts/map/actions/Generic_Action.gd"
@@ -185,7 +180,6 @@ _global_script_class_icons={
 "Encyclopedia_Enemy": "",
 "Enemy_Combat": "",
 "Enemy_preview": "",
-"Game_Manager": "",
 "Generic_Action": "",
 "Generic_Validators": "",
 "Item": "",
@@ -218,7 +212,6 @@ Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
 
 gdscript/completion/autocomplete_setters_and_getters=true
 gdscript/warnings/shadowed_variable=false
-gdscript/warnings/unused_class_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false

@@ -1,6 +1,6 @@
 extends Node
 
-class_name Game_Manager
+#class_name Game_Manager
 
 var campaign : Dictionary = {
 	"name": "example_campaign",

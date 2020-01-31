@@ -136,10 +136,13 @@ func _execute_combat_loop() -> void:
 		
 		var battler = _turn_order[_cur_fighter]
 		if battler.data.stats.strain + int(battler.data.stats.max_strain / 10.0) > battler.data.stats.max_strain:
-			battler.data.stats.strain == battler.data.stats.max_strain
+			battler.data.stats.strain = battler.data.stats.max_strain
 		else:
 			battler.data.stats.strain += int(battler.data.stats.max_strain / 10.0)
 		UI.update_status_graphics()
+		
+		if battler is Enemy_Combat:
+			_enemy_decide_turn(battler as Enemy_Combat)
 		
 		yield(self, "turn_finished")
 		_cur_fighter += 1
@@ -158,11 +161,9 @@ func _combat_is_in_progress() -> bool:
 		if battler is Character_Combat:
 			if battler.data.stats.health > 0:
 				allies_dead = false
-			print("Char combat")
 		else:
 			if battler.data.stats.health > 0:
 				enemies_dead = false
-			print("Enem Combat")
 	
 	return not (allies_dead or enemies_dead)
 
@@ -244,7 +245,9 @@ func _apply_ability_effect(receiver, emiter) -> void:
 		"damage":
 			receiver.data.stats.damage -= amount
 
-
+# This function decides what ability and targer will an enemy choose
+func _enemy_decide_turn(enemy : Enemy_Combat) -> void:
+	pass 
 
 # This function is connected to players, when two animations are played (emiter and receiver) it notifies the interested parties
 func _update_yield_counter() -> void:
