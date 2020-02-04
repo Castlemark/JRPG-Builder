@@ -185,7 +185,7 @@ class Campaign_Loader:
 			detail_data.rotation = detail_info.rotation as int
 			detail_data.filepath = detail_info.filepath
 
-			if detail_info.scale < 1:
+			if detail_info.scale <= 0:
 				load_correct = false
 				print("detail " + detail_data.filepath + " in map has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 				detail_data.scale = 1
@@ -209,7 +209,7 @@ class Campaign_Loader:
 		var background_data := Model.Map_Data.BG_Data.new()
 		background_data.x_offset = map_dict.background_info.x_offset
 		background_data.y_offset = map_dict.background_info.y_offset
-		if map_dict.background_info.scale < 1:
+		if map_dict.background_info.scale <= 0:
 			load_correct = false
 			print("\"background_info\" field in map has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			background_data.scale = 1
@@ -217,7 +217,7 @@ class Campaign_Loader:
 			background_data.scale = map_dict.background_info.scale
 
 		map_data.background_info = background_data
-		
+
 		#Textures
 		map_data.combat_background = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/maps/" + map_name +  "/combat_background.png")
 
@@ -279,7 +279,7 @@ class Campaign_Loader:
 		character_data.cur_level = character_data.start_level as int
 
 		# Scale
-		if character_dict.scale < 1:
+		if character_dict.scale <= 0:
 			load_correct = false
 			print("Character has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			character_data.scale = 1
@@ -571,7 +571,7 @@ class Campaign_Loader:
 		for enemy_name in enemy_names:
 			var enemy_data : Model.Enemy_Data = load_enemy(enemy_name, campaign_name)
 			if enemy_data == null:
-				print("\n	Ability could not be loaded correctly\n------------------------------------")
+				print("\n	Enemy could not be loaded correctly\n------------------------------------")
 				load_correct = false
 				continue
 
@@ -601,12 +601,18 @@ class Campaign_Loader:
 		enemy_data.name = enemy_name
 
 		# Scale
-		if enemy_dict.scale < 1:
+		if enemy_dict.scale <= 0:
 			load_correct = false
 			print("Enemy has \"scale\" field but is an invalid value, please make sure the scale is bigger than 0")
 			enemy_data.scale = 1
 		else:
 			enemy_data.scale = enemy_dict.scale
+
+		if enemy_dict.xp_reward < 0:
+			load_correct = false
+			print("Enemy has \"xp_reward\" field but is an invalid value, please make sure the xp_reward is bigger or equal than 0")
+		else:
+			enemy_data.xp_reward = enemy_dict.xp_reward
 
 		# Stats
 		var stats := Model.Stats_Data.new()

@@ -224,7 +224,7 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 		allies_status[0].grab_focus()
 	_on_End_Turn_pressed(data)
 
-func _on_Status_battler_selected(battler_data) -> void:
-	#menu.visible = false # TODO Remove comment when enemies end turn by themselves
+func _on_Status_battler_selected(battler_ui_button : Battler_UI_Controller) -> void:
+	menu.visible = false
 	submenu.visible = false
-	emit_signal("battler_selected", battler_data)
+	emit_signal("battler_selected", battler_ui_button)

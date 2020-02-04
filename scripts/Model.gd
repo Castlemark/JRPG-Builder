@@ -107,6 +107,7 @@ class Enemy_Data:
 	var stats : Stats_Data
 	var abilities : Dictionary
 	var animation_data : Animation_Data
+	var xp_reward : int
 	var scale : float
 
 class Ability_Data:

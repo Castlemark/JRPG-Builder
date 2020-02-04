@@ -77,6 +77,7 @@ func start_combat(combat_data : Dictionary) -> void:
 	UI.set_status()
 	
 	_combat_started = true
+	randomize()
 	_execute_combat_loop()
 
 func _end_combat() -> void:
@@ -142,7 +143,7 @@ func _execute_combat_loop() -> void:
 		UI.update_status_graphics()
 		
 		if battler is Enemy_Combat:
-			_enemy_decide_turn(battler as Enemy_Combat)
+			_enemy_decide_turn(battler)
 		
 		yield(self, "turn_finished")
 		_cur_fighter += 1
@@ -177,11 +178,11 @@ func _set_cur_ability(data) -> void:
 	else:
 		_cur_ability = data
 
-#function called when a target for the ability is chosen
-func _play_ability(battler_status) -> void:
-	var recevier_battler = battler_status.data
+#function called when a target for the ability is chosen the variable is the ui for the target
+func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
+	var recevier_battler = receiver_battler_ui.data
 	
-	var emiter : Character_Combat = _turn_order[_cur_fighter]
+	var emiter = _turn_order[_cur_fighter]
 	
 	emiter.z_index = 1
 	recevier_battler.z_index = 1
@@ -199,7 +200,7 @@ func _play_ability(battler_status) -> void:
 	# We check if receiver has died
 	if recevier_battler.data.stats.health <= 0:
 		recevier_battler.visible = false
-		battler_status.visible = false
+		receiver_battler_ui.visible = false
 		var dead_index = _turn_order.find(recevier_battler)
 		if dead_index <= _cur_fighter and dead_index >= 0:
 			_cur_fighter -= 1
@@ -245,9 +246,36 @@ func _apply_ability_effect(receiver, emiter) -> void:
 		"damage":
 			receiver.data.stats.damage -= amount
 
-# This function decides what ability and targer will an enemy choose
+# This function decides what ability and target will an enemy choose, then executes it's turn
 func _enemy_decide_turn(enemy : Enemy_Combat) -> void:
-	pass 
+	var ui_allies_status := []
+	var ui_enemies_status := []
+	for i in range(3):
+		var ally_battler_ui : Battler_UI_Controller = UI.allies_status[i]
+		if ally_battler_ui.visible == true:
+			ui_allies_status.append(ally_battler_ui)
+		
+		var enemy_battler_ui : Battler_UI_Controller = UI.enemies_status[i]
+		if enemy_battler_ui.visible == true:
+			ui_enemies_status.append(enemy_battler_ui)
+	
+	var index : int = randi() % enemy.data.abilities.size()
+	var choosen_ability : Model.Ability_Data = enemy.data.abilities.values()[index]
+	_set_cur_ability(choosen_ability)
+	
+	print("	choosen ability: " + choosen_ability.name + " ; with side " + choosen_ability.side)
+	
+	var choosen_battler : Battler_UI_Controller
+	# we flip the selection because for the enemies, their enemies are our allies
+	if choosen_ability.side == "enemies":
+		choosen_battler = ui_allies_status[randi() % ui_allies_status.size()]
+	else:
+		choosen_battler = ui_enemies_status[randi() % ui_enemies_status.size()]
+	
+	print("	choosen target: " + choosen_battler.data.data.name)
+	
+	_play_ability(choosen_battler)
+
 
 # This function is connected to players, when two animations are played (emiter and receiver) it notifies the interested parties
 func _update_yield_counter() -> void:

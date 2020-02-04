@@ -15,7 +15,6 @@
 script = ExtResource( 1 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = -1
 
 [node name="Background" type="TextureRect" parent="BackgroundLayer"]
@@ -73,6 +72,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 6 )
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Menu" type="Panel" parent="UILayer/UI"]
 anchor_left = 0.5
@@ -129,7 +131,6 @@ text = "END TURN"
 clip_text = true
 
 [node name="Submenu" type="Control" parent="UILayer/UI"]
-editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 611.0
@@ -138,7 +139,6 @@ margin_right = 1311.0
 margin_bottom = -32.0
 
 [node name="Grid" type="Panel" parent="UILayer/UI/Submenu"]
-editor/display_folded = true
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_right = -4.0
@@ -269,7 +269,6 @@ margin_right = 338.0
 margin_bottom = 159.0
 
 [node name="Queue" type="Control" parent="UILayer/UI"]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -243.0
@@ -286,6 +285,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Icon1" type="TextureRect" parent="UILayer/UI/Queue/HBoxContainer"]
 margin_left = 11.0
@@ -386,6 +388,27 @@ margin_bottom = 142.0
 [node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
 margin_top = 146.0
 margin_bottom = 215.0
+
+[node name="End_Scren" type="Panel" parent="UILayer/UI"]
+visible = false
+anchor_left = 0.2
+anchor_right = 0.8
+anchor_bottom = 1.0
+margin_top = 32.0
+margin_bottom = -278.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UILayer/UI/End_Scren"]
+anchor_left = 0.35
+anchor_top = 0.85
+anchor_right = 0.65
+anchor_bottom = 0.95
+text = "Continue"
+__meta__ = {
+"_editor_description_": ""
+}
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Second" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Third" to="." method="_update_yield_counter"]

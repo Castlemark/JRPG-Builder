@@ -62,4 +62,4 @@ class Validation:
 	const detail_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"scale": NUMBER}, {"rotation" : NUMBER}, {"filepath" : TEXT}]
 
 	# ENEMY
-	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"scale": NUMBER}]
+	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"xp_reward": NUMBER}, {"scale": NUMBER}]

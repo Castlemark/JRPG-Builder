@@ -28,9 +28,9 @@ Below you'll find some deadlines for the various modules, when a module is marke
   - [ ] Story module V-1
     - [ ] NPC
     - [ ] Conversation
-  - [ ] Combat module V-1
-    - [ ] Combat logic
-    - [ ] Placeholder enemy AI
+  - [x] Combat module V-1
+    - [x] Combat logic
+    - [x] Placeholder enemy AI
   - [ ] Map module V-3
     - [x] Combat trigger
     - [ ] Treasure
