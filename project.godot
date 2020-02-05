@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Combat/Character_Combat.gd"
 }, {
+"base": "Control",
+"class": "Character_End_Screen",
+"language": "GDScript",
+"path": "res://scripts/Combat/Character_End_Screen.gd"
+}, {
 "base": "Button",
 "class": "Character_UI",
 "language": "GDScript",
@@ -170,6 +175,7 @@ _global_script_class_icons={
 "Between_node": "",
 "Character_Ability": "",
 "Character_Combat": "",
+"Character_End_Screen": "",
 "Character_UI": "",
 "Combat": "",
 "Combat_Trigger_Action": "",

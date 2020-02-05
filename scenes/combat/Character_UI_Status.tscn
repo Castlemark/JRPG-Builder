@@ -37,6 +37,9 @@ rect_min_size = Vector2( 547, 69 )
 focus_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Name" type="Label" parent="."]
 anchor_right = 0.35
@@ -84,6 +87,9 @@ custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 allow_greater = true
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="LifeBar"]
 anchor_right = 1.0
@@ -108,6 +114,9 @@ custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 allow_greater = true
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="EnergyBar"]
 anchor_right = 1.0
@@ -117,6 +126,9 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "12/345"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="." to="." method="_on_Status_pressed"]
