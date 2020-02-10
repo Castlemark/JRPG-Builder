@@ -4,6 +4,7 @@ class_name Combat_UI_Manager
 
 signal ability_chosen(ability_data)
 signal battler_selected(battler_data)
+signal end_combat_summary_dismissed()
 
 var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
 
@@ -23,6 +24,8 @@ onready var items_button : Button = $Menu/HBoxContainer/Inventory as Button
 onready var items_grid : GridContainer = $Submenu/Grid/Items/Container as GridContainer
 onready var items_container : ScrollContainer = $Submenu/Grid/Items as ScrollContainer
 
+onready var end_screen := $End_Screen as End_Screen
+
 var ability_button_group := ButtonGroup.new()
 
 var _cur_fighter : int
@@ -40,6 +43,9 @@ onready var enemies_status := [$Enemies_Status/VBoxContainer/Status, $Enemies_St
 var cur_battler
 
 func _ready() -> void:
+	end_screen.visible = false
+	end_screen.continue_button.connect("pressed", self, "_on_end_screen_dismissed")
+	
 	queue_tween.connect("tween_completed", self, "_on_tween_completed")
 
 
@@ -163,6 +169,7 @@ func update_queue(turn_order : Array) -> void:
 			queue_container.get_child(i).visible = false
 
 func _on_End_Turn_pressed(data) -> void:
+	menu.visible = false
 	end_turn_button.pressed = false
 	emit_signal("ability_chosen", data)
 
@@ -224,7 +231,18 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 		allies_status[0].grab_focus()
 	_on_End_Turn_pressed(data)
 
+func on_combat_end(xp_earned : int):
+	end_screen.visible = true
+	
+	for index in range(allies.size()):
+		var ally := allies[index] as Character_Combat
+		end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats.health, ally.data.stats.max_health)
+
 func _on_Status_battler_selected(battler_ui_button : Battler_UI_Controller) -> void:
 	menu.visible = false
 	submenu.visible = false
 	emit_signal("battler_selected", battler_ui_button)
+
+func _on_end_screen_dismissed():
+	end_screen.visible = false
+	emit_signal("end_combat_summary_dismissed")

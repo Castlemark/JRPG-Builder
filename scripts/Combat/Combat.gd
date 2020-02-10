@@ -28,18 +28,14 @@ var _combat_started := false
 var _turn_order := []
 var _cur_fighter : int = 0
 var _cur_ability : Model.Ability_Data
+var _xp_reward : int = 0
 
 var _yield_battler_counter := 0
 
 func _ready() -> void:
 	background.visible = false
 	UI.visible = false
-	pass
-
-func _input(event: InputEvent) -> void:
-	if _combat_started:
-		if event.is_action_pressed("ui_select"):
-			_end_combat()
+	UI.connect("end_combat_summary_dismissed", self, "_end_combat")
 
 func start_combat(combat_data : Dictionary) -> void:
 	# TODO Disable all Menu and bind inventory
@@ -57,18 +53,21 @@ func start_combat(combat_data : Dictionary) -> void:
 			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_third.visible = false
 			
+			_xp_reward = enemy_second.data.xp_reward
 			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_second])
 		2:
 			enemy_first.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[1]))
 			enemy_third.visible = false
 			
+			_xp_reward = enemy_first.data.xp_reward + enemy_second.data.xp_reward
 			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_first, enemy_second])
 		3:
 			enemy_first.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[1]))
 			enemy_third.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[2]))
 			
+			_xp_reward = enemy_first.data.xp_reward + enemy_second.data.xp_reward + enemy_third.data.xp_reward
 			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_first, enemy_second, enemy_third])
 	
 	_turn_order = [ally_first, ally_second, ally_third, enemy_first, enemy_second, enemy_third]
@@ -152,7 +151,7 @@ func _execute_combat_loop() -> void:
 			_update_turn_order()
 		UI.indicate_cur_fighter(_cur_fighter, _turn_order)
 	
-	_display_combat_end()
+	UI.on_combat_end(_xp_reward)
 
 func _combat_is_in_progress() -> bool:
 	var allies_dead := true
@@ -167,9 +166,6 @@ func _combat_is_in_progress() -> bool:
 				enemies_dead = false
 	
 	return not (allies_dead or enemies_dead)
-
-func _display_combat_end() -> void:
-	_end_combat()
 
 func _set_cur_ability(data) -> void:
 	if data is bool:
