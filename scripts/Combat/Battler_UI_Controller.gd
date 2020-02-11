@@ -41,20 +41,20 @@ func set_all_stats(name : String, cur_hp : int, total_hp : int, cur_energy : int
 
 func update_stats():
 	if data.data.stats.health != lifebar.value:
-		tween.interpolate_property(lifebar, "value", null, data.data.stats.health, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(lifebar, "value", lifebar.value, data.data.stats.health, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		life_label.text = String(data.data.stats.health) + "/" + String(lifebar.max_value)
 	
 	if data.data.stats.strain != energybar.value:
-		tween.interpolate_property(energybar, "value", null, data.data.stats.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property(energybar, "value", energybar.value, data.data.stats.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		energy_label.text = String(data.data.stats.strain) + "/" + String(energybar.max_value)
 	
 	if data.data.stats.evasion != cur_evasion:
 		print("hola")
-		tween.interpolate_method(self, "_animate_evasion", null, data.data.stats.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		tween.interpolate_method(self, "_animate_evasion", cur_evasion, data.data.stats.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 		cur_evasion = data.data.stats.evasion
 	
 	if data.data.stats.critic != cur_critic:
-		tween.interpolate_method(self, "_animate_critic", null, data.data.stats.critic, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		tween.interpolate_method(self, "_animate_critic", cur_critic, data.data.stats.critic, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 		cur_critic = data.data.stats.critic
 	
 	tween.start()
