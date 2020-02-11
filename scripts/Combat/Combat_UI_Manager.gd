@@ -45,7 +45,7 @@ var cur_battler
 func _ready() -> void:
 	end_screen.visible = false
 	end_screen.continue_button.connect("pressed", self, "_on_end_screen_dismissed")
-	
+
 	queue_tween.connect("tween_completed", self, "_on_tween_completed")
 
 
@@ -72,7 +72,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		_on_ability_released()
 		_on_ability_grab(abilities_grid.get_child(0).data, abilities_grid.get_child(0).ability_icon.texture)
 	else:
-		#menu.visible = false # TODO Remove comment when enemies end turn by themselves
+		menu.visible = false # TODO Remove comment when enemies end turn by themselves
 		submenu.visible = false
 
 	queue_tween.stop_all()
@@ -157,7 +157,7 @@ func set_status() -> void:
 func update_status_graphics() -> void:
 	for i in range (0, allies.size()):
 		(allies_status[i] as Battler_UI_Controller).update_stats()
-	
+
 	for i in range (0, enemies.size()):
 		(enemies_status[i] as Battler_UI_Controller).update_stats()
 
@@ -169,7 +169,6 @@ func update_queue(turn_order : Array) -> void:
 			queue_container.get_child(i).visible = false
 
 func _on_End_Turn_pressed(data) -> void:
-	menu.visible = false
 	end_turn_button.pressed = false
 	emit_signal("ability_chosen", data)
 
@@ -233,7 +232,7 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 
 func on_combat_end(xp_earned : int):
 	end_screen.visible = true
-	
+
 	for index in range(allies.size()):
 		var ally := allies[index] as Character_Combat
 		end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats.health, ally.data.stats.max_health)
