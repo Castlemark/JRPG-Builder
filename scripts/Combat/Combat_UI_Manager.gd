@@ -191,7 +191,7 @@ func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> voi
 	($Submenu/Description/Scroll/VBoxContainer/Description as Label).text = String(data.description)
 	($Submenu/Description/Scroll/VBoxContainer/Cost as Label).text = "Costs " + String(data.cost) + " stamina points"
 
-	var damage : String = "Effect: " + String(data.amount * stats.damage) + " " + data.type
+	var damage : String = "Effect: " + String(round(data.amount * stats.damage)) + " " + data.type
 
 	if data.amount == 0:
 		damage = " Effect: none"
