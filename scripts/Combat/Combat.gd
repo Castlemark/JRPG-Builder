@@ -31,6 +31,7 @@ var _cur_ability : Model.Ability_Data
 var _xp_reward : int = 0
 
 var _yield_battler_counter := 0
+var _yield_battler_counter_target := 2
 
 func _ready() -> void:
 	background.visible = false
@@ -191,6 +192,10 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	_apply_ability_effect(recevier_battler, emiter)
 	UI.update_status_graphics()
 
+	if recevier_battler == emiter:
+		_yield_battler_counter = 1
+	else:
+		_yield_battler_counter = 2
 	yield(self, "battler_animations_completed")
 
 	# We check if receiver has died
@@ -276,6 +281,6 @@ func _enemy_decide_turn(enemy : Enemy_Combat) -> void:
 # This function is connected to players, when two animations are played (emiter and receiver) it notifies the interested parties
 func _update_yield_counter() -> void:
 	_yield_battler_counter += 1
-	if _yield_battler_counter >= 2:
+	if _yield_battler_counter >= _yield_battler_counter_target:
 		emit_signal("battler_animations_completed")
 		_yield_battler_counter = 0
