@@ -1,7 +1,7 @@
 {
     "min_level": 1,
     "side": "enemies",
-    "cost": 55,
+    "cost": 10,
     "type": "health",
     "amount": 0.3,
     "description": "Stab and stab until you can't stab no more"

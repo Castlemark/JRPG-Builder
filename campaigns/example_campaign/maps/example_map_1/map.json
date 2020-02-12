@@ -67,7 +67,20 @@
             "x": 85,
             "y": 39,
             "connected_nodes":[7,10],
-            "actions": []
+            "actions": [
+                {
+                    "type" : "combat",
+                    "data" :
+                    {
+                      "enemies" :
+                      [
+                          "Burning Ghoul",
+                          "Heavy Bandit",
+                          "Skeleton"
+                      ]
+                    }
+                  }
+            ]
         },
         {
             "x": 0,

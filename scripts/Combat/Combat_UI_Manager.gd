@@ -67,6 +67,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		menu.visible = true
 		submenu.visible = true
 
+		# TODO COntemplate case where ability can't be choosen due to low stamina
 		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.stats.strain)
 		abilities_grid.get_child(0).grab_focus()
 		_on_ability_released()
@@ -135,24 +136,30 @@ func _on_tween_completed(object : Object, key : NodePath):
 
 func set_status() -> void:
 	for i in range(0, allies.size()):
-		(allies_status[i] as Battler_UI_Controller).set_all_stats(\
-			allies[i].data.name, \
-			allies[i].data.stats.health, \
-			allies[i].data.stats.max_health, \
-			allies[i].data.stats.strain, \
-			allies[i].data.stats.max_strain, \
-			allies[i] \
-		)
+		if allies[i].data.stats.health == 0:
+			allies_status[i].visible = false
+		else:
+			(allies_status[i] as Battler_UI_Controller).set_all_stats(\
+				allies[i].data.name, \
+				allies[i].data.stats.health, \
+				allies[i].data.stats.max_health, \
+				allies[i].data.stats.strain, \
+				allies[i].data.stats.max_strain, \
+				allies[i] \
+			)
 
 	for i in range (0, enemies.size()):
-		(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
-			enemies[i].data.name, \
-			enemies[i].data.stats.health, \
-			enemies[i].data.stats.max_health, \
-			enemies[i].data.stats.strain, \
-			enemies[i].data.stats.max_strain, \
-			enemies[i] \
-		)
+		if enemies[i].data.stats.health == 0:
+			enemies_status[i].visible = false
+		else:
+			(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
+				enemies[i].data.name, \
+				enemies[i].data.stats.health, \
+				enemies[i].data.stats.max_health, \
+				enemies[i].data.stats.strain, \
+				enemies[i].data.stats.max_strain, \
+				enemies[i] \
+			)
 
 func update_status_graphics() -> void:
 	for i in range (0, allies.size()):
@@ -232,6 +239,9 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 
 func on_combat_end(xp_earned : int):
 	end_screen.visible = true
+	queue_container.visible = false
+	menu.visible = false
+	submenu.visible = false
 
 	for index in range(allies.size()):
 		var ally := allies[index] as Character_Combat
@@ -244,4 +254,16 @@ func _on_Status_battler_selected(battler_ui_button : Battler_UI_Controller) -> v
 
 func _on_end_screen_dismissed():
 	end_screen.visible = false
+
+	for ally_status in allies_status:
+		ally_status.visible = true
+	for enemy_status in enemies_status:
+		enemy_status.visible = true
+
+	for queue_item in queue_container.get_children():
+		queue_item.visible = true
+
+	queue_container.visible = true
+	menu.visible = true
+	submenu.visible = true
 	emit_signal("end_combat_summary_dismissed")

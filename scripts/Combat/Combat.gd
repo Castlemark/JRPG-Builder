@@ -75,6 +75,11 @@ func start_combat(combat_data : Dictionary) -> void:
 	_update_turn_order()
 	UI.indicate_cur_fighter(_cur_fighter, _turn_order)
 	UI.set_status()
+	
+
+	ally_first.visible = false if ally_first.data.stats.health == 0 else true
+	ally_second.visible = false if ally_second.data.stats.health == 0 else true
+	ally_third.visible = false if ally_third.data.stats.health == 0 else true
 
 	_combat_started = true
 	randomize()
@@ -82,12 +87,9 @@ func start_combat(combat_data : Dictionary) -> void:
 
 func _end_combat() -> void:
 	# We reset stamina of allies
-	if ally_first.visible:
-		ally_first.data.stats.strain = ally_first.data.stats.max_strain
-	if ally_second.visible:
-		ally_second.data.stats.strain = ally_second.data.stats.max_strain
-	if ally_third.visible:
-		ally_third.data.stats.strain = ally_third.data.stats.max_strain
+	_reset_character_after_combat(ally_first)
+	_reset_character_after_combat(ally_second)
+	_reset_character_after_combat(ally_third)
 
 	# We deactivate all relevant elements
 	background.visible = false
@@ -103,9 +105,14 @@ func _end_combat() -> void:
 
 	emit_signal("combat_finished")
 
+func _reset_character_after_combat(character : Character_Combat):
+	character.data.stats.strain = character.data.stats.max_strain
+	character.data.stats.evasion = character.data.stats.max_evasion
+	character.data.stats.damage = character.data.stats.max_damage
+
 func _update_turn_order() -> void:
 	for i in range(_turn_order.size() - 1, -1, -1):
-		if not _turn_order[i].visible:
+		if _turn_order[i].data.stats.health == 0:
 			_turn_order.remove(i)
 
 	_turn_order.sort_custom(self, "_priority_sort")
@@ -132,6 +139,7 @@ func _priority_sort(a, b):
 
 func _execute_combat_loop() -> void:
 	# Turn logic goes inside the loop
+	print(_turn_order)
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
 
@@ -152,6 +160,7 @@ func _execute_combat_loop() -> void:
 			_update_turn_order()
 		UI.indicate_cur_fighter(_cur_fighter, _turn_order)
 
+	print("ending combat")
 	UI.on_combat_end(_xp_reward)
 
 func _combat_is_in_progress() -> bool:
@@ -192,10 +201,7 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	_apply_ability_effect(recevier_battler, emiter)
 	UI.update_status_graphics()
 
-	if recevier_battler == emiter:
-		_yield_battler_counter = 1
-	else:
-		_yield_battler_counter = 2
+	_yield_battler_counter = 1 if recevier_battler == emiter else 2
 	yield(self, "battler_animations_completed")
 
 	# We check if receiver has died
@@ -239,13 +245,13 @@ func _apply_ability_effect(receiver, emiter) -> void:
 
 	match _cur_ability.type:
 		"health":
-			receiver.data.stats.health -= amount
+			receiver.data.stats.health = receiver.data.stats.health - amount if (receiver.data.stats.health - amount > 0) else 0
 		"evasion":
-			receiver.data.stats.evasion -= amount
+			receiver.data.stats.evasion = receiver.data.stats.evasion - amount if (receiver.data.stats.evasion - amount > 0) else 0
 		"strain":
-			receiver.data.stats.strain -= amount
+			receiver.data.stats.strain = receiver.data.stats.strain - amount if (receiver.data.stats.strain - amount > 0) else 0
 		"damage":
-			receiver.data.stats.damage -= amount
+			receiver.data.stats.damage = receiver.data.stats.damage - amount if (receiver.data.stats.damage - amount > 0) else 0
 
 # This function decides what ability and target will an enemy choose, then executes it's turn
 func _enemy_decide_turn(enemy : Enemy_Combat) -> void:

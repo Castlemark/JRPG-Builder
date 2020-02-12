@@ -110,6 +110,17 @@ class Enemy_Data:
 	var xp_reward : int
 	var scale : float
 
+	func duplicate_enemy() -> Enemy_Data:
+		var d_enemy := Enemy_Data.new()
+		d_enemy.name = self.name
+		d_enemy.stats = self.stats.duplicate_stats()
+		d_enemy.animation_data = self.animation_data
+		d_enemy.abilities = self.abilities
+		d_enemy.scale = self.scale
+		d_enemy.xp_reward = self.xp_reward
+
+		return d_enemy
+
 class Ability_Data:
 	var name : String
 	var min_level : int
@@ -131,6 +142,22 @@ class Stats_Data:
 	var max_evasion : float
 	var damage : int
 	var max_damage : int
+
+	func duplicate_stats() -> Stats_Data:
+		var d_stats := Stats_Data.new()
+
+		d_stats.critic = self.critic
+		d_stats.speed = self.speed
+		d_stats.health = self.health
+		d_stats.max_health = self.max_health
+		d_stats.strain = self.strain
+		d_stats.max_strain = self.max_strain
+		d_stats.evasion = self.evasion
+		d_stats.max_evasion = self.max_evasion
+		d_stats.damage = self.damage
+		d_stats.max_damage = self.max_damage
+
+		return d_stats
 
 class Animation_Data:
 	var hframes : int
