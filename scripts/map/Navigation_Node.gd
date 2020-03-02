@@ -11,7 +11,6 @@ var default_intersection_node : Texture = preload("res://default_assets/map/map_
 var default_path_node : Texture = preload("res://default_assets/map/map_nodes/node_path.png")
 
 onready var skin : Sprite3D
-onready var events : Spatial
 onready var actions : Node
 
 var index : int
@@ -23,7 +22,6 @@ func _ready() -> void:
 
 func initialize(node_info, node_index : int, path_img : Resource, intersection_img : Texture) -> void:
 	skin  = ($Skin as Sprite3D)
-	events  = ($Events as Spatial)
 	actions = $Actions
 	
 	intersection_node = intersection_img
