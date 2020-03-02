@@ -22,9 +22,7 @@ func initialize(character) -> void:
 	name_label.text = data.name
 	level_label.text = _LEVEL + String(data.start_level)
 
-	var img : Texture = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/party/" + character.name + "/icon.png")
-	if img != null:
-		icon_rect.texture = img
+	icon_rect.texture = character.icon_texture
 
 	self.connect("toggled", self, "_on_toggled")
 

@@ -12,8 +12,7 @@ var elapsed_frame_time := 0.0
 
 func initialize(detail_info) -> void:
 	
-	var path : String = "res://campaigns/" + GM.campaign_data.name + "/maps/" + GM.campaign_data.cur_map + "/detail_art/" + detail_info.filepath + ".png"
-	var detail_img := Utils.load_img_3D(path)
+	var detail_img : Texture = detail_info.texture
 	
 	if detail_img != null:
 		sprite.texture = detail_img

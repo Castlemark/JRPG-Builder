@@ -21,14 +21,12 @@ func initialize(enemy_data : Model.Enemy_Data) -> void:
 	data = enemy_data
 	
 	label.text = data.name
-	var icon_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/icon.png")
-	if icon_sprite != null:
-		enemy_icon.texture = icon_sprite
+	enemy_icon.texture = enemy_data.icon_texture
 	
-	idle_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/idle.png")
-	attack_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/attack.png")
-	hit_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/hit.png")
-	miss_sprite = Utils.load_img_GUI("res://campaigns/" + GM.campaign_data.name + "/characters/enemies/" + data.name + "/miss.png")
+	idle_sprite = enemy_data.idle_texture
+	attack_sprite = enemy_data.attack_texture
+	hit_sprite = enemy_data.hit_texture
+	miss_sprite = enemy_data.miss_texture
 	
 	if data.animation_data != null:
 		is_animated = true

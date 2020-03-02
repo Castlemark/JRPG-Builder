@@ -173,6 +173,7 @@ class Campaign_Loader:
 
 		# Details
 		map_data.detail_art = []
+		var detail_cache := {}
 		for detail_info in map_dict.detail_art:
 			if not (detail_info.rotation == 0 or detail_info.rotation == 1):
 				print("Detail " + detail_info.filepath + " contains rotation field, but value is not valid, it must be either 0 for horizontal or 1 for vertical")
@@ -202,6 +203,16 @@ class Campaign_Loader:
 				detail_data.animation_data = animation_data
 			else:
 				detail_data.animation_data = null
+			
+			if not detail_cache.has(detail_info.filepath):
+				detail_data.texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/detail_art/" + detail_info.filepath + ".png")
+				if detail_data.texture == null:
+					print("	detail" + detail_info.filepath + " texture could not be Loaded, please make sure the texture exists and has the correct name")
+					load_correct = false
+				else:
+					detail_cache[detail_info.filepath] = detail_data.texture
+			else:
+				detail_data.texture = detail_cache[detail_info.filepath]
 
 			map_data.detail_art.append(detail_data)
 
@@ -220,9 +231,33 @@ class Campaign_Loader:
 
 		#Textures
 		map_data.combat_background = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/maps/" + map_name +  "/combat_background.png")
-
 		if map_data.combat_background == null:
 			print("	combat background could not be Loaded, please make sure the image exists and has the correct name")
+			load_correct = false
+		
+		map_data.map_floor = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map.png")
+		if map_data.map_floor == null:
+			print("	map floor texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		map_data.intersection_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map_nodes/node_intersection.png")
+		if map_data.intersection_texture == null:
+			print("	intersection node texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		map_data.path_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map_nodes/node_path.png")
+		if map_data.path_texture == null:
+			print("	path node texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		map_data.between_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map_nodes/node_between.png")
+		if map_data.between_texture == null:
+			print("	path node texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		map_data.avatar_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/player_avatar.png")
+		if map_data.map_floor == null:
+			print("	map floor texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
 
 		if not load_correct:
@@ -394,6 +429,32 @@ class Campaign_Loader:
 
 			character_data.abilities[ability_name] = campaign_data.abilities.get(ability_name)
 
+		#Textures
+		character_data.icon_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/icon.png")
+		if character_data.icon_texture == null:
+			print("	party character icon could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		character_data.attack_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/attack.png")
+		if character_data.attack_texture == null:
+			print("	party character attack texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		character_data.hit_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/hit.png")
+		if character_data.hit_texture == null:
+			print("	party character hit texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		character_data.idle_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/idle.png")
+		if character_data.idle_texture == null:
+			print("	party character idle texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		character_data.miss_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/miss.png")
+		if character_data.attack_texture == null:
+			print("	party character miss texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+
 		if not load_correct:
 			return null
 
@@ -453,7 +514,6 @@ class Campaign_Loader:
 
 		#Textures
 		ability_data.icon_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/abilities/" + ability_name + "/icon.png")
-
 		if ability_data.icon_texture == null:
 			print("	ability icon could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
@@ -487,15 +547,22 @@ class Campaign_Loader:
 				load_correct = false
 				print("	\nItem could not be loaded correctly\n------------------------------------")
 				continue
+			
+			#Textures
+			var icon_item : Texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/items/" + item_name + "/item.png")
+			if icon_item == null:
+				print("	item icon could not be Loaded, please make sure the icon exists and has the correct name")
+				load_correct = false
+				continue
 
 			var item_data
 			match item_dict.type:
 				"equipment":
-					item_data = load_equipment(item_name, item_dict.data)
+					item_data = load_equipment(item_name, item_dict.data, icon_item)
 				"quest_object":
-					item_data = load_quest_item(item_name, item_dict.data)
+					item_data = load_quest_item(item_name, item_dict.data, icon_item)
 				"consumable":
-					item_data = load_consumable(item_name, item_dict.data)
+					item_data = load_consumable(item_name, item_dict.data, icon_item)
 
 			print("	Successfully loaded item\n------------------------------------")
 			items[item_name] = item_data
@@ -503,9 +570,10 @@ class Campaign_Loader:
 		if not load_correct:
 			return {}
 
+		print("ALL ITEMS LOADED SUCESSFULLY!\n")
 		return items
 
-	func load_consumable(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Consumable_Data:
+	func load_consumable(item_name : String, item_dict : Dictionary, icon_texture : Texture) -> Model.Item_Data.Consumable_Data:
 		var item_data := Model.Item_Data.Consumable_Data.new()
 		item_data.type = "consumable"
 
@@ -519,10 +587,12 @@ class Campaign_Loader:
 		item_effect.duration = item_dict.effect.duration as int
 
 		item_data.effect = item_effect
+		
+		item_data.icon_texture = icon_texture
 
 		return item_data
 
-	func load_equipment(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Equipment_Item_Data:
+	func load_equipment(item_name : String, item_dict : Dictionary, icon_texture : Texture) -> Model.Item_Data.Equipment_Item_Data:
 		var item_data := Model.Item_Data.Equipment_Item_Data.new()
 		item_data.type = "equipment"
 
@@ -545,20 +615,24 @@ class Campaign_Loader:
 		item_stats.max_damage = item_stats.max_damage
 
 		item_data.stats = item_stats
+		
+		item_data.icon_texture = icon_texture
 
 		return item_data
 
-	func load_quest_item(item_name : String, item_dict : Dictionary) -> Model.Item_Data.Quest_Object_Data:
+	func load_quest_item(item_name : String, item_dict : Dictionary, icon_texture : Texture) -> Model.Item_Data.Quest_Object_Data:
 		var item_data := Model.Item_Data.Quest_Object_Data.new()
 
 		item_data.name = item_name
 		item_data.type = "quest_object"
 		item_data.keyword = item_dict.keyword
+		
+		item_data.icon_texture = icon_texture
 
 		return item_data
 
 	func load_all_enemies(campaign_name : String) -> Dictionary:
-		print("#############################\n##### LOADING ENEMIES #####\n#############################")
+		print("#############################\n###### LOADING ENEMIES ######\n#############################")
 
 		var load_correct = true
 		var enemy_names : Array = Utils.scan_directories_in_directory("res://campaigns/" + campaign_name + "/characters/enemies")
@@ -580,7 +654,7 @@ class Campaign_Loader:
 		if not load_correct:
 			return {}
 
-		print("ALL ABILITIES LOADED SUCESSFULLY!\n")
+		print("ALL ENEMIES LOADED SUCESSFULLY!\n")
 		return enemies
 
 	func load_enemy(enemy_name : String, campaign_name : String) -> Model.Enemy_Data:
@@ -650,6 +724,32 @@ class Campaign_Loader:
 			enemy_data.animation_data = animation_data
 		else:
 			enemy_data.animation_data = null
+
+		#Textures
+		enemy_data.icon_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/icon.png")
+		if enemy_data.icon_texture == null:
+			print("	enemy icon could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		enemy_data.attack_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/attack.png")
+		if enemy_data.attack_texture == null:
+			print("	enemy attack texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		enemy_data.hit_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/hit.png")
+		if enemy_data.hit_texture == null:
+			print("	enemy hit texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		enemy_data.idle_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/idle.png")
+		if enemy_data.idle_texture == null:
+			print("	enemy idle texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
+		
+		enemy_data.miss_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/miss.png")
+		if enemy_data.attack_texture == null:
+			print("	enemy miss texture could not be Loaded, please make sure the icon exists and has the correct name")
+			load_correct = false
 
 		if not load_correct:
 			return null

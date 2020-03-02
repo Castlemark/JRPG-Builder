@@ -30,7 +30,13 @@ class Map_Data:
 	var detail_art : Array
 	var background_info : BG_Data
 	var access_point : int
+	
 	var combat_background : Texture
+	var map_floor : Texture
+	var intersection_texture : Texture
+	var path_texture : Texture
+	var between_texture : Texture
+	var avatar_texture : Texture
 
 	class BG_Data:
 		var x_offset : float
@@ -54,6 +60,8 @@ class Map_Data:
 		var rotation : int
 		var filepath : String
 		var animation_data : Animation_Data
+		
+		var texture : Texture
 
 class Item_Data:
 		class Consumable_Data:
@@ -61,17 +69,23 @@ class Item_Data:
 			var name : String
 			var price : int
 			var effect : Item_Effect_Data
+			
+			var icon_texture : Texture
 
 			class Item_Effect_Data:
 				var type : String
 				var value : int
 				var delay : int
 				var duration : int
+				
+				var icon_texture : Texture
 
 		class Quest_Object_Data:
 			var type : String
 			var name : String
 			var keyword : String
+			
+			var icon_texture : Texture
 
 		class Equipment_Item_Data:
 			var type : String
@@ -81,6 +95,8 @@ class Item_Data:
 			var stats : Stats_Data
 			var min_level : int
 			var rarity : int
+			
+			var icon_texture : Texture
 
 class Character_Data:
 	var name : String
@@ -93,6 +109,12 @@ class Character_Data:
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
 	var scale : float
+	
+	var icon_texture : Texture
+	var idle_texture : Texture
+	var attack_texture : Texture
+	var hit_texture : Texture
+	var miss_texture : Texture
 
 	class Equipment_Data:
 		var legs : Item_Data.Equipment_Item_Data
@@ -109,6 +131,12 @@ class Enemy_Data:
 	var animation_data : Animation_Data
 	var xp_reward : int
 	var scale : float
+	
+	var icon_texture : Texture
+	var idle_texture : Texture
+	var attack_texture : Texture
+	var hit_texture : Texture
+	var miss_texture : Texture
 
 	func duplicate_enemy() -> Enemy_Data:
 		var d_enemy := Enemy_Data.new()
@@ -118,6 +146,12 @@ class Enemy_Data:
 		d_enemy.abilities = self.abilities
 		d_enemy.scale = self.scale
 		d_enemy.xp_reward = self.xp_reward
+		
+		d_enemy.icon_texture = self.icon_texture
+		d_enemy.idle_texture = self.idle_texture
+		d_enemy.attack_texture = self.attack_texture
+		d_enemy.hit_texture = self.hit_texture
+		d_enemy.miss_texture = self.miss_texture
 
 		return d_enemy
 

@@ -171,7 +171,7 @@ func update_status_graphics() -> void:
 func update_queue(turn_order : Array) -> void:
 	for i in range(0, 6):
 		if i < turn_order.size():
-			(queue_container.get_child(i) as TextureRect).texture = turn_order[i].icon_sprite
+			(queue_container.get_child(i) as TextureRect).texture = turn_order[i].data.icon_texture
 		else:
 			queue_container.get_child(i).visible = false
 

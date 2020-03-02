@@ -31,11 +31,11 @@ func _ready() -> void:
 	initialize(GM.campaign_data.maps.get(GM.campaign_data.cur_map))
 
 func initialize(map) -> void:
-	path_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map_nodes/node_path.png")
-	intersection_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map_nodes/node_intersection.png")
-	between_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map_nodes/node_between.png")
-	avatar_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/player_avatar.png")
-	map_img = Utils.load_img_3D("res://campaigns/" + GM.campaign_data.name + "/maps/" + map.name + "/map.png")
+	path_img = map.path_texture
+	intersection_img = map.intersection_texture
+	between_img = map.between_texture
+	avatar_img = map.avatar_texture
+	map_img = map.map_floor
 
 	instantiate_navigation_nodes(map.navigation_nodes as Array)
 	instantiate_between_nodes(map.navigation_nodes as Array)
@@ -101,10 +101,6 @@ func instantiate_background_map(background_info) -> void:
 
 func instantiate_details(details_list : Array) -> void:
 	for detail_info in details_list:
-		if not (detail_info.rotation == 0 or detail_info.rotation == 1):
-			print("Detail contains rotation field, but value is not valid, it must be either 0 for horizontal or 1 for vertical")
-			return
-
 		var detail_node = detail_node_res.instance()
 		details.add_child(detail_node, true)
 		detail_node.initialize(detail_info)
