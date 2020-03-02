@@ -2,6 +2,8 @@ extends VBoxContainer
 
 class_name Menu_Manager
 
+signal on_menus_toggle(is_hidden)
+
 const SCREEN_NONE := "None"
 const MIN_SIZE := 74
 const MAX_SIZE := -1072
@@ -72,6 +74,9 @@ func _update_current_screen(section : Button) -> void:
 		menu_up = false
 		
 		(get_node("Content/" + section.name) as Control).visible = false
+		
+		emit_signal("on_menus_toggle", not menu_up)
+	
 	elif not menu_up:
 		section.pressed = true
 		_wipe_all_menus()
@@ -84,6 +89,8 @@ func _update_current_screen(section : Button) -> void:
 		yield(tween,"tween_completed")
 		animation_in_progress = false
 		menu_up = true
+		
+		emit_signal("on_menus_toggle", not menu_up)
 	else:
 		section.pressed = true
 		_wipe_all_menus()

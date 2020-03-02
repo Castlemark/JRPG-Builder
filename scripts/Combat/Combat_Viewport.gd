@@ -2,7 +2,7 @@ extends Panel
 
 class_name Combat_Viewport
 
-signal encounter_finished()
+signal on_combat_toggle(is_hidden)
 
 const MIN_SIZE := -1083
 const MAX_SIZE := 43
@@ -18,6 +18,7 @@ func _ready() -> void:
 	self.margin_bottom = MIN_SIZE
 
 func start_encounter(combat_data : Dictionary) -> void:
+	emit_signal("on_combat_toggle", false)
 	
 	print("starting encounter")
 	combat_controller.start_combat(combat_data)
@@ -33,4 +34,4 @@ func start_encounter(combat_data : Dictionary) -> void:
 	yield(tween,"tween_completed")
 	
 	print("ending encounter")
-	emit_signal("encounter_finished")
+	emit_signal("on_combat_toggle", true)
