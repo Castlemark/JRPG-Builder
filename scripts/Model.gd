@@ -30,7 +30,7 @@ class Map_Data:
 	var detail_art : Array
 	var background_info : BG_Data
 	var access_point : int
-	
+
 	var combat_background : Texture
 	var map_floor : Texture
 	var intersection_texture : Texture
@@ -60,7 +60,7 @@ class Map_Data:
 		var rotation : int
 		var filepath : String
 		var animation_data : Animation_Data
-		
+
 		var texture : Texture
 
 class Item_Data:
@@ -69,7 +69,7 @@ class Item_Data:
 			var name : String
 			var price : int
 			var effect : Item_Effect_Data
-			
+
 			var icon_texture : Texture
 
 			class Item_Effect_Data:
@@ -77,14 +77,14 @@ class Item_Data:
 				var value : int
 				var delay : int
 				var duration : int
-				
+
 				var icon_texture : Texture
 
 		class Quest_Object_Data:
 			var type : String
 			var name : String
 			var keyword : String
-			
+
 			var icon_texture : Texture
 
 		class Equipment_Item_Data:
@@ -95,13 +95,13 @@ class Item_Data:
 			var stats : Stats_Data
 			var min_level : int
 			var rarity : int
-			
+
 			var icon_texture : Texture
 
 class Character_Data:
 	var name : String
-	var start_level : int
-	var cur_level : int
+	var start_xp : int
+	var cur_xp : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
 	var stats : Stats_Data
@@ -109,12 +109,15 @@ class Character_Data:
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
 	var scale : float
-	
+
 	var icon_texture : Texture
 	var idle_texture : Texture
 	var attack_texture : Texture
 	var hit_texture : Texture
 	var miss_texture : Texture
+
+	func cur_level() -> int:
+		return floor(self.cur_xp/100.0) as int
 
 	class Equipment_Data:
 		var legs : Item_Data.Equipment_Item_Data
@@ -131,7 +134,7 @@ class Enemy_Data:
 	var animation_data : Animation_Data
 	var xp_reward : int
 	var scale : float
-	
+
 	var icon_texture : Texture
 	var idle_texture : Texture
 	var attack_texture : Texture
@@ -146,7 +149,7 @@ class Enemy_Data:
 		d_enemy.abilities = self.abilities
 		d_enemy.scale = self.scale
 		d_enemy.xp_reward = self.xp_reward
-		
+
 		d_enemy.icon_texture = self.icon_texture
 		d_enemy.idle_texture = self.idle_texture
 		d_enemy.attack_texture = self.attack_texture

@@ -203,7 +203,7 @@ class Campaign_Loader:
 				detail_data.animation_data = animation_data
 			else:
 				detail_data.animation_data = null
-			
+
 			if not detail_cache.has(detail_info.filepath):
 				detail_data.texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/detail_art/" + detail_info.filepath + ".png")
 				if detail_data.texture == null:
@@ -234,27 +234,27 @@ class Campaign_Loader:
 		if map_data.combat_background == null:
 			print("	combat background could not be Loaded, please make sure the image exists and has the correct name")
 			load_correct = false
-		
+
 		map_data.map_floor = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map.png")
 		if map_data.map_floor == null:
 			print("	map floor texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		map_data.intersection_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map_nodes/node_intersection.png")
 		if map_data.intersection_texture == null:
 			print("	intersection node texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		map_data.path_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map_nodes/node_path.png")
 		if map_data.path_texture == null:
 			print("	path node texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		map_data.between_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/map_nodes/node_between.png")
 		if map_data.between_texture == null:
 			print("	path node texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		map_data.avatar_texture = Utils.load_img_3D("res://campaigns/" + campaign_name + "/maps/" + map_name + "/player_avatar.png")
 		if map_data.map_floor == null:
 			print("	map floor texture could not be Loaded, please make sure the icon exists and has the correct name")
@@ -310,8 +310,8 @@ class Campaign_Loader:
 		character_data.name = character_name
 
 		# Level
-		character_data.start_level = character_dict.start_level as int
-		character_data.cur_level = character_data.start_level as int
+		character_data.start_xp = character_dict.start_xp as int
+		character_data.cur_xp = character_data.start_xp as int
 
 		# Scale
 		if character_dict.scale <= 0:
@@ -354,15 +354,15 @@ class Campaign_Loader:
 		# Cur Stats
 		var stats := Model.Stats_Data.new()
 
-		stats.critic = min_stats.critic + (character_data.cur_level - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
-		stats.speed = min_stats.speed + (character_data.cur_level - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
-		stats.health = min_stats.health + ((character_data.cur_level - 1) * float(max_stats.health - min_stats.health)/_MAX_LEVEL)
+		stats.critic = min_stats.critic + (character_data.cur_level() - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
+		stats.speed = min_stats.speed + (character_data.cur_level() - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
+		stats.health = min_stats.health + ((character_data.cur_level() - 1) * float(max_stats.health - min_stats.health)/_MAX_LEVEL)
 		stats.max_health = stats.health
-		stats.strain = min_stats.strain + ((character_data.cur_level - 1) * float(max_stats.strain - min_stats.strain)/_MAX_LEVEL)
+		stats.strain = min_stats.strain + ((character_data.cur_level() - 1) * float(max_stats.strain - min_stats.strain)/_MAX_LEVEL)
 		stats.max_strain = stats.strain
-		stats.evasion = min_stats.evasion + ((character_data.cur_level - 1) * float(max_stats.evasion - min_stats.evasion)/_MAX_LEVEL)
+		stats.evasion = min_stats.evasion + ((character_data.cur_level() - 1) * float(max_stats.evasion - min_stats.evasion)/_MAX_LEVEL)
 		stats.max_evasion = stats.evasion
-		stats.damage = min_stats.damage + ((character_data.cur_level - 1) * float(max_stats.damage - min_stats.damage)/_MAX_LEVEL)
+		stats.damage = min_stats.damage + ((character_data.cur_level() - 1) * float(max_stats.damage - min_stats.damage)/_MAX_LEVEL)
 		stats.max_damage = stats.damage
 
 		character_data.stats = stats
@@ -434,22 +434,22 @@ class Campaign_Loader:
 		if character_data.icon_texture == null:
 			print("	party character icon could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		character_data.attack_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/attack.png")
 		if character_data.attack_texture == null:
 			print("	party character attack texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		character_data.hit_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/hit.png")
 		if character_data.hit_texture == null:
 			print("	party character hit texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		character_data.idle_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/idle.png")
 		if character_data.idle_texture == null:
 			print("	party character idle texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		character_data.miss_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/party/" + character_name + "/miss.png")
 		if character_data.attack_texture == null:
 			print("	party character miss texture could not be Loaded, please make sure the icon exists and has the correct name")
@@ -547,7 +547,7 @@ class Campaign_Loader:
 				load_correct = false
 				print("	\nItem could not be loaded correctly\n------------------------------------")
 				continue
-			
+
 			#Textures
 			var icon_item : Texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/items/" + item_name + "/item.png")
 			if icon_item == null:
@@ -587,7 +587,7 @@ class Campaign_Loader:
 		item_effect.duration = item_dict.effect.duration as int
 
 		item_data.effect = item_effect
-		
+
 		item_data.icon_texture = icon_texture
 
 		return item_data
@@ -615,7 +615,7 @@ class Campaign_Loader:
 		item_stats.max_damage = item_stats.max_damage
 
 		item_data.stats = item_stats
-		
+
 		item_data.icon_texture = icon_texture
 
 		return item_data
@@ -626,7 +626,7 @@ class Campaign_Loader:
 		item_data.name = item_name
 		item_data.type = "quest_object"
 		item_data.keyword = item_dict.keyword
-		
+
 		item_data.icon_texture = icon_texture
 
 		return item_data
@@ -730,22 +730,22 @@ class Campaign_Loader:
 		if enemy_data.icon_texture == null:
 			print("	enemy icon could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		enemy_data.attack_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/attack.png")
 		if enemy_data.attack_texture == null:
 			print("	enemy attack texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		enemy_data.hit_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/hit.png")
 		if enemy_data.hit_texture == null:
 			print("	enemy hit texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		enemy_data.idle_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/idle.png")
 		if enemy_data.idle_texture == null:
 			print("	enemy idle texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
-		
+
 		enemy_data.miss_texture = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/characters/enemies/" + enemy_name + "/miss.png")
 		if enemy_data.attack_texture == null:
 			print("	enemy miss texture could not be Loaded, please make sure the icon exists and has the correct name")

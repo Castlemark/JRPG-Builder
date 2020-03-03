@@ -17,10 +17,10 @@ var data := Model.Character_Data.new()
 
 func initialize(character) -> void:
 	data = character
-	
+
 	self.name = data.name
 	name_label.text = data.name
-	level_label.text = _LEVEL + String(data.start_level)
+	level_label.text = _LEVEL + String(data.start_xp)
 
 	icon_rect.texture = character.icon_texture
 

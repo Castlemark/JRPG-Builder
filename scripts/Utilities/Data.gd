@@ -44,7 +44,7 @@ class Validation:
 	const type_data := [{"type" : TEXT}, {"data" : DICTIONARY}] # Used for items and actions
 
 	# CHARACTER
-	const char_fields := [{"start_level" : NUMBER}, {"min_stats" : DICTIONARY}, {"max_stats" : DICTIONARY}, {"abilities" : ARRAY}, {"equipment" : DICTIONARY}, {"scale": NUMBER}]
+	const char_fields := [{"start_xp" : NUMBER}, {"min_stats" : DICTIONARY}, {"max_stats" : DICTIONARY}, {"abilities" : ARRAY}, {"equipment" : DICTIONARY}, {"scale": NUMBER}]
 	const stats := [{"critic" : NUMBER}, {"speed" : NUMBER}, {"health" : NUMBER}, {"strain" : NUMBER}, {"evasion" : NUMBER}, {"evasion" : NUMBER}]
 	const char_slots := [{"legs" : TEXT}, {"torso" : TEXT}, {"accessory_1" : TEXT}, {"accessory_2" : TEXT}, {"accessory_3" : TEXT}, {"weapon" : TEXT}]
 
