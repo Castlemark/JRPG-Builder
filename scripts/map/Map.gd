@@ -90,13 +90,14 @@ func instantiate_background_map(background_info) -> void:
 	if map_img != null:
 		map_size = map_img.get_size()
 
-	for i in range(0, map_size.x, TILE_SIZE):
-		for j in range(0, map_size.y, TILE_SIZE):
+	for i in range(0, map_size.x * background_info.scale, TILE_SIZE):
+		for j in range(0, map_size.y  * background_info.scale, TILE_SIZE):
 			var back_tile = background_tile_res.instance()
 
-			back_tile.initialize(Vector2(i, j),
-								 map_img,
-								 Vector2(i/100.0 - 10 * offset.x, map_size.y/100.0 - j/100.0 - 10 * (offset.y + 1)))
+			back_tile.initialize(Vector2(i / background_info.scale, j / background_info.scale),
+								map_img,
+								Vector2(i/100.0 - 10 * offset.x, (map_size.y * background_info.scale) /100.0 - j/100.0 - 10 * (offset.y + 1)),
+								background_info.scale)
 			background.add_child(back_tile, true)
 
 func instantiate_details(details_list : Array) -> void:
