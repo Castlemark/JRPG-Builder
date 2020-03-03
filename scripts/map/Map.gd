@@ -99,13 +99,12 @@ func instantiate_background_map(background_info) -> void:
 			# We check if we surpass the region to avoid distortion
 			var x_size_region : int = TILE_SIZE if (i + TILE_SIZE < x_size) else (x_size - i)
 			var y_size_region : int = TILE_SIZE if (j + TILE_SIZE < y_size) else (y_size - j)
-			print("Size region: " + String(x_size_region) + " , " + String(y_size_region))
 			var size_region = Vector2(x_size_region, y_size_region)
 			
 			back_tile.initialize(Vector2(i / background_info.scale, j / background_info.scale),
 								size_region,
 								map_img,
-								Vector2(i/100.0 - 10 * offset.x, (y_size) /100.0 - j/100.0 - 10 * (offset.y + 1)),
+								Vector2(i/100.0 - 10 * offset.x, (y_size) /100.0 - j/100.0 - 10 * (offset.y + 1) + ((TILE_SIZE - y_size_region)/100.0)),
 								background_info.scale)
 			background.add_child(back_tile, true)
 
