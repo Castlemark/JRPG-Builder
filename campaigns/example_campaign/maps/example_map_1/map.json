@@ -86,7 +86,22 @@
             "x": 0,
             "y": 55,
             "connected_nodes":[1,2,12],
-            "actions": []
+            "actions": [
+                {
+                    "type" : "treasure",
+                    "data" :
+                    {
+                        "money": 350,
+                        "items":
+                        [
+                            "breastplate",
+                            "crown",
+                            "food",
+                            "pants"
+                        ]
+                    }
+                  }
+            ]
         },
         {
             "x": 112,
