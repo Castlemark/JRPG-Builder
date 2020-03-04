@@ -139,7 +139,6 @@ func _priority_sort(a, b):
 
 func _execute_combat_loop() -> void:
 	# Turn logic goes inside the loop
-	print(_turn_order)
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
 

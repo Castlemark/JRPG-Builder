@@ -21,10 +21,10 @@ func start_encounter(combat_data : Dictionary) -> void:
 	emit_signal("on_combat_toggle", false)
 	
 	print("starting encounter")
-	combat_controller.start_combat(combat_data)
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
+	combat_controller.start_combat(combat_data)
 	$ViewportContainer.visible = true
 	yield(combat_controller, "combat_finished")
 	

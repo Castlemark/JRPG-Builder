@@ -49,7 +49,6 @@ func update_stats():
 		energy_label.text = String(data.data.stats.strain) + "/" + String(energybar.max_value)
 	
 	if data.data.stats.evasion != cur_evasion:
-		print("hola")
 		tween.interpolate_method(self, "_animate_evasion", cur_evasion, data.data.stats.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 		cur_evasion = data.data.stats.evasion
 	
