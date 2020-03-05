@@ -5,10 +5,11 @@
 [ext_resource path="res://scenes/combat/Character_Combat.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/combat/Enemy_Combat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://default_assets/combat/attack_bg.png" type="Texture" id=5]
-[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=6]
+[ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=6]
 [ext_resource path="res://scripts/Combat/Combat_UI_Manager.gd" type="Script" id=7]
 [ext_resource path="res://scenes/combat/Character_UI_Status.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/combat/End_Screen.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="ButtonGroup" id=1]
 

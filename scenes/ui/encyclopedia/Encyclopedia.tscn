@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Encyclopedia.gd" type="Script" id=2]
 [ext_resource path="res://default_assets/user_interface/encyclopedia/journal.png" type="Texture" id=3]
 [ext_resource path="res://default_assets/user_interface/encyclopedia/bestiary.png" type="Texture" id=4]
@@ -8,6 +8,7 @@
 [ext_resource path="res://default_assets/user_interface/encyclopedia/stats.png" type="Texture" id=6]
 [ext_resource path="res://scripts/ui/Enemy_Preview.gd" type="Script" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
+
 
 [sub_resource type="ButtonGroup" id=1]
 
