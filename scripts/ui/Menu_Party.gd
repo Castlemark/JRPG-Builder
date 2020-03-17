@@ -15,7 +15,7 @@ onready var character_ability_container : GridContainer = $Data/HBoxContainer/Ab
 func _ready():
 	pass
 
-func initialize_party() -> void:
+func update() -> void:
 	if GM.campaign_data == null:
 		return
 	# TODO check for duplicates (characters)

@@ -3,7 +3,6 @@
 [ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Inventory.gd" type="Script" id=2]
 
-
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="Inventory" type="Tabs"]
@@ -17,7 +16,7 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
-margin_left = 3.8147e-006
+margin_left = 3.8147e-06
 margin_top = 30.0
 rect_min_size = Vector2( 400, 370 )
 
@@ -81,6 +80,10 @@ margin_top = 40.0
 margin_right = -10.0
 margin_bottom = -10.0
 rect_min_size = Vector2( 400, 360 )
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Grid" type="GridContainer" parent="Scroll"]
 margin_right = 1708.0

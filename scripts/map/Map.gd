@@ -18,6 +18,7 @@ onready var player_avatar := $Player_Avatar as Player_Avatar
 onready var camera := $Player_Avatar/Camera as Map_Camera
 
 onready var combat_viewport := $UI/Combat_Viewport as Combat_Viewport
+onready var treaseure_menu := $UI/Treasure_Menu as Treaseure_Menu
 
 var path_img : Texture
 var intersection_img : Texture

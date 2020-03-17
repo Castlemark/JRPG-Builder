@@ -27,13 +27,7 @@ var menu_up : bool
 var animation_in_progress : bool
 var current_screen : String
 
-func initialize() -> void:
-	inventory_menu.initialize_inventory()
-	party_menu.initialize_party()
-	encyclopedia_menu.initialize_encyclopedia([], [])
-
 func _ready() -> void:
-	initialize()
 	_wipe_all_menus()
 	self.margin_top = MIN_SIZE
 	
@@ -81,6 +75,7 @@ func _update_current_screen(section : Button) -> void:
 		section.pressed = true
 		_wipe_all_menus()
 		(get_node("Content/" + section.name) as Control).visible = true
+		(get_node("Content/" + section.name) as Control).update()
 		current_screen = section.name
 		
 		animation_in_progress = true
@@ -95,6 +90,7 @@ func _update_current_screen(section : Button) -> void:
 		section.pressed = true
 		_wipe_all_menus()
 		(get_node("Content/" + section.name) as Control).visible = true
+		(get_node("Content/" + section.name) as Control).update()
 		current_screen = section.name
 
 func _wipe_all_menus() -> void:

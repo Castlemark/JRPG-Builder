@@ -14,13 +14,30 @@ func _ready():
 	pass
 
 
-func initialize_inventory() -> void:
+func update() -> void:
 	if GM.campaign_data == null: 
 		return
-	for item_data in GM.campaign_data.party.inventory:
-		var item_node : Item = item_res.instance()
-		inventory_container.add_child(item_node, true)
-		item_node.initialize(item_data)
+	# TODO reuse items when possible
+	var inventory : Array = GM.campaign_data.party.inventory
+	var difference : int = inventory.size() - (inventory_container.get_child_count())
+	if difference > 0:
+# warning-ignore:unused_variable
+		for i in range(abs(difference)):
+			var item_node : Item = item_res.instance()
+			inventory_container.add_child(item_node, true)
+			inventory_container.move_child(item_node, 0)
+			item_node.group = item_button_group
+	elif difference < 0:
+# warning-ignore:unused_variable
+		for i in range(abs(difference)):
+			var node_to_delete = inventory_container.get_child(0)
+			inventory_container.remove_child(node_to_delete)
+			node_to_delete.queue_free()
+	
+	
+	for i in range(inventory.size()):
+		var item_node : Item = inventory_container.get_child(i)
+		item_node.initialize(inventory[i])
 		item_node.group = item_button_group
 
 func _on_filter_pressed() -> void:

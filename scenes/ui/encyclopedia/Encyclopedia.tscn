@@ -9,7 +9,6 @@
 [ext_resource path="res://scripts/ui/Enemy_Preview.gd" type="Script" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
 
-
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="Encyclopedia" type="Tabs"]
@@ -24,9 +23,11 @@ anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.95
 custom_constants/separation = 26
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Selector" type="VBoxContainer" parent="HBoxContainer"]
-editor/display_folded = true
 margin_right = 125.0
 margin_bottom = 972.0
 rect_min_size = Vector2( 125, 0 )
@@ -57,7 +58,6 @@ custom_constants/separation = 7
 alignment = 1
 
 [node name="Journal" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-editor/display_folded = true
 margin_right = 105.0
 margin_bottom = 125.0
 rect_min_size = Vector2( 0, 125 )
@@ -89,7 +89,6 @@ text = "Journal"
 align = 1
 
 [node name="Bestiary" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-editor/display_folded = true
 margin_top = 132.0
 margin_right = 105.0
 margin_bottom = 257.0
@@ -122,7 +121,6 @@ text = "Bestiary"
 align = 1
 
 [node name="Abilities" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-editor/display_folded = true
 margin_top = 264.0
 margin_right = 105.0
 margin_bottom = 389.0
@@ -155,7 +153,6 @@ text = "Abilities"
 align = 1
 
 [node name="Stats" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-editor/display_folded = true
 margin_top = 396.0
 margin_right = 105.0
 margin_bottom = 521.0
@@ -212,6 +209,9 @@ margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
 scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Grid" type="GridContainer" parent="HBoxContainer/Content/BG/Scroll"]
 margin_right = 1131.0
@@ -224,25 +224,25 @@ columns = 5
 
 [node name="Inv_Fill_1" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
 modulate = Color( 1, 1, 1, 0 )
-margin_right = 275.0
+margin_right = 220.0
 size_flags_horizontal = 3
 
 [node name="Inv_Fill_2" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 285.0
-margin_right = 560.0
+margin_left = 230.0
+margin_right = 450.0
 size_flags_horizontal = 3
 
 [node name="Inv_Fill_3" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 570.0
-margin_right = 845.0
+margin_left = 460.0
+margin_right = 680.0
 size_flags_horizontal = 3
 
 [node name="Inv_Fill_4" type="Panel" parent="HBoxContainer/Content/BG/Scroll/Grid"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 855.0
-margin_right = 1130.0
+margin_left = 690.0
+margin_right = 910.0
 size_flags_horizontal = 3
 
 [node name="Enemy_Preview" type="VBoxContainer" parent="HBoxContainer"]
@@ -370,7 +370,6 @@ margin_bottom = 152.0
 text = "Speed: "
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Enemy_Preview/Abilities/Stats/Container"]
-editor/display_folded = true
 margin_left = 184.0
 margin_right = 196.0
 margin_bottom = 256.0

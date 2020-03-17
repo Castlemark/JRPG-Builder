@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/combat/Character_UI_Status.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/combat/End_Screen.tscn" type="PackedScene" id=9]
 
-
 [sub_resource type="ButtonGroup" id=1]
 
 [node name="Combat" type="Node2D"]
