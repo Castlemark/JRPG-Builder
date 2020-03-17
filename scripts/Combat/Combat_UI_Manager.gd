@@ -67,7 +67,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		menu.visible = true
 		submenu.visible = true
 
-		# TODO COntemplate case where ability can't be choosen due to low stamina
+		# TODO Contemplate case where ability can't be choosen due to low stamina
 		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.stats.strain)
 		abilities_grid.get_child(0).grab_focus()
 		_on_ability_released()

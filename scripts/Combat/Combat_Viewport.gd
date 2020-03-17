@@ -3,6 +3,7 @@ extends Panel
 class_name Combat_Viewport
 
 signal on_combat_toggle(is_hidden)
+signal on_combat_finished()
 
 const MIN_SIZE := -1083
 const MAX_SIZE := 43
@@ -34,4 +35,5 @@ func start_encounter(combat_data : Dictionary) -> void:
 	yield(tween,"tween_completed")
 	
 	print("ending encounter")
+	emit_signal("on_combat_finished")
 	emit_signal("on_combat_toggle", true)
