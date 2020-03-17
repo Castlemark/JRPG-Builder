@@ -26,7 +26,6 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Items
 - [ ] <u>Structure Sprint - 23/08/19</u>
   - [ ] Story module V-1
-    - [ ] NPC
     - [ ] Conversation
   - [x] Combat module V-1
     - [x] Combat logic
@@ -34,7 +33,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
   - [ ] Map module V-3
     - [x] Combat trigger
     - [X] Treasure
-    - [ ] NPC
+    - [ ] Conversation
 - [ ] <u>Story Sprint - 04/10/19</u>
   - [ ] Story module V-2 **(final)**
     - [ ] Cut-scene
