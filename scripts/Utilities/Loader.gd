@@ -62,7 +62,7 @@ class Campaign_Loader:
 		for inventory_item in campaign_dict.inventory:
 			if not campaign_data.items.has(inventory_item):
 				load_correct = false
-				print("\nYour inventory has the item\"" + inventory_item  +"\", but this item does not exist or has not loaded correctly, please make sure the character exists and is in the correct place")
+				print("\nYour inventory has the item\"" + inventory_item  + "\", but this item does not exist or has not loaded correctly, please make sure the character exists and is in the correct place")
 			else:
 				party.inventory.append(campaign_data.items.get(inventory_item))
 
@@ -155,6 +155,19 @@ class Campaign_Loader:
 						if not campaign_data.enemies.has(enemy):
 							load_correct = false
 							print("Action combat has the necessary fields, but enenmy \"" + enemy + "\" could not be loaded or does not exist")
+				
+				elif action_info.type == "treasure":
+					if action_info.data.money < 0:
+						load_correct = false
+						print("Action treasure has " + String(action_info.data.money) +  " money, but the value must be positive")
+					
+					for item in action_info.data.items:
+						if not campaign_data.items.has(item):
+							load_correct = false
+							print("Action treasure has the necessary fields, but item \"" + item + "\" could not be loaded or does not exist")
+				
+				elif action_info.type == "travel":
+					pass # TODO check destination exists as map.json and  target node is positive
 
 				if not load_correct:
 					continue

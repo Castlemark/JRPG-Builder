@@ -10,12 +10,12 @@ onready var enemy_preview : Enemy_preview = $HBoxContainer/Enemy_Preview
 
 var enemy_button_group := ButtonGroup.new()
 
-func initialize_encyclopedia(journal : Array, statistics : Array) -> void:
+func update() -> void:
 	# We don't pass enemy and abilities as parameters because we scan the 
 	# whole enemy and ability directories to know wich ones exist.
 	
-	_initialize_journal(journal)
-	_initialize_stats(statistics)
+	#_initialize_journal(journal)
+	#_initialize_stats(statistics)
 	_scan_enemies()
 	_scan_abilities()
 

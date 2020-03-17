@@ -59,6 +59,9 @@ func set_up_actions(actions_list : Array):
 			"combat":
 				action = Combat_Trigger_Action.new()
 				action.name = "Combat_Action"
+			"treasure":
+				action = Treasure_Action.new()
+				action.name = "Treasure_Action"
 		
 		action.initialize(i.data)
 		actions.add_child(action, true)

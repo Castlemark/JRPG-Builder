@@ -33,7 +33,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Placeholder enemy AI
   - [ ] Map module V-3
     - [x] Combat trigger
-    - [ ] Treasure
+    - [X] Treasure
     - [ ] NPC
 - [ ] <u>Story Sprint - 04/10/19</u>
   - [ ] Story module V-2 **(final)**

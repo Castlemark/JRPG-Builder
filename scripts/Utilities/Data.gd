@@ -12,7 +12,8 @@ class Validation:
 
 	const action_types := {
 		"travel" : [{"map_name" : TEXT}, {"access_point" : NUMBER}],
-		"combat" : [{"enemies" : ARRAY}]
+		"combat" : [{"enemies" : ARRAY}],
+		"treasure": [{"money": NUMBER}, {"items": ARRAY}]
 	}
 	const item_types := {
 		"consumable" : [{"price" : NUMBER}, {"effect" : DICTIONARY}],

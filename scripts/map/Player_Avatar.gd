@@ -40,3 +40,4 @@ func is_moving() -> bool:
 func execute_actions() -> void:
 	for action in current_node.actions.get_children():
 		(action as Generic_Action).execute()
+		yield(action, "finished")
