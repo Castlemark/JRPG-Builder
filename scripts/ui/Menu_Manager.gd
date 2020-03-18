@@ -2,7 +2,7 @@ extends VBoxContainer
 
 class_name Menu_Manager
 
-signal on_menus_toggle(is_hidden)
+signal on_menus_toggle(is_active)
 
 const SCREEN_NONE := "None"
 const MIN_SIZE := 74
@@ -69,7 +69,7 @@ func _update_current_screen(section : Button) -> void:
 		
 		(get_node("Content/" + section.name) as Control).visible = false
 		
-		emit_signal("on_menus_toggle", not menu_up)
+		emit_signal("on_menus_toggle", menu_up)
 	
 	elif not menu_up:
 		section.pressed = true
@@ -85,7 +85,7 @@ func _update_current_screen(section : Button) -> void:
 		animation_in_progress = false
 		menu_up = true
 		
-		emit_signal("on_menus_toggle", not menu_up)
+		emit_signal("on_menus_toggle", menu_up)
 	else:
 		section.pressed = true
 		_wipe_all_menus()
@@ -96,3 +96,20 @@ func _update_current_screen(section : Button) -> void:
 func _wipe_all_menus() -> void:
 	for screen in content_panel.get_children():
 			(screen as Control).visible = false
+
+func on_external_ui_toggle(external_active : bool) -> void:
+	
+	if external_active and menu_up:
+		_update_current_screen(sections_group.get_pressed_button())
+	
+	inventory_button.disabled = external_active
+	inventory_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	party_button.disabled = external_active
+	party_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	encyclopedia_button.disabled = external_active
+	encyclopedia_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	settings_button.disabled = external_active
+	settings_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL

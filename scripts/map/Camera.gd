@@ -73,5 +73,5 @@ func on_window_resize() -> void:
 	height = get_viewport().get_visible_rect().size.y
 	width = get_viewport().get_visible_rect().size.x
 
-func on_ui_toggle(is_hidden : bool) -> void:
-	should_move = is_hidden
+func on_ui_toggle(ui_active : bool) -> void:
+	should_move = not ui_active

@@ -2,7 +2,7 @@ extends Panel
 
 class_name Combat_Viewport
 
-signal on_combat_toggle(is_hidden)
+signal on_combat_toggle(is_active)
 signal on_combat_finished()
 
 const MIN_SIZE := -1083
@@ -19,7 +19,7 @@ func _ready() -> void:
 	self.margin_bottom = MIN_SIZE
 
 func start_encounter(combat_data : Dictionary) -> void:
-	emit_signal("on_combat_toggle", false)
+	emit_signal("on_combat_toggle", true)
 	
 	print("starting encounter")
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
@@ -36,4 +36,4 @@ func start_encounter(combat_data : Dictionary) -> void:
 	
 	print("ending encounter")
 	emit_signal("on_combat_finished")
-	emit_signal("on_combat_toggle", true)
+	emit_signal("on_combat_toggle", false)

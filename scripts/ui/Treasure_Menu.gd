@@ -2,7 +2,7 @@ extends Panel
 
 class_name Treaseure_Menu
 
-signal on_treasure_toggle(is_hidden)
+signal on_treasure_toggle(is_active)
 signal items_taken()
 
 var item_res := preload("res://scenes/ui/inventory/Item.tscn")
@@ -12,7 +12,7 @@ onready var money_label :=  $Control/Money as Label
 onready var item_container := $Control/Scroll/GridContainer as GridContainer
 
 func receive_items(treasure_data : Dictionary) -> void:
-	emit_signal("on_treasure_toggle", false)
+	emit_signal("on_treasure_toggle", true)
 	
 	Game_Manager.campaign_data.party.money += treasure_data.money
 	money_label.text = "Money: " + String(treasure_data.money)
@@ -43,5 +43,5 @@ func on_click_take_all() -> void:
 		Game_Manager.campaign_data.party.inventory.append(item.data)
 	
 	self.visible = false
-	emit_signal("on_treasure_toggle", true)
+	emit_signal("on_treasure_toggle", false)
 	emit_signal("items_taken")
