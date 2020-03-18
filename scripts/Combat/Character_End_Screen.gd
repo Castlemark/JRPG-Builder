@@ -16,7 +16,7 @@ func show_character_summary(char_name : String, xp_earned : int, cur_life : int 
 	self.xp_earned.text = "0" + xp_msg
 	rem_life_label.text = String(cur_life) + "/" + String(total_life)
 	rem_life_bar.value = 0
-	#character_portrait.texture = 
+	character_portrait.texture = Game_Manager.campaign_data.characters.get(char_name).icon_texture
 	rem_life_bar.max_value = total_life
 	
 	
