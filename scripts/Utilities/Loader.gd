@@ -79,6 +79,13 @@ class Campaign_Loader:
 		campaign_data.maps = maps
 		campaign_data.cur_map = campaign_dict.map_name
 
+		# DIALOGUES
+		# TODO load portraits
+		var dialogues : Dictionary = load_all_dialogues(campaign_name)
+		if dialogues.empty():
+			load_correct = false
+		campaign_data.dialogues = dialogues
+
 		# FINAL STEPS
 		if not load_correct:
 			print("\nCampaign \"" + campaign_name + "\" could not be loaded, look above to see what were the errors")
@@ -769,3 +776,62 @@ class Campaign_Loader:
 
 		print("	Successfully loaded enemy\n------------------------------------")
 		return enemy_data
+
+	func load_all_dialogues(campaign_name : String) -> Dictionary:
+		print("#############################\n##### LOADING DIALOGUES #####\n#############################")
+		
+		var load_correct = true
+		var dialogue_files : Array = Utils.scan_files_in_directory("res://campaigns/" + campaign_name + "/dialogues")
+		
+		if dialogue_files == null:
+			load_correct = false
+			return {}
+
+		var dialogues := {}
+		for dialogue_name in dialogue_files:
+			var dialogue_data : Model.Dialogue_Data = load_dialogue(dialogue_name, campaign_name)
+			if dialogue_data == null:
+				print("\n	Dialogue could not be loaded correctly\n------------------------------------")
+				load_correct = false
+				continue
+
+			dialogues[dialogue_name] = dialogue_data
+
+		if not load_correct:
+			return {}
+
+		print("ALL DIALOGUES LOADED SUCESSFULLY!\n")
+		return dialogues
+	
+	func load_dialogue(dialogue_name : String, campaign_name : String) -> Model.Dialogue_Data:
+		print("------------------------------------\nLoading dialogue : " + dialogue_name)
+		
+		var load_correct := true
+		var dialogue_dict = Utils.load_json("res://campaigns/" + campaign_name + "/dialogues/" + dialogue_name)
+		
+		if dialogue_dict == null:
+			load_correct = false
+			return null
+
+		if not Validator.dialogue_is_valid(dialogue_dict, dialogue_name):
+			load_correct = false
+			return null
+		
+		var dialogue_data := Model.Dialogue_Data.new()
+		dialogue_data.name = dialogue_name
+		
+		# Dialogue nodes
+		for dialogue_node_dict in dialogue_dict.dialogue:
+			var dialogue_node := Model.Dialogue_Node.new()
+			dialogue_node.character = dialogue_node_dict.character
+			dialogue_node.text = dialogue_node_dict.text
+			
+			# TODO check portrait exists
+			
+			dialogue_data.nodes.append(dialogue_node)
+		
+		if not load_correct:
+			return null
+		
+		print("	Successfully loaded dialogue\n------------------------------------")
+		return dialogue_data

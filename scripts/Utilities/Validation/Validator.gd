@@ -109,3 +109,15 @@ static func character_is_valid(character_data, character : String) -> bool:
 	if not Generic_Validators.minimal_info_fields_exist(character_data.max_stats, Data.Validation.stats, "character has missing or incorrect required fields in \"max_stats\" field", "", character):
 		return false
 	return true
+
+# DIALOGUE
+
+static func dialogue_is_valid(dialogue_data, dialogue_name : String) -> bool:
+	if dialogue_data == null:
+		return false
+	if not Generic_Validators.minimal_info_fields_exist(dialogue_data, Data.Validation.dialogue_fields, "character has missing or incorrect required fields", "", dialogue_name):
+		return false
+	for dialogue_node in dialogue_data.dialogue:
+		if not Generic_Validators.minimal_info_fields_exist(dialogue_node, Data.Validation.dialogue_node_fields, "character has missing or incorrect required fields", "", dialogue_name):
+			return false
+	return true

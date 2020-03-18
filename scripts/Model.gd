@@ -12,6 +12,9 @@ class Campaign_Data:
 	var characters: Dictionary
 	var npcs : Dictionary
 	var enemies : Dictionary
+	
+	var portraits : Dictionary
+	var dialogues : Dictionary
 
 	var party : Party_Data
 
@@ -195,6 +198,14 @@ class Stats_Data:
 		d_stats.max_damage = self.max_damage
 
 		return d_stats
+
+class Dialogue_Data:
+	var name : String
+	var nodes : Array
+
+class Dialogue_Node:
+	var character : String
+	var text : String
 
 class Animation_Data:
 	var hframes : int

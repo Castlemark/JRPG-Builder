@@ -228,6 +228,10 @@ config/name="JRPG Builder"
 run/main_scene="res://scenes/map/Map.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
 [autoload]
 
 Game_Manager="*res://scenes/singletons/Game_Manager.tscn"

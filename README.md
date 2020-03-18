@@ -34,6 +34,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Combat trigger
     - [X] Treasure
     - [ ] Conversation
+    - [ ] Narration
 - [ ] <u>Story Sprint - 04/10/19</u>
   - [ ] Story module V-2 **(final)**
     - [ ] Cut-scene

@@ -64,3 +64,7 @@ class Validation:
 
 	# ENEMY
 	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"xp_reward": NUMBER}, {"scale": NUMBER}]
+	
+	# DIALOGUE
+	const dialogue_fields := [{"dialogue" : ARRAY}]
+	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}]
