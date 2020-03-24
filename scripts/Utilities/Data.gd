@@ -39,6 +39,11 @@ class Validation:
 		"complementary": [],
 		"opposite": []
 	}
+	
+	const dialogue_node_side_types := {
+		"l": [],
+		"r": []
+	}
 
 	# GENERAL
 	const animation_data := [{"hframes" : NUMBER}, {"vframes" : NUMBER}, {"total_frames" : NUMBER}, {"duration" : NUMBER}]
@@ -67,4 +72,4 @@ class Validation:
 	
 	# DIALOGUE
 	const dialogue_fields := [{"dialogue" : ARRAY}]
-	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}]
+	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}, {"side": TEXT}]

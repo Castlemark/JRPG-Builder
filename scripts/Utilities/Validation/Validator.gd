@@ -120,4 +120,6 @@ static func dialogue_is_valid(dialogue_data, dialogue_name : String) -> bool:
 	for dialogue_node in dialogue_data.dialogue:
 		if not Generic_Validators.minimal_info_fields_exist(dialogue_node, Data.Validation.dialogue_node_fields, "character has missing or incorrect required fields", "", dialogue_name):
 			return false
+		if not Generic_Validators.type_is_valid(dialogue_node.side, Data.Validation.dialogue_node_side_types, {}):
+			return false
 	return true
