@@ -102,7 +102,7 @@ static func character_is_valid(character_data, character : String) -> bool:
 		return false
 	if not Generic_Validators.minimal_info_fields_exist(character_data, Data.Validation.char_fields, "character has missing or incorrect required fields", "", character):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character has missing or incorrect required fields", "", character):
+	if not Generic_Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character has missing or incorrect required fields in \"equipment\" field", "", character):
 		return false
 	if not Generic_Validators.minimal_info_fields_exist(character_data.min_stats, Data.Validation.stats, "character has missing or incorrect required fields in \"min_stats\" field", "", character):
 		return false

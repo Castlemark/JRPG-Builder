@@ -13,8 +13,10 @@ class Validation:
 	const action_types := {
 		"travel" : [{"map_name" : TEXT}, {"access_point" : NUMBER}],
 		"combat" : [{"enemies" : ARRAY}],
-		"treasure": [{"money": NUMBER}, {"items": ARRAY}]
+		"treasure": [{"money": NUMBER}, {"items": ARRAY}],
+		"dialogue": [{"id": TEXT}]
 	}
+	
 	const item_types := {
 		"consumable" : [{"price" : NUMBER}, {"effect" : DICTIONARY}],
 		"equipment" : [{"price" : NUMBER}, {"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}],

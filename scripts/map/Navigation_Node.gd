@@ -62,6 +62,9 @@ func set_up_actions(actions_list : Array):
 			"treasure":
 				action = Treasure_Action.new()
 				action.name = "Treasure_Action"
+			"dialogue":
+				action = Dialogue_Action.new()
+				action.name = "Dialogue_Action"
 		
 		action.initialize(i.data)
 		actions.add_child(action, true)

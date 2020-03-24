@@ -19,6 +19,7 @@ onready var camera := $Player_Avatar/Camera as Map_Camera
 
 onready var combat_viewport := $UI/Combat_Viewport as Combat_Viewport
 onready var treaseure_menu := $UI/Treasure_Menu as Treaseure_Menu
+onready var dialogue_menu := $UI/Dialogue_Menu as Menu_Dialogue
 
 var path_img : Texture
 var intersection_img : Texture

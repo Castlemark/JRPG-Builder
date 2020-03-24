@@ -11,6 +11,9 @@ onready var GM := $"/root/Game_Manager"
 onready var money_label :=  $Control/Money as Label
 onready var item_container := $Control/Scroll/GridContainer as GridContainer
 
+func _ready() -> void:
+	self.visible = false
+
 func receive_items(treasure_data : Dictionary) -> void:
 	emit_signal("on_treasure_toggle", true)
 	
