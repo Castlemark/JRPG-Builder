@@ -81,7 +81,12 @@ class Campaign_Loader:
 
 		# DIALOGUES
 		# TODO load portraits
-		var dialogues : Dictionary = load_all_dialogues(campaign_name)
+		var portraits := load_all_portraits(campaign_name)
+		if portraits.empty():
+			load_correct = false
+		campaign_data.portraits = portraits
+		
+		var dialogues := load_all_dialogues(campaign_name)
 		if dialogues.empty():
 			load_correct = false
 		campaign_data.dialogues = dialogues
@@ -777,6 +782,34 @@ class Campaign_Loader:
 		print("	Successfully loaded enemy\n------------------------------------")
 		return enemy_data
 
+	func load_all_portraits(campaign_name : String) -> Dictionary:
+		print("#############################\n##### LOADING PORTRAITS #####\n#############################")
+		
+		var load_correct = true
+		var portrait_files : Array = Utils.scan_files_in_directory("res://campaigns/" + campaign_name + "/dialogues/portraits")
+		
+		if portrait_files == null:
+			load_correct = false
+			return {}
+		
+		var portraits := {}
+		for portrait_name in portrait_files:
+			print("------------------------------------\nLoading portrait : " + portrait_name)
+			var portrait := Utils.load_img_GUI("res://campaigns/" + campaign_name + "/dialogues/portraits/" + portrait_name)
+			if portrait == null:
+				print("\n	Portrait could not be loaded correctly\n------------------------------------")
+				load_correct = false
+				continue
+			
+			portraits[portrait_name.rstrip(".png")] = portrait
+			print("	Successfully loaded portrait\n------------------------------------")
+		
+		if not load_correct:
+			return {}
+		
+		print("ALL PORTRAITS LOADED SUCESSFULLY!\n")
+		return portraits
+
 	func load_all_dialogues(campaign_name : String) -> Dictionary:
 		print("#############################\n##### LOADING DIALOGUES #####\n#############################")
 		
@@ -795,7 +828,7 @@ class Campaign_Loader:
 				load_correct = false
 				continue
 
-			dialogues[dialogue_name] = dialogue_data
+			dialogues[dialogue_name.rstrip(".json")] = dialogue_data
 
 		if not load_correct:
 			return {}
@@ -827,6 +860,10 @@ class Campaign_Loader:
 			dialogue_node.text = dialogue_node_dict.text
 			
 			# TODO check portrait exists
+			if campaign_data.portraits.get(dialogue_node.character) == null:
+				load_correct = false
+				print("Dialogue is correct, but character \"" + dialogue_node.character + "\" doesn't have a portrait, please make sure the portrait exists and is in the correct place")
+				continue
 			
 			dialogue_data.nodes.append(dialogue_node)
 		
