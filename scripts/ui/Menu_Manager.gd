@@ -27,6 +27,8 @@ var menu_up : bool
 var animation_in_progress : bool
 var current_screen : String
 
+var menu_enabled : bool
+
 func _ready() -> void:
 	_wipe_all_menus()
 	self.margin_top = MIN_SIZE
@@ -35,10 +37,12 @@ func _ready() -> void:
 	animation_in_progress = false
 	current_screen = SCREEN_NONE
 	
+	menu_enabled = true
+	
 	GM.menus = self
 
 func _input(event : InputEvent) -> void:
-	if not animation_in_progress:
+	if not animation_in_progress and menu_enabled:
 		if event.is_action_pressed("ui_inventory"):
 			_update_current_screen(inventory_button)
 		if event.is_action_pressed("ui_party"):
@@ -98,6 +102,7 @@ func _wipe_all_menus() -> void:
 			(screen as Control).visible = false
 
 func on_external_ui_toggle(external_active : bool) -> void:
+	menu_enabled = not external_active
 	
 	if external_active and menu_up:
 		_update_current_screen(sections_group.get_pressed_button())

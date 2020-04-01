@@ -2,10 +2,10 @@ extends Control
 
 class_name Menu_Dialogue
 
-const MAX_CHAR_HEIGHT_POS := 0
+const MAX_CHAR_HEIGHT_POS := -76
 const MIN_HEIGHT_POS := 702
 
-const MAX_DIALOGUE_HEIGHT_POS := 280.8
+const MAX_DIALOGUE_HEIGHT_POS := 204.8
 const DIALOGUE_LEFT_POS := 96
 const DIALOGUE_RIGHT_POS := 672
 

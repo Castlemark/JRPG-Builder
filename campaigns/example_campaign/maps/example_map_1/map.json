@@ -42,6 +42,12 @@
             "x": 16.5,
             "y": 33,
             "connected_nodes":[1,7],
+            "actions": []
+        },
+        {
+            "x": 47,
+            "y": 33,
+            "connected_nodes":[6,8],
             "actions": [
                 {
                     "type" : "dialogue",
@@ -49,14 +55,7 @@
                     {
                         "id": "example_dialogue_1"
                     }
-                }
-            ]
-        },
-        {
-            "x": 47,
-            "y": 33,
-            "connected_nodes":[6,8],
-            "actions": [
+                },
                 {
                   "type" : "combat",
                   "data" :
@@ -68,6 +67,20 @@
                         "Skeleton"
                     ]
                   }
+                },
+                {
+                    "type" : "treasure",
+                    "data" :
+                    {
+                        "money": 350,
+                        "items":
+                        [
+                            "breastplate",
+                            "crown",
+                            "food",
+                            "pants"
+                        ]
+                    }
                 }
             ]
         },
@@ -108,7 +121,7 @@
                             "pants"
                         ]
                     }
-                  }
+                }
             ]
         },
         {
