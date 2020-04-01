@@ -13,6 +13,7 @@ var width : int
 var direction : Vector3
 var acceleration : float
 
+var should_move : bool
 var trigger_move : bool
 
 onready var tween : Tween = $Tween as Tween
@@ -27,6 +28,7 @@ func _ready() -> void:
 	
 	direction = Vector3(0, 0, 0)
 	
+	should_move = true
 	trigger_move = false
 
 func _input(event: InputEvent) -> void:
@@ -39,7 +41,7 @@ func _input(event: InputEvent) -> void:
 		trigger_move = false
 
 func _process(delta: float) -> void:
-	if trigger_move:
+	if trigger_move and should_move:
 		direction = calculate_motion_direction(get_viewport().get_mouse_position())
 		acceleration = calculate_acceleration(get_viewport().get_mouse_position())
 		
@@ -67,6 +69,9 @@ func return_to_original_position() -> void:
 	tween.interpolate_property(self, "translation", translation, original_position, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tween.start()
 
-func on_window_resize():
+func on_window_resize() -> void:
 	height = get_viewport().get_visible_rect().size.y
 	width = get_viewport().get_visible_rect().size.x
+
+func on_ui_toggle(ui_active : bool) -> void:
+	should_move = not ui_active

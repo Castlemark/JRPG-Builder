@@ -1,13 +1,12 @@
 {
     "stats":
     {
-        "strength": 10,
-        "dexterity": 8,
-        "constitution": 7,
         "critic": 0.15,
-        "defence": 2,
-        "alt_defence": 1,
-        "speed": 4
+        "speed": 4,
+        "health": 40,
+        "strain": 50,
+        "evasion": 0.04,
+        "damage": 18
     },
     "abilities":
     [
@@ -20,5 +19,7 @@
         "vframes": 1,
         "total_frames": 8,
         "duration": 1.5
-    }
+    },
+    "xp_reward": 10,
+    "scale": 1
 }

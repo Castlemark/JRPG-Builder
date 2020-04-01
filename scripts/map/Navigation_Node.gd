@@ -11,7 +11,6 @@ var default_intersection_node : Texture = preload("res://default_assets/map/map_
 var default_path_node : Texture = preload("res://default_assets/map/map_nodes/node_path.png")
 
 onready var skin : Sprite3D
-onready var events : Spatial
 onready var actions : Node
 
 var index : int
@@ -21,9 +20,8 @@ func _ready() -> void:
 #warning-ignore:return_value_discarded
 	self.connect("clicked_destination", $"/root/Map", "_on_Navigation_Node_clicked_destination")
 
-func initialize(node_info : Dictionary, node_index : int, path_img : Resource, intersection_img : Texture) -> void:
+func initialize(node_info, node_index : int, path_img : Resource, intersection_img : Texture) -> void:
 	skin  = ($Skin as Sprite3D)
-	events  = ($Events as Spatial)
 	actions = $Actions
 	
 	intersection_node = intersection_img
@@ -53,19 +51,23 @@ func set_up_skin(connected_nodes_num : int) -> void:
 
 func set_up_actions(actions_list : Array):
 	for i in actions_list:
-		
-		if not Validators.minimal_info_fields_exist(i, ["type", "data"], "action has missing required fields, " + Validators.check_docu, "type"):
-			return
-		
-		if not Validators.type_is_valid(i.type as String, Validators.action_types, i.data):
-			return
-		
+		var action : Generic_Action
 		match (i.type as String):
 			"travel":
-				var action := Travel_Action.new()
+				action = Travel_Action.new()
 				action.name = "Travel_Action"
-				action.initialize(i.data)
-				actions.add_child(action, true)
+			"combat":
+				action = Combat_Trigger_Action.new()
+				action.name = "Combat_Action"
+			"treasure":
+				action = Treasure_Action.new()
+				action.name = "Treasure_Action"
+			"dialogue":
+				action = Dialogue_Action.new()
+				action.name = "Dialogue_Action"
+		
+		action.initialize(i.data)
+		actions.add_child(action, true)
 
 func is_connected_to(node : Navigation_Node, all_nodes : Array) -> bool:
 	for i in connected_nodes:

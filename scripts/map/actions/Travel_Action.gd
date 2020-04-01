@@ -2,7 +2,6 @@ extends Generic_Action
 
 class_name Travel_Action
 
-
 func execute() -> void:
 	var map_name : String = data.map_name
 	var access_point : int = data.access_point

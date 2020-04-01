@@ -1,0 +1,43 @@
+{
+    "start_xp": 0,
+    "min_stats":
+    {
+        "critic": 0.05,
+        "speed": 8,
+        "health": 81,
+        "strain": 76,
+        "evasion": 0.11,
+        "damage": 35
+    },
+    "max_stats":
+    {
+        "critic": 0.2,
+        "speed": 80,
+        "health": 243,
+        "strain": 223,
+        "evasion": 0.33,
+        "damage": 105
+    },
+    "abilities":
+    [
+        "heal",
+        "backstab"
+    ],
+    "equipment":
+    {
+        "legs": "pants",
+        "torso": "breastplate",
+        "accessory_1": "horn of power",
+        "accessory_2": "lucky amulet",
+        "accessory_3": "tribal necklace",
+        "weapon": "mace"
+    },
+    "animation_data":
+    {
+        "hframes": 16,
+        "vframes": 1,
+        "total_frames": 16,
+        "duration": 1.5
+    },
+    "scale": 8
+}

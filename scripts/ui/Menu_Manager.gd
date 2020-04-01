@@ -2,9 +2,13 @@ extends VBoxContainer
 
 class_name Menu_Manager
 
+signal on_menus_toggle(is_active)
+
 const SCREEN_NONE := "None"
 const MIN_SIZE := 74
 const MAX_SIZE := -1072
+
+onready var GM := $"/root/Game_Manager"
 
 onready var inventory_menu : Menu_Inventory = $Content/Inventory as Menu_Inventory
 onready var party_menu : Menu_Party = $Content/Party as Menu_Party
@@ -23,10 +27,7 @@ var menu_up : bool
 var animation_in_progress : bool
 var current_screen : String
 
-func initialize(campaign_data : Dictionary) -> void:
-	inventory_menu.initialize_inventory(campaign_data.inventory)
-	party_menu.initialize_party(campaign_data.party)
-	encyclopedia_menu.initialize_encyclopedia([], [])
+var menu_enabled : bool
 
 func _ready() -> void:
 	_wipe_all_menus()
@@ -35,9 +36,13 @@ func _ready() -> void:
 	menu_up = false
 	animation_in_progress = false
 	current_screen = SCREEN_NONE
+	
+	menu_enabled = true
+	
+	GM.menus = self
 
 func _input(event : InputEvent) -> void:
-	if not animation_in_progress:
+	if not animation_in_progress and menu_enabled:
 		if event.is_action_pressed("ui_inventory"):
 			_update_current_screen(inventory_button)
 		if event.is_action_pressed("ui_party"):
@@ -67,10 +72,14 @@ func _update_current_screen(section : Button) -> void:
 		menu_up = false
 		
 		(get_node("Content/" + section.name) as Control).visible = false
+		
+		emit_signal("on_menus_toggle", menu_up)
+	
 	elif not menu_up:
 		section.pressed = true
 		_wipe_all_menus()
 		(get_node("Content/" + section.name) as Control).visible = true
+		(get_node("Content/" + section.name) as Control).update()
 		current_screen = section.name
 		
 		animation_in_progress = true
@@ -79,12 +88,33 @@ func _update_current_screen(section : Button) -> void:
 		yield(tween,"tween_completed")
 		animation_in_progress = false
 		menu_up = true
+		
+		emit_signal("on_menus_toggle", menu_up)
 	else:
 		section.pressed = true
 		_wipe_all_menus()
 		(get_node("Content/" + section.name) as Control).visible = true
+		(get_node("Content/" + section.name) as Control).update()
 		current_screen = section.name
 
 func _wipe_all_menus() -> void:
 	for screen in content_panel.get_children():
 			(screen as Control).visible = false
+
+func on_external_ui_toggle(external_active : bool) -> void:
+	menu_enabled = not external_active
+	
+	if external_active and menu_up:
+		_update_current_screen(sections_group.get_pressed_button())
+	
+	inventory_button.disabled = external_active
+	inventory_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	party_button.disabled = external_active
+	party_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	encyclopedia_button.disabled = external_active
+	encyclopedia_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	settings_button.disabled = external_active
+	settings_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL

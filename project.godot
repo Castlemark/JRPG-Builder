@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Background_Tile.gd"
 }, {
+"base": "Button",
+"class": "Battler_UI_Controller",
+"language": "GDScript",
+"path": "res://scripts/Combat/Battler_UI_Controller.gd"
+}, {
 "base": "Position3D",
 "class": "Between_node",
 "language": "GDScript",
@@ -24,20 +29,70 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Character_ability.gd"
 }, {
+"base": "Sprite",
+"class": "Character_Combat",
+"language": "GDScript",
+"path": "res://scripts/Combat/Character_Combat.gd"
+}, {
+"base": "Control",
+"class": "Character_End_Screen",
+"language": "GDScript",
+"path": "res://scripts/Combat/Character_End_Screen.gd"
+}, {
 "base": "Button",
 "class": "Character_UI",
 "language": "GDScript",
 "path": "res://scripts/ui/Character_UI.gd"
+}, {
+"base": "Node2D",
+"class": "Combat",
+"language": "GDScript",
+"path": "res://scripts/Combat/Combat.gd"
+}, {
+"base": "Generic_Action",
+"class": "Combat_Trigger_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Combat_Trigger_Action.gd"
+}, {
+"base": "Control",
+"class": "Combat_UI_Manager",
+"language": "GDScript",
+"path": "res://scripts/Combat/Combat_UI_Manager.gd"
+}, {
+"base": "Panel",
+"class": "Combat_Viewport",
+"language": "GDScript",
+"path": "res://scripts/Combat/Combat_Viewport.gd"
+}, {
+"base": "Reference",
+"class": "Data",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Data.gd"
 }, {
 "base": "Spatial",
 "class": "Detail_Node",
 "language": "GDScript",
 "path": "res://scripts/map/Detail_Node.gd"
 }, {
+"base": "Generic_Action",
+"class": "Dialogue_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Dialogue_Action.gd"
+}, {
 "base": "Button",
 "class": "Encyclopedia_Enemy",
 "language": "GDScript",
 "path": "res://scripts/ui/Encyclopedia_Enemy.gd"
+}, {
+"base": "Panel",
+"class": "End_Screen",
+"language": "GDScript",
+"path": "res://scripts/Combat/End_Screen.gd"
+}, {
+"base": "Sprite",
+"class": "Enemy_Combat",
+"language": "GDScript",
+"path": "res://scripts/Combat/Enemy_Combat.gd"
 }, {
 "base": "VBoxContainer",
 "class": "Enemy_preview",
@@ -45,19 +100,24 @@ _global_script_classes=[ {
 "path": "res://scripts/ui/Enemy_Preview.gd"
 }, {
 "base": "Node",
-"class": "Game_Manager",
-"language": "GDScript",
-"path": "res://scripts/Game_Manager.gd"
-}, {
-"base": "Node",
 "class": "Generic_Action",
 "language": "GDScript",
 "path": "res://scripts/map/actions/Generic_Action.gd"
+}, {
+"base": "Reference",
+"class": "Generic_Validators",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Validation/Generic_Validators.gd"
 }, {
 "base": "Button",
 "class": "Item",
 "language": "GDScript",
 "path": "res://scripts/ui/Item.gd"
+}, {
+"base": "Reference",
+"class": "Loaders",
+"language": "GDScript",
+"path": "res://scripts/Utilities/Loader.gd"
 }, {
 "base": "Spatial",
 "class": "Map",
@@ -68,6 +128,11 @@ _global_script_classes=[ {
 "class": "Map_Camera",
 "language": "GDScript",
 "path": "res://scripts/map/Camera.gd"
+}, {
+"base": "Control",
+"class": "Menu_Dialogue",
+"language": "GDScript",
+"path": "res://scripts/ui/Menu_Dialogue.gd"
 }, {
 "base": "Tabs",
 "class": "Menu_Encyclopedia",
@@ -89,6 +154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Menu_Party.gd"
 }, {
+"base": "Reference",
+"class": "Model",
+"language": "GDScript",
+"path": "res://scripts/Model.gd"
+}, {
 "base": "Position3D",
 "class": "Navigation_Node",
 "language": "GDScript",
@@ -104,38 +174,64 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/actions/Travel_Action.gd"
 }, {
+"base": "Panel",
+"class": "Treaseure_Menu",
+"language": "GDScript",
+"path": "res://scripts/ui/Treasure_Menu.gd"
+}, {
+"base": "Generic_Action",
+"class": "Treasure_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Treasure_Action.gd"
+}, {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
 "path": "res://scripts/Utilities/Utils.gd"
 }, {
-"base": "Node",
-"class": "Validators",
+"base": "Reference",
+"class": "Validator",
 "language": "GDScript",
-"path": "res://scripts/Utilities/Validators.gd"
+"path": "res://scripts/Utilities/Validation/Validator.gd"
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
+"Battler_UI_Controller": "",
 "Between_node": "",
 "Character_Ability": "",
+"Character_Combat": "",
+"Character_End_Screen": "",
 "Character_UI": "",
+"Combat": "",
+"Combat_Trigger_Action": "",
+"Combat_UI_Manager": "",
+"Combat_Viewport": "",
+"Data": "",
 "Detail_Node": "",
+"Dialogue_Action": "",
 "Encyclopedia_Enemy": "",
+"End_Screen": "",
+"Enemy_Combat": "",
 "Enemy_preview": "",
-"Game_Manager": "",
 "Generic_Action": "",
+"Generic_Validators": "",
 "Item": "",
+"Loaders": "",
 "Map": "",
 "Map_Camera": "",
+"Menu_Dialogue": "",
 "Menu_Encyclopedia": "",
 "Menu_Inventory": "",
 "Menu_Manager": "",
 "Menu_Party": "",
+"Model": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
 "Travel_Action": "",
+"Treaseure_Menu": "",
+"Treasure_Action": "",
 "Utils": "",
-"Validators": ""
+"Validator": ""
 }
 
 [application]
@@ -144,6 +240,10 @@ config/name="JRPG Builder"
 run/main_scene="res://scenes/map/Map.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
 [autoload]
 
 Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
@@ -151,6 +251,7 @@ Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
 [debug]
 
 gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/shadowed_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/narrowing_conversion=false
 gdscript/warnings/return_value_discarded=false
@@ -231,6 +332,10 @@ ui_encyclopedia={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=32768
 
 [rendering]
 

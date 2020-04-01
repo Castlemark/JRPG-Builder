@@ -1,28 +1,36 @@
 {
-    "start_level": 1,
+    "start_xp": 0,
     "min_stats":
     {
-        "strength": 5,
-        "dexterity": 2,
-        "constitution": 3,
         "critic": 0.1,
-        "defence": 0,
-        "alt_defence": 0,
-        "speed": 2
+        "speed": 2,
+        "health": 42,
+        "strain": 60,
+        "evasion": 0.07,
+        "damage": 20
     },
     "max_stats":
     {
-        "strength": 50,
-        "dexterity": 20,
-        "constitution": 30,
         "critic": 0.2,
-        "defence": 20,
-        "alt_defence": 8,
-        "speed": 15
+        "speed": 15,
+        "health": 126,
+        "strain": 180,
+        "evasion": 0.21,
+        "damage": 60
     },
     "abilities":
     [
         "cleave",
         "grapeshot_blast"
-    ]
+    ],
+    "equipment":
+    {
+        "legs": "pants",
+        "torso": "breastplate",
+        "accessory_1": "horn of power",
+        "accessory_2": "lucky amulet",
+        "accessory_3": "tribal necklace",
+        "weapon": "mace"
+    },
+    "scale": 1
 }

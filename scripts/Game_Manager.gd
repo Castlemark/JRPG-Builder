@@ -1,6 +1,6 @@
 extends Node
 
-class_name Game_Manager
+#class_name Game_Manager
 
 var campaign : Dictionary = {
 	"name": "example_campaign",
@@ -15,13 +15,15 @@ var UI : Dictionary = {
 	"margin_right": null
 }
 
+var campaign_data := Model.Campaign_Data.new()
+
 var current_scene : Node = null
 
 const MAP : Resource = preload("res://scenes/map/Map.tscn") 
 
 onready var transition : ColorRect = $UI/Transition as ColorRect
 onready var transition_tween : Tween = $UI/Transition/Tween as Tween
-onready var menus : Menu_Manager = $Menus as Menu_Manager
+onready var menus : Menu_Manager
 
 
 func _ready() -> void:
@@ -31,10 +33,8 @@ func _ready() -> void:
 	#############
 	
 	### CAMPAIGN ###
-	var campaign_data : Dictionary = Utils.load_json("res://campaigns/" + campaign.name + "/campaign.json")
-	campaign.cur_map.name = campaign_data.map_name
-	campaign.cur_map.access_point = campaign_data.access_point
-	menus.initialize(campaign_data)
+	var campaign_loader := Loaders.Campaign_Loader.new()
+	campaign_data = campaign_loader.load_campaign(campaign.name)
 	################
 	
 	### CONFIG ###
@@ -48,7 +48,6 @@ func _ready() -> void:
 func goto_scene(scene : Resource) -> void:
 	call_deferred("_deferred_goto_scene", scene)
 
-# IMPROVE TRANSITION
 func _deferred_goto_scene(scene : Resource) -> void:
 	
 	# We fade out to mask the transition
@@ -79,13 +78,8 @@ func _deferred_goto_scene(scene : Resource) -> void:
 	transition.margin_right = 0
 
 func travel_to_map(map_name : String, access_point : int) -> void:
-	campaign.cur_map.name = map_name
-	campaign.cur_map.access_point = access_point
-	
+	campaign_data.cur_map = map_name
 	goto_scene(MAP)
-
-func get_inventory() -> Array:
-	return menus.inventory_container.get_children()
 
 func on_window_resize() -> void:
 	UI.margin_bottom = get_viewport().get_visible_rect().size.y

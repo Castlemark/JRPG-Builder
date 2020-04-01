@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://default_assets/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Party.gd" type="Script" id=2]
+
 
 [node name="Party" type="Tabs"]
 anchor_right = 1.0
@@ -14,6 +15,7 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Party" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
@@ -48,6 +50,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Equipment" type="VBoxContainer" parent="."]
+editor/display_folded = true
 anchor_left = 0.05
 anchor_top = 0.2
 anchor_right = 0.35
@@ -81,7 +84,6 @@ text = "Stats"
 valign = 1
 
 [node name="Stats" type="Panel" parent="Data"]
-editor/display_folded = true
 margin_top = 26.0
 margin_right = 1133.0
 margin_bottom = 399.0
@@ -137,16 +139,10 @@ margin_right = 540.0
 margin_bottom = 152.0
 text = "Defence:"
 
-[node name="Alt Defence" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
+[node name="Speed" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
 margin_top = 156.0
 margin_right = 540.0
 margin_bottom = 178.0
-text = "Alt. Defence:"
-
-[node name="Speed" type="Label" parent="Data/Stats/HBoxContainer/Hard"]
-margin_top = 182.0
-margin_right = 540.0
-margin_bottom = 204.0
 text = "Speed:"
 
 [node name="MarginContainer" type="MarginContainer" parent="Data/Stats/HBoxContainer"]
@@ -173,28 +169,22 @@ margin_right = 541.0
 margin_bottom = 22.0
 text = "HP:"
 
-[node name="Shield" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
+[node name="Strain" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
 margin_top = 26.0
 margin_right = 541.0
 margin_bottom = 48.0
-text = "Shield:"
-
-[node name="Strain" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 52.0
-margin_right = 541.0
-margin_bottom = 74.0
 text = "Strain:"
 
 [node name="Evasion" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 78.0
+margin_top = 52.0
 margin_right = 541.0
-margin_bottom = 100.0
+margin_bottom = 74.0
 text = "Evasion:"
 
 [node name="Damage" type="Label" parent="Data/Stats/HBoxContainer/Soft"]
-margin_top = 104.0
+margin_top = 78.0
 margin_right = 541.0
-margin_bottom = 126.0
+margin_bottom = 100.0
 text = "Damage:"
 
 [node name="Abilities_Label" type="Label" parent="Data"]
@@ -205,6 +195,7 @@ text = "Abilities"
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Data"]
+editor/display_folded = true
 margin_top = 429.0
 margin_right = 1133.0
 margin_bottom = 802.0
@@ -213,7 +204,6 @@ size_flags_vertical = 3
 custom_constants/separation = 26
 
 [node name="Abilities" type="Panel" parent="Data/HBoxContainer"]
-editor/display_folded = true
 margin_right = 553.0
 margin_bottom = 373.0
 size_flags_horizontal = 3
@@ -272,7 +262,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
-editor/display_folded = true
 margin_right = 534.0
 margin_bottom = 50.0
 
@@ -311,17 +300,12 @@ margin_top = 96.0
 margin_right = 534.0
 margin_bottom = 118.0
 
-[node name="Targets" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
+[node name="Damage" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
 margin_top = 122.0
 margin_right = 534.0
 margin_bottom = 144.0
 
-[node name="Damage" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
+[node name="Cost" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
 margin_top = 148.0
 margin_right = 534.0
 margin_bottom = 170.0
-
-[node name="Effect" type="Label" parent="Data/HBoxContainer/Preview/Scroll/VBoxContainer"]
-margin_top = 174.0
-margin_right = 534.0
-margin_bottom = 196.0

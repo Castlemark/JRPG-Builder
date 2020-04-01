@@ -14,36 +14,31 @@ func _ready():
 	pass
 
 
-func initialize_inventory(item_list : Array) -> void:
-	# TODO check items are valid
-	for item in item_list:
-		var item_data : Dictionary = Utils.load_json("res://campaigns/" + GM.campaign.name + "/items/" + item + "/item.json")
-		if not _validate_item(item_data, item):
-			continue
-		
-		item_data["name"] = item
-		
-		var item_node : Item = item_res.instance()
-		inventory_container.add_child(item_node, true)
-		item_node.initialize(item_data)
+func update() -> void:
+	if GM.campaign_data == null: 
+		return
+	# TODO reuse items when possible
+	var inventory : Array = GM.campaign_data.party.inventory
+	var difference : int = inventory.size() - (inventory_container.get_child_count())
+	if difference > 0:
+# warning-ignore:unused_variable
+		for i in range(abs(difference)):
+			var item_node : Item = item_res.instance()
+			inventory_container.add_child(item_node, true)
+			inventory_container.move_child(item_node, 0)
+			item_node.group = item_button_group
+	elif difference < 0:
+# warning-ignore:unused_variable
+		for i in range(abs(difference)):
+			var node_to_delete = inventory_container.get_child(0)
+			inventory_container.remove_child(node_to_delete)
+			node_to_delete.queue_free()
+	
+	
+	for i in range(inventory.size()):
+		var item_node : Item = inventory_container.get_child(i)
+		item_node.initialize(inventory[i])
 		item_node.group = item_button_group
-
-func _validate_item(item_data, item : String) -> bool:
-	if item_data == null:
-		return false
-	if not Validators.minimal_info_fields_exist(item_data, ["type", "data"], "item is missing required fields", "", item):
-		return false
-	if not Validators.type_is_valid(item_data.type, Validators.item_types, item_data.data):
-		return false
-	
-	var valid := true
-	match item_data.type:
-		"consumable":
-			valid = Validators.minimal_info_fields_exist(item_data.data.effect, ["type", "value", "delay", "duration"], "item consumable is missing fields in it's \"effect\" field", "", item)
-		"equipment":
-			valid = Validators.minimal_info_fields_exist(item_data.data.stats, Validators.stats, "item equipment is missing fields in it's \"stats\" field", "", item)
-	
-	return valid
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:

@@ -10,10 +10,9 @@ var frames := 0
 
 var elapsed_frame_time := 0.0
 
-func initialize(detail_info : Dictionary) -> void:
+func initialize(detail_info) -> void:
 	
-	var path : String = "res://campaigns/" + GM.campaign.name + "/maps/" + GM.campaign.cur_map.name + "/detail_art/" + detail_info.filepath + ".png"
-	var detail_img := Utils.load_img_3D(path)
+	var detail_img : Texture = detail_info.texture
 	
 	if detail_img != null:
 		sprite.texture = detail_img
@@ -23,7 +22,9 @@ func initialize(detail_info : Dictionary) -> void:
 		sprite.transform = Transform(Vector3(4, 0, 0), Vector3(3, 1.732, 0), Vector3(0, 0, 4), Vector3(0, 0, 0))
 		self.rotation_degrees = Vector3(0, 90, 0)
 	
-	if Validators.optional_info_field_exists(detail_info, "animation_data", ["hframes", "vframes", "total_frames", "duration"], "detail is marked as animated, but it's missing some of the requeried animation_data fields, " + Validators.check_docu, "filepath"):
+	self.scale *= detail_info.scale
+	
+	if detail_info.animation_data != null:
 		_configure_animation(detail_info.animation_data)
 
 func _process(delta: float) -> void:
@@ -37,7 +38,7 @@ func _process(delta: float) -> void:
 		
 		elapsed_frame_time += delta
 
-func _configure_animation(animation_info : Dictionary):
+func _configure_animation(animation_info):
 	sprite.vframes = animation_info.vframes
 	sprite.hframes = animation_info.hframes
 	frames = animation_info.total_frames

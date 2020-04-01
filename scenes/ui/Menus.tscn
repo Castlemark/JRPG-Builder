@@ -25,6 +25,9 @@ theme = ExtResource( 1 )
 custom_constants/separation = 8
 alignment = 2
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Sections" type="HBoxContainer" parent="."]
 margin_right = 1536.0
