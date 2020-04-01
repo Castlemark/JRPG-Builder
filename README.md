@@ -10,12 +10,12 @@ Below you'll find some deadlines for the various modules, when a module is marke
 
 ### Tentative deadlines:
 
-- [x] <u>Navigation Sprint - 17/05/19</u>
+- [x] <u>Navigation Sprint</u>
   - [x] Map module V-1
     - [x] Navigation
     - [x] Inter-map movement
     - [x] Background art
-- [x] <u>Map interaction Sprint - 12/07/19</u>
+- [x] <u>Map interaction Sprint</u>
   - [x] Map module V-2
     - [x] Individual art
   - [x] Character and Enemy module **(final)**
@@ -24,7 +24,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Equipment
     - [x] Abilities
     - [x] Items
-- [x] <u>Structure Sprint - 23/08/19</u>
+- [x] <u>Structure Sprint</u>
   - [x] Story module V-1
     - [x] Conversation
   - [x] Combat module V-1
@@ -34,7 +34,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Combat trigger
     - [X] Treasure
     - [x] Conversation
-- [ ] <u>Story Sprint - 04/10/19</u>
+- [ ] <u>Story Sprint</u>
   - [ ] Story module V-2 **(final)**
     - [ ] Cut-scene
     - [ ] Campaign structure file
@@ -44,10 +44,10 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [ ] Character management
     - [x] Bestiary
     - [ ] Journal
-- [ ] <u>Combat Sprint - 08/11/19</u>
+- [ ] <u>Combat Sprint</u>
   - [ ] Combat module V-2 **(final)**
     - [ ] Final AI
-- [ ] <u>Content creation Sprint - 24/12/19</u>
+- [ ] <u>Content creation Sprint</u>
   - [ ] Add fonts and refine theme
   - [ ] Save states
   - [ ] Create Campaign **(final)**
