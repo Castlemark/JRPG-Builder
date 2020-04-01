@@ -79,6 +79,18 @@ class Campaign_Loader:
 		campaign_data.maps = maps
 		campaign_data.cur_map = campaign_dict.map_name
 
+		# DIALOGUES
+		# TODO load portraits
+		var portraits := load_all_portraits(campaign_name)
+		if portraits.empty():
+			load_correct = false
+		campaign_data.portraits = portraits
+		
+		var dialogues := load_all_dialogues(campaign_name)
+		if dialogues.empty():
+			load_correct = false
+		campaign_data.dialogues = dialogues
+
 		# FINAL STEPS
 		if not load_correct:
 			print("\nCampaign \"" + campaign_name + "\" could not be loaded, look above to see what were the errors")
@@ -769,3 +781,99 @@ class Campaign_Loader:
 
 		print("	Successfully loaded enemy\n------------------------------------")
 		return enemy_data
+
+	func load_all_portraits(campaign_name : String) -> Dictionary:
+		print("#############################\n##### LOADING PORTRAITS #####\n#############################")
+		
+		var load_correct = true
+		var portrait_files : Array = Utils.scan_files_in_directory("res://campaigns/" + campaign_name + "/dialogues/portraits")
+		
+		if portrait_files == null:
+			load_correct = false
+			return {}
+		
+		var portraits := {}
+		for portrait_name in portrait_files:
+			print("------------------------------------\nLoading portrait : " + portrait_name)
+			var portrait := Utils.load_img_GUI("res://campaigns/" + campaign_name + "/dialogues/portraits/" + portrait_name)
+			if portrait == null:
+				print("\n	Portrait could not be loaded correctly\n------------------------------------")
+				load_correct = false
+				continue
+			
+			portraits[portrait_name.rstrip(".png")] = portrait
+			print("	Successfully loaded portrait\n------------------------------------")
+		
+		if not load_correct:
+			return {}
+		
+		print("ALL PORTRAITS LOADED SUCESSFULLY!\n")
+		return portraits
+
+	func load_all_dialogues(campaign_name : String) -> Dictionary:
+		print("#############################\n##### LOADING DIALOGUES #####\n#############################")
+		
+		var load_correct = true
+		var dialogue_files : Array = Utils.scan_files_in_directory("res://campaigns/" + campaign_name + "/dialogues")
+		
+		if dialogue_files == null:
+			load_correct = false
+			return {}
+
+		var dialogues := {}
+		for dialogue_name in dialogue_files:
+			var dialogue_data : Model.Dialogue_Data = load_dialogue(dialogue_name, campaign_name)
+			if dialogue_data == null:
+				print("\n	Dialogue could not be loaded correctly\n------------------------------------")
+				load_correct = false
+				continue
+
+			dialogues[dialogue_name.rstrip(".json")] = dialogue_data
+
+		if not load_correct:
+			return {}
+
+		print("ALL DIALOGUES LOADED SUCESSFULLY!\n")
+		return dialogues
+	
+	func load_dialogue(dialogue_name : String, campaign_name : String) -> Model.Dialogue_Data:
+		print("------------------------------------\nLoading dialogue : " + dialogue_name)
+		
+		var load_correct := true
+		var dialogue_dict = Utils.load_json("res://campaigns/" + campaign_name + "/dialogues/" + dialogue_name)
+		
+		if dialogue_dict == null:
+			load_correct = false
+			return null
+
+		if not Validator.dialogue_is_valid(dialogue_dict, dialogue_name):
+			load_correct = false
+			return null
+		
+		var dialogue_data := Model.Dialogue_Data.new()
+		dialogue_data.name = dialogue_name
+		
+		# Dialogue nodes
+		for dialogue_node_dict in dialogue_dict.dialogue:
+			var dialogue_node := Model.Dialogue_Node.new()
+			dialogue_node.character = dialogue_node_dict.character
+			dialogue_node.text = dialogue_node_dict.text
+
+			if dialogue_node_dict.side != "r" and dialogue_node_dict.side != "l":
+				load_correct = false
+				print("Dialogue is correct but field side has an invalid value, only \"r\" for right and \"l\" for left are valid")
+			dialogue_node.side = dialogue_node_dict.side
+			
+			# TODO check portrait exists
+			if campaign_data.portraits.get(dialogue_node.character) == null:
+				load_correct = false
+				print("Dialogue is correct, but character \"" + dialogue_node.character + "\" doesn't have a portrait, please make sure the portrait exists and is in the correct place")
+				continue
+			
+			dialogue_data.nodes.append(dialogue_node)
+		
+		if not load_correct:
+			return null
+		
+		print("	Successfully loaded dialogue\n------------------------------------")
+		return dialogue_data

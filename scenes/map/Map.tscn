@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/map/Map.gd" type="Script" id=1]
 [ext_resource path="res://scenes/map/Player_Avatar.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/ui/Menus.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/combat/Combat_Viewport.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ui/Treasure_Menu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ui/Dialogue_Menu.tscn" type="PackedScene" id=7]
 
 [node name="Map" type="Spatial"]
 script = ExtResource( 1 )
@@ -41,8 +42,13 @@ script = ExtResource( 3 )
 [node name="Combat_Viewport" parent="UI" instance=ExtResource( 5 )]
 
 [node name="Treasure_Menu" parent="UI" instance=ExtResource( 6 )]
+visible = true
+
+[node name="Dialogue_Menu" parent="UI" instance=ExtResource( 7 )]
 [connection signal="on_menus_toggle" from="UI/Menus" to="Player_Avatar/Camera" method="on_ui_toggle"]
-[connection signal="on_combat_toggle" from="UI/Combat_Viewport" to="UI/Menus" method="on_external_ui_toggle"]
 [connection signal="on_combat_toggle" from="UI/Combat_Viewport" to="Player_Avatar/Camera" method="on_ui_toggle"]
-[connection signal="on_treasure_toggle" from="UI/Treasure_Menu" to="UI/Menus" method="on_external_ui_toggle"]
+[connection signal="on_combat_toggle" from="UI/Combat_Viewport" to="UI/Menus" method="on_external_ui_toggle"]
 [connection signal="on_treasure_toggle" from="UI/Treasure_Menu" to="Player_Avatar/Camera" method="on_ui_toggle"]
+[connection signal="on_treasure_toggle" from="UI/Treasure_Menu" to="UI/Menus" method="on_external_ui_toggle"]
+[connection signal="on_dialogue_toggle" from="UI/Dialogue_Menu" to="Player_Avatar/Camera" method="on_ui_toggle"]
+[connection signal="on_dialogue_toggle" from="UI/Dialogue_Menu" to="UI/Menus" method="on_external_ui_toggle"]

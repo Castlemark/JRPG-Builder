@@ -102,10 +102,24 @@ static func character_is_valid(character_data, character : String) -> bool:
 		return false
 	if not Generic_Validators.minimal_info_fields_exist(character_data, Data.Validation.char_fields, "character has missing or incorrect required fields", "", character):
 		return false
-	if not Generic_Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character has missing or incorrect required fields", "", character):
+	if not Generic_Validators.minimal_info_fields_exist(character_data.equipment, Data.Validation.char_slots, "character has missing or incorrect required fields in \"equipment\" field", "", character):
 		return false
 	if not Generic_Validators.minimal_info_fields_exist(character_data.min_stats, Data.Validation.stats, "character has missing or incorrect required fields in \"min_stats\" field", "", character):
 		return false
 	if not Generic_Validators.minimal_info_fields_exist(character_data.max_stats, Data.Validation.stats, "character has missing or incorrect required fields in \"max_stats\" field", "", character):
 		return false
+	return true
+
+# DIALOGUE
+
+static func dialogue_is_valid(dialogue_data, dialogue_name : String) -> bool:
+	if dialogue_data == null:
+		return false
+	if not Generic_Validators.minimal_info_fields_exist(dialogue_data, Data.Validation.dialogue_fields, "character has missing or incorrect required fields", "", dialogue_name):
+		return false
+	for dialogue_node in dialogue_data.dialogue:
+		if not Generic_Validators.minimal_info_fields_exist(dialogue_node, Data.Validation.dialogue_node_fields, "character has missing or incorrect required fields", "", dialogue_name):
+			return false
+		if not Generic_Validators.type_is_valid(dialogue_node.side, Data.Validation.dialogue_node_side_types, {}):
+			return false
 	return true

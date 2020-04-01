@@ -50,6 +50,13 @@
             "connected_nodes":[6,8],
             "actions": [
                 {
+                    "type" : "dialogue",
+                    "data" : 
+                    {
+                        "id": "example_dialogue_1"
+                    }
+                },
+                {
                   "type" : "combat",
                   "data" :
                   {
@@ -60,6 +67,20 @@
                         "Skeleton"
                     ]
                   }
+                },
+                {
+                    "type" : "treasure",
+                    "data" :
+                    {
+                        "money": 350,
+                        "items":
+                        [
+                            "breastplate",
+                            "crown",
+                            "food",
+                            "pants"
+                        ]
+                    }
                 }
             ]
         },
@@ -100,7 +121,7 @@
                             "pants"
                         ]
                     }
-                  }
+                }
             ]
         },
         {

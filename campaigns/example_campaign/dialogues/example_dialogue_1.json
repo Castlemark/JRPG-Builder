@@ -1,0 +1,30 @@
+{
+    "dialogue":
+    [
+        {
+            "character": "Heavy Bandit",
+            "side": "r",
+            "text": "[shake rate=5 level=10]Surrender or die![/shake]"
+        },
+        {
+            "character": "Wanderer",
+            "side": "l",
+            "text": "Who you foolin' [rainbow freq=0.5 sat=10 val=20]bruh?[/rainbow]"
+        },
+        {
+            "character": "Heavy Bandit",
+            "side": "r",
+            "text": "[wave amp=50 freq=2]Prepare to die then![/wave]"
+        },
+        {
+            "character": "Wanderer",
+            "side": "l",
+            "text": "[tornado radius=5 freq=2]You wish![/tornado]"
+        },
+        {
+            "character": "Breaker",
+            "side": "l",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+    ]
+}

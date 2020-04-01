@@ -13,8 +13,10 @@ class Validation:
 	const action_types := {
 		"travel" : [{"map_name" : TEXT}, {"access_point" : NUMBER}],
 		"combat" : [{"enemies" : ARRAY}],
-		"treasure": [{"money": NUMBER}, {"items": ARRAY}]
+		"treasure": [{"money": NUMBER}, {"items": ARRAY}],
+		"dialogue": [{"id": TEXT}]
 	}
+	
 	const item_types := {
 		"consumable" : [{"price" : NUMBER}, {"effect" : DICTIONARY}],
 		"equipment" : [{"price" : NUMBER}, {"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}],
@@ -38,6 +40,11 @@ class Validation:
 		"same": [],
 		"complementary": [],
 		"opposite": []
+	}
+	
+	const dialogue_node_side_types := {
+		"l": [],
+		"r": []
 	}
 
 	# GENERAL
@@ -64,3 +71,7 @@ class Validation:
 
 	# ENEMY
 	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"xp_reward": NUMBER}, {"scale": NUMBER}]
+	
+	# DIALOGUE
+	const dialogue_fields := [{"dialogue" : ARRAY}]
+	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}, {"side": TEXT}]

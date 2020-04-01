@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Detail_Node.gd"
 }, {
+"base": "Generic_Action",
+"class": "Dialogue_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Dialogue_Action.gd"
+}, {
 "base": "Button",
 "class": "Encyclopedia_Enemy",
 "language": "GDScript",
@@ -123,6 +128,11 @@ _global_script_classes=[ {
 "class": "Map_Camera",
 "language": "GDScript",
 "path": "res://scripts/map/Camera.gd"
+}, {
+"base": "Control",
+"class": "Menu_Dialogue",
+"language": "GDScript",
+"path": "res://scripts/ui/Menu_Dialogue.gd"
 }, {
 "base": "Tabs",
 "class": "Menu_Encyclopedia",
@@ -198,6 +208,7 @@ _global_script_class_icons={
 "Combat_Viewport": "",
 "Data": "",
 "Detail_Node": "",
+"Dialogue_Action": "",
 "Encyclopedia_Enemy": "",
 "End_Screen": "",
 "Enemy_Combat": "",
@@ -208,6 +219,7 @@ _global_script_class_icons={
 "Loaders": "",
 "Map": "",
 "Map_Camera": "",
+"Menu_Dialogue": "",
 "Menu_Encyclopedia": "",
 "Menu_Inventory": "",
 "Menu_Manager": "",
@@ -227,6 +239,10 @@ _global_script_class_icons={
 config/name="JRPG Builder"
 run/main_scene="res://scenes/map/Map.tscn"
 config/icon="res://icon.png"
+
+[audio]
+
+default_bus_layout=""
 
 [autoload]
 
