@@ -24,9 +24,9 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Equipment
     - [x] Abilities
     - [x] Items
-- [ ] <u>Structure Sprint - 23/08/19</u>
-  - [ ] Story module V-1
-    - [ ] Conversation
+- [x] <u>Structure Sprint - 23/08/19</u>
+  - [x] Story module V-1
+    - [x] Conversation
   - [x] Combat module V-1
     - [x] Combat logic
     - [x] Placeholder enemy AI
