@@ -46,9 +46,9 @@ visible = true
 
 [node name="Dialogue_Menu" parent="UI" instance=ExtResource( 7 )]
 [connection signal="on_menus_toggle" from="UI/Menus" to="Player_Avatar/Camera" method="on_ui_toggle"]
-[connection signal="on_combat_toggle" from="UI/Combat_Viewport" to="Player_Avatar/Camera" method="on_ui_toggle"]
 [connection signal="on_combat_toggle" from="UI/Combat_Viewport" to="UI/Menus" method="on_external_ui_toggle"]
-[connection signal="on_treasure_toggle" from="UI/Treasure_Menu" to="Player_Avatar/Camera" method="on_ui_toggle"]
+[connection signal="on_combat_toggle" from="UI/Combat_Viewport" to="Player_Avatar/Camera" method="on_ui_toggle"]
 [connection signal="on_treasure_toggle" from="UI/Treasure_Menu" to="UI/Menus" method="on_external_ui_toggle"]
-[connection signal="on_dialogue_toggle" from="UI/Dialogue_Menu" to="Player_Avatar/Camera" method="on_ui_toggle"]
+[connection signal="on_treasure_toggle" from="UI/Treasure_Menu" to="Player_Avatar/Camera" method="on_ui_toggle"]
 [connection signal="on_dialogue_toggle" from="UI/Dialogue_Menu" to="UI/Menus" method="on_external_ui_toggle"]
+[connection signal="on_dialogue_toggle" from="UI/Dialogue_Menu" to="Player_Avatar/Camera" method="on_ui_toggle"]

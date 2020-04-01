@@ -6,7 +6,15 @@
             "x": -10,
             "y": 0,
             "connected_nodes":[1],
-            "actions": []
+            "actions": [
+                {
+                    "type" : "dialogue",
+                    "data" : 
+                    {
+                        "id": "example_dialogue_1"
+                    }
+                }
+            ]
         },
         {
             "x": 0,

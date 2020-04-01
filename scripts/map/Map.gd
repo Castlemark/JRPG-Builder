@@ -45,6 +45,7 @@ func initialize(map) -> void:
 	instantiate_details(map.detail_art)
 
 	player_avatar.initialize(navigation_nodes.get_child(map.access_point) as Navigation_Node, avatar_img)
+	player_avatar.execute_actions()
 
 func instantiate_navigation_nodes(node_list : Array) -> void:
 	var counter : int = 0
