@@ -858,6 +858,11 @@ class Campaign_Loader:
 			var dialogue_node := Model.Dialogue_Node.new()
 			dialogue_node.character = dialogue_node_dict.character
 			dialogue_node.text = dialogue_node_dict.text
+
+			if dialogue_node_dict.side != "r" and dialogue_node_dict.side != "l":
+				load_correct = false
+				print("Dialogue is correct but field side has an invalid value, only \"r\" for right and \"l\" for left are valid")
+			dialogue_node.side = dialogue_node_dict.side
 			
 			# TODO check portrait exists
 			if campaign_data.portraits.get(dialogue_node.character) == null:

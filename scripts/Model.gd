@@ -205,6 +205,7 @@ class Dialogue_Data:
 
 class Dialogue_Node:
 	var character : String
+	var side : String
 	var text : String
 
 class Animation_Data:

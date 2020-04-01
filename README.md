@@ -27,15 +27,13 @@ Below you'll find some deadlines for the various modules, when a module is marke
 - [ ] <u>Structure Sprint - 23/08/19</u>
   - [ ] Story module V-1
     - [ ] Conversation
-    - [ ] Narration
   - [x] Combat module V-1
     - [x] Combat logic
     - [x] Placeholder enemy AI
-  - [ ] Map module V-3
+  - [x] Map module V-3
     - [x] Combat trigger
     - [X] Treasure
     - [x] Conversation
-    - [ ] Narration
 - [ ] <u>Story Sprint - 04/10/19</u>
   - [ ] Story module V-2 **(final)**
     - [ ] Cut-scene
@@ -50,6 +48,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
   - [ ] Combat module V-2 **(final)**
     - [ ] Final AI
 - [ ] <u>Content creation Sprint - 24/12/19</u>
+  - [ ] Add fonts and refine theme
   - [ ] Save states
   - [ ] Create Campaign **(final)**
   - [ ] Documentation **(final)**
