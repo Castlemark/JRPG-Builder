@@ -4,22 +4,22 @@
         {
             "character": "Heavy Bandit",
             "side": "r",
-            "text": "Surrender or die!"
+            "text": "[shake rate=5 level=10]Surrender or die![/shake]"
         },
         {
             "character": "Wanderer",
             "side": "l",
-            "text": "Who you foolin' bruh?"
+            "text": "Who you foolin' [rainbow freq=0.5 sat=10 val=20]bruh?[/rainbow]"
         },
         {
             "character": "Heavy Bandit",
             "side": "r",
-            "text": "Prepare to die then!"
+            "text": "[wave amp=50 freq=2]Prepare to die then![/wave]"
         },
         {
             "character": "Wanderer",
             "side": "l",
-            "text": "You wish!"
+            "text": "[tornado radius=5 freq=2]You wish![/tornado]"
         },
         {
             "character": "Breaker",

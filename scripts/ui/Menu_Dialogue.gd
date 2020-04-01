@@ -9,7 +9,7 @@ const MAX_DIALOGUE_HEIGHT_POS := 280.8
 const DIALOGUE_LEFT_POS := 96
 const DIALOGUE_RIGHT_POS := 672
 
-const CHARS_PER_SECONDS : float = 25.0
+const CHARS_PER_SECONDS : float = 35.0
 
 signal on_dialogue_toggle(is_active)
 signal on_dialogue_finished()
