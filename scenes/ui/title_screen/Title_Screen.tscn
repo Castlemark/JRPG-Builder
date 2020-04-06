@@ -242,7 +242,7 @@ margin_top = -38.0
 margin_right = 262.0
 margin_bottom = -16.0
 bbcode_enabled = true
-bbcode_text = "Photo by [color=aqua][url=https://unsplash.com/@ventiviews]Cameron Venti[/url][/color] on [color=aqua][url=https://unsplash.com]Unsplash[/url][/color]"
+bbcode_text = "[color=aqua][url=https://unsplash.com/photos/2XlB5L33Asw]Photo[/url][/color] by [color=aqua][url=https://unsplash.com/@ventiviews]Cameron Venti[/url][/color] on Unsplash"
 text = "Photo by Cameron Venti on Unsplash"
 scroll_active = false
 __meta__ = {
