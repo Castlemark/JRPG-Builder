@@ -2,8 +2,8 @@ extends Control
 
 class_name Settings
 
-onready var fullscreen_button := $Panel/Settings/FullscreenButton as CheckButton
-onready var vsync_button := $Panel/Settings/VsyncButton as CheckButton
+onready var fullscreen_button := $FullscreenButton as CheckButton
+onready var vsync_button := $VsyncButton as CheckButton
 
 func _on_FullscreenButton_toggled(button_pressed: bool) -> void:
 	OS.window_fullscreen = button_pressed
