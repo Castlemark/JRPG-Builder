@@ -28,7 +28,7 @@ static func minimal_info_fields_exist(info : Dictionary, fields : Array, msg : S
 		printerr(info.get(name_field, id) + " " + msg + ". The following fields are missing:\n	" + String(missing_fields))
 	
 	if not correct_types:
-		printerr(info.get(name_field, id) + " " + msg + ". The following fields have the incorrect type:\n	" + String(incorrect_types))
+		printerr("\"" + info.get(name_field, id) + "\" " + msg + ". The following fields have the incorrect type:\n	" + String(incorrect_types))
 	
 	return valid and correct_types
 

@@ -13,6 +13,12 @@ class Campaign_Loader:
 		var load_correct = true
 		# TODO Validate campaign file
 		var campaign_dict = Utils.load_json("res://campaigns/" + campaign_name + "/campaign.json")
+		if campaign_dict == null:
+			load_correct = false
+			print("Couldn't find \"campaign.json\" file inside the \"" + campaign_name + "\" campaign, please make sure it exists and is in the correct location")
+		
+		if not Validator.campaign_info_is_valid(campaign_dict, campaign_name):
+			load_correct = false
 
 		campaign_data = Model.Campaign_Data.new()
 		campaign_data.name = campaign_name
@@ -877,3 +883,30 @@ class Campaign_Loader:
 		
 		print("	Successfully loaded dialogue\n------------------------------------")
 		return dialogue_data
+
+static func load_all_campaigns_basic_info() -> Dictionary:
+	var load_correct = true
+	var campaign_names : Array = Utils.scan_directories_in_directory("res://campaigns")
+	
+	if campaign_names == null:
+		load_correct = false
+		return {}
+	
+	var campaigns := {}
+	for campaign_name in campaign_names:
+		var campaign_info = Utils.load_json("res://campaigns/" + campaign_name + "/campaign.json")
+		if campaign_info == null:
+			load_correct = false
+			print("Couldn't find \"campaign.json\" file inside the \"" + campaign_name + "\" campaign, please make sure it exists and is in the correct location")
+			continue
+		
+		if not Validator.campaign_info_is_valid(campaign_info, campaign_name):
+			load_correct = false
+			continue
+		
+		campaigns[campaign_name] = campaign_info
+	
+	if not load_correct:
+		return {}
+	
+	return campaigns

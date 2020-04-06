@@ -119,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Utilities/Loader.gd"
 }, {
+"base": "Control",
+"class": "Main_Menu",
+"language": "GDScript",
+"path": "res://scripts/ui/Main_Menu.gd"
+}, {
 "base": "Spatial",
 "class": "Map",
 "language": "GDScript",
@@ -169,6 +174,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Player_Avatar.gd"
 }, {
+"base": "Control",
+"class": "Settings",
+"language": "GDScript",
+"path": "res://scripts/ui/Settings_Menu.gd"
+}, {
 "base": "Generic_Action",
 "class": "Travel_Action",
 "language": "GDScript",
@@ -217,6 +227,7 @@ _global_script_class_icons={
 "Generic_Validators": "",
 "Item": "",
 "Loaders": "",
+"Main_Menu": "",
 "Map": "",
 "Map_Camera": "",
 "Menu_Dialogue": "",
@@ -227,6 +238,7 @@ _global_script_class_icons={
 "Model": "",
 "Navigation_Node": "",
 "Player_Avatar": "",
+"Settings": "",
 "Travel_Action": "",
 "Treaseure_Menu": "",
 "Treasure_Action": "",
@@ -237,7 +249,7 @@ _global_script_class_icons={
 [application]
 
 config/name="JRPG Builder"
-run/main_scene="res://scenes/map/Map.tscn"
+run/main_scene="res://scenes/ui/main_menu/Main_Menu.tscn"
 config/icon="res://icon.png"
 
 [audio]
