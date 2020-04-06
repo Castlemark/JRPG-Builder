@@ -47,6 +47,9 @@ class Validation:
 		"r": []
 	}
 
+	# CAMPAIGN
+	const campaign_info_data := [{"map_name" : TEXT}, {"access_point" : NUMBER}, {"party" : ARRAY}, {"inventory" : ARRAY}, {"money" : NUMBER}, {"description" : TEXT}]
+
 	# GENERAL
 	const animation_data := [{"hframes" : NUMBER}, {"vframes" : NUMBER}, {"total_frames" : NUMBER}, {"duration" : NUMBER}]
 	const type_data := [{"type" : TEXT}, {"data" : DICTIONARY}] # Used for items and actions

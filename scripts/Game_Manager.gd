@@ -1,15 +1,5 @@
 extends Node
 
-#class_name Game_Manager
-
-var campaign : Dictionary = {
-	"name": "example_campaign",
-	"cur_map": {
-		"name": null,
-		"access_point": null
-	},
-}
-
 var UI : Dictionary = {
 	"margin_bottom": null,
 	"margin_right": null
@@ -32,11 +22,6 @@ func _ready() -> void:
 	current_scene = root.get_child(root.get_child_count() - 1)
 	#############
 	
-	### CAMPAIGN ###
-	var campaign_loader := Loaders.Campaign_Loader.new()
-	campaign_data = campaign_loader.load_campaign(campaign.name)
-	################
-	
 	### CONFIG ###
 	get_tree().root.connect("size_changed", self, "on_window_resize")
 	on_window_resize()
@@ -44,6 +29,10 @@ func _ready() -> void:
 	transition.margin_bottom = 0
 	transition.margin_right = 0
 	##############
+
+func load_campaign(campaign_name : String) -> void:
+	var campaign_loader := Loaders.Campaign_Loader.new()
+	campaign_data = campaign_loader.load_campaign(campaign_name)
 
 func goto_scene(scene : Resource) -> void:
 	call_deferred("_deferred_goto_scene", scene)
