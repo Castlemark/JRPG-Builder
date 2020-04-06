@@ -10,6 +10,7 @@ var campaign_data := Model.Campaign_Data.new()
 var current_scene : Node = null
 
 const MAP : Resource = preload("res://scenes/map/Map.tscn") 
+const TITLE_SCREEN : Resource = preload("res://scenes/ui/title_screen/Title_Screen.tscn")
 
 onready var transition : ColorRect = $UI/Transition as ColorRect
 onready var transition_tween : Tween = $UI/Transition/Tween as Tween
