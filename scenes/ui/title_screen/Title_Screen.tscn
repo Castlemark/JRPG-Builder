@@ -3,7 +3,7 @@
 [ext_resource path="res://default_assets/theme/Galaktika.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/ui/Main_Menu.gd" type="Script" id=2]
 [ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://default_assets/user_interface/Title_Screen/cameron-venti-2XlB5L33Asw-unsplash.jpg" type="Texture" id=4]
 [ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=5]
 [ext_resource path="res://scenes/ui/Settings_Options.tscn" type="PackedScene" id=6]
 
@@ -24,6 +24,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
+expand = true
 stretch_mode = 7
 __meta__ = {
 "_edit_use_anchors_": false
@@ -64,6 +65,7 @@ anchor_left = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.2
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.14902, 0.172549, 0.231373, 1 )
 text = "SETTINGS"
 align = 1
 valign = 1
@@ -96,6 +98,7 @@ anchor_left = 0.2
 anchor_right = 0.8
 anchor_bottom = 0.2
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.14902, 0.172549, 0.231373, 1 )
 text = "JRPG BUILDER"
 align = 1
 valign = 1
@@ -161,6 +164,7 @@ anchor_left = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.2
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.14902, 0.172549, 0.231373, 1 )
 text = "choose campaign"
 align = 1
 valign = 1
@@ -173,6 +177,7 @@ anchor_top = 0.2
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 32.0
+margin_bottom = -54.0
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -180,35 +185,12 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer/Campaigns_Menu/CampaignScroll"]
 margin_right = 928.0
-margin_bottom = 864.0
+margin_bottom = 810.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 16
 
-[node name="VSeparator" type="VSeparator" parent="MenuContainer/Campaigns_Menu"]
-anchor_left = 0.5
-anchor_top = 0.2
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = 16.0
-margin_right = -16.0
-margin_bottom = -32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HSeparator" type="HSeparator" parent="MenuContainer/Campaigns_Menu"]
-anchor_left = 0.5
-anchor_top = 0.2
-anchor_right = 1.0
-anchor_bottom = 0.2
-margin_left = 32.0
-margin_right = -32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DescriptionLabel" type="Label" parent="MenuContainer/Campaigns_Menu"]
+[node name="Label" type="Label" parent="MenuContainer/Campaigns_Menu"]
 anchor_left = 0.5
 anchor_top = 0.2
 anchor_right = 1.0
@@ -216,25 +198,14 @@ anchor_bottom = 0.25
 margin_left = 32.0
 margin_right = -32.0
 custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.14902, 0.172549, 0.231373, 1 )
 text = "Description"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSeparator2" type="HSeparator" parent="MenuContainer/Campaigns_Menu"]
-anchor_left = 0.5
-anchor_top = 0.25
-anchor_right = 1.0
-anchor_bottom = 0.25
-margin_left = 32.0
-margin_right = -32.0
-margin_bottom = 4.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DescriptionScroll" type="ScrollContainer" parent="MenuContainer/Campaigns_Menu"]
+[node name="Descritption" type="RichTextLabel" parent="MenuContainer/Campaigns_Menu"]
 anchor_left = 0.5
 anchor_top = 0.25
 anchor_right = 1.0
@@ -243,18 +214,14 @@ margin_left = 32.0
 margin_top = 16.0
 margin_right = -32.0
 margin_bottom = -32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuContainer/Campaigns_Menu/DescriptionScroll"]
-margin_right = 896.0
-margin_bottom = 600.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-bbcode_enabled = true
-
-[node name="ChooseCampaignButton" type="Button" parent="MenuContainer/Campaigns_Menu"]
+[node name="Start_Campaign_Button" type="Button" parent="MenuContainer/Campaigns_Menu"]
 anchor_left = 0.5
 anchor_top = 0.85
 anchor_right = 0.75
@@ -263,6 +230,24 @@ margin_left = 32.0
 margin_bottom = -32.0
 custom_fonts/font = ExtResource( 5 )
 text = "Start / Load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credit_Label" type="RichTextLabel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -38.0
+margin_right = 262.0
+margin_bottom = -16.0
+bbcode_enabled = true
+bbcode_text = "Photo by [color=aqua][url=https://unsplash.com/@ventiviews]Cameron Venti[/url][/color] on [color=aqua][url=https://unsplash.com]Unsplash[/url][/color]"
+text = "Photo by Cameron Venti on Unsplash"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="MenuContainer/Settings_Menu/BackButton" to="." method="move_to_menu" binds= [ 1 ]]
@@ -271,4 +256,5 @@ text = "Start / Load"
 [connection signal="pressed" from="MenuContainer/Options_Menu/Settings_Button" to="." method="move_to_menu" binds= [ 0 ]]
 [connection signal="pressed" from="MenuContainer/Options_Menu/Exit_Button" to="MenuContainer/Settings_Menu/Panel/Settings" method="_on_exit_pressed"]
 [connection signal="pressed" from="MenuContainer/Campaigns_Menu/BackButton" to="." method="move_to_menu" binds= [ 1 ]]
-[connection signal="pressed" from="MenuContainer/Campaigns_Menu/ChooseCampaignButton" to="." method="_on_start_campaign_pressed"]
+[connection signal="pressed" from="MenuContainer/Campaigns_Menu/Start_Campaign_Button" to="." method="_on_start_campaign_pressed"]
+[connection signal="meta_clicked" from="Credit_Label" to="." method="_on_Credit_Label_meta_clicked"]

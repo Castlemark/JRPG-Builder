@@ -10,7 +10,15 @@ onready var menu_container := $MenuContainer as Control
 onready var tween := $Tween as Tween
 
 onready var campaign_button_container := $MenuContainer/Campaigns_Menu/CampaignScroll/VBoxContainer as VBoxContainer
-onready var campaign_description := $MenuContainer/Campaigns_Menu/DescriptionScroll/RichTextLabel as RichTextLabel
+onready var campaign_description := $MenuContainer/Campaigns_Menu/Descritption as RichTextLabel
+
+onready var settings_menu := $MenuContainer/Settings_Menu as Control
+onready var title_screen := $MenuContainer/Options_Menu as Control
+onready var campaigns_menu := $MenuContainer/Campaigns_Menu as Control
+
+onready var settings_back_button := $MenuContainer/Settings_Menu/BackButton as Button
+onready var campaigns_back_button := $MenuContainer/Campaigns_Menu/BackButton as Button
+onready var choose_campaign_button := $MenuContainer/Options_Menu/Choose_Campaign_Button as Button
 
 onready var is_moving := false
 onready var campaigns := {}
@@ -29,8 +37,30 @@ func move_to_menu(index : int) -> void:
 		tween.interpolate_property(menu_container, "rect_position", null, menu_pos * index, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		
 		is_moving = true
+		
+		if index == 0:
+			settings_back_button.grab_focus()
+			settings_menu.visible = true
+		elif index == 1:
+			choose_campaign_button.grab_focus()
+			title_screen.visible = true
+		elif index == 2:
+			campaigns_back_button.grab_focus()
+			campaigns_menu.visible = true
+		
 		tween.start()
 		yield(tween, "tween_all_completed")
+		
+		if index == 0:
+			title_screen.visible = false
+			campaigns_menu.visible = false
+		elif index == 1:
+			settings_menu.visible = false
+			campaigns_menu.visible = false
+		elif index == 2:
+			title_screen.visible = false
+			settings_menu.visible = false
+		
 		is_moving = false
 
 func _input(event: InputEvent) -> void:
@@ -51,3 +81,7 @@ func _on_start_campaign_pressed():
 	Game_Manager.load_campaign(campaigns.keys()[cur_campaign_index])
 	Game_Manager.goto_scene(Game_Manager.MAP)
 	pass
+
+
+func _on_Credit_Label_meta_clicked(meta) -> void:
+	OS.shell_open(meta)
