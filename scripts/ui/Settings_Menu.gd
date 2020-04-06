@@ -18,3 +18,10 @@ func _on_CheckBox_60fps_toggled(button_pressed: bool) -> void:
 func _on_CheckBox_30fps_toggled(button_pressed: bool) -> void:
 	if button_pressed:
 		Engine.target_fps = 30
+
+func _on_exit_pressed():
+	get_tree().quit()
+
+func _on_title_screen_pressed():
+	Game_Manager.goto_scene(Game_Manager.TITLE_SCREEN)
+	Game_Manager.campaign_data = null

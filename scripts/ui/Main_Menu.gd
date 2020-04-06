@@ -2,7 +2,7 @@ extends Control
 
 class_name Main_Menu
 
-var campaign_button_res = preload("res://scenes/ui/main_menu/Campaign_Button.tscn")
+var campaign_button_res = preload("res://scenes/ui/title_screen/Campaign_Button.tscn")
 
 const menu_pos := Vector2(-1920, 0)
 

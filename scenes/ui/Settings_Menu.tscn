@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=2]
+[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/ui/Settings_Options.tscn" type="PackedScene" id=4]
+
+[node name="Settings" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+
+[node name="Settings" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.6
+
+[node name="Title_Screen_Button" type="Button" parent="."]
+anchor_left = 0.26
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_right = -32.0
+custom_fonts/font = ExtResource( 3 )
+text = "go to title screen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit_Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.74
+anchor_bottom = 0.8
+margin_left = 32.0
+custom_fonts/font = ExtResource( 3 )
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Title_Screen_Button" to="Settings" method="_on_title_screen_pressed"]
+[connection signal="pressed" from="Exit_Button" to="Settings" method="_on_exit_pressed"]

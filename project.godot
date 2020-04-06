@@ -249,7 +249,7 @@ _global_script_class_icons={
 [application]
 
 config/name="JRPG Builder"
-run/main_scene="res://scenes/ui/main_menu/Main_Menu.tscn"
+run/main_scene="res://scenes/ui/title_screen/Title_Screen.tscn"
 config/icon="res://icon.png"
 
 [audio]
