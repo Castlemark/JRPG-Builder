@@ -13,6 +13,12 @@ class Campaign_Loader:
 		var load_correct = true
 		# TODO Validate campaign file
 		var campaign_dict = Utils.load_json("res://campaigns/" + campaign_name + "/campaign.json")
+		if campaign_dict == null:
+			load_correct = false
+			print("Couldn't find \"campaign.json\" file inside the \"" + campaign_name + "\" campaign, please make sure it exists and is in the correct location")
+		
+		if not Validator.campaign_info_is_valid(campaign_dict, campaign_name):
+			load_correct = false
 
 		campaign_data = Model.Campaign_Data.new()
 		campaign_data.name = campaign_name
