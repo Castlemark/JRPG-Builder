@@ -35,8 +35,8 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [X] Treasure
     - [x] Conversation
 - [ ] <u>Story Sprint</u>
-  - [ ] Story module V-2 **(final)**
-    - [ ] Cut-scene
+  - [x] Story module V-2 **(final)**
+    - [x] Cut-scene
     - [x] Campaign structure file
   - [ ] Map module V-4 **(final)**
     - [ ] Inventory

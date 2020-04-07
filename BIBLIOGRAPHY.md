@@ -52,3 +52,7 @@
   - [https://github.com/naturally-intelligent/godot-yarn-importer](https://github.com/naturally-intelligent/godot-yarn-importer)
   
   - [https://github.com/frojo/yarnspinnergd](https://github.com/frojo/yarnspinnergd)
+
+# CREDITS
+
+- Cutscene images by Jamie Oliver Aspinall (CC BY-NC-ND 4.0)

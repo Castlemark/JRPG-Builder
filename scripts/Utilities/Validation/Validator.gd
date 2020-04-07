@@ -124,6 +124,20 @@ static func dialogue_is_valid(dialogue_data, dialogue_name : String) -> bool:
 			return false
 	return true
 
+# CUTSCENE
+
+static func cutscene_is_valid(cutscene_data, cutscene_name : String) -> bool:
+	if cutscene_data == null:
+		return false
+	if not Generic_Validators.minimal_info_fields_exist(cutscene_data, Data.Validation.cutscene_fields, "cutscene has missing or incorrect required fields", "", cutscene_name):
+		return false
+	for cutscene_node in cutscene_data.cutscene:
+		if not Generic_Validators.minimal_info_fields_exist(cutscene_node, Data.Validation.cutscene_node_fields, "cutscene has missing or incorrect required fields", "", cutscene_name):
+			return false
+	return true
+
+# CAMPAIGN INFO
+
 static func campaign_info_is_valid(campaign_info_data, campaign_name) -> bool:
 	if campaign_info_data == null:
 		return false

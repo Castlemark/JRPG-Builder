@@ -64,6 +64,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Combat/Combat_Viewport.gd"
 }, {
+"base": "Generic_Action",
+"class": "Cutscene_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Cutscene_Action.gd"
+}, {
+"base": "Panel",
+"class": "Cutscene_Menu",
+"language": "GDScript",
+"path": "res://scripts/ui/Cutscene_Menu.gd"
+}, {
 "base": "Reference",
 "class": "Data",
 "language": "GDScript",
@@ -203,6 +213,11 @@ _global_script_classes=[ {
 "class": "Validator",
 "language": "GDScript",
 "path": "res://scripts/Utilities/Validation/Validator.gd"
+}, {
+"base": "Generic_Action",
+"class": "Wait_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Wait_Action.gd"
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
@@ -216,6 +231,8 @@ _global_script_class_icons={
 "Combat_Trigger_Action": "",
 "Combat_UI_Manager": "",
 "Combat_Viewport": "",
+"Cutscene_Action": "",
+"Cutscene_Menu": "",
 "Data": "",
 "Detail_Node": "",
 "Dialogue_Action": "",
@@ -243,7 +260,8 @@ _global_script_class_icons={
 "Treaseure_Menu": "",
 "Treasure_Action": "",
 "Utils": "",
-"Validator": ""
+"Validator": "",
+"Wait_Action": ""
 }
 
 [application]
