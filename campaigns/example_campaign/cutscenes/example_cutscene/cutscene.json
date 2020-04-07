@@ -1,0 +1,25 @@
+{
+    "cutscene":
+    [
+        {
+            "text" : "Once upon a time...",
+            "image" : "1"
+        },
+        {
+            "text" : "There was a knight with no courage...",
+            "image" : "1"
+        },
+        {
+            "text" : "But after eating a mushroom he found on the forest everything started to feel a bit dizzy...",
+            "image" : "2"
+        },
+        {
+            "text" : "After the dizziness faded and he could see everything in rainbows, he gained courage to continue his quest...",
+            "image" : "3"
+        },
+        {
+            "text" : "His enemies would tremble when they saw him, for he was stronger now!",
+            "image" : "End"
+        }
+    ]
+}
