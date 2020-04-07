@@ -75,6 +75,23 @@ class Campaign_Loader:
 		party.money = 0
 		campaign_data.party = party
 
+		# DIALOGUES
+		var portraits := load_all_portraits(campaign_name)
+		if portraits.empty():
+			load_correct = false
+		campaign_data.portraits = portraits
+
+		var dialogues := load_all_dialogues(campaign_name)
+		if dialogues.empty():
+			load_correct = false
+		campaign_data.dialogues = dialogues
+
+		# CUTSCENES
+		var cutscenes := load_all_cutscenes(campaign_name)
+		if cutscenes.empty():
+			load_correct = false
+		campaign_data.cutscenes = cutscenes
+
 		# MAPS
 		var maps : Dictionary = load_all_maps(campaign_name)
 		if maps.empty():
@@ -84,18 +101,6 @@ class Campaign_Loader:
 			print("\nStarting map \"" + campaign_dict.map_name + "\" does not exist or has not loaded correctly, please make sure the map exists and is in the correct place")
 		campaign_data.maps = maps
 		campaign_data.cur_map = campaign_dict.map_name
-
-		# DIALOGUES
-		# TODO load portraits
-		var portraits := load_all_portraits(campaign_name)
-		if portraits.empty():
-			load_correct = false
-		campaign_data.portraits = portraits
-		
-		var dialogues := load_all_dialogues(campaign_name)
-		if dialogues.empty():
-			load_correct = false
-		campaign_data.dialogues = dialogues
 
 		# FINAL STEPS
 		if not load_correct:
@@ -183,6 +188,21 @@ class Campaign_Loader:
 						if not campaign_data.items.has(item):
 							load_correct = false
 							print("Action treasure has the necessary fields, but item \"" + item + "\" could not be loaded or does not exist")
+				
+				elif action_info.type == "dialogue":
+					if not campaign_data.dialogues.has(action_info.data.id):
+						load_correct = false
+						print("Action dialogue has the necessary fields, but dialogue \"" + action_info.data.id + "\" could not be loaded or does not exist")
+				
+				elif action_info.type == "wait":
+					if not action_info.data.amount > 0:
+						load_correct = false
+						print("Action wait has the necessary fields, but amount field must be greater than 0")
+				
+				elif action_info.type == "cutscene":
+					if not campaign_data.cutscenes.has(action_info.data.id):
+						load_correct = false
+						print("Action cutscene has the necessary fields, but cutscene \"" + action_info.data.id + "\" could not be loaded or does not exist")
 				
 				elif action_info.type == "travel":
 					pass # TODO check destination exists as map.json and  target node is positive
@@ -883,6 +903,66 @@ class Campaign_Loader:
 		
 		print("	Successfully loaded dialogue\n------------------------------------")
 		return dialogue_data
+	
+	func load_all_cutscenes(campaign_name : String) -> Dictionary:
+		print("#############################\n##### LOADING CUTSCENES #####\n#############################")
+		
+		var load_correct = true
+		var cutscene_directories : Array = Utils.scan_directories_in_directory("res://campaigns/" + campaign_name + "/cutscenes")
+		
+		if cutscene_directories == null:
+			load_correct = false
+			return {}
+		
+		var cutscenes := {}
+		for cutscene_name in cutscene_directories:
+			var cutscene_data : Model.Cutscene_Data = load_cutscene(cutscene_name, campaign_name)
+			if cutscene_data == null:
+				print("\n	Cutscene could not be loaded correctly\n------------------------------------")
+				load_correct = false
+				continue
+			
+			cutscenes[cutscene_name] = cutscene_data
+		
+		if not load_correct:
+			return {}
+		
+		print("ALL CUTSCENES LOADED SUCCESSFULLY!\n")
+		return cutscenes
+	
+	func load_cutscene(cutscene_name : String, campaign_name : String) -> Model.Cutscene_Data:
+		print("------------------------------------\nLoading cutscene : " + cutscene_name)
+		
+		var load_correct := true
+		var cutscene_dict = Utils.load_json("res://campaigns/" + campaign_name + "/cutscenes/" + cutscene_name + "/cutscene.json")
+		
+		if cutscene_dict == null:
+			load_correct = false
+			return null
+
+		if not Validator.cutscene_is_valid(cutscene_dict, cutscene_name):
+			load_correct = false
+			return null
+		
+		var cutscene_data := Model.Cutscene_Data.new()
+		cutscene_data.name = cutscene_name
+		
+		for cutscene_node_dict in cutscene_dict.cutscene:
+			var cutscene_node := Model.Cutscene_Node.new()
+			cutscene_node.text = cutscene_node_dict.text
+			cutscene_node.image = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/cutscenes/" + cutscene_name + "/images/" + cutscene_node_dict.image + ".png")
+			
+			if cutscene_node.image == null:
+				load_correct= false
+				print("Cutscene is correct, but image \"" + cutscene_node_dict.image + "\" couldn't be found, please make sure the portrait exists and is in the correct place")
+			
+			cutscene_data.nodes.append(cutscene_node)
+		
+		if not load_correct:
+			return null
+		
+		print("	Successfully loaded cutscene\n------------------------------------")
+		return cutscene_data
 
 static func load_all_campaigns_basic_info() -> Dictionary:
 	var load_correct = true

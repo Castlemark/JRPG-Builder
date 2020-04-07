@@ -68,6 +68,9 @@ func set_up_actions(actions_list : Array):
 			"wait":
 				action = Wait_Action.new()
 				action.name = "Wait_Action"
+			"cutscene":
+				action = Cutscene_Action.new()
+				action.name = "Cutscene_Action"
 		
 		action.initialize(i.data)
 		actions.add_child(action, true)

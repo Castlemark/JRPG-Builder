@@ -15,10 +15,10 @@
                     }
                 },
                 {
-                    "type" : "dialogue",
+                    "type" : "cutscene",
                     "data" :
                     {
-                        "id": "example_dialogue_1"
+                        "id": "example_cutscene"
                     }
                 }
             ]

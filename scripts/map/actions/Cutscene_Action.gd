@@ -1,9 +1,9 @@
 extends Generic_Action
 
-class_name Wait_Action
+class_name Cutscene_Action
 
 func execute() -> void:
-	yield(get_tree().create_timer(self.data.amount), "timeout")
+	print("cutscene not yet implemented")
 	
 	self.queue_free()
 	emit_signal("finished")

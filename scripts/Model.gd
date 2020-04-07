@@ -15,6 +15,8 @@ class Campaign_Data:
 	
 	var portraits : Dictionary
 	var dialogues : Dictionary
+	
+	var cutscenes : Dictionary
 
 	var party : Party_Data
 
@@ -207,6 +209,14 @@ class Dialogue_Node:
 	var character : String
 	var side : String
 	var text : String
+
+class Cutscene_Data:
+	var name : String
+	var nodes : Array
+
+class Cutscene_Node:
+	var text : String
+	var image : Texture
 
 class Animation_Data:
 	var hframes : int

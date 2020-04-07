@@ -15,6 +15,7 @@ class Validation:
 		"combat" : [{"enemies" : ARRAY}],
 		"treasure": [{"money": NUMBER}, {"items": ARRAY}],
 		"dialogue": [{"id": TEXT}],
+		"cutscene": [{"id": TEXT}],
 		"wait": [{"amount": NUMBER}]
 	}
 
@@ -79,3 +80,7 @@ class Validation:
 	# DIALOGUE
 	const dialogue_fields := [{"dialogue" : ARRAY}]
 	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}, {"side": TEXT}]
+	
+	# CUTSCENE
+	const cutscene_fields := [{"cutscene" : ARRAY}]
+	const cutscene_node_fields := [{"text" : TEXT}, {"image" : TEXT}]

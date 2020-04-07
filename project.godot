@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Combat/Combat_Viewport.gd"
 }, {
+"base": "Generic_Action",
+"class": "Cutscene_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Cutscene_Action.gd"
+}, {
 "base": "Reference",
 "class": "Data",
 "language": "GDScript",
@@ -221,6 +226,7 @@ _global_script_class_icons={
 "Combat_Trigger_Action": "",
 "Combat_UI_Manager": "",
 "Combat_Viewport": "",
+"Cutscene_Action": "",
 "Data": "",
 "Detail_Node": "",
 "Dialogue_Action": "",
