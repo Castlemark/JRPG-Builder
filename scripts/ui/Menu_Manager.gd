@@ -40,6 +40,8 @@ func _ready() -> void:
 	menu_enabled = true
 	
 	GM.menus = self
+	
+	self.visible = true
 
 func _input(event : InputEvent) -> void:
 	if not animation_in_progress and menu_enabled:

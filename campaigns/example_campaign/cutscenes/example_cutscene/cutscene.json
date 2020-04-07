@@ -10,15 +10,15 @@
             "image" : "1"
         },
         {
-            "text" : "But after eating a mushroom he found on the forest everything started to feel a bit dizzy...",
+            "text" : "But after eating a mushroom he found on the forest, [wave amp=50 freq=4]everything started to feel a bit dizzy...[/wave]",
             "image" : "2"
         },
         {
-            "text" : "After the dizziness faded and he could see everything in rainbows, he gained courage to continue his quest...",
+            "text" : "[wave amp=50 freq=4]After[/wave] [wave amp=25 freq=4]the[/wave] [wave amp=12 freq=4]dizziness[/wave] [wave amp=6 freq=4]faded[/wave] and [rainbow freq=1 sat=10 val=20]he could see everything in rainbows[/rainbow], he gained courage to continue his quest...",
             "image" : "3"
         },
         {
-            "text" : "His enemies would tremble when they saw him, for he was stronger now!",
+            "text" : "His enemies would [shake rate=20 level=10]tremble[/shake] when they saw him, for he was stronger now!",
             "image" : "End"
         }
     ]
