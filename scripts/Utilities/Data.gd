@@ -14,9 +14,10 @@ class Validation:
 		"travel" : [{"map_name" : TEXT}, {"access_point" : NUMBER}],
 		"combat" : [{"enemies" : ARRAY}],
 		"treasure": [{"money": NUMBER}, {"items": ARRAY}],
-		"dialogue": [{"id": TEXT}]
+		"dialogue": [{"id": TEXT}],
+		"wait": [{"amount": NUMBER}]
 	}
-	
+
 	const item_types := {
 		"consumable" : [{"price" : NUMBER}, {"effect" : DICTIONARY}],
 		"equipment" : [{"price" : NUMBER}, {"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}],
@@ -41,7 +42,7 @@ class Validation:
 		"complementary": [],
 		"opposite": []
 	}
-	
+
 	const dialogue_node_side_types := {
 		"l": [],
 		"r": []
@@ -74,7 +75,7 @@ class Validation:
 
 	# ENEMY
 	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"xp_reward": NUMBER}, {"scale": NUMBER}]
-	
+
 	# DIALOGUE
 	const dialogue_fields := [{"dialogue" : ARRAY}]
 	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}, {"side": TEXT}]

@@ -65,6 +65,9 @@ func set_up_actions(actions_list : Array):
 			"dialogue":
 				action = Dialogue_Action.new()
 				action.name = "Dialogue_Action"
+			"wait":
+				action = Wait_Action.new()
+				action.name = "Wait_Action"
 		
 		action.initialize(i.data)
 		actions.add_child(action, true)
