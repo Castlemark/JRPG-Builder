@@ -122,6 +122,316 @@ margin_bottom = 373.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Clothes" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -8.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Torso" type="HBoxContainer" parent="Data/TopHBoxContainer/Equipment/Clothes"]
+margin_right = 252.0
+margin_bottom = 105.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Data/TopHBoxContainer/Equipment/Clothes/Torso"]
+margin_right = 96.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment/Clothes/Torso"]
+margin_left = 104.0
+margin_right = 252.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Data/TopHBoxContainer/Equipment/Clothes/Torso/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+text = "Torso"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Clothes/Torso/VBoxContainer"]
+margin_top = 26.0
+margin_right = 148.0
+margin_bottom = 30.0
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Equipment/Clothes/Torso/VBoxContainer"]
+margin_top = 34.0
+margin_right = 148.0
+margin_bottom = 105.0
+size_flags_vertical = 3
+autowrap = true
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Clothes"]
+margin_top = 109.0
+margin_right = 252.0
+margin_bottom = 113.0
+
+[node name="Legs" type="HBoxContainer" parent="Data/TopHBoxContainer/Equipment/Clothes"]
+margin_top = 117.0
+margin_right = 252.0
+margin_bottom = 222.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Data/TopHBoxContainer/Equipment/Clothes/Legs"]
+margin_right = 96.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment/Clothes/Legs"]
+margin_left = 104.0
+margin_right = 252.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Data/TopHBoxContainer/Equipment/Clothes/Legs/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+text = "Legs"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Clothes/Legs/VBoxContainer"]
+margin_top = 26.0
+margin_right = 148.0
+margin_bottom = 30.0
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Equipment/Clothes/Legs/VBoxContainer"]
+margin_top = 34.0
+margin_right = 148.0
+margin_bottom = 105.0
+size_flags_vertical = 3
+autowrap = true
+clip_text = true
+
+[node name="HSeparator2" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Clothes"]
+margin_top = 226.0
+margin_right = 252.0
+margin_bottom = 230.0
+
+[node name="Weapon" type="HBoxContainer" parent="Data/TopHBoxContainer/Equipment/Clothes"]
+margin_top = 234.0
+margin_right = 252.0
+margin_bottom = 341.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Data/TopHBoxContainer/Equipment/Clothes/Weapon"]
+margin_right = 96.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment/Clothes/Weapon"]
+margin_left = 104.0
+margin_right = 252.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Data/TopHBoxContainer/Equipment/Clothes/Weapon/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+text = "Weapon"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Clothes/Weapon/VBoxContainer"]
+margin_top = 26.0
+margin_right = 148.0
+margin_bottom = 30.0
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Equipment/Clothes/Weapon/VBoxContainer"]
+margin_top = 34.0
+margin_right = 148.0
+margin_bottom = 107.0
+size_flags_vertical = 3
+autowrap = true
+clip_text = true
+
+[node name="VSeparator" type="VSeparator" parent="Data/TopHBoxContainer/Equipment"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 16.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accessories" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accessory_1" type="HBoxContainer" parent="Data/TopHBoxContainer/Equipment/Accessories"]
+margin_right = 252.0
+margin_bottom = 105.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_1"]
+margin_right = 96.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_1"]
+margin_left = 104.0
+margin_right = 252.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_1/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+text = "Accessory"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_1/VBoxContainer"]
+margin_top = 26.0
+margin_right = 148.0
+margin_bottom = 30.0
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_1/VBoxContainer"]
+margin_top = 34.0
+margin_right = 148.0
+margin_bottom = 105.0
+size_flags_vertical = 3
+autowrap = true
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Accessories"]
+margin_top = 109.0
+margin_right = 252.0
+margin_bottom = 113.0
+
+[node name="Accessory_2" type="HBoxContainer" parent="Data/TopHBoxContainer/Equipment/Accessories"]
+margin_top = 117.0
+margin_right = 252.0
+margin_bottom = 222.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_2"]
+margin_right = 96.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_2"]
+margin_left = 104.0
+margin_right = 252.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_2/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+text = "Accessory"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_2/VBoxContainer"]
+margin_top = 26.0
+margin_right = 148.0
+margin_bottom = 30.0
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_2/VBoxContainer"]
+margin_top = 34.0
+margin_right = 148.0
+margin_bottom = 105.0
+size_flags_vertical = 3
+autowrap = true
+clip_text = true
+
+[node name="HSeparator2" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Accessories"]
+margin_top = 226.0
+margin_right = 252.0
+margin_bottom = 230.0
+
+[node name="Accessory_3" type="HBoxContainer" parent="Data/TopHBoxContainer/Equipment/Accessories"]
+margin_top = 234.0
+margin_right = 252.0
+margin_bottom = 341.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_3"]
+margin_right = 96.0
+margin_bottom = 107.0
+rect_min_size = Vector2( 96, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_3"]
+margin_left = 104.0
+margin_right = 252.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_3/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 22.0
+text = "Accessory"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_3/VBoxContainer"]
+margin_top = 26.0
+margin_right = 148.0
+margin_bottom = 30.0
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Equipment/Accessories/Accessory_3/VBoxContainer"]
+margin_top = 34.0
+margin_right = 148.0
+margin_bottom = 107.0
+size_flags_vertical = 3
+autowrap = true
+clip_text = true
+
 [node name="Stats" type="Panel" parent="Data/TopHBoxContainer"]
 margin_left = 579.0
 margin_right = 1133.0

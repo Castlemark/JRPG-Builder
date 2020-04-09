@@ -2,8 +2,8 @@ extends Tabs
 
 class_name Menu_Party
 
-var CHAR_PREV_SIZE_X := 400
-var CHAR_PREV_SIZE_Y := 640
+var CHAR_PREV_SIZE_X := 444 * 0.8
+var CHAR_PREV_SIZE_Y := 717 * 0.8
 
 var character_res : Resource = preload("res://scenes/ui/party/Character_UI.tscn")
 var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
@@ -93,6 +93,7 @@ func _on_player_select(data : Model.Character_Data) -> void:
 	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.stats.evasion * 100)) + "%"
 	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.stats.damage))
 
+	_update_character_equipment(data.equipment)
 	_update_character_abilites_panel(data.abilities.values())
 	_reset_ability_preview()
 
@@ -102,6 +103,25 @@ func _rescale_sprite() -> void:
 	
 	var scale : float = min(width_scale, heigth_scale)
 	character_preview.scale = Vector2(scale, scale)
+
+func _update_character_equipment(equipment_data : Model.Character_Data.Equipment_Data):
+	$Data/TopHBoxContainer/Equipment/Clothes/Torso/VBoxContainer/Name.text = equipment_data.torso.name
+	$Data/TopHBoxContainer/Equipment/Clothes/Torso/TextureRect.texture = equipment_data.torso.icon_texture
+	
+	$Data/TopHBoxContainer/Equipment/Clothes/Legs/VBoxContainer/Name.text = equipment_data.legs.name
+	$Data/TopHBoxContainer/Equipment/Clothes/Legs/TextureRect.texture = equipment_data.legs.icon_texture
+	
+	$Data/TopHBoxContainer/Equipment/Clothes/Weapon/VBoxContainer/Name.text = equipment_data.weapon.name
+	$Data/TopHBoxContainer/Equipment/Clothes/Weapon/TextureRect.texture = equipment_data.weapon.icon_texture
+	
+	$Data/TopHBoxContainer/Equipment/Accessories/Accessory_1/VBoxContainer/Name.text = equipment_data.accessory_1.name
+	$Data/TopHBoxContainer/Equipment/Accessories/Accessory_1/TextureRect.texture = equipment_data.accessory_1.icon_texture
+	
+	$Data/TopHBoxContainer/Equipment/Accessories/Accessory_2/VBoxContainer/Name.text = equipment_data.accessory_2.name
+	$Data/TopHBoxContainer/Equipment/Accessories/Accessory_2/TextureRect.texture = equipment_data.accessory_2.icon_texture
+	
+	$Data/TopHBoxContainer/Equipment/Accessories/Accessory_3/VBoxContainer/Name.text = equipment_data.accessory_3.name
+	$Data/TopHBoxContainer/Equipment/Accessories/Accessory_3/TextureRect.texture = equipment_data.accessory_3.icon_texture
 
 func _update_character_abilites_panel(abilities_data : Array) -> void:
 	var difference : int =  abilities_data.size() - (character_ability_container.get_child_count() - 2)
