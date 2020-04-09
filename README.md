@@ -40,7 +40,7 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Campaign structure file
   - [ ] Map module V-4 **(final)**
     - [ ] Inventory
-    - [ ] Character management
+    - [x] Character management
     - [x] Bestiary
 - [ ] <u>Combat Sprint</u>
   - [ ] Combat module V-2 **(final)**
