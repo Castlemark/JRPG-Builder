@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Encyclopedia.gd" type="Script" id=2]
-[ext_resource path="res://default_assets/user_interface/encyclopedia/journal.png" type="Texture" id=3]
 [ext_resource path="res://default_assets/user_interface/encyclopedia/bestiary.png" type="Texture" id=4]
 [ext_resource path="res://default_assets/user_interface/encyclopedia/abilities.png" type="Texture" id=5]
-[ext_resource path="res://default_assets/user_interface/encyclopedia/stats.png" type="Texture" id=6]
 [ext_resource path="res://scripts/ui/Enemy_Preview.gd" type="Script" id=7]
 [ext_resource path="res://icon.png" type="Texture" id=8]
 
@@ -16,6 +14,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_left = 0.05
@@ -41,8 +42,8 @@ text = "Categories"
 [node name="BG" type="Panel" parent="HBoxContainer/Selector"]
 margin_top = 26.0
 margin_right = 125.0
-margin_bottom = 567.0
-rect_min_size = Vector2( 0, 541 )
+margin_bottom = 306.0
+rect_min_size = Vector2( 0, 280 )
 size_flags_horizontal = 3
 
 [node name="Container" type="VBoxContainer" parent="HBoxContainer/Selector/BG"]
@@ -56,42 +57,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 7
 alignment = 1
-
-[node name="Journal" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-margin_right = 105.0
-margin_bottom = 125.0
-rect_min_size = Vector2( 0, 125 )
-toggle_mode = true
-group = SubResource( 1 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Selector/BG/Container/Journal"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-custom_constants/separation = 0
-
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Selector/BG/Container/Journal/VBoxContainer"]
-margin_right = 101.0
-margin_bottom = 101.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="HBoxContainer/Selector/BG/Container/Journal/VBoxContainer"]
-margin_top = 101.0
-margin_right = 101.0
-margin_bottom = 123.0
-text = "Journal"
-align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Bestiary" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-margin_top = 132.0
+margin_top = 1.0
 margin_right = 105.0
-margin_bottom = 257.0
+margin_bottom = 126.0
 rect_min_size = Vector2( 0, 125 )
 toggle_mode = true
 group = SubResource( 1 )
@@ -121,9 +94,9 @@ text = "Bestiary"
 align = 1
 
 [node name="Abilities" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-margin_top = 264.0
+margin_top = 133.0
 margin_right = 105.0
-margin_bottom = 389.0
+margin_bottom = 258.0
 rect_min_size = Vector2( 0, 125 )
 toggle_mode = true
 group = SubResource( 1 )
@@ -150,38 +123,6 @@ margin_top = 101.0
 margin_right = 101.0
 margin_bottom = 123.0
 text = "Abilities"
-align = 1
-
-[node name="Stats" type="Button" parent="HBoxContainer/Selector/BG/Container"]
-margin_top = 396.0
-margin_right = 105.0
-margin_bottom = 521.0
-rect_min_size = Vector2( 0, 125 )
-toggle_mode = true
-group = SubResource( 1 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Selector/BG/Container/Stats"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = -2.0
-custom_constants/separation = 0
-
-[node name="Icon" type="TextureRect" parent="HBoxContainer/Selector/BG/Container/Stats/VBoxContainer"]
-margin_right = 101.0
-margin_bottom = 101.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="HBoxContainer/Selector/BG/Container/Stats/VBoxContainer"]
-margin_top = 101.0
-margin_right = 101.0
-margin_bottom = 123.0
-text = "Statistics"
 align = 1
 
 [node name="Content" type="VBoxContainer" parent="HBoxContainer"]
