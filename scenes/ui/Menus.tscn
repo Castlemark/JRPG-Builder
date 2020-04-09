@@ -101,12 +101,12 @@ size_flags_vertical = 3
 visible = false
 
 [node name="Party" parent="Content" instance=ExtResource( 9 )]
-visible = false
 
 [node name="Encyclopedia" parent="Content" instance=ExtResource( 10 )]
 visible = false
 
 [node name="Settings" parent="Content" instance=ExtResource( 11 )]
+visible = false
 [connection signal="toggled" from="Sections/Tabs/Inventory" to="." method="_on_section_toggled"]
 [connection signal="toggled" from="Sections/Tabs/Party" to="." method="_on_section_toggled"]
 [connection signal="toggled" from="Sections/Tabs/Encyclopedia" to="." method="_on_section_toggled"]
