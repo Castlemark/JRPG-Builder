@@ -98,9 +98,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Inventory" parent="Content" instance=ExtResource( 8 )]
-visible = false
 
 [node name="Party" parent="Content" instance=ExtResource( 9 )]
+visible = false
 
 [node name="Encyclopedia" parent="Content" instance=ExtResource( 10 )]
 visible = false

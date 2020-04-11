@@ -15,9 +15,6 @@ func initialize(item) -> void:
 	self.add_to_group(data.type)
 	label.text = data.name
 
-	var tooltip := String(data.name)
-	self.hint_tooltip = tooltip
-
 	var img : Texture = item.icon_texture
 	if img != null:
 		image.texture = img

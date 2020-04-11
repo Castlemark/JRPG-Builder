@@ -4,7 +4,7 @@ class_name Cutscene_Menu
 
 const CHARS_PER_SECONDS : float = 30.0
 
-signal on_treasure_toggle(is_active)
+signal on_cutscene_toggle(is_active)
 signal on_cutscene_finished()
 signal on_cutscene_node_next()
 
@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 			emit_signal("on_cutscene_node_next")
 
 func play_cutscene(cutscene_id : String) -> void:
-	emit_signal("on_treasure_toggle", true)
+	emit_signal("on_cutscene_toggle", true)
 	
 	var cutscene_data := Game_Manager.campaign_data.cutscenes[cutscene_id] as Model.Cutscene_Data
 	
@@ -44,5 +44,5 @@ func play_cutscene(cutscene_id : String) -> void:
 	
 	self.visible = false
 	
-	emit_signal("on_treasure_toggle", false)
+	emit_signal("on_cutscene_toggle", false)
 	emit_signal("on_cutscene_finished")

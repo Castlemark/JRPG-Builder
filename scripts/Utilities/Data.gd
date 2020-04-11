@@ -20,9 +20,8 @@ class Validation:
 	}
 
 	const item_types := {
-		"consumable" : [{"price" : NUMBER}, {"effect" : DICTIONARY}],
-		"equipment" : [{"price" : NUMBER}, {"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}],
-		"quest_object" : [{"keyword": TEXT}]
+		"consumable" : [{"effect" : DICTIONARY}, {"description": TEXT}],
+		"equipment" : [{"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}, {"description": TEXT}]
 	}
 
 	const equipment_types := {
@@ -34,6 +33,7 @@ class Validation:
 
 	const effect_types := {
 		"health": [],
+		"damage": [],
 		"evasion": [],
 		"strain": []
 	}
@@ -63,10 +63,9 @@ class Validation:
 
 	# ABILITY
 	const ability_fields := [ {"min_level" : NUMBER}, {"side" : TEXT}, {"cost" : NUMBER}, {"type" : TEXT}, {"amount" : NUMBER}, {"description" : TEXT},]
-	const ability_effect_fields := [{"type" : TEXT}, {"receiver" : TEXT}, {"amount" : NUMBER}, {"duration" : NUMBER}]
 
 	# ITEM
-	const consumable_effect_fields := [{"type" : TEXT}, {"value" : NUMBER}, {"delay" : NUMBER}, {"duration" : NUMBER}]
+	const consumable_effect_fields := [{"type" : TEXT}, {"value" : NUMBER}]
 
 	# MAP
 	const map_fields := [{"navigation_nodes" : ARRAY}, {"detail_art" : ARRAY}, {"background_info" : DICTIONARY}, {"name" : TEXT}]
