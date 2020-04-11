@@ -1,0 +1,391 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://scripts/ui/Item_Preview.gd" type="Script" id=2]
+
+[node name="Item_Preview" type="Panel"]
+anchor_left = 0.6
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.55
+margin_left = 16.0
+margin_top = 30.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="TextureRect" parent="."]
+anchor_right = 0.35
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = 16.0
+margin_bottom = -8.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Basic_Info" type="VBoxContainer" parent="."]
+anchor_left = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Basic_Info"]
+margin_right = 394.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+text = "Name  "
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="Basic_Info"]
+margin_top = 36.0
+margin_right = 394.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="RichTextLabel" parent="Basic_Info"]
+margin_top = 44.0
+margin_right = 394.0
+margin_bottom = 231.0
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = -2.0
+margin_right = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equipment_Info" type="Control" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stat_Info" type="VBoxContainer" parent="Equipment_Info"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_right = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="HBoxContainer" parent="Equipment_Info/Stat_Info"]
+margin_right = 280.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Stat_Info/Health"]
+margin_top = 10.0
+margin_right = 252.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Health"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Stat_Info/Health"]
+margin_left = 256.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "+50"
+
+[node name="Damage" type="HBoxContainer" parent="Equipment_Info/Stat_Info"]
+margin_top = 39.0
+margin_right = 280.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Stat_Info/Damage"]
+margin_top = 10.0
+margin_right = 252.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Damage"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Stat_Info/Damage"]
+margin_left = 256.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "+50"
+
+[node name="Strain" type="HBoxContainer" parent="Equipment_Info/Stat_Info"]
+margin_top = 78.0
+margin_right = 280.0
+margin_bottom = 113.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Stat_Info/Strain"]
+margin_top = 10.0
+margin_right = 252.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Strain"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Stat_Info/Strain"]
+margin_left = 256.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "+50"
+
+[node name="Evasion" type="HBoxContainer" parent="Equipment_Info/Stat_Info"]
+margin_top = 117.0
+margin_right = 280.0
+margin_bottom = 152.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Stat_Info/Evasion"]
+margin_top = 10.0
+margin_right = 252.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Evasion"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Stat_Info/Evasion"]
+margin_left = 256.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "+50"
+
+[node name="Critic" type="HBoxContainer" parent="Equipment_Info/Stat_Info"]
+margin_top = 156.0
+margin_right = 280.0
+margin_bottom = 191.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Stat_Info/Critic"]
+margin_top = 10.0
+margin_right = 252.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Critic"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Stat_Info/Critic"]
+margin_left = 256.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "+50"
+
+[node name="Speed" type="HBoxContainer" parent="Equipment_Info/Stat_Info"]
+margin_top = 195.0
+margin_right = 280.0
+margin_bottom = 231.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Stat_Info/Speed"]
+margin_top = 11.0
+margin_right = 252.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+text = "Speed"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Stat_Info/Speed"]
+margin_left = 256.0
+margin_top = 11.0
+margin_right = 280.0
+margin_bottom = 25.0
+text = "+50"
+
+[node name="Extra_Info" type="VBoxContainer" parent="Equipment_Info"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 32.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type" type="HBoxContainer" parent="Equipment_Info/Extra_Info"]
+margin_right = 280.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Extra_Info/Type"]
+margin_top = 10.0
+margin_right = 227.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Type"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Extra_Info/Type"]
+margin_left = 231.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "weapon"
+
+[node name="Min_Level" type="HBoxContainer" parent="Equipment_Info/Extra_Info"]
+margin_top = 38.0
+margin_right = 280.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Extra_Info/Min_Level"]
+margin_top = 10.0
+margin_right = 268.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Minimum Level"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Extra_Info/Min_Level"]
+margin_left = 272.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "3"
+
+[node name="Rarity" type="HBoxContainer" parent="Equipment_Info/Extra_Info"]
+margin_top = 76.0
+margin_right = 280.0
+margin_bottom = 111.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Equipment_Info/Extra_Info/Rarity"]
+margin_top = 10.0
+margin_right = 218.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Rarity"
+
+[node name="Amount" type="Label" parent="Equipment_Info/Extra_Info/Rarity"]
+margin_left = 222.0
+margin_top = 10.0
+margin_right = 280.0
+margin_bottom = 24.0
+text = "Common"
+
+[node name="Equip_Button" type="Button" parent="Equipment_Info"]
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 1.0
+anchor_bottom = 0.85
+margin_left = 64.0
+margin_right = -64.0
+text = "Equip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="Equipment_Info"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 4.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Consumable_Info" type="Control" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Extra_Info" type="VBoxContainer" parent="Consumable_Info"]
+anchor_right = 1.0
+anchor_bottom = 0.33
+margin_bottom = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Type" type="HBoxContainer" parent="Consumable_Info/Extra_Info"]
+margin_right = 624.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Consumable_Info/Extra_Info/Type"]
+margin_top = 10.0
+margin_right = 571.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Type"
+
+[node name="Amount" type="Label" parent="Consumable_Info/Extra_Info/Type"]
+margin_left = 575.0
+margin_top = 10.0
+margin_right = 624.0
+margin_bottom = 24.0
+text = "weapon"
+
+[node name="Amount" type="HBoxContainer" parent="Consumable_Info/Extra_Info"]
+margin_top = 39.0
+margin_right = 624.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name_Label" type="Label" parent="Consumable_Info/Extra_Info/Amount"]
+margin_top = 10.0
+margin_right = 612.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Minimum Level"
+
+[node name="Amount" type="Label" parent="Consumable_Info/Extra_Info/Amount"]
+margin_left = 616.0
+margin_top = 10.0
+margin_right = 624.0
+margin_bottom = 24.0
+text = "3"
+
+[node name="Consume_Button" type="Button" parent="Consumable_Info"]
+anchor_left = 0.25
+anchor_top = 0.55
+anchor_right = 0.75
+anchor_bottom = 0.75
+margin_left = 64.0
+margin_right = -64.0
+text = "Consume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Equipment_Info/Equip_Button" to="." method="_on_Equip_Button_pressed"]
+[connection signal="pressed" from="Consumable_Info/Consume_Button" to="." method="_on_Consume_Button_pressed"]

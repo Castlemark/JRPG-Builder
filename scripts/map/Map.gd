@@ -20,6 +20,7 @@ onready var camera := $Player_Avatar/Camera as Map_Camera
 onready var combat_viewport := $UI/Combat_Viewport as Combat_Viewport
 onready var treaseure_menu := $UI/Treasure_Menu as Treaseure_Menu
 onready var dialogue_menu := $UI/Dialogue_Menu as Menu_Dialogue
+onready var cutscene_menu := $UI/Cutscene_Menu as Cutscene_Menu
 
 var path_img : Texture
 var intersection_img : Texture
@@ -45,6 +46,7 @@ func initialize(map) -> void:
 	instantiate_details(map.detail_art)
 
 	player_avatar.initialize(navigation_nodes.get_child(map.access_point) as Navigation_Node, avatar_img)
+	player_avatar.execute_actions()
 
 func instantiate_navigation_nodes(node_list : Array) -> void:
 	var counter : int = 0

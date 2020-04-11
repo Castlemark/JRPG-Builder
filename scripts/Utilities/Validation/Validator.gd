@@ -71,6 +71,8 @@ static func item_is_valid(item_data, item : String) -> bool:
 	match item_data.type:
 		"consumable":
 			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.effect, Data.Validation.consumable_effect_fields, "item consumable has missing or incorrect fields in it's \"effect\" field", "", item)
+			if valid:
+				valid = Generic_Validators.type_is_valid(item_data.data.effect.type, Data.Validation.effect_types, {})
 		"equipment":
 			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.stats, Data.Validation.stats, "item equipment has missing or incorrect fields in it's \"stats\" field", "", item)
 	
@@ -122,4 +124,31 @@ static func dialogue_is_valid(dialogue_data, dialogue_name : String) -> bool:
 			return false
 		if not Generic_Validators.type_is_valid(dialogue_node.side, Data.Validation.dialogue_node_side_types, {}):
 			return false
+	return true
+
+# CUTSCENE
+
+static func cutscene_is_valid(cutscene_data, cutscene_name : String) -> bool:
+	if cutscene_data == null:
+		return false
+	if not Generic_Validators.minimal_info_fields_exist(cutscene_data, Data.Validation.cutscene_fields, "cutscene has missing or incorrect required fields", "", cutscene_name):
+		return false
+	for cutscene_node in cutscene_data.cutscene:
+		if not Generic_Validators.minimal_info_fields_exist(cutscene_node, Data.Validation.cutscene_node_fields, "cutscene has missing or incorrect required fields", "", cutscene_name):
+			return false
+	return true
+
+# CAMPAIGN INFO
+
+static func campaign_info_is_valid(campaign_info_data, campaign_name) -> bool:
+	if campaign_info_data == null:
+		return false
+	if not Generic_Validators.minimal_info_fields_exist(campaign_info_data, Data.Validation.campaign_info_data, "campaign has missing or incorrect required fields", "", campaign_name):
+		return false
+	if campaign_info_data.access_point < 0:
+		print("campaign info \"" + campaign_name + "/campaign.json\" is valid, but it's \"access_point\" property is smaller than 0, please make sure \"access_point\" is correct")
+		return false
+	if campaign_info_data.party.size() > 3 or campaign_info_data.party.size() <= 0:
+		print("campaign info \"" + campaign_name + "/campaign.json\" is valid, but it's \"party\" property must have a size between 1 and 3, please make sure \"party\" is correct")
+		return false
 	return true

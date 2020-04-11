@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://scripts/map/Between_node.gd"
 }, {
 "base": "Button",
+"class": "Char_Stats_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Char_Stats_Preview.gd"
+}, {
+"base": "Button",
 "class": "Character_Ability",
 "language": "GDScript",
 "path": "res://scripts/ui/Character_ability.gd"
@@ -63,6 +68,16 @@ _global_script_classes=[ {
 "class": "Combat_Viewport",
 "language": "GDScript",
 "path": "res://scripts/Combat/Combat_Viewport.gd"
+}, {
+"base": "Generic_Action",
+"class": "Cutscene_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Cutscene_Action.gd"
+}, {
+"base": "Panel",
+"class": "Cutscene_Menu",
+"language": "GDScript",
+"path": "res://scripts/ui/Cutscene_Menu.gd"
 }, {
 "base": "Reference",
 "class": "Data",
@@ -114,10 +129,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Item.gd"
 }, {
+"base": "Panel",
+"class": "Item_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Item_Preview.gd"
+}, {
 "base": "Reference",
 "class": "Loaders",
 "language": "GDScript",
 "path": "res://scripts/Utilities/Loader.gd"
+}, {
+"base": "Control",
+"class": "Main_Menu",
+"language": "GDScript",
+"path": "res://scripts/ui/Main_Menu.gd"
 }, {
 "base": "Spatial",
 "class": "Map",
@@ -164,10 +189,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Navigation_Node.gd"
 }, {
+"base": "Panel",
+"class": "Party_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Party_Preview.gd"
+}, {
 "base": "Position3D",
 "class": "Player_Avatar",
 "language": "GDScript",
 "path": "res://scripts/map/Player_Avatar.gd"
+}, {
+"base": "Control",
+"class": "Settings",
+"language": "GDScript",
+"path": "res://scripts/ui/Settings_Menu.gd"
 }, {
 "base": "Generic_Action",
 "class": "Travel_Action",
@@ -193,11 +228,17 @@ _global_script_classes=[ {
 "class": "Validator",
 "language": "GDScript",
 "path": "res://scripts/Utilities/Validation/Validator.gd"
+}, {
+"base": "Generic_Action",
+"class": "Wait_Action",
+"language": "GDScript",
+"path": "res://scripts/map/actions/Wait_Action.gd"
 } ]
 _global_script_class_icons={
 "Background_Tile": "",
 "Battler_UI_Controller": "",
 "Between_node": "",
+"Char_Stats_Preview": "",
 "Character_Ability": "",
 "Character_Combat": "",
 "Character_End_Screen": "",
@@ -206,6 +247,8 @@ _global_script_class_icons={
 "Combat_Trigger_Action": "",
 "Combat_UI_Manager": "",
 "Combat_Viewport": "",
+"Cutscene_Action": "",
+"Cutscene_Menu": "",
 "Data": "",
 "Detail_Node": "",
 "Dialogue_Action": "",
@@ -216,7 +259,9 @@ _global_script_class_icons={
 "Generic_Action": "",
 "Generic_Validators": "",
 "Item": "",
+"Item_Preview": "",
 "Loaders": "",
+"Main_Menu": "",
 "Map": "",
 "Map_Camera": "",
 "Menu_Dialogue": "",
@@ -226,18 +271,21 @@ _global_script_class_icons={
 "Menu_Party": "",
 "Model": "",
 "Navigation_Node": "",
+"Party_Preview": "",
 "Player_Avatar": "",
+"Settings": "",
 "Travel_Action": "",
 "Treaseure_Menu": "",
 "Treasure_Action": "",
 "Utils": "",
-"Validator": ""
+"Validator": "",
+"Wait_Action": ""
 }
 
 [application]
 
 config/name="JRPG Builder"
-run/main_scene="res://scenes/map/Map.tscn"
+run/main_scene="res://scenes/ui/title_screen/Title_Screen.tscn"
 config/icon="res://icon.png"
 
 [audio]

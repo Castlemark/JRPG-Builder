@@ -1,0 +1,135 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/ui/Party_Preview.gd" type="Script" id=2]
+
+[node name="Party_Preview" type="Panel"]
+anchor_left = 0.6
+anchor_top = 0.55
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = 16.0
+margin_top = 16.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+grow_horizontal = 2
+follow_focus = true
+scroll_vertical_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Party_Container" type="HBoxContainer" parent="Scroll"]
+margin_right = 632.0
+margin_bottom = 400.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Stats" type="VBoxContainer" parent="Scroll/Party_Container"]
+margin_right = 80.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="Scroll/Party_Container/Stats"]
+margin_right = 80.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 0, 124 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="Scroll/Party_Container/Stats"]
+margin_top = 128.0
+margin_right = 80.0
+margin_bottom = 132.0
+size_flags_horizontal = 3
+
+[node name="Health" type="Label" parent="Scroll/Party_Container/Stats"]
+margin_top = 136.0
+margin_right = 80.0
+margin_bottom = 170.0
+size_flags_vertical = 3
+text = "Health"
+align = 2
+valign = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Scroll/Party_Container/Stats"]
+margin_top = 174.0
+margin_right = 80.0
+margin_bottom = 178.0
+
+[node name="Damage" type="Label" parent="Scroll/Party_Container/Stats"]
+margin_top = 182.0
+margin_right = 80.0
+margin_bottom = 216.0
+size_flags_vertical = 3
+text = "Damage"
+align = 2
+valign = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Scroll/Party_Container/Stats"]
+margin_top = 220.0
+margin_right = 80.0
+margin_bottom = 224.0
+
+[node name="Strain" type="Label" parent="Scroll/Party_Container/Stats"]
+margin_top = 228.0
+margin_right = 80.0
+margin_bottom = 262.0
+size_flags_vertical = 3
+text = "Strain"
+align = 2
+valign = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Scroll/Party_Container/Stats"]
+margin_top = 266.0
+margin_right = 80.0
+margin_bottom = 270.0
+
+[node name="Evasion" type="Label" parent="Scroll/Party_Container/Stats"]
+margin_top = 274.0
+margin_right = 80.0
+margin_bottom = 308.0
+size_flags_vertical = 3
+text = "Evasion"
+align = 2
+valign = 1
+
+[node name="HSeparator5" type="HSeparator" parent="Scroll/Party_Container/Stats"]
+margin_top = 312.0
+margin_right = 80.0
+margin_bottom = 316.0
+
+[node name="Critic" type="Label" parent="Scroll/Party_Container/Stats"]
+margin_top = 320.0
+margin_right = 80.0
+margin_bottom = 354.0
+size_flags_vertical = 3
+text = "Critic"
+align = 2
+valign = 1
+
+[node name="HSeparator6" type="HSeparator" parent="Scroll/Party_Container/Stats"]
+margin_top = 358.0
+margin_right = 80.0
+margin_bottom = 362.0
+
+[node name="Speed" type="Label" parent="Scroll/Party_Container/Stats"]
+margin_top = 366.0
+margin_right = 80.0
+margin_bottom = 400.0
+size_flags_vertical = 3
+text = "Speed"
+align = 2
+valign = 1

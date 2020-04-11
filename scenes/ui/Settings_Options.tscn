@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/ui/Settings_Menu.gd" type="Script" id=1]
+[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=2]
+
+[sub_resource type="ButtonGroup" id=1]
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullscreenButton" type="CheckButton" parent="."]
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.367
+margin_left = -1.52588e-05
+margin_top = -1.52588e-05
+margin_bottom = -1.52588e-05
+custom_fonts/font = ExtResource( 2 )
+text = "Fullscreen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="."]
+anchor_left = 0.1
+anchor_top = 0.367
+anchor_right = 0.9
+anchor_bottom = 0.367
+margin_left = 4.57764e-05
+margin_bottom = 4.0
+
+[node name="VsyncButton" type="CheckButton" parent="."]
+anchor_left = 0.1
+anchor_top = 0.367
+anchor_right = 0.9
+anchor_bottom = 0.634
+margin_left = -1.52588e-05
+custom_fonts/font = ExtResource( 2 )
+text = "Vsync"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+anchor_left = 0.1
+anchor_top = 0.634
+anchor_right = 0.9
+anchor_bottom = 0.634
+margin_left = 4.57764e-05
+margin_top = 1.52588e-05
+margin_bottom = 4.00002
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RefreshRate" type="HBoxContainer" parent="."]
+anchor_left = 0.1
+anchor_top = 0.634
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_left = -1.52588e-05
+margin_top = 1.52588e-05
+margin_right = -4.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RefreshRate"]
+margin_right = 1412.0
+margin_bottom = 287.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Refresh Rate"
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="RefreshRate"]
+margin_left = 1428.0
+margin_right = 1472.0
+margin_bottom = 287.0
+rect_min_size = Vector2( 0, 89 )
+group = SubResource( 1 )
+text = "30"
+
+[node name="CheckBox2" type="CheckBox" parent="RefreshRate"]
+margin_left = 1488.0
+margin_right = 1532.0
+margin_bottom = 287.0
+rect_min_size = Vector2( 0, 89 )
+pressed = true
+group = SubResource( 1 )
+text = "60"
+[connection signal="toggled" from="FullscreenButton" to="." method="_on_FullscreenButton_toggled"]
+[connection signal="toggled" from="VsyncButton" to="." method="_on_VsyncButton_toggled"]
+[connection signal="toggled" from="RefreshRate/CheckBox" to="." method="_on_CheckBox_30fps_toggled"]
+[connection signal="toggled" from="RefreshRate/CheckBox2" to="." method="_on_CheckBox_60fps_toggled"]

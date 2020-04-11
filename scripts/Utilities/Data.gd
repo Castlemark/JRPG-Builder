@@ -14,13 +14,14 @@ class Validation:
 		"travel" : [{"map_name" : TEXT}, {"access_point" : NUMBER}],
 		"combat" : [{"enemies" : ARRAY}],
 		"treasure": [{"money": NUMBER}, {"items": ARRAY}],
-		"dialogue": [{"id": TEXT}]
+		"dialogue": [{"id": TEXT}],
+		"cutscene": [{"id": TEXT}],
+		"wait": [{"amount": NUMBER}]
 	}
-	
+
 	const item_types := {
-		"consumable" : [{"price" : NUMBER}, {"effect" : DICTIONARY}],
-		"equipment" : [{"price" : NUMBER}, {"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}],
-		"quest_object" : [{"keyword": TEXT}]
+		"consumable" : [{"effect" : DICTIONARY}, {"description": TEXT}],
+		"equipment" : [{"slot" : TEXT}, {"stats" : DICTIONARY}, {"min_level" : NUMBER}, {"rarity" : NUMBER}, {"description": TEXT}]
 	}
 
 	const equipment_types := {
@@ -32,6 +33,7 @@ class Validation:
 
 	const effect_types := {
 		"health": [],
+		"damage": [],
 		"evasion": [],
 		"strain": []
 	}
@@ -41,11 +43,14 @@ class Validation:
 		"complementary": [],
 		"opposite": []
 	}
-	
+
 	const dialogue_node_side_types := {
 		"l": [],
 		"r": []
 	}
+
+	# CAMPAIGN
+	const campaign_info_data := [{"map_name" : TEXT}, {"access_point" : NUMBER}, {"party" : ARRAY}, {"inventory" : ARRAY}, {"money" : NUMBER}, {"description" : TEXT}]
 
 	# GENERAL
 	const animation_data := [{"hframes" : NUMBER}, {"vframes" : NUMBER}, {"total_frames" : NUMBER}, {"duration" : NUMBER}]
@@ -58,10 +63,9 @@ class Validation:
 
 	# ABILITY
 	const ability_fields := [ {"min_level" : NUMBER}, {"side" : TEXT}, {"cost" : NUMBER}, {"type" : TEXT}, {"amount" : NUMBER}, {"description" : TEXT},]
-	const ability_effect_fields := [{"type" : TEXT}, {"receiver" : TEXT}, {"amount" : NUMBER}, {"duration" : NUMBER}]
 
 	# ITEM
-	const consumable_effect_fields := [{"type" : TEXT}, {"value" : NUMBER}, {"delay" : NUMBER}, {"duration" : NUMBER}]
+	const consumable_effect_fields := [{"type" : TEXT}, {"value" : NUMBER}]
 
 	# MAP
 	const map_fields := [{"navigation_nodes" : ARRAY}, {"detail_art" : ARRAY}, {"background_info" : DICTIONARY}, {"name" : TEXT}]
@@ -71,7 +75,11 @@ class Validation:
 
 	# ENEMY
 	const enemy_fields := [{"stats" : DICTIONARY}, {"abilities" : ARRAY}, {"xp_reward": NUMBER}, {"scale": NUMBER}]
-	
+
 	# DIALOGUE
 	const dialogue_fields := [{"dialogue" : ARRAY}]
 	const dialogue_node_fields := [{"character" : TEXT}, {"text": TEXT}, {"side": TEXT}]
+	
+	# CUTSCENE
+	const cutscene_fields := [{"cutscene" : ARRAY}]
+	const cutscene_node_fields := [{"text" : TEXT}, {"image" : TEXT}]

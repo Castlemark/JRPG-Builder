@@ -34,16 +34,14 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Combat trigger
     - [X] Treasure
     - [x] Conversation
-- [ ] <u>Story Sprint</u>
-  - [ ] Story module V-2 **(final)**
-    - [ ] Cut-scene
-    - [ ] Campaign structure file
-    - [ ] Mission
-  - [ ] Map module V-4 **(final)**
-    - [ ] Inventory
-    - [ ] Character management
+- [x] <u>Story Sprint</u>
+  - [x] Story module V-2 **(final)**
+    - [x] Cut-scene
+    - [x] Campaign structure file
+  - [x] Map module V-4 **(final)**
+    - [x] Inventory
+    - [x] Character management
     - [x] Bestiary
-    - [ ] Journal
 - [ ] <u>Combat Sprint</u>
   - [ ] Combat module V-2 **(final)**
     - [ ] Final AI
