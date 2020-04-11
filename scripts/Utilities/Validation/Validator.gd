@@ -71,6 +71,8 @@ static func item_is_valid(item_data, item : String) -> bool:
 	match item_data.type:
 		"consumable":
 			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.effect, Data.Validation.consumable_effect_fields, "item consumable has missing or incorrect fields in it's \"effect\" field", "", item)
+			if valid:
+				valid = Generic_Validators.type_is_valid(item_data.data.effect.type, Data.Validation.effect_types, {})
 		"equipment":
 			valid = Generic_Validators.minimal_info_fields_exist(item_data.data.stats, Data.Validation.stats, "item equipment has missing or incorrect fields in it's \"stats\" field", "", item)
 	

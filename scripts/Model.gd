@@ -72,34 +72,25 @@ class Item_Data:
 		class Consumable_Data:
 			var type : String
 			var name : String
-			var price : int
 			var effect : Item_Effect_Data
+			var description : String
 
 			var icon_texture : Texture
 
 			class Item_Effect_Data:
 				var type : String
 				var value : int
-				var delay : int
-				var duration : int
 
 				var icon_texture : Texture
-
-		class Quest_Object_Data:
-			var type : String
-			var name : String
-			var keyword : String
-
-			var icon_texture : Texture
 
 		class Equipment_Item_Data:
 			var type : String
 			var name : String
-			var price : int
 			var slot : String
 			var stats : Stats_Data
 			var min_level : int
 			var rarity : int
+			var description : String
 
 			var icon_texture : Texture
 
@@ -123,6 +114,36 @@ class Character_Data:
 
 	func cur_level() -> int:
 		return floor(self.cur_xp/100.0) as int
+	
+	func full_stats(equipment : Equipment_Data) -> Model.Stats_Data:
+		var eq_stats := Stats_Data.new()
+
+		eq_stats.max_health = max(stats.max_health + equipment.legs.stats.health + equipment.torso.stats.health + equipment.accessory_1.stats.health + equipment.accessory_2.stats.health + equipment.accessory_3.stats.health + equipment.weapon.stats.health, 10)
+		eq_stats.health = max(stats.health, 0)
+		eq_stats.max_damage = max(stats.max_damage + equipment.legs.stats.damage + equipment.torso.stats.damage + equipment.accessory_1.stats.damage + equipment.accessory_2.stats.damage + equipment.accessory_3.stats.damage + equipment.weapon.stats.damage, 0)
+		eq_stats.damage = max(stats.damage, 0)
+		eq_stats.max_strain = max(stats.max_strain + equipment.legs.stats.strain + equipment.torso.stats.strain + equipment.accessory_1.stats.strain + equipment.accessory_2.stats.strain + equipment.accessory_3.stats.strain + equipment.weapon.stats.strain, 0)
+		eq_stats.strain = max(stats.strain, 0)
+		eq_stats.max_evasion = clamp(stats.max_evasion + equipment.legs.stats.evasion + equipment.torso.stats.evasion + equipment.accessory_1.stats.evasion + equipment.accessory_2.stats.evasion + equipment.accessory_3.stats.evasion + equipment.weapon.stats.evasion, 0, 1)
+		eq_stats.evasion = max(stats.evasion, 0)
+		eq_stats.critic = clamp(stats.critic + equipment.legs.stats.critic + equipment.torso.stats.critic + equipment.accessory_1.stats.critic + equipment.accessory_2.stats.critic + equipment.accessory_3.stats.critic + equipment.weapon.stats.critic, 0, 1)
+		eq_stats.speed = max(stats.speed + equipment.legs.stats.speed + equipment.torso.stats.speed + equipment.accessory_1.stats.speed + equipment.accessory_2.stats.speed + equipment.accessory_3.stats.speed + equipment.weapon.stats.speed, 0)
+
+		return eq_stats
+	
+	func calc_diff(new_eq : Equipment_Data) -> Stats_Data:
+		var diff_stats := full_stats(new_eq)
+		var cur_stats := full_stats(equipment)
+
+		diff_stats.max_health -= cur_stats.max_health
+		diff_stats.max_damage -= cur_stats.max_damage
+		diff_stats.max_strain -= cur_stats.max_strain
+		diff_stats.max_evasion -= cur_stats.max_evasion
+		diff_stats.critic -= cur_stats.critic
+		diff_stats.speed -= cur_stats.speed
+
+		return diff_stats
+
 
 	class Equipment_Data:
 		var legs : Item_Data.Equipment_Item_Data
@@ -131,6 +152,18 @@ class Character_Data:
 		var accessory_2 : Item_Data.Equipment_Item_Data
 		var accessory_3 : Item_Data.Equipment_Item_Data
 		var weapon : Item_Data.Equipment_Item_Data
+		
+		func duplicate_eq() -> Model.Character_Data.Equipment_Data:
+			var eq_data := Equipment_Data.new()
+			
+			eq_data.legs = legs
+			eq_data.torso = torso
+			eq_data.accessory_1 = accessory_1
+			eq_data.accessory_2 = accessory_2
+			eq_data.accessory_3 = accessory_3
+			eq_data.weapon = weapon
+			
+			return eq_data
 
 class Enemy_Data:
 	var name : String

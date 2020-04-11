@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://scripts/map/Between_node.gd"
 }, {
 "base": "Button",
+"class": "Char_Stats_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Char_Stats_Preview.gd"
+}, {
+"base": "Button",
 "class": "Character_Ability",
 "language": "GDScript",
 "path": "res://scripts/ui/Character_ability.gd"
@@ -124,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Item.gd"
 }, {
+"base": "Panel",
+"class": "Item_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Item_Preview.gd"
+}, {
 "base": "Reference",
 "class": "Loaders",
 "language": "GDScript",
@@ -179,6 +189,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Navigation_Node.gd"
 }, {
+"base": "Panel",
+"class": "Party_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Party_Preview.gd"
+}, {
 "base": "Position3D",
 "class": "Player_Avatar",
 "language": "GDScript",
@@ -223,6 +238,7 @@ _global_script_class_icons={
 "Background_Tile": "",
 "Battler_UI_Controller": "",
 "Between_node": "",
+"Char_Stats_Preview": "",
 "Character_Ability": "",
 "Character_Combat": "",
 "Character_End_Screen": "",
@@ -243,6 +259,7 @@ _global_script_class_icons={
 "Generic_Action": "",
 "Generic_Validators": "",
 "Item": "",
+"Item_Preview": "",
 "Loaders": "",
 "Main_Menu": "",
 "Map": "",
@@ -254,6 +271,7 @@ _global_script_class_icons={
 "Menu_Party": "",
 "Model": "",
 "Navigation_Node": "",
+"Party_Preview": "",
 "Player_Avatar": "",
 "Settings": "",
 "Travel_Action": "",
