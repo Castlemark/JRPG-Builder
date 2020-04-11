@@ -52,7 +52,7 @@ func update() -> void:
 	pass
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var stats : Model.Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.stats
+	var stats := (character_button_group.get_pressed_button() as Character_UI).data.stats
 
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
@@ -67,12 +67,8 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = damage
 
 func _reset_ability_preview():
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = null
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Cost as Label).text = ""
+	character_ability_container.get_child(0).pressed = true
+	character_ability_container.get_child(0).emit_signal("pressed")
 
 func _on_player_select(data : Model.Character_Data) -> void:
 	character_preview.texture = data.idle_texture
