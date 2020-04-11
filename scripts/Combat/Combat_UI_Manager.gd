@@ -69,9 +69,12 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 
 		# TODO Contemplate case where ability can't be choosen due to low stamina
 		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.stats.strain)
-		abilities_grid.get_child(0).grab_focus()
+		
+		if abilities_grid.get_child_count() != 0:
+			abilities_grid.get_child(0).grab_focus()
 		_on_ability_released()
-		_on_ability_grab(abilities_grid.get_child(0).data, abilities_grid.get_child(0).ability_icon.texture)
+		if abilities_grid.get_child_count() != 0:
+			_on_ability_grab(abilities_grid.get_child(0).data, abilities_grid.get_child(0).ability_icon.texture)
 	else:
 		menu.visible = false # TODO Remove comment when enemies end turn by themselves
 		submenu.visible = false
@@ -95,8 +98,17 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 
 	_tween_values.invert()
 
+func filter_abilities(abilities_data : Array, cur_level : int) -> Array:
+	var filtered_array := []
+	for ability in abilities_data:
+		if ability.min_level <= cur_level:
+			filtered_array.append(ability)
+	
+	return filtered_array
+
 func _update_character_abilites_panel(abilities_data : Array, stamina_left : int) -> void:
-	var difference : int =  abilities_data.size() - (abilities_grid.get_child_count() - 2)
+	var filtered_abilities := filter_abilities(abilities_data, cur_battler.data.cur_level())
+	var difference : int =  filtered_abilities.size() - (abilities_grid.get_child_count())
 
 	if difference > 0:
 # warning-ignore:unused_variable
@@ -117,11 +129,11 @@ func _update_character_abilites_panel(abilities_data : Array, stamina_left : int
 			abilities_grid.remove_child(node_to_delete)
 			node_to_delete.queue_free()
 
-	for i in range(abilities_data.size()):
+	for i in range(filtered_abilities.size()):
 		var ability_node : Character_Ability = abilities_grid.get_child(i) as Character_Ability
-		ability_node.initialize(abilities_data[i])
+		ability_node.initialize(filtered_abilities[i])
 		ability_node.pressed = false
-		if abilities_data[i].cost > stamina_left:
+		if filtered_abilities[i].cost > stamina_left:
 			ability_node.disabled = true
 			ability_node.focus_mode = FOCUS_NONE
 		else:

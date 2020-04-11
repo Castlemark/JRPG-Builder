@@ -46,16 +46,13 @@ position = Vector2( 250, 0 )
 
 [node name="First" parent="Characters/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 500, -200 )
-texture = ExtResource( 2 )
 centered = false
 
 [node name="Second" parent="Characters/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 200, 0 )
-texture = ExtResource( 2 )
 centered = false
 
 [node name="Third" parent="Characters/Enemies" instance=ExtResource( 4 )]
-texture = ExtResource( 2 )
 centered = false
 
 [node name="Attack_BG" type="Sprite" parent="."]
@@ -160,17 +157,6 @@ margin_bottom = 208.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
-
-[node name="Inv_Fill1" type="Control" parent="UILayer/UI/Submenu/Grid/Abilities/Container"]
-margin_right = 167.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_horizontal = 3
-
-[node name="Inv_Fill2" type="Control" parent="UILayer/UI/Submenu/Grid/Abilities/Container"]
-margin_left = 171.0
-margin_right = 338.0
-rect_min_size = Vector2( 100, 0 )
-size_flags_horizontal = 3
 
 [node name="Items" type="ScrollContainer" parent="UILayer/UI/Submenu/Grid"]
 visible = false
