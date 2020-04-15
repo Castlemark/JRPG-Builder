@@ -10,9 +10,12 @@ onready var enemy_preview : Enemy_preview = $HBoxContainer/Enemy_Preview
 
 var enemy_button_group := ButtonGroup.new()
 
-func update() -> void:
+func _ready() -> void:
 	_scan_enemies()
 	_scan_abilities()
+
+func update() -> void:
+	pass
 
 
 func _scan_enemies() -> void:
