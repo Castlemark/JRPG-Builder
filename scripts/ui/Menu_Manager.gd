@@ -75,6 +75,7 @@ func _update_current_screen(section : Button) -> void:
 		(get_node("Content/" + section.name) as Control).visible = false
 		
 		emit_signal("on_menus_toggle", menu_up)
+		Game_Manager.resize_transition(menu_up)
 	
 	elif not menu_up:
 		section.pressed = true
@@ -91,6 +92,7 @@ func _update_current_screen(section : Button) -> void:
 		menu_up = true
 		
 		emit_signal("on_menus_toggle", menu_up)
+		Game_Manager.resize_transition(menu_up)
 	else:
 		section.pressed = true
 		_wipe_all_menus()
@@ -103,6 +105,8 @@ func _wipe_all_menus() -> void:
 			(screen as Control).visible = false
 
 func on_external_ui_toggle(external_active : bool) -> void:
+	Game_Manager.resize_transition(true)
+	
 	menu_enabled = not external_active
 	
 	if external_active and menu_up:
@@ -119,3 +123,5 @@ func on_external_ui_toggle(external_active : bool) -> void:
 	
 	settings_button.disabled = external_active
 	settings_button.focus_mode = FOCUS_NONE if external_active else FOCUS_ALL
+	
+	Game_Manager.resize_transition(false)

@@ -11,6 +11,7 @@ onready var tween := $Tween as Tween
 
 onready var campaign_button_container := $MenuContainer/Campaigns_Menu/CampaignScroll/VBoxContainer as VBoxContainer
 onready var campaign_description := $MenuContainer/Campaigns_Menu/Descritption as RichTextLabel
+onready var start_campaign_button := $MenuContainer/Campaigns_Menu/Start_Campaign_Button as Button
 
 onready var settings_menu := $MenuContainer/Settings_Menu as Control
 onready var title_screen := $MenuContainer/Options_Menu as Control
@@ -78,9 +79,9 @@ func _on_campaign_chooser_button_pressed():
 
 func _on_start_campaign_pressed():
 	# TODO load save file
+	start_campaign_button.disabled = true
 	Game_Manager.load_campaign(campaigns.keys()[cur_campaign_index])
 	Game_Manager.goto_scene(Game_Manager.MAP)
-	pass
 
 
 func _on_Credit_Label_meta_clicked(meta) -> void:
