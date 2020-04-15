@@ -70,13 +70,13 @@ func _set_up_animation(animation_info) -> void:
 
 func _set_stats(stats : Model.Stats_Data, abilities : Array) -> void:
 	
-	($Abilities/Stats/Container/Hard/Critic as Label).text = "Critic: " +  String(round(stats.critic * 100)) + "%"
-	($Abilities/Stats/Container/Hard/Speed as Label).text = "Speed: " +  String(round(stats.speed))
+	($Abilities/Stats/Container/Soft/Critic/Amount as Label).text = String(round(stats.critic * 100)) + "%"
+	($Abilities/Stats/Container/Soft/Speed/Amount as Label).text = String(round(stats.speed))
 	
-	($Abilities/Stats/Container/Soft/HP as Label).text = "HP: " + String(round(stats.health))
-	($Abilities/Stats/Container/Soft/Strain as Label).text = "Strain: " + String(round(stats.strain))
-	($Abilities/Stats/Container/Soft/Evasion as Label).text = "Evasion: " + String(round(stats.evasion * 100)) + "%"
-	($Abilities/Stats/Container/Soft/Damage as Label).text = "Base Damage: " + String(round(stats.damage))
+	($Abilities/Stats/Container/Soft/HP/Amount as Label).text = String(round(stats.health))
+	($Abilities/Stats/Container/Soft/Strain/Amount as Label).text = String(round(stats.strain))
+	($Abilities/Stats/Container/Soft/Evasion/Amount as Label).text = String(round(stats.evasion * 100)) + "%"
+	($Abilities/Stats/Container/Soft/Damage/Amount as Label).text = String(round(stats.damage))
 	
 	_update_character_abilites_panel(abilities)
 	
