@@ -26,7 +26,6 @@ class Party_Data:
 	var third_character : Character_Data
 
 	var inventory : Array
-	var money : int
 
 
 class Map_Data:

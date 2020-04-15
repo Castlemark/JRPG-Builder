@@ -13,7 +13,7 @@ class Validation:
 	const action_types := {
 		"travel" : [{"map_name" : TEXT}, {"access_point" : NUMBER}],
 		"combat" : [{"enemies" : ARRAY}],
-		"treasure": [{"money": NUMBER}, {"items": ARRAY}],
+		"treasure": [{"items": ARRAY}],
 		"dialogue": [{"id": TEXT}],
 		"cutscene": [{"id": TEXT}],
 		"wait": [{"amount": NUMBER}]
@@ -50,7 +50,7 @@ class Validation:
 	}
 
 	# CAMPAIGN
-	const campaign_info_data := [{"map_name" : TEXT}, {"access_point" : NUMBER}, {"party" : ARRAY}, {"inventory" : ARRAY}, {"money" : NUMBER}, {"description" : TEXT}]
+	const campaign_info_data := [{"map_name" : TEXT}, {"access_point" : NUMBER}, {"party" : ARRAY}, {"inventory" : ARRAY}, {"description" : TEXT}]
 
 	# GENERAL
 	const animation_data := [{"hframes" : NUMBER}, {"vframes" : NUMBER}, {"total_frames" : NUMBER}, {"duration" : NUMBER}]

@@ -50,7 +50,7 @@ func update() -> void:
 	if item_button_group.get_pressed_button() == null:
 		inventory_container.get_child(0).pressed = true
 		_show_item_preview()
-		_on_character_selected(party_preview.cur_character)
+	_on_character_selected(party_preview.cur_character)
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:

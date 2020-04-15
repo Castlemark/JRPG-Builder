@@ -8,7 +8,6 @@ signal items_taken()
 var item_res := preload("res://scenes/ui/inventory/Item.tscn")
 
 onready var GM := $"/root/Game_Manager"
-onready var money_label :=  $Control/Money as Label
 onready var item_container := $Control/Scroll/GridContainer as GridContainer
 
 func _ready() -> void:
@@ -16,9 +15,6 @@ func _ready() -> void:
 
 func receive_items(treasure_data : Dictionary) -> void:
 	emit_signal("on_treasure_toggle", true)
-	
-	Game_Manager.campaign_data.party.money += treasure_data.money
-	money_label.text = "Money: " + String(treasure_data.money)
 	
 	var difference : int = treasure_data.items.size() - item_container.get_child_count()
 	if difference > 0:

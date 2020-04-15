@@ -79,7 +79,6 @@ class Campaign_Loader:
 			else:
 				party.inventory.append(campaign_data.items.get(inventory_item))
 
-		party.money = 0
 		campaign_data.party = party
 
 		# DIALOGUES
@@ -187,10 +186,6 @@ class Campaign_Loader:
 							print("Action combat has the necessary fields, but enenmy \"" + enemy + "\" could not be loaded or does not exist")
 				
 				elif action_info.type == "treasure":
-					if action_info.data.money < 0:
-						load_correct = false
-						print("Action treasure has " + String(action_info.data.money) +  " money, but the value must be positive")
-					
 					for item in action_info.data.items:
 						if not campaign_data.items.has(item):
 							load_correct = false
