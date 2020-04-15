@@ -18,7 +18,7 @@ onready var equip_dialog := $EquipConfirmationDialog as ConfirmationDialog
 onready var accessory_dialog : ConfirmationDialog = null
 
 func _ready():
-	pass
+	update()
 
 
 func update() -> void:
@@ -50,6 +50,7 @@ func update() -> void:
 	if item_button_group.get_pressed_button() == null:
 		inventory_container.get_child(0).pressed = true
 		_show_item_preview()
+		_on_character_selected(party_preview.cur_character)
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:
@@ -172,3 +173,23 @@ func _on_equip_accessory_confirmed(action: String) -> void:
 	Game_Manager.campaign_data.party.inventory.append(item_to_replace)
 	
 	party_preview.set_item_preview(cur_item.data)
+
+
+func _on_character_selected(character_data) -> void:
+	var cur_item := item_button_group.get_pressed_button() as Item
+	if cur_item != null:
+		var need_to_change_item_preview := false
+		if cur_item.data.type != "consumable" and cur_item.data.min_level > character_data.cur_level():
+			need_to_change_item_preview = true
+		
+		print(character_data.name + ": " + String(character_data.cur_level()))
+		for item in item_button_group.get_buttons():
+			if item.data.type != "consumable" and item.data.min_level > character_data.cur_level():
+				(item as Item).disable(true)
+			else:
+				(item as Item).disable(false)
+				if need_to_change_item_preview:
+					item.pressed = true
+					_show_item_preview()
+					party_preview.set_item_preview(item.data)
+					need_to_change_item_preview = false

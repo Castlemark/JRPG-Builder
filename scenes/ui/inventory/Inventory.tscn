@@ -122,5 +122,6 @@ __meta__ = {
 [connection signal="pressed" from="Filter_Bar/Consumables" to="." method="_on_filter_pressed"]
 [connection signal="consume_cur_item_request" from="Item_Preview" to="." method="_on_consume_cur_item_request"]
 [connection signal="equip_cur_item_request" from="Item_Preview" to="." method="_on_equip_cur_item_request"]
+[connection signal="character_selected" from="Party_Preview" to="." method="_on_character_selected"]
 [connection signal="confirmed" from="EquipConfirmationDialog" to="." method="_on_equip_confirmed"]
 [connection signal="confirmed" from="ConsumeConfirmationDialog" to="." method="_on_consume_confirmed"]

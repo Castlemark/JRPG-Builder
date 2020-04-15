@@ -2,6 +2,8 @@ extends Panel
 
 class_name Party_Preview
 
+signal character_selected(character_data)
+
 var char_stats_preview_res := preload("res://scenes/ui/inventory/Char_Stats_Preview.tscn")
 
 onready var button_group_char_preview := ButtonGroup.new()
@@ -34,3 +36,4 @@ func set_item_preview(item_data):
 
 func _on_char_preview_pressed():
 	cur_character = button_group_char_preview.get_pressed_button().character_data
+	emit_signal("character_selected", cur_character)
