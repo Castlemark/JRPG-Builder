@@ -4,7 +4,6 @@ class_name Encyclopedia_Enemy
 
 signal enemy_ui_pressed(enemy_data, abilities_data, animated, sprites)
 
-onready var GM := $"/root/Game_Manager"
 onready var enemy_icon : TextureRect = $VBoxContainer/Icon as TextureRect
 onready var label : Label = $VBoxContainer/Label as Label
 

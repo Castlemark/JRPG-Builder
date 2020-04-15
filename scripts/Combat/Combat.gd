@@ -7,8 +7,6 @@ signal turn_finished()
 
 signal battler_animations_completed()
 
-onready var GM := $"/root/Game_Manager"
-
 onready var background : TextureRect = $BackgroundLayer/Background as TextureRect
 
 onready var ally_first : Character_Combat = $Characters/Allies/First as Character_Combat
@@ -40,33 +38,33 @@ func _ready() -> void:
 
 func start_combat(combat_data : Dictionary) -> void:
 	# TODO Disable all Menu and bind inventory
-	background.texture = GM.campaign_data.maps[GM.campaign_data.cur_map].combat_background
+	background.texture = Game_Manager.campaign_data.maps[Game_Manager.campaign_data.cur_map].combat_background
 	background.visible = true
 	UI.visible = true
 
-	ally_first.prepare_for_combat(GM.campaign_data.party.first_character)
-	ally_second.prepare_for_combat(GM.campaign_data.party.second_character)
-	ally_third.prepare_for_combat(GM.campaign_data.party.third_character)
+	ally_first.prepare_for_combat(Game_Manager.campaign_data.party.first_character)
+	ally_second.prepare_for_combat(Game_Manager.campaign_data.party.second_character)
+	ally_third.prepare_for_combat(Game_Manager.campaign_data.party.third_character)
 
 	match combat_data.enemies.size():
 		1:
 			enemy_first.visible = false
-			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
+			enemy_second.prepare_for_combat(Game_Manager.campaign_data.enemies.get(combat_data.enemies[0]))
 			enemy_third.visible = false
 
 			_xp_reward = enemy_second.data.xp_reward
 			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_second])
 		2:
-			enemy_first.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
-			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[1]))
+			enemy_first.prepare_for_combat(Game_Manager.campaign_data.enemies.get(combat_data.enemies[0]))
+			enemy_second.prepare_for_combat(Game_Manager.campaign_data.enemies.get(combat_data.enemies[1]))
 			enemy_third.visible = false
 
 			_xp_reward = enemy_first.data.xp_reward + enemy_second.data.xp_reward
 			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_first, enemy_second])
 		3:
-			enemy_first.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[0]))
-			enemy_second.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[1]))
-			enemy_third.prepare_for_combat(GM.campaign_data.enemies.get(combat_data.enemies[2]))
+			enemy_first.prepare_for_combat(Game_Manager.campaign_data.enemies.get(combat_data.enemies[0]))
+			enemy_second.prepare_for_combat(Game_Manager.campaign_data.enemies.get(combat_data.enemies[1]))
+			enemy_third.prepare_for_combat(Game_Manager.campaign_data.enemies.get(combat_data.enemies[2]))
 
 			_xp_reward = enemy_first.data.xp_reward + enemy_second.data.xp_reward + enemy_third.data.xp_reward
 			UI.get_nodes([ally_first, ally_second, ally_third], [enemy_first, enemy_second, enemy_third])

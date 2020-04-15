@@ -5,8 +5,6 @@ class_name Item
 const ENABLED := Color(1, 1, 1, 1)
 const DISABLED := Color(1, 1, 1, 0.25)
 
-onready var GM := $"/root/Game_Manager"
-
 onready var label : Label = $VBoxContainer/Label as Label
 onready var image : TextureRect = $VBoxContainer/Image as TextureRect
 

@@ -4,7 +4,6 @@ class_name Menu_Encyclopedia
 
 var enemy_encyclopedia : Resource = preload("res://scenes/ui/encyclopedia/Encyclopedia_Enemy.tscn")
 
-onready var GM := $"/root/Game_Manager"
 onready var encyclopedia_container : GridContainer = $HBoxContainer/Content/BG/Scroll/Grid
 onready var enemy_preview : Enemy_preview = $HBoxContainer/Enemy_Preview
 
@@ -19,9 +18,9 @@ func update() -> void:
 
 
 func _scan_enemies() -> void:
-	if GM.campaign_data == null: 
+	if Game_Manager.campaign_data == null: 
 		return
-	for enemy_data in GM.campaign_data.enemies.values():
+	for enemy_data in Game_Manager.campaign_data.enemies.values():
 		
 		var enemy_node : Encyclopedia_Enemy = enemy_encyclopedia.instance()
 		encyclopedia_container.add_child(enemy_node, true)

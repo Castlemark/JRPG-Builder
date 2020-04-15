@@ -7,7 +7,6 @@ signal items_taken()
 
 var item_res := preload("res://scenes/ui/inventory/Item.tscn")
 
-onready var GM := $"/root/Game_Manager"
 onready var item_container := $Control/Scroll/GridContainer as GridContainer
 
 func _ready() -> void:

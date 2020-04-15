@@ -4,8 +4,6 @@ class_name Character_UI
 
 signal character_selected(character_data)
 
-onready var GM := $"/root/Game_Manager"
-
 onready var name_label : Label = $HBoxContainer/VBoxContainer/Name as Label
 onready var level_label : Label = $HBoxContainer/VBoxContainer/Level as Label
 onready var icon_rect : TextureRect = $HBoxContainer/Icon as TextureRect

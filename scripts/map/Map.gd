@@ -9,7 +9,6 @@ var between_node_res : Resource = preload("res://scenes/map/Between_node.tscn")
 var background_tile_res : Resource = preload("res://scenes/map/Background_Tile.tscn")
 var detail_node_res : Resource = preload("res://scenes/map/Detail_Node.tscn")
 
-onready var GM := $"/root/Game_Manager"
 onready var navigation_nodes := $Navigation_Nodes as Spatial
 onready var between_nodes := $Between_Nodes as Spatial
 onready var background := $Backgorund as Spatial
@@ -29,9 +28,9 @@ var avatar_img : Texture
 var map_img : Texture
 
 func _ready() -> void:
-	if GM.campaign_data == null:
+	if Game_Manager.campaign_data == null:
 		return
-	initialize(GM.campaign_data.maps.get(GM.campaign_data.cur_map))
+	initialize(Game_Manager.campaign_data.maps.get(Game_Manager.campaign_data.cur_map))
 
 func initialize(map) -> void:
 	path_img = map.path_texture

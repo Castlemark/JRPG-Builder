@@ -8,7 +8,6 @@ const SCREEN_NONE := "None"
 const MIN_SIZE := 74
 const MAX_SIZE := -1072
 
-onready var GM := $"/root/Game_Manager"
 
 onready var inventory_menu : Menu_Inventory = $Content/Inventory as Menu_Inventory
 onready var party_menu : Menu_Party = $Content/Party as Menu_Party
@@ -39,7 +38,7 @@ func _ready() -> void:
 	
 	menu_enabled = true
 	
-	GM.menus = self
+	Game_Manager.menus = self
 	
 	self.visible = true
 

@@ -6,8 +6,6 @@ const base_scale := Vector2(1, 1)
 
 signal special_animation_finished()
 
-onready var GM := $"/root/Game_Manager"
-
 var data := Model.Character_Data.new()
 
 var duration := 0.0
