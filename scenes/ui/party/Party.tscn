@@ -450,93 +450,147 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hard" type="VBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer"]
-margin_right = 251.0
-margin_bottom = 353.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Strength" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_right = 251.0
-margin_bottom = 22.0
-text = "Strength:"
-
-[node name="Dexterity" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_top = 26.0
-margin_right = 251.0
-margin_bottom = 48.0
-text = "Dexterity:"
-
-[node name="Constitution" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_top = 52.0
-margin_right = 251.0
-margin_bottom = 74.0
-text = "Constitution:"
-
-[node name="Memory" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_top = 78.0
-margin_right = 251.0
-margin_bottom = 100.0
-text = "Memory:"
-
-[node name="Critic" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_top = 104.0
-margin_right = 251.0
-margin_bottom = 126.0
-text = "Critic:"
-
-[node name="Defence" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_top = 130.0
-margin_right = 251.0
-margin_bottom = 152.0
-text = "Defence:"
-
-[node name="Speed" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Hard"]
-margin_top = 156.0
-margin_right = 251.0
-margin_bottom = 178.0
-text = "Speed:"
-
-[node name="MarginContainer" type="MarginContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer"]
-margin_left = 255.0
-margin_right = 279.0
-margin_bottom = 353.0
-custom_constants/margin_right = 10
-custom_constants/margin_left = 10
-
-[node name="VSeparator" type="VSeparator" parent="Data/TopHBoxContainer/Stats/HBoxContainer/MarginContainer"]
-margin_left = 10.0
-margin_right = 14.0
-margin_bottom = 353.0
-
 [node name="Soft" type="VBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer"]
-margin_left = 283.0
 margin_right = 534.0
 margin_bottom = 353.0
 size_flags_horizontal = 3
 
-[node name="HP" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
-margin_right = 251.0
-margin_bottom = 22.0
-text = "HP:"
+[node name="HP" type="HBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
+margin_right = 534.0
+margin_bottom = 55.0
+size_flags_vertical = 3
 
-[node name="Strain" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
-margin_top = 26.0
-margin_right = 251.0
-margin_bottom = 48.0
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP"]
+margin_top = 16.0
+margin_right = 506.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "Health:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP"]
+margin_left = 510.0
+margin_top = 16.0
+margin_right = 534.0
+margin_bottom = 38.0
+text = "XX"
+
+[node name="Strain" type="HBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
+margin_top = 59.0
+margin_right = 534.0
+margin_bottom = 114.0
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain"]
+margin_top = 16.0
+margin_right = 506.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
 text = "Strain:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Evasion" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
-margin_top = 52.0
-margin_right = 251.0
-margin_bottom = 74.0
+[node name="Amount" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain"]
+margin_left = 510.0
+margin_top = 16.0
+margin_right = 534.0
+margin_bottom = 38.0
+text = "XX"
+
+[node name="Evasion" type="HBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
+margin_top = 118.0
+margin_right = 534.0
+margin_bottom = 173.0
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion"]
+margin_top = 16.0
+margin_right = 506.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
 text = "Evasion:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Damage" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
-margin_top = 78.0
-margin_right = 251.0
-margin_bottom = 100.0
+[node name="Amount" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion"]
+margin_left = 510.0
+margin_top = 16.0
+margin_right = 534.0
+margin_bottom = 38.0
+text = "XX"
+
+[node name="Damage" type="HBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
+margin_top = 177.0
+margin_right = 534.0
+margin_bottom = 232.0
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage"]
+margin_top = 16.0
+margin_right = 506.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
 text = "Damage:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage"]
+margin_left = 510.0
+margin_top = 16.0
+margin_right = 534.0
+margin_bottom = 38.0
+text = "XX"
+
+[node name="Critic" type="HBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
+margin_top = 236.0
+margin_right = 534.0
+margin_bottom = 291.0
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic"]
+margin_top = 16.0
+margin_right = 506.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "Critic:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic"]
+margin_left = 510.0
+margin_top = 16.0
+margin_right = 534.0
+margin_bottom = 38.0
+text = "XX"
+
+[node name="Speed" type="HBoxContainer" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft"]
+margin_top = 295.0
+margin_right = 534.0
+margin_bottom = 353.0
+size_flags_vertical = 3
+
+[node name="Name" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed"]
+margin_top = 18.0
+margin_right = 506.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "Speed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed"]
+margin_left = 510.0
+margin_top = 18.0
+margin_right = 534.0
+margin_bottom = 40.0
+text = "XX"
 
 [node name="Abilities_Label" type="Label" parent="Data"]
 margin_top = 403.0

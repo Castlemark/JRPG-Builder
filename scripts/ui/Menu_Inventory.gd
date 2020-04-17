@@ -109,11 +109,13 @@ func _on_equip_cur_item_request() -> void:
 		accessory_dialog.anchor_bottom = 0.6
 		accessory_dialog.add_button(cur_character.equipment.accessory_1.name, false, "1")
 		accessory_dialog.add_button(cur_character.equipment.accessory_2.name, false, "2")
-		accessory_dialog.add_button(cur_character.equipment.accessory_3.name, false, "3")
+		var button := accessory_dialog.add_button(cur_character.equipment.accessory_3.name, false, "3")
 		accessory_dialog.connect("custom_action", self, "_on_equip_accessory_confirmed")
 		
 		accessory_dialog.dialog_text = cur_character.name + " is about to replace it's " + cur_item.name + ". Click the accessory you want to replace."
+		
 		accessory_dialog.popup()
+		button.grab_focus()
 	else:
 		var item_to_replace : Model.Item_Data.Equipment_Item_Data
 		match cur_item.slot:

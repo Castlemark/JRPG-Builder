@@ -22,5 +22,5 @@ func initialize(item) -> void:
 
 func disable(should_disable : bool) -> void:
 	self.disabled = should_disable
-	self.focus_mode = FOCUS_NONE if should_disable else FOCUS_NONE
+	self.focus_mode = FOCUS_NONE if should_disable else FOCUS_ALL
 	image.modulate = DISABLED if should_disable else ENABLED

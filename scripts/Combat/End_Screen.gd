@@ -3,13 +3,15 @@ extends Panel
 class_name End_Screen
 
 # Made of Character_End_Screen nodes
-onready var char_summary := [$VBoxContainer/Character_Summary, \
-							$VBoxContainer/Character_Summary2, \
-							$VBoxContainer/Character_Summary3]
+onready var char_summary := [$Panel/VBoxContainer/Character_Summary, \
+							$Panel/VBoxContainer/Character_Summary2, \
+							$Panel/VBoxContainer/Character_Summary3]
 
 onready var continue_button := $Button as Button
 
 func _ready() -> void:
+	self.visible = false
+	
 	char_summary[0].visible = false
 	char_summary[1].visible = false
 	char_summary[2].visible = false

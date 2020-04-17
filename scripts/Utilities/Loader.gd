@@ -363,8 +363,7 @@ class Campaign_Loader:
 		character_data.name = character_name
 
 		# Level
-		character_data.start_xp = character_dict.start_xp as int
-		character_data.cur_xp = character_data.start_xp as int
+		character_data.cur_xp = character_dict.start_xp as int
 
 		# Scale
 		if character_dict.scale <= 0:

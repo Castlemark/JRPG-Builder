@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://default_assets/theme/theme_buttons.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Manager.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/ui/party/Party.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/ui/encyclopedia/Encyclopedia.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/ui/Settings_Menu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=12]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -91,6 +92,7 @@ icon = ExtResource( 7 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Content" type="Panel" parent="."]
+material = ExtResource( 12 )
 margin_top = 74.0
 margin_right = 1536.0
 margin_bottom = 1075.0

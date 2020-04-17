@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://default_assets/theme/theme_generic.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Treasure_Menu.gd" type="Script" id=2]
 [ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=3]
 [ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=4]
+[ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=5]
 
 [node name="Treasure_Menu" type="Panel"]
+material = ExtResource( 5 )
 anchor_left = 0.3
 anchor_top = 0.07
 anchor_right = 0.7

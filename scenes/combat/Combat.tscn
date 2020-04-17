@@ -377,7 +377,6 @@ margin_top = 146.0
 margin_bottom = 215.0
 
 [node name="End_Screen" parent="UILayer/UI" instance=ExtResource( 9 )]
-visible = true
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Second" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Third" to="." method="_update_yield_counter"]

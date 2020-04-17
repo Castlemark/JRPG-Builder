@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://default_assets/user_interface/blur.shader" type="Shader" id=1]
+
+[resource]
+render_priority = 3
+shader = ExtResource( 1 )
+shader_param/amount = 3.0
+shader_param/color = Color( 0.490196, 0.556863, 0.709804, 1 )

@@ -18,7 +18,7 @@ func initialize(character) -> void:
 
 	self.name = data.name
 	name_label.text = data.name
-	level_label.text = _LEVEL + String(data.start_xp)
+	level_label.text = _LEVEL + String(data.cur_level())
 
 	icon_rect.texture = character.icon_texture
 

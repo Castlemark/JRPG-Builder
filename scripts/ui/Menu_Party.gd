@@ -49,7 +49,9 @@ func _process(delta: float) -> void:
 
 
 func update() -> void:
-	pass
+	var pressed_char_button : Character_UI = character_button_group.get_pressed_button()
+	if pressed_char_button != null:
+		_on_player_select(pressed_char_button.data)
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
 	var stats := (character_button_group.get_pressed_button() as Character_UI).data.stats
@@ -81,13 +83,12 @@ func _on_player_select(data : Model.Character_Data) -> void:
 		self.duration = data.animation_data.duration
 	_rescale_sprite()
 
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.stats.critic * 100)) + "%"
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.stats.speed))
-
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.stats.health))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.stats.strain))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.stats.evasion * 100)) + "%"
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.stats.damage))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic/Amount as Label).text = String(round(data.stats.critic * 100)) + "%"
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed/Amount as Label).text = String(round(data.stats.speed))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP/Amount as Label). text = String(round(data.stats.health))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain/Amount as Label).text = String(round(data.stats.strain))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion/Amount as Label).text = String(round(data.stats.evasion * 100)) + "%"
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage/Amount as Label).text = String(round(data.stats.damage))
 
 	_update_character_equipment(data.equipment)
 	_update_character_abilites_panel(data.abilities.values())

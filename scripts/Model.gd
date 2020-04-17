@@ -95,7 +95,6 @@ class Item_Data:
 
 class Character_Data:
 	var name : String
-	var start_xp : int
 	var cur_xp : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
