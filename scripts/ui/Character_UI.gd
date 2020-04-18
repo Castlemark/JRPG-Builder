@@ -3,6 +3,7 @@ extends Button
 class_name Character_UI
 
 signal character_selected(character_data)
+signal character_unselected(character_data)
 
 onready var name_label : Label = $HBoxContainer/VBoxContainer/Name as Label
 onready var level_label : Label = $HBoxContainer/VBoxContainer/Level as Label
@@ -22,8 +23,8 @@ func initialize(character) -> void:
 
 	icon_rect.texture = character.icon_texture
 
-	self.connect("toggled", self, "_on_toggled")
-
 func _on_toggled(pressed_button : bool) -> void:
 	if pressed_button:
 		emit_signal("character_selected", data)
+	else:
+		emit_signal("character_unselected", data)

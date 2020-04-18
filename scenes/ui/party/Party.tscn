@@ -22,6 +22,9 @@ anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.95
 anchor_bottom = 0.2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Party_Label" type="Label" parent="Party"]
 margin_right = 1719.0
@@ -29,14 +32,21 @@ margin_bottom = 22.0
 text = "Party"
 valign = 1
 
-[node name="BG" type="Panel" parent="Party"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Party"]
 margin_top = 26.0
 margin_right = 1719.0
 margin_bottom = 160.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 26
 
-[node name="Scroll" type="ScrollContainer" parent="Party/BG"]
+[node name="BG" type="Panel" parent="Party/HBoxContainer"]
+margin_right = 1393.0
+margin_bottom = 134.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Party/HBoxContainer/BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
@@ -44,12 +54,19 @@ margin_top = 5.0
 margin_right = -5.0
 margin_bottom = -5.0
 
-[node name="Char_Container" type="HBoxContainer" parent="Party/BG/Scroll"]
-margin_right = 1709.0
+[node name="Char_Container" type="HBoxContainer" parent="Party/HBoxContainer/BG/Scroll"]
+margin_right = 1383.0
 margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+
+[node name="ChangePartyButton" type="Button" parent="Party/HBoxContainer"]
+margin_left = 1419.0
+margin_right = 1719.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 300, 0 )
+text = "Change Party"
 
 [node name="Character" type="VBoxContainer" parent="."]
 anchor_left = 0.05
@@ -713,3 +730,33 @@ margin_bottom = 144.0
 margin_top = 148.0
 margin_right = 534.0
 margin_bottom = 170.0
+
+[node name="PartySwitch" type="ConfirmationDialog" parent="."]
+anchor_left = 0.4
+anchor_top = 0.3
+anchor_right = 0.6
+anchor_bottom = 0.7
+window_title = "Choose your 3 party members"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scroll" type="ScrollContainer" parent="PartySwitch"]
+anchor_right = 1.0
+anchor_bottom = 0.91
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 0.519989
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="PartySwitch/Scroll"]
+margin_right = 366.0
+margin_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+[connection signal="pressed" from="Party/HBoxContainer/ChangePartyButton" to="." method="_on_change_party_request"]
+[connection signal="confirmed" from="PartySwitch" to="." method="_update_roster"]

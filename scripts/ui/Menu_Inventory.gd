@@ -184,7 +184,6 @@ func _on_character_selected(character_data) -> void:
 		if cur_item.data.type != "consumable" and cur_item.data.min_level > character_data.cur_level():
 			need_to_change_item_preview = true
 		
-		print(character_data.name + ": " + String(character_data.cur_level()))
 		for item in item_button_group.get_buttons():
 			if item.data.type != "consumable" and item.data.min_level > character_data.cur_level():
 				(item as Item).disable(true)

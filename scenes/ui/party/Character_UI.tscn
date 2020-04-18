@@ -6,7 +6,7 @@
 [node name="Character" type="Button"]
 margin_right = 1363.0
 margin_bottom = 88.0
-rect_min_size = Vector2( 220, 0 )
+rect_min_size = Vector2( 220, 88 )
 size_flags_horizontal = 3
 toggle_mode = true
 script = ExtResource( 1 )
@@ -54,3 +54,4 @@ size_flags_horizontal = 3
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 5
+[connection signal="toggled" from="." to="." method="_on_toggled"]
