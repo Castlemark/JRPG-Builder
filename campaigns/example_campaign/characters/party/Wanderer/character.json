@@ -6,7 +6,7 @@
         "speed": 8,
         "health": 81,
         "strain": 76,
-        "evasion": 1,
+        "evasion": 0.11,
         "damage": 35
     },
     "max_stats":
@@ -15,7 +15,7 @@
         "speed": 80,
         "health": 243,
         "strain": 223,
-        "evasion": 1,
+        "evasion": 0.33,
         "damage": 105
     },
     "abilities":
