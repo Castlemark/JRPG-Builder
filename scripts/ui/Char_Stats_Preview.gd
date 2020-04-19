@@ -16,14 +16,14 @@ onready var critic_diff := $Character/Critic as Label
 onready var speed_diff := $Character/Speed as Label
 
 var character_data : Model.Character_Data
-var full_stats : Model.Stats_Data
+var stats_with_eq : Model.Stats_Data
 
 func set_character(character_data : Model.Character_Data):
 	self.character_data = character_data
 	character_icon.texture = character_data.icon_texture
-	full_stats = character_data.full_stats(character_data.equipment)
+	stats_with_eq = character_data.stats_with_equipment
 	
-	set_full_stats()
+	set_stats_with_eq()
 
 func set_diff_with_item(item_data : Model.Item_Data.Equipment_Item_Data):
 	var mod_eq := character_data.equipment.duplicate_eq()
@@ -100,16 +100,16 @@ func set_diff_with_item(item_data : Model.Item_Data.Equipment_Item_Data):
 		speed_diff.text = "+" + String(diff_stats.speed)
 		speed_diff.add_color_override("font_color", NEUTRAL_COLOR)
 
-func set_full_stats():
-	evasion_diff.text = String(stepify(full_stats.max_evasion * 100, 1)) + "%"
+func set_stats_with_eq():
+	evasion_diff.text = String(stepify(stats_with_eq.max_evasion * 100, 1)) + "%"
 	evasion_diff.add_color_override("font_color", NEUTRAL_COLOR)
-	health_diff.text = String(full_stats.health) + "/" + String(full_stats.max_health)
+	health_diff.text = String(stats_with_eq.health) + "/" + String(stats_with_eq.max_health)
 	health_diff.add_color_override("font_color", NEUTRAL_COLOR)
-	damage_diff.text = String(full_stats.max_damage)
+	damage_diff.text = String(stats_with_eq.max_damage)
 	damage_diff.add_color_override("font_color", NEUTRAL_COLOR)
-	strain_diff.text = String(full_stats.max_strain)
+	strain_diff.text = String(stats_with_eq.max_strain)
 	strain_diff.add_color_override("font_color", NEUTRAL_COLOR)
-	critic_diff.text = String(stepify(full_stats.critic * 100, 1)) + "%"
+	critic_diff.text = String(stepify(stats_with_eq.critic * 100, 1)) + "%"
 	critic_diff.add_color_override("font_color", NEUTRAL_COLOR)
-	speed_diff.text = String(full_stats.speed)
+	speed_diff.text = String(stats_with_eq.speed)
 	speed_diff.add_color_override("font_color", NEUTRAL_COLOR)

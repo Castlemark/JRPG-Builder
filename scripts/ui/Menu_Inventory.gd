@@ -18,7 +18,7 @@ onready var equip_dialog := $EquipConfirmationDialog as ConfirmationDialog
 onready var accessory_dialog : ConfirmationDialog = null
 
 func _ready():
-	pass
+	update()
 
 
 func update() -> void:
@@ -49,7 +49,8 @@ func update() -> void:
 
 	if item_button_group.get_pressed_button() == null:
 		inventory_container.get_child(0).pressed = true
-		_show_item_preview()
+	_show_item_preview()
+	_on_character_selected(party_preview.cur_character)
 
 func _on_filter_pressed() -> void:
 	match button_group_inventory.get_pressed_button().name:
@@ -84,14 +85,20 @@ func _on_consume_confirmed() -> void:
 	var cur_character := party_preview.cur_character
 	
 	var field : String = cur_item.data.effect.type
-	cur_character.stats.set(field, min(cur_character.stats.get(field) + cur_item.data.effect.value, cur_character.stats.get("max_" + field)))
+	cur_character.stats_with_equipment.set(field, min(cur_character.stats_with_equipment.get(field) + cur_item.data.effect.value, cur_character.stats_with_equipment.get("max_" + field)))
 	
 	Game_Manager.campaign_data.party.inventory.erase(cur_item.data)
 	cur_item.queue_free()
 	
-	(inventory_container.get_child(0) as Item).grab_focus()
-	(inventory_container.get_child(0) as Item).pressed = true
-	item_preview.preview(inventory_container.get_child(0).data)
+	var first_item_available : Item
+	for item in inventory_container.get_children():
+		if not item.disabled:
+			first_item_available = item
+			break
+	first_item_available.grab_focus()
+	first_item_available.pressed = true
+	_show_item_preview()
+	
 
 func _on_equip_cur_item_request() -> void:
 	var cur_item := item_button_group.get_pressed_button().data as Model.Item_Data.Equipment_Item_Data
@@ -108,11 +115,13 @@ func _on_equip_cur_item_request() -> void:
 		accessory_dialog.anchor_bottom = 0.6
 		accessory_dialog.add_button(cur_character.equipment.accessory_1.name, false, "1")
 		accessory_dialog.add_button(cur_character.equipment.accessory_2.name, false, "2")
-		accessory_dialog.add_button(cur_character.equipment.accessory_3.name, false, "3")
+		var button := accessory_dialog.add_button(cur_character.equipment.accessory_3.name, false, "3")
 		accessory_dialog.connect("custom_action", self, "_on_equip_accessory_confirmed")
 		
 		accessory_dialog.dialog_text = cur_character.name + " is about to replace it's " + cur_item.name + ". Click the accessory you want to replace."
+		
 		accessory_dialog.popup()
+		button.grab_focus()
 	else:
 		var item_to_replace : Model.Item_Data.Equipment_Item_Data
 		match cur_item.slot:
@@ -141,6 +150,7 @@ func _on_equip_confirmed() -> void:
 		"weapon":
 			item_to_replace = cur_character.equipment.weapon
 			cur_character.equipment.weapon = cur_item.data
+	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment)
 	
 	cur_item.initialize(item_to_replace)
 	
@@ -164,6 +174,7 @@ func _on_equip_accessory_confirmed(action: String) -> void:
 		"3":
 			item_to_replace = cur_character.equipment.accessory_3
 			cur_character.equipment.accessory_3 = cur_item.data
+	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment)
 	
 	cur_item.initialize(item_to_replace)
 	accessory_dialog.queue_free()
@@ -172,3 +183,22 @@ func _on_equip_accessory_confirmed(action: String) -> void:
 	Game_Manager.campaign_data.party.inventory.append(item_to_replace)
 	
 	party_preview.set_item_preview(cur_item.data)
+
+
+func _on_character_selected(character_data) -> void:
+	var cur_item := item_button_group.get_pressed_button() as Item
+	if cur_item != null:
+		var need_to_change_item_preview := false
+		if cur_item.data.type != "consumable" and cur_item.data.min_level > character_data.cur_level():
+			need_to_change_item_preview = true
+		
+		for item in item_button_group.get_buttons():
+			if item.data.type != "consumable" and item.data.min_level > character_data.cur_level():
+				(item as Item).disable(true)
+			else:
+				(item as Item).disable(false)
+				if need_to_change_item_preview:
+					item.pressed = true
+					_show_item_preview()
+					party_preview.set_item_preview(item.data)
+					need_to_change_item_preview = false

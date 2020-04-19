@@ -87,7 +87,6 @@
                     "type" : "treasure",
                     "data" :
                     {
-                        "money": 350,
                         "items":
                         [
                             "breastplate",
@@ -126,7 +125,6 @@
                     "type" : "treasure",
                     "data" :
                     {
-                        "money": 350,
                         "items":
                         [
                             "breastplate",
@@ -2091,6 +2089,12 @@
     {
         "x_offset": 1,
         "y_offset": 1,
+        "color" :
+        {
+            "r": 255,
+            "g": 255,
+            "b": 255
+        },
         "scale": 4
     }
 }

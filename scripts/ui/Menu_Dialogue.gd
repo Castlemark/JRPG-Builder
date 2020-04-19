@@ -6,8 +6,8 @@ const MAX_CHAR_HEIGHT_POS := -76
 const MIN_HEIGHT_POS := 702
 
 const MAX_DIALOGUE_HEIGHT_POS := 204.8
-const DIALOGUE_LEFT_POS := 96
-const DIALOGUE_RIGHT_POS := 672
+const DIALOGUE_LEFT_POS := Vector2(0.05, 0.65)
+const DIALOGUE_RIGHT_POS := Vector2(0.35, 0.95)
 
 const CHARS_PER_SECONDS : float = 35.0
 
@@ -52,24 +52,27 @@ func start_dialogue(dialogue_id : String) -> void:
 	
 	self.visible = true
 	
-	dialogue_box.rect_position.x = DIALOGUE_RIGHT_POS if dialogue_data.nodes[0].side == "l" else DIALOGUE_LEFT_POS
-	var dialogue_box_pos := dialogue_box.rect_position
-	dialogue_box_pos.y = MAX_DIALOGUE_HEIGHT_POS
+	dialogue_box.anchor_left = DIALOGUE_RIGHT_POS.x if dialogue_data.nodes[0].side == "l" else DIALOGUE_LEFT_POS.x
+	dialogue_box.anchor_right = DIALOGUE_RIGHT_POS.y if dialogue_data.nodes[0].side == "l" else DIALOGUE_LEFT_POS.y
+	var dialogue_box_pos_y := dialogue_box.rect_position.y
+	dialogue_box_pos_y = MAX_DIALOGUE_HEIGHT_POS
 	
-	# Logic stuff
+	var target_dialog_pos : Vector2
 	var cur_character_panel : Control
 	for dialogue_node in dialogue_data.nodes:
 		if dialogue_node.side == "l":
 			cur_character_panel = character_1
-			dialogue_box_pos.x = DIALOGUE_RIGHT_POS
+			target_dialog_pos = DIALOGUE_RIGHT_POS
 		else:
 			cur_character_panel = character_2
-			dialogue_box_pos.x = DIALOGUE_LEFT_POS
+			target_dialog_pos = DIALOGUE_LEFT_POS
 		
 		cur_character_panel.get_node("Portrait").texture = Game_Manager.campaign_data.portraits[dialogue_node.character]
 		cur_character_panel.get_node("Panel/Name").text = dialogue_node.character
 		ui_tween.interpolate_property(cur_character_panel, "rect_position", null, Vector2(cur_character_panel.rect_position.x, MAX_CHAR_HEIGHT_POS), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		ui_tween.interpolate_property(dialogue_box, "rect_position", null, dialogue_box_pos, 0.5,  Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		ui_tween.interpolate_property(dialogue_box, "rect_position:y", null, dialogue_box_pos_y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		ui_tween.interpolate_property(dialogue_box, "anchor_left", null, target_dialog_pos.x, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		ui_tween.interpolate_property(dialogue_box, "anchor_right", null, target_dialog_pos.y, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		
 		ui_tween.start()
 		yield(ui_tween, "tween_all_completed")
@@ -91,7 +94,8 @@ func start_dialogue(dialogue_id : String) -> void:
 	ui_tween.interpolate_property(dialogue_box, "rect_position", null, Vector2(dialogue_box.rect_position.x, MIN_HEIGHT_POS), 0.5,  Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	ui_tween.start()
 	yield(ui_tween, "tween_all_completed")
-	dialogue_box.rect_position.x = DIALOGUE_RIGHT_POS
+	dialogue_box.anchor_left = DIALOGUE_RIGHT_POS.x
+	dialogue_box.anchor_right = DIALOGUE_RIGHT_POS.y
 	
 	self.visible = false
 	emit_signal("on_dialogue_finished")

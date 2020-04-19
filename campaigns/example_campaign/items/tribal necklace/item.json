@@ -5,8 +5,8 @@
         "slot": "accessory",
         "stats":
         {
-            "critic": 0.5,
-            "speed": -2,
+            "critic": 0.0,
+            "speed": 3,
             "health": 10,
             "strain": 0,
             "evasion": 0.0,

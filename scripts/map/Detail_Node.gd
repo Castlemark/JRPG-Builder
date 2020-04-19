@@ -2,7 +2,6 @@ extends Spatial
 
 class_name Detail_Node
 
-onready var GM := $"/root/Game_Manager"
 onready var sprite := $Sprite as Sprite3D
 
 var duration := 0.0

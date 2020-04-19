@@ -11,14 +11,20 @@ var character_ability_res : Resource = preload("res://scenes/ui/party/Character_
 var character_button_group := ButtonGroup.new()
 var ability_button_group := ButtonGroup.new()
 
-onready var character_container : HBoxContainer = $Party/BG/Scroll/Char_Container as HBoxContainer
-onready var character_ability_container : GridContainer = $Data/HBoxContainer/Abilities/Scroll/Container as GridContainer
+onready var character_container := $Party/HBoxContainer/BG/Scroll/Char_Container as HBoxContainer
+onready var character_ability_container := $Data/HBoxContainer/Abilities/Scroll/Container as GridContainer
 onready var character_preview := $Character/Preview/Sprite as Sprite
+
+onready var party_switch := $PartySwitch as ConfirmationDialog
+onready var party_switch_container := $PartySwitch/Scroll/Container as VBoxContainer
 
 var duration := 0.0
 var frames := 0
 
 var elapsed_frame_time := 0.0
+
+var party_switch_char_count := 0
+var new_party := []
 
 func _ready():
 	if Game_Manager.campaign_data == null:
@@ -35,6 +41,25 @@ func _ready():
 		character_node.group = character_button_group
 	
 	character_container.get_child(0).pressed = true
+	
+	for character in Game_Manager.campaign_data.characters.values():
+		var character_node : Character_UI = character_res.instance()
+		party_switch_container.add_child(character_node, true)
+		character_node.initialize(character)
+		character_node.connect("character_selected", self, "_on_party_switch_character_selected")
+		character_node.connect("character_unselected", self, "_on_party_switch_character_unselected")
+
+func _update_roster() -> void:
+	Game_Manager.campaign_data.party.first_character = new_party[0]
+	Game_Manager.campaign_data.party.second_character = new_party[1]
+	Game_Manager.campaign_data.party.third_character = new_party[2]
+	
+	var i := 0
+	for character in character_container.get_children():
+		character.initialize(new_party[i])
+		i += 1
+	character_container.get_child(0).pressed = true
+	_on_player_select(character_container.get_child(0).data)
 
 func _process(delta: float) -> void:
 	if frames > 1:
@@ -49,10 +74,12 @@ func _process(delta: float) -> void:
 
 
 func update() -> void:
-	pass
+	var pressed_char_button : Character_UI = character_button_group.get_pressed_button()
+	if pressed_char_button != null:
+		_on_player_select(pressed_char_button.data)
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var stats : Model.Stats_Data = (character_button_group.get_pressed_button() as Character_UI).data.stats
+	var stats := (character_button_group.get_pressed_button() as Character_UI).data.stats_with_equipment
 
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
@@ -67,12 +94,8 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = damage
 
 func _reset_ability_preview():
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = null
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Description as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Level as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Damage as Label).text = ""
-	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/Cost as Label).text = ""
+	character_ability_container.get_child(0).pressed = true
+	character_ability_container.get_child(0).emit_signal("pressed")
 
 func _on_player_select(data : Model.Character_Data) -> void:
 	character_preview.texture = data.idle_texture
@@ -83,15 +106,21 @@ func _on_player_select(data : Model.Character_Data) -> void:
 		character_preview.hframes = data.animation_data.hframes
 		character_preview.vframes = data.animation_data.vframes
 		self.duration = data.animation_data.duration
+	else:
+		self.frames = 0
+		character_preview.hframes = 1
+		character_preview.vframes = 1
+		self.duration = 0
+		
 	_rescale_sprite()
 
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Hard/Critic as Label).text = "Critic: " + String(round(data.stats.critic * 100)) + "%"
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Hard/Speed as Label).text = "Speed: " + String(round(data.stats.speed))
-
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP as Label). text = "HP: " + String(round(data.stats.health))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain as Label).text = "Strain: " + String(round(data.stats.strain))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion as Label).text = "Evasion: " + String(round(data.stats.evasion * 100)) + "%"
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage as Label).text = "Base Damage: " + String(round(data.stats.damage))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Level/Amount as Label).text = String(data.cur_level())
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic/Amount as Label).text = String(round(data.stats_with_equipment.critic * 100)) + "%"
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed/Amount as Label).text = String(round(data.stats_with_equipment.speed))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP/Amount as Label). text = String(round(data.stats_with_equipment.health)) + "/" + String(round(data.stats_with_equipment.max_health))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain/Amount as Label).text = String(round(data.stats_with_equipment.strain))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion/Amount as Label).text = String(round(data.stats_with_equipment.evasion * 100)) + "%"
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage/Amount as Label).text = String(round(data.stats_with_equipment.damage))
 
 	_update_character_equipment(data.equipment)
 	_update_character_abilites_panel(data.abilities.values())
@@ -145,3 +174,34 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 		var ability_node : Character_Ability = character_ability_container.get_child(i) as Character_Ability
 		ability_node.initialize(abilities_data[i])
 		ability_node.pressed = false
+
+
+func _on_change_party_request() -> void:
+	party_switch.popup_centered()
+	party_switch.get_ok().disabled = true
+	
+	new_party = []
+	
+	for character_button in party_switch_container.get_children():
+			character_button.disabled = false
+			character_button.pressed = false
+	party_switch_container.get_child(0).grab_focus()
+
+func _on_party_switch_character_selected(data : Model.Character_Data) -> void:
+	party_switch_char_count += 1
+	new_party.append(data)
+	
+	if party_switch_char_count == 3:
+		party_switch.get_ok().grab_focus()
+		party_switch.get_ok().disabled = false
+		
+		for character_button in party_switch_container.get_children():
+			if not character_button.pressed:
+				(character_button as Button).disabled = true
+
+func _on_party_switch_character_unselected(data : Model.Character_Data) -> void:
+	party_switch_char_count -= 1
+	new_party.erase(data)
+	
+	for character_button in party_switch_container.get_children():
+			(character_button as Button).disabled = false

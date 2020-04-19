@@ -367,7 +367,7 @@ margin_top = 10.0
 margin_right = 612.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-text = "Minimum Level"
+text = "Amount"
 
 [node name="Amount" type="Label" parent="Consumable_Info/Extra_Info/Amount"]
 margin_left = 616.0

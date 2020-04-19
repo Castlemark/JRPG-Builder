@@ -4,7 +4,7 @@ class_name Enemy_Combat
 
 signal special_animation_finished()
 
-onready var GM := $"/root/Game_Manager"
+const TYPE := "Enemy_Combat"
 
 var data := Model.Enemy_Data.new()
 

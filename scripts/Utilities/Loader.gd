@@ -79,7 +79,6 @@ class Campaign_Loader:
 			else:
 				party.inventory.append(campaign_data.items.get(inventory_item))
 
-		party.money = 0
 		campaign_data.party = party
 
 		# DIALOGUES
@@ -187,10 +186,6 @@ class Campaign_Loader:
 							print("Action combat has the necessary fields, but enenmy \"" + enemy + "\" could not be loaded or does not exist")
 				
 				elif action_info.type == "treasure":
-					if action_info.data.money < 0:
-						load_correct = false
-						print("Action treasure has " + String(action_info.data.money) +  " money, but the value must be positive")
-					
 					for item in action_info.data.items:
 						if not campaign_data.items.has(item):
 							load_correct = false
@@ -284,6 +279,12 @@ class Campaign_Loader:
 			background_data.scale = 1
 		else:
 			background_data.scale = map_dict.background_info.scale
+		if map_dict.background_info.color.r >= 0 and map_dict.background_info.color.r < 256 and map_dict.background_info.color.g >= 0 and map_dict.background_info.color.g < 256 and map_dict.background_info.color.b >= 0 and map_dict.background_info.color.b < 256:
+			background_data.color = Color(map_dict.background_info.color.r / 255, map_dict.background_info.color.g / 255, map_dict.background_info.color.b / 255)
+		else:
+			load_correct = false
+			print("fields \"r\",\"g\" and \"b\" of \"color\" exist, but their values must be between 0 and 255 included")
+			background_data.color = Color(0, 0, 0)
 
 		map_data.background_info = background_data
 
@@ -368,8 +369,7 @@ class Campaign_Loader:
 		character_data.name = character_name
 
 		# Level
-		character_data.start_xp = character_dict.start_xp as int
-		character_data.cur_xp = character_data.start_xp as int
+		character_data.cur_xp = character_dict.start_xp as int
 
 		# Scale
 		if character_dict.scale <= 0:
@@ -466,11 +466,8 @@ class Campaign_Loader:
 		character_data.equipment = equipment
 		
 		if load_correct:
-			var full_stats := character_data.full_stats(character_data.equipment)
-			character_data.stats.health = full_stats.max_health
-			character_data.stats.damage = full_stats.max_damage
-			character_data.stats.strain = full_stats.max_strain
-			character_data.stats.evasion = full_stats.max_evasion
+			character_data.stats_with_equipment = character_data.stats_with_eq(character_data.equipment, true)
+			
 
 		# Animation Data
 		if Generic_Validators.optional_info_field_exists(character_dict, "animation_data", Data.Validation.animation_data, "character is marked as animated, but it's requeried animation_data fields are either missing or incorrect, " + Data.Validation.check_docu, "filepath"):
@@ -751,7 +748,7 @@ class Campaign_Loader:
 		stats.damage = enemy_dict.stats.damage as int
 		stats.max_damage = stats.damage
 
-		enemy_data.stats = stats
+		enemy_data.stats_with_equipment = stats
 
 		# Abilities
 		enemy_data.abilities = {}

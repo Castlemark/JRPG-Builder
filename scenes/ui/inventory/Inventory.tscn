@@ -64,6 +64,7 @@ anchor_right = 0.6
 anchor_bottom = 0.95
 margin_left = 3.8147e-06
 margin_top = 30.0
+margin_right = -26.0
 rect_min_size = Vector2( 400, 370 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -84,7 +85,7 @@ __meta__ = {
 }
 
 [node name="Grid" type="GridContainer" parent="Items/Scroll"]
-margin_right = 1024.0
+margin_right = 998.0
 margin_bottom = 910.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -93,8 +94,12 @@ custom_constants/hseparation = 16
 columns = 4
 
 [node name="Item_Preview" parent="." instance=ExtResource( 4 )]
+margin_left = 0.0
+margin_bottom = -13.0
 
 [node name="Party_Preview" parent="." instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 13.0
 
 [node name="EquipConfirmationDialog" type="ConfirmationDialog" parent="."]
 anchor_left = 0.4
@@ -122,5 +127,6 @@ __meta__ = {
 [connection signal="pressed" from="Filter_Bar/Consumables" to="." method="_on_filter_pressed"]
 [connection signal="consume_cur_item_request" from="Item_Preview" to="." method="_on_consume_cur_item_request"]
 [connection signal="equip_cur_item_request" from="Item_Preview" to="." method="_on_equip_cur_item_request"]
+[connection signal="character_selected" from="Party_Preview" to="." method="_on_character_selected"]
 [connection signal="confirmed" from="EquipConfirmationDialog" to="." method="_on_equip_confirmed"]
 [connection signal="confirmed" from="ConsumeConfirmationDialog" to="." method="_on_consume_confirmed"]

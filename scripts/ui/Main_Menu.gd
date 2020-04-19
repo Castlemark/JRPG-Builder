@@ -4,13 +4,15 @@ class_name Main_Menu
 
 var campaign_button_res = preload("res://scenes/ui/title_screen/Campaign_Button.tscn")
 
-const menu_pos := Vector2(-1920, 0)
+var menu_pos := Vector2(-1920, 0)
+var cur_index := 1
 
 onready var menu_container := $MenuContainer as Control
 onready var tween := $Tween as Tween
 
 onready var campaign_button_container := $MenuContainer/Campaigns_Menu/CampaignScroll/VBoxContainer as VBoxContainer
 onready var campaign_description := $MenuContainer/Campaigns_Menu/Descritption as RichTextLabel
+onready var start_campaign_button := $MenuContainer/Campaigns_Menu/Start_Campaign_Button as Button
 
 onready var settings_menu := $MenuContainer/Settings_Menu as Control
 onready var title_screen := $MenuContainer/Options_Menu as Control
@@ -25,15 +27,19 @@ onready var campaigns := {}
 onready var cur_campaign_index := -1
 
 func _ready() -> void:
+	get_tree().root.connect("size_changed", self, "on_window_resize")
+	
 	campaigns = Loaders.load_all_campaigns_basic_info()
 	for i in range(campaigns.size()):
 		var campaign_button_node := campaign_button_res.instance() as Button
 		campaign_button_node.text = campaigns.keys()[i]
 		campaign_button_container.add_child(campaign_button_node)
 		campaign_button_node.connect("pressed", self, "_on_campaign_button_pressed", [i])
+	on_window_resize()
 
 func move_to_menu(index : int) -> void:
 	if not is_moving:
+		cur_index = index
 		tween.interpolate_property(menu_container, "rect_position", null, menu_pos * index, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		
 		is_moving = true
@@ -78,10 +84,14 @@ func _on_campaign_chooser_button_pressed():
 
 func _on_start_campaign_pressed():
 	# TODO load save file
+	start_campaign_button.disabled = true
 	Game_Manager.load_campaign(campaigns.keys()[cur_campaign_index])
 	Game_Manager.goto_scene(Game_Manager.MAP)
-	pass
 
 
 func _on_Credit_Label_meta_clicked(meta) -> void:
 	OS.shell_open(meta)
+
+func on_window_resize() -> void:
+	menu_pos = Vector2(- get_viewport().get_visible_rect().size.x, 0)
+	menu_container.rect_position = menu_pos * cur_index

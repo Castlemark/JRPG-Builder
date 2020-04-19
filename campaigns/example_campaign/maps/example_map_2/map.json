@@ -74,6 +74,12 @@
     {
         "x_offset": 2,
         "y_offset": 1,
+        "color" :
+        {
+            "r": 0,
+            "g": 0,
+            "b": 0
+        },
         "scale" : 1
     }
 }

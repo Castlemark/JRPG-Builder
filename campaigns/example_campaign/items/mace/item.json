@@ -5,14 +5,14 @@
         "slot": "weapon",
         "stats":
         {
-            "critic": 0.5,
-            "speed": -2,
+            "critic": 0.05,
+            "speed": 2,
             "health": 0,
             "strain": 0,
             "evasion": 0.0,
             "damage": 0
         },
-        "min_level": 3,
+        "min_level": 10,
         "rarity": 2,
         "description": "This is an item description. This field also supports [shake rate=20 level=10]BBCode[/shake]"
     }

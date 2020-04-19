@@ -2,6 +2,8 @@ extends Panel
 
 class_name Party_Preview
 
+signal character_selected(character_data)
+
 var char_stats_preview_res := preload("res://scenes/ui/inventory/Char_Stats_Preview.tscn")
 
 onready var button_group_char_preview := ButtonGroup.new()
@@ -30,7 +32,8 @@ func set_item_preview(item_data):
 		if item_data.type == "equipment":
 			char_previews[i].set_diff_with_item(item_data)
 		else:
-			char_previews[i].set_full_stats()
+			char_previews[i].set_stats_with_eq()
 
 func _on_char_preview_pressed():
 	cur_character = button_group_char_preview.get_pressed_button().character_data
+	emit_signal("character_selected", cur_character)

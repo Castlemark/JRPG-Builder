@@ -27,8 +27,7 @@ func _ready() -> void:
 	get_tree().root.connect("size_changed", self, "on_window_resize")
 	on_window_resize()
 	
-	transition.margin_bottom = 0
-	transition.margin_right = 0
+	resize_transition(false)
 	##############
 
 func load_campaign(campaign_name : String) -> void:
@@ -41,8 +40,7 @@ func goto_scene(scene : Resource) -> void:
 func _deferred_goto_scene(scene : Resource) -> void:
 	
 	# We fade out to mask the transition
-	transition.margin_bottom = UI.margin_bottom
-	transition.margin_right = UI.margin_right
+	resize_transition(true)
 
 	transition_tween.interpolate_property(transition, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 	transition_tween.start()
@@ -64,8 +62,11 @@ func _deferred_goto_scene(scene : Resource) -> void:
 	transition_tween.start()
 	yield(transition_tween,"tween_completed")
 
-	transition.margin_bottom = 0
-	transition.margin_right = 0
+	resize_transition(false)
+
+func resize_transition(to_max : bool) -> void:
+	transition.margin_bottom = UI.margin_bottom if to_max else 0
+	transition.margin_right = UI.margin_right if to_max else 0
 
 func travel_to_map(map_name : String, access_point : int) -> void:
 	campaign_data.cur_map = map_name
