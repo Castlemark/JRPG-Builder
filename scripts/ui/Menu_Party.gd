@@ -114,6 +114,7 @@ func _on_player_select(data : Model.Character_Data) -> void:
 		
 	_rescale_sprite()
 
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Level/Amount as Label).text = String(data.cur_level())
 	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic/Amount as Label).text = String(round(data.stats_with_equipment.critic * 100)) + "%"
 	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed/Amount as Label).text = String(round(data.stats_with_equipment.speed))
 	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP/Amount as Label). text = String(round(data.stats_with_equipment.health)) + "/" + String(round(data.stats_with_equipment.max_health))
