@@ -32,29 +32,29 @@ func set_all_stats(name : String, cur_hp : int, total_hp : int, cur_energy : int
 	energybar.max_value = total_energy
 	energy_label.text = String(cur_energy) + "/" + String(total_energy)
 	
-	evasion_label.text = "Evasion " + String(battler_data.data.stats.evasion) + "%"
-	cur_evasion = battler_data.data.stats.evasion
-	critic_label.text = "Critic " + String(battler_data.data.stats.critic * 100) + "%"
-	cur_critic = battler_data.data.stats.critic
+	evasion_label.text = "Evasion " + String(battler_data.data.stats_with_equipment.evasion) + "%"
+	cur_evasion = battler_data.data.stats_with_equipment.evasion
+	critic_label.text = "Critic " + String(battler_data.data.stats_with_equipment.critic * 100) + "%"
+	cur_critic = battler_data.data.stats_with_equipment.critic
 	
 	data = battler_data
 
 func update_stats():
-	if data.data.stats.health != lifebar.value:
-		tween.interpolate_property(lifebar, "value", lifebar.value, data.data.stats.health, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		life_label.text = String(data.data.stats.health) + "/" + String(lifebar.max_value)
+	if data.data.stats_with_equipment.health != lifebar.value:
+		tween.interpolate_property(lifebar, "value", lifebar.value, data.data.stats_with_equipment.health, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		life_label.text = String(data.data.stats_with_equipment.health) + "/" + String(lifebar.max_value)
 	
-	if data.data.stats.strain != energybar.value:
-		tween.interpolate_property(energybar, "value", energybar.value, data.data.stats.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-		energy_label.text = String(data.data.stats.strain) + "/" + String(energybar.max_value)
+	if data.data.stats_with_equipment.strain != energybar.value:
+		tween.interpolate_property(energybar, "value", energybar.value, data.data.stats_with_equipment.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+		energy_label.text = String(data.data.stats_with_equipment.strain) + "/" + String(energybar.max_value)
 	
-	if data.data.stats.evasion != cur_evasion:
-		tween.interpolate_method(self, "_animate_evasion", cur_evasion, data.data.stats.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
-		cur_evasion = data.data.stats.evasion
+	if data.data.stats_with_equipment.evasion != cur_evasion:
+		tween.interpolate_method(self, "_animate_evasion", cur_evasion, data.data.stats_with_equipment.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		cur_evasion = data.data.stats_with_equipment.evasion
 	
-	if data.data.stats.critic != cur_critic:
-		tween.interpolate_method(self, "_animate_critic", cur_critic, data.data.stats.critic, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
-		cur_critic = data.data.stats.critic
+	if data.data.stats_with_equipment.critic != cur_critic:
+		tween.interpolate_method(self, "_animate_critic", cur_critic, data.data.stats_with_equipment.critic, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		cur_critic = data.data.stats_with_equipment.critic
 	
 	tween.start()
 

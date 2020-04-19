@@ -85,7 +85,7 @@ func _on_consume_confirmed() -> void:
 	var cur_character := party_preview.cur_character
 	
 	var field : String = cur_item.data.effect.type
-	cur_character.stats.set(field, min(cur_character.stats.get(field) + cur_item.data.effect.value, cur_character.stats.get("max_" + field)))
+	cur_character.stats_with_equipment.set(field, min(cur_character.stats_with_equipment.get(field) + cur_item.data.effect.value, cur_character.stats_with_equipment.get("max_" + field)))
 	
 	Game_Manager.campaign_data.party.inventory.erase(cur_item.data)
 	cur_item.queue_free()
@@ -144,6 +144,7 @@ func _on_equip_confirmed() -> void:
 		"weapon":
 			item_to_replace = cur_character.equipment.weapon
 			cur_character.equipment.weapon = cur_item.data
+	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment)
 	
 	cur_item.initialize(item_to_replace)
 	
@@ -167,6 +168,7 @@ func _on_equip_accessory_confirmed(action: String) -> void:
 		"3":
 			item_to_replace = cur_character.equipment.accessory_3
 			cur_character.equipment.accessory_3 = cur_item.data
+	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment)
 	
 	cur_item.initialize(item_to_replace)
 	accessory_dialog.queue_free()

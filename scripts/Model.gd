@@ -100,6 +100,7 @@ class Character_Data:
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
 	var stats : Stats_Data
+	var stats_with_equipment : Stats_Data
 	var abilities : Dictionary
 	var equipment : Equipment_Data
 	var animation_data : Animation_Data
@@ -114,25 +115,25 @@ class Character_Data:
 	func cur_level() -> int:
 		return floor(self.cur_xp/100.0) as int
 	
-	func full_stats(equipment : Equipment_Data) -> Model.Stats_Data:
+	func stats_with_eq(equipment : Equipment_Data, max_everything : bool = false) -> Model.Stats_Data:
 		var eq_stats := Stats_Data.new()
 
 		eq_stats.max_health = max(stats.max_health + equipment.legs.stats.health + equipment.torso.stats.health + equipment.accessory_1.stats.health + equipment.accessory_2.stats.health + equipment.accessory_3.stats.health + equipment.weapon.stats.health, 10)
-		eq_stats.health = max(stats.health, 0)
+		eq_stats.health = eq_stats.max_health if max_everything else int(max(stats.health, 0))
 		eq_stats.max_damage = max(stats.max_damage + equipment.legs.stats.damage + equipment.torso.stats.damage + equipment.accessory_1.stats.damage + equipment.accessory_2.stats.damage + equipment.accessory_3.stats.damage + equipment.weapon.stats.damage, 0)
-		eq_stats.damage = max(stats.damage, 0)
+		eq_stats.damage = eq_stats.max_damage if max_everything else int(max(stats.damage, 0))
 		eq_stats.max_strain = max(stats.max_strain + equipment.legs.stats.strain + equipment.torso.stats.strain + equipment.accessory_1.stats.strain + equipment.accessory_2.stats.strain + equipment.accessory_3.stats.strain + equipment.weapon.stats.strain, 0)
-		eq_stats.strain = max(stats.strain, 0)
+		eq_stats.strain = eq_stats.max_strain if max_everything else int(max(stats.strain, 0))
 		eq_stats.max_evasion = clamp(stats.max_evasion + equipment.legs.stats.evasion + equipment.torso.stats.evasion + equipment.accessory_1.stats.evasion + equipment.accessory_2.stats.evasion + equipment.accessory_3.stats.evasion + equipment.weapon.stats.evasion, 0, 1)
-		eq_stats.evasion = max(stats.evasion, 0)
+		eq_stats.evasion = eq_stats.max_evasion if max_everything else max(stats.evasion, 0)
 		eq_stats.critic = clamp(stats.critic + equipment.legs.stats.critic + equipment.torso.stats.critic + equipment.accessory_1.stats.critic + equipment.accessory_2.stats.critic + equipment.accessory_3.stats.critic + equipment.weapon.stats.critic, 0, 1)
 		eq_stats.speed = max(stats.speed + equipment.legs.stats.speed + equipment.torso.stats.speed + equipment.accessory_1.stats.speed + equipment.accessory_2.stats.speed + equipment.accessory_3.stats.speed + equipment.weapon.stats.speed, 0)
 
 		return eq_stats
 	
 	func calc_diff(new_eq : Equipment_Data) -> Stats_Data:
-		var diff_stats := full_stats(new_eq)
-		var cur_stats := full_stats(equipment)
+		var diff_stats := stats_with_eq(new_eq)
+		var cur_stats := stats_with_eq(equipment)
 
 		diff_stats.max_health -= cur_stats.max_health
 		diff_stats.max_damage -= cur_stats.max_damage
@@ -166,7 +167,7 @@ class Character_Data:
 
 class Enemy_Data:
 	var name : String
-	var stats : Stats_Data
+	var stats_with_equipment : Stats_Data
 	var abilities : Dictionary
 	var animation_data : Animation_Data
 	var xp_reward : int
@@ -181,7 +182,7 @@ class Enemy_Data:
 	func duplicate_enemy() -> Enemy_Data:
 		var d_enemy := Enemy_Data.new()
 		d_enemy.name = self.name
-		d_enemy.stats = self.stats.duplicate_stats()
+		d_enemy.stats_with_equipment = self.stats_with_equipment.duplicate_stats()
 		d_enemy.animation_data = self.animation_data
 		d_enemy.abilities = self.abilities
 		d_enemy.scale = self.scale

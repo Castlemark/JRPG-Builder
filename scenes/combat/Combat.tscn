@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scripts/Combat/Combat_UI_Manager.gd" type="Script" id=7]
 [ext_resource path="res://scenes/combat/Character_UI_Status.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/combat/End_Screen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/combat/Enemy_UI_Status.tscn" type="PackedScene" id=10]
+[ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=11]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -57,6 +59,7 @@ centered = false
 
 [node name="Attack_BG" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
+material = ExtResource( 11 )
 scale = Vector2( 1920, 1080 )
 texture = ExtResource( 5 )
 
@@ -365,14 +368,17 @@ margin_bottom = -32.0
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Enemies_Status"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Status" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
+[node name="Status" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 10 )]
 
-[node name="Status2" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
+[node name="Status2" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 10 )]
 margin_top = 73.0
 margin_bottom = 142.0
 
-[node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 8 )]
+[node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 10 )]
 margin_top = 146.0
 margin_bottom = 215.0
 

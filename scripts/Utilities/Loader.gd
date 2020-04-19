@@ -466,11 +466,8 @@ class Campaign_Loader:
 		character_data.equipment = equipment
 		
 		if load_correct:
-			var full_stats := character_data.full_stats(character_data.equipment)
-			character_data.stats.health = full_stats.max_health
-			character_data.stats.damage = full_stats.max_damage
-			character_data.stats.strain = full_stats.max_strain
-			character_data.stats.evasion = full_stats.max_evasion
+			character_data.stats_with_equipment = character_data.stats_with_eq(character_data.equipment, true)
+			
 
 		# Animation Data
 		if Generic_Validators.optional_info_field_exists(character_dict, "animation_data", Data.Validation.animation_data, "character is marked as animated, but it's requeried animation_data fields are either missing or incorrect, " + Data.Validation.check_docu, "filepath"):
@@ -751,7 +748,7 @@ class Campaign_Loader:
 		stats.damage = enemy_dict.stats.damage as int
 		stats.max_damage = stats.damage
 
-		enemy_data.stats = stats
+		enemy_data.stats_with_equipment = stats
 
 		# Abilities
 		enemy_data.abilities = {}

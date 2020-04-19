@@ -68,7 +68,7 @@ func indicate_cur_fighter(fighter_pos : int, turn_order : Array):
 		submenu.visible = true
 
 		# TODO Contemplate case where ability can't be choosen due to low stamina
-		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.stats.strain)
+		_update_character_abilites_panel(turn_order[fighter_pos].data.abilities.values(), turn_order[fighter_pos].data.stats_with_equipment.strain)
 		
 		if abilities_grid.get_child_count() != 0:
 			abilities_grid.get_child(0).grab_focus()
@@ -148,28 +148,28 @@ func _on_tween_completed(object : Object, key : NodePath):
 
 func set_status() -> void:
 	for i in range(0, allies.size()):
-		if allies[i].data.stats.health == 0:
+		if allies[i].data.stats_with_equipment.health == 0:
 			allies_status[i].visible = false
 		else:
 			(allies_status[i] as Battler_UI_Controller).set_all_stats(\
 				allies[i].data.name, \
-				allies[i].data.stats.health, \
-				allies[i].data.stats.max_health, \
-				allies[i].data.stats.strain, \
-				allies[i].data.stats.max_strain, \
+				allies[i].data.stats_with_equipment.health, \
+				allies[i].data.stats_with_equipment.max_health, \
+				allies[i].data.stats_with_equipment.strain, \
+				allies[i].data.stats_with_equipment.max_strain, \
 				allies[i] \
 			)
 
 	for i in range (0, enemies.size()):
-		if enemies[i].data.stats.health == 0:
+		if enemies[i].data.stats_with_equipment.health == 0:
 			enemies_status[i].visible = false
 		else:
 			(enemies_status[i] as Battler_UI_Controller).set_all_stats( \
 				enemies[i].data.name, \
-				enemies[i].data.stats.health, \
-				enemies[i].data.stats.max_health, \
-				enemies[i].data.stats.strain, \
-				enemies[i].data.stats.max_strain, \
+				enemies[i].data.stats_with_equipment.health, \
+				enemies[i].data.stats_with_equipment.max_health, \
+				enemies[i].data.stats_with_equipment.strain, \
+				enemies[i].data.stats_with_equipment.max_strain, \
 				enemies[i] \
 			)
 
@@ -203,7 +203,7 @@ func _on_ability_grab(data : Model.Ability_Data, preview_icon : Texture) -> void
 	_set_ability_view(data, preview_icon)
 
 func _set_ability_view(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var stats : Model.Stats_Data = cur_battler.data.stats
+	var stats : Model.Stats_Data = cur_battler.data.stats_with_equipment
 
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Icon as TextureRect).texture = preview_icon
 	($Submenu/Description/Scroll/VBoxContainer/Ttile/Name as Label).text = String(data.name)
@@ -257,7 +257,7 @@ func on_combat_end(xp_earned : int):
 
 	for index in range(allies.size()):
 		var ally := allies[index] as Character_Combat
-		end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats.health, ally.data.stats.max_health)
+		end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats_with_equipment.health, ally.data.stats_with_equipment.max_health)
 
 func _on_Status_battler_selected(battler_ui_button : Battler_UI_Controller) -> void:
 	menu.visible = false

@@ -31,7 +31,7 @@ func set_data(enemy_data : Model.Enemy_Data, abilities_data : Dictionary, is_ani
 	data = enemy_data
 	enemy_name.text = data.name
 	
-	_set_stats(data.stats, abilities_data.values())
+	_set_stats(data.stats_with_equipment, abilities_data.values())
 	
 	elapsed_frame_time = 0.0
 	sprite.frame = 0

@@ -75,9 +75,9 @@ func start_combat(combat_data : Dictionary) -> void:
 	UI.set_status()
 	
 
-	ally_first.visible = false if ally_first.data.stats.health == 0 else true
-	ally_second.visible = false if ally_second.data.stats.health == 0 else true
-	ally_third.visible = false if ally_third.data.stats.health == 0 else true
+	ally_first.visible = false if ally_first.data.stats_with_equipment.health == 0 else true
+	ally_second.visible = false if ally_second.data.stats_with_equipment.health == 0 else true
+	ally_third.visible = false if ally_third.data.stats_with_equipment.health == 0 else true
 
 	_combat_started = true
 	randomize()
@@ -104,13 +104,13 @@ func _end_combat() -> void:
 	emit_signal("combat_finished")
 
 func _reset_character_after_combat(character : Character_Combat):
-	character.data.stats.strain = character.data.stats.max_strain
-	character.data.stats.evasion = character.data.stats.max_evasion
-	character.data.stats.damage = character.data.stats.max_damage
+	character.data.stats_with_equipment.strain = character.data.stats_with_equipment.max_strain
+	character.data.stats_with_equipment.evasion = character.data.stats_with_equipment.max_evasion
+	character.data.stats_with_equipment.damage = character.data.stats_with_equipment.max_damage
 
 func _update_turn_order() -> void:
 	for i in range(_turn_order.size() - 1, -1, -1):
-		if _turn_order[i].data.stats.health == 0:
+		if _turn_order[i].data.stats_with_equipment.health == 0:
 			_turn_order.remove(i)
 
 	_turn_order.sort_custom(self, "_priority_sort")
@@ -123,15 +123,15 @@ func _priority_sort(a, b):
 
 	var priority_a
 	if a is Character_Combat:
-		priority_a = 2 * a.data.stats.speed + a.data.stats.evasion
+		priority_a = 2 * a.data.stats_with_equipment.speed + a.data.stats_with_equipment.evasion
 	else:
-		priority_a = 2 * a.data.stats.speed + a.data.stats.evasion
+		priority_a = 2 * a.data.stats_with_equipment.speed + a.data.stats_with_equipment.evasion
 
 	var priority_b
 	if b is Character_Combat:
-		priority_b = 2 * b.data.stats.speed + b.data.stats.evasion
+		priority_b = 2 * b.data.stats_with_equipment.speed + b.data.stats_with_equipment.evasion
 	else:
-		priority_b = 2 * b.data.stats.speed + b.data.stats.evasion
+		priority_b = 2 * b.data.stats_with_equipment.speed + b.data.stats_with_equipment.evasion
 
 	return priority_a > priority_b
 
@@ -141,10 +141,10 @@ func _execute_combat_loop() -> void:
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
 
 		var battler = _turn_order[_cur_fighter]
-		if battler.data.stats.strain + int(battler.data.stats.max_strain / 10.0) > battler.data.stats.max_strain:
-			battler.data.stats.strain = battler.data.stats.max_strain
+		if battler.data.stats_with_equipment.strain + int(battler.data.stats_with_equipment.max_strain / 10.0) > battler.data.stats_with_equipment.max_strain:
+			battler.data.stats_with_equipment.strain = battler.data.stats_with_equipment.max_strain
 		else:
-			battler.data.stats.strain += int(battler.data.stats.max_strain / 10.0)
+			battler.data.stats_with_equipment.strain += int(battler.data.stats_with_equipment.max_strain / 10.0)
 		UI.update_status_graphics()
 
 		if battler is Enemy_Combat:
@@ -166,10 +166,10 @@ func _combat_is_in_progress() -> bool:
 
 	for battler in _turn_order:
 		if battler is Character_Combat:
-			if battler.data.stats.health > 0:
+			if battler.data.stats_with_equipment.health > 0:
 				allies_dead = false
 		else:
-			if battler.data.stats.health > 0:
+			if battler.data.stats_with_equipment.health > 0:
 				enemies_dead = false
 
 	return not (allies_dead or enemies_dead)
@@ -202,7 +202,7 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	yield(self, "battler_animations_completed")
 
 	# We check if receiver has died
-	if recevier_battler.data.stats.health <= 0:
+	if recevier_battler.data.stats_with_equipment.health <= 0:
 		recevier_battler.visible = false
 		receiver_battler_ui.visible = false
 		var dead_index = _turn_order.find(recevier_battler)
@@ -230,8 +230,8 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	emit_signal("turn_finished")
 
 func _apply_ability_effect(receiver, emiter) -> void:
-	var amount : int = (round(_cur_ability.amount * emiter.data.stats.damage) as int)
-	emiter.data.stats.strain -= _cur_ability.cost
+	var amount : int = (round(_cur_ability.amount * emiter.data.stats_with_equipment.damage) as int)
+	emiter.data.stats_with_equipment.strain -= _cur_ability.cost
 
 	if amount > 0:
 		emiter.play_animation("attack")
@@ -242,13 +242,13 @@ func _apply_ability_effect(receiver, emiter) -> void:
 
 	match _cur_ability.type:
 		"health":
-			receiver.data.stats.health = receiver.data.stats.health - amount if (receiver.data.stats.health - amount > 0) else 0
+			receiver.data.stats_with_equipment.health = receiver.data.stats_with_equipment.health - amount if (receiver.data.stats_with_equipment.health - amount > 0) else 0
 		"evasion":
-			receiver.data.stats.evasion = receiver.data.stats.evasion - amount if (receiver.data.stats.evasion - amount > 0) else 0
+			receiver.data.stats_with_equipment.evasion = receiver.data.stats_with_equipment.evasion - amount if (receiver.data.stats_with_equipment.evasion - amount > 0) else 0
 		"strain":
-			receiver.data.stats.strain = receiver.data.stats.strain - amount if (receiver.data.stats.strain - amount > 0) else 0
+			receiver.data.stats_with_equipment.strain = receiver.data.stats_with_equipment.strain - amount if (receiver.data.stats_with_equipment.strain - amount > 0) else 0
 		"damage":
-			receiver.data.stats.damage = receiver.data.stats.damage - amount if (receiver.data.stats.damage - amount > 0) else 0
+			receiver.data.stats_with_equipment.damage = receiver.data.stats_with_equipment.damage - amount if (receiver.data.stats_with_equipment.damage - amount > 0) else 0
 
 # This function decides what ability and target will an enemy choose, then executes it's turn
 func _enemy_decide_turn(enemy : Enemy_Combat) -> void:
