@@ -3,6 +3,6 @@
     "side": "enemies",
     "cost": 50,
     "type": "evasion",
-    "amount": 0.3,
+    "amount": 0.05,
     "description": "Destroy them all"
 }
