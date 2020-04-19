@@ -14,6 +14,8 @@ onready var queue_tween : Tween = $Queue/Tween as Tween
 onready var menu : Panel = $Menu as Panel
 onready var submenu : Control = $Submenu as Control
 
+onready var turn_description := $TurnDescription as RichTextLabel
+
 onready var end_turn_button : Button = $Menu/HBoxContainer/End_Turn as Button
 
 onready var attack_button : Button = $Menu/HBoxContainer/Attack as Button
@@ -268,8 +270,13 @@ func toggle_menus(should_be_visible : bool):
 	menu.visible = should_be_visible
 	submenu.visible = should_be_visible
 
+func show_turn_log(description : String):
+	turn_description.bbcode_text = description
+	turn_description.visible = true
+
 func _on_end_screen_dismissed():
 	end_screen.visible = false
+	turn_description.visible = false
 
 	for ally_status in allies_status:
 		ally_status.visible = true

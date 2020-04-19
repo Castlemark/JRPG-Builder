@@ -4,6 +4,8 @@ class_name Enemy_Combat
 
 signal special_animation_finished()
 
+const TYPE := "Enemy_Combat"
+
 var data := Model.Enemy_Data.new()
 
 var duration := 0.0

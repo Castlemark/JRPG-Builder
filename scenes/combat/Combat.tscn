@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/combat/Enemy_UI_Status.tscn" type="PackedScene" id=10]
 [ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=11]
 [ext_resource path="res://default_assets/theme/Galaktika.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=13]
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -145,11 +146,17 @@ margin_left = 611.0
 margin_top = -248.0
 margin_right = 1311.0
 margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Grid" type="Panel" parent="UILayer/UI/Submenu"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_right = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Abilities" type="ScrollContainer" parent="UILayer/UI/Submenu/Grid"]
 visible = false
@@ -265,6 +272,22 @@ margin_top = 137.0
 margin_right = 338.0
 margin_bottom = 159.0
 
+[node name="TurnDescription" type="RichTextLabel" parent="UILayer/UI"]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 611.0
+margin_top = -248.0
+margin_right = 1311.0
+margin_bottom = -32.0
+custom_fonts/normal_font = ExtResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[center]{text}[/center]"
+text = "{text}"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Queue" type="Control" parent="UILayer/UI"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -349,6 +372,9 @@ margin_left = 32.0
 margin_top = -248.0
 margin_right = 579.0
 margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Allies_Status"]
 anchor_right = 1.0

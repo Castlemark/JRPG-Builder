@@ -257,31 +257,21 @@ func _apply_ability_effect(receiver, emiter) -> void:
 
 	var receiver_pos : float = receiver.position.x
 	var emiter_pos : float= emiter.position.x
-	
-	chars_tween.interpolate_property(receiver, "position:x", null, ACTIVE_POS, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	chars_tween.interpolate_property(emiter, "position:x", null, ACTIVE_POS, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
-	chars_tween.start()
-	yield(chars_tween, "tween_all_completed")
 
-	if amount > 0:
-		emiter.play_animation("attack")
-		receiver.play_animation("hit")
-	else:
-		emiter.play_animation("miss")
-		receiver.play_animation("miss")
+	var turn_description := "[center]" + _cur_ability.name + "\n"
 
-	yield(self, "battler_animations_completed")
-
-	var are_allies : bool = emiter.get_class() == receiver.get_class()
+	var are_allies : bool = emiter.TYPE == receiver.TYPE
 	var evades : bool = randf() < receiver.data.stats_with_equipment.evasion
+	print("Evades: " + String(evades))
 	var is_critic : bool = randf() < emiter.data.stats_with_equipment.critic
 	if is_critic:
 		amount = int(amount * 1.5) 
-		print("Critic!")
+		turn_description = "[center][color=yellow]" + _cur_ability.name + " is critic![/color]\n and "
 
 
 	if are_allies or not evades:
-		print("Hit!")
+		var str_amount := ("[color=red]" if amount > 0 else  "[color=green]") + String(amount) + "[/color]"
+		turn_description += "deals " + str_amount + " to " + _cur_ability.type + "[/center]"
 		match _cur_ability.type:
 			"health":
 				receiver.data.stats_with_equipment.health = receiver.data.stats_with_equipment.health - amount if (receiver.data.stats_with_equipment.health - amount > 0) else 0
@@ -291,9 +281,28 @@ func _apply_ability_effect(receiver, emiter) -> void:
 				receiver.data.stats_with_equipment.strain = receiver.data.stats_with_equipment.strain - amount if (receiver.data.stats_with_equipment.strain - amount > 0) else 0
 			"damage":
 				receiver.data.stats_with_equipment.damage = receiver.data.stats_with_equipment.damage - amount if (receiver.data.stats_with_equipment.damage - amount > 0) else 0
-		UI.update_status_graphics()
 	else:
-		print("Evades!")
+		turn_description = "[center][color=red]" + _cur_ability.name + " misses![/color][/center]"
+	UI.show_turn_log(turn_description)
+
+	chars_tween.interpolate_property(receiver, "position:x", null, ACTIVE_POS, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	chars_tween.interpolate_property(emiter, "position:x", null, ACTIVE_POS, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	chars_tween.start()
+	yield(chars_tween, "tween_all_completed")
+
+	if amount > 0 and not evades:
+		emiter.play_animation("attack")
+		receiver.play_animation("hit")
+	elif amount > 0 and evades:
+		emiter.play_animation("attack")
+		receiver.play_animation("miss")
+	else:
+		emiter.play_animation("miss")
+		receiver.play_animation("miss")
+
+	yield(self, "battler_animations_completed")
+
+	UI.update_status_graphics()
 
 	timer.start(0.5)
 	yield(timer, "timeout")
@@ -302,6 +311,7 @@ func _apply_ability_effect(receiver, emiter) -> void:
 	chars_tween.interpolate_property(emiter, "position:x", null, emiter_pos, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	chars_tween.start()
 	yield(chars_tween, "tween_all_completed")
+	UI.turn_description.visible = false
 	emit_signal("turn_animations_completed")
 
 # This function decides what ability and target will an enemy choose, then executes it's turn
