@@ -261,9 +261,12 @@ func on_combat_end(xp_earned : int):
 		end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats_with_equipment.health, ally.data.stats_with_equipment.max_health)
 
 func _on_Status_battler_selected(battler_ui_button : Battler_UI_Controller) -> void:
-	menu.visible = false
-	submenu.visible = false
+	toggle_menus(false)
 	emit_signal("battler_selected", battler_ui_button)
+
+func toggle_menus(should_be_visible : bool):
+	menu.visible = should_be_visible
+	submenu.visible = should_be_visible
 
 func _on_end_screen_dismissed():
 	end_screen.visible = false

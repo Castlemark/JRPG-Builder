@@ -91,6 +91,7 @@ func start_combat(combat_data : Dictionary) -> void:
 
 	_combat_started = true
 	randomize()
+	UI.toggle_menus(false)
 	_execute_combat_loop()
 
 func _end_combat() -> void:
@@ -146,12 +147,13 @@ func _priority_sort(a, b):
 	return priority_a > priority_b
 
 func _execute_combat_loop() -> void:
-	timer.start(3.0)
+	timer.start(2.0)
 	yield(timer, "timeout")
 	UI.begin_label.visible = false
 	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
+	UI.toggle_menus(true)
 	
 	# Turn logic goes inside the loop
 	while _combat_is_in_progress():
@@ -270,16 +272,28 @@ func _apply_ability_effect(receiver, emiter) -> void:
 
 	yield(self, "battler_animations_completed")
 
-	match _cur_ability.type:
-		"health":
-			receiver.data.stats_with_equipment.health = receiver.data.stats_with_equipment.health - amount if (receiver.data.stats_with_equipment.health - amount > 0) else 0
-		"evasion":
-			receiver.data.stats_with_equipment.evasion = receiver.data.stats_with_equipment.evasion - amount if (receiver.data.stats_with_equipment.evasion - amount > 0) else 0
-		"strain":
-			receiver.data.stats_with_equipment.strain = receiver.data.stats_with_equipment.strain - amount if (receiver.data.stats_with_equipment.strain - amount > 0) else 0
-		"damage":
-			receiver.data.stats_with_equipment.damage = receiver.data.stats_with_equipment.damage - amount if (receiver.data.stats_with_equipment.damage - amount > 0) else 0
-	UI.update_status_graphics()
+	var are_allies : bool = emiter.get_class() == receiver.get_class()
+	var evades : bool = randf() < receiver.data.stats_with_equipment.evasion
+	var is_critic : bool = randf() < emiter.data.stats_with_equipment.critic
+	if is_critic:
+		amount = int(amount * 1.5) 
+		print("Critic!")
+
+
+	if are_allies or not evades:
+		print("Hit!")
+		match _cur_ability.type:
+			"health":
+				receiver.data.stats_with_equipment.health = receiver.data.stats_with_equipment.health - amount if (receiver.data.stats_with_equipment.health - amount > 0) else 0
+			"evasion":
+				receiver.data.stats_with_equipment.evasion = receiver.data.stats_with_equipment.evasion - amount if (receiver.data.stats_with_equipment.evasion - amount > 0) else 0
+			"strain":
+				receiver.data.stats_with_equipment.strain = receiver.data.stats_with_equipment.strain - amount if (receiver.data.stats_with_equipment.strain - amount > 0) else 0
+			"damage":
+				receiver.data.stats_with_equipment.damage = receiver.data.stats_with_equipment.damage - amount if (receiver.data.stats_with_equipment.damage - amount > 0) else 0
+		UI.update_status_graphics()
+	else:
+		print("Evades!")
 
 	timer.start(0.5)
 	yield(timer, "timeout")
