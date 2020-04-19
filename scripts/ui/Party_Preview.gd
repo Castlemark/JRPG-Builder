@@ -32,7 +32,7 @@ func set_item_preview(item_data):
 		if item_data.type == "equipment":
 			char_previews[i].set_diff_with_item(item_data)
 		else:
-			char_previews[i].set_full_stats()
+			char_previews[i].set_stats_with_eq()
 
 func _on_char_preview_pressed():
 	cur_character = button_group_char_preview.get_pressed_button().character_data

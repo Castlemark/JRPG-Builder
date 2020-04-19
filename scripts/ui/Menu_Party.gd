@@ -79,7 +79,7 @@ func update() -> void:
 		_on_player_select(pressed_char_button.data)
 
 func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> void:
-	var stats := (character_button_group.get_pressed_button() as Character_UI).data.stats
+	var stats := (character_button_group.get_pressed_button() as Character_UI).data.stats_with_equipment
 
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Icon as TextureRect).texture = preview_icon
 	($Data/HBoxContainer/Preview/Scroll/VBoxContainer/HBoxContainer/Name as Label).text = String(data.name).replace("_", " ")
@@ -114,12 +114,13 @@ func _on_player_select(data : Model.Character_Data) -> void:
 		
 	_rescale_sprite()
 
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic/Amount as Label).text = String(round(data.stats.critic * 100)) + "%"
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed/Amount as Label).text = String(round(data.stats.speed))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP/Amount as Label). text = String(round(data.stats.health))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain/Amount as Label).text = String(round(data.stats.strain))
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion/Amount as Label).text = String(round(data.stats.evasion * 100)) + "%"
-	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage/Amount as Label).text = String(round(data.stats.damage))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Level/Amount as Label).text = String(data.cur_level())
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Critic/Amount as Label).text = String(round(data.stats_with_equipment.critic * 100)) + "%"
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Speed/Amount as Label).text = String(round(data.stats_with_equipment.speed))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/HP/Amount as Label). text = String(round(data.stats_with_equipment.health)) + "/" + String(round(data.stats_with_equipment.max_health))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Strain/Amount as Label).text = String(round(data.stats_with_equipment.strain))
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Evasion/Amount as Label).text = String(round(data.stats_with_equipment.evasion * 100)) + "%"
+	($Data/TopHBoxContainer/Stats/HBoxContainer/Soft/Damage/Amount as Label).text = String(round(data.stats_with_equipment.damage))
 
 	_update_character_equipment(data.equipment)
 	_update_character_abilites_panel(data.abilities.values())

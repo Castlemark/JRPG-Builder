@@ -42,9 +42,9 @@ Below you'll find some deadlines for the various modules, when a module is marke
     - [x] Inventory
     - [x] Character management
     - [x] Bestiary
-- [ ] <u>Combat Sprint</u>
-  - [ ] Combat module V-2 **(final)**
-    - [ ] Final AI
+- [x] <u>Combat Sprint</u>
+  - [x] Combat module V-2 **(final)**
+    - [x] Combat refactor
 - [ ] <u>Content creation Sprint</u>
   - [ ] Add fonts and refine theme
   - [ ] Save states
