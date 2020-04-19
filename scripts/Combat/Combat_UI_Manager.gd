@@ -28,6 +28,7 @@ onready var items_container : ScrollContainer = $Submenu/Grid/Items as ScrollCon
 
 onready var end_screen := $End_Screen as End_Screen
 onready var begin_label := $BeginLabel as Label
+onready var lost_screen := $Lost_Screen as Panel
 
 var ability_button_group := ButtonGroup.new()
 
@@ -252,15 +253,19 @@ func _on_ability_pressed(data : Model.Ability_Data, preview_icon : Texture) -> v
 		allies_status[0].grab_focus()
 	_on_End_Turn_pressed(data)
 
-func on_combat_end(xp_earned : int):
-	end_screen.visible = true
+func on_combat_end(xp_earned : int, combat_won : bool):
 	queue_container.visible = false
 	menu.visible = false
 	submenu.visible = false
 
-	for index in range(allies.size()):
-		var ally := allies[index] as Character_Combat
-		end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats_with_equipment.health, ally.data.stats_with_equipment.max_health)
+	if combat_won:
+		end_screen.visible = true
+
+		for index in range(allies.size()):
+			var ally := allies[index] as Character_Combat
+			end_screen.set_char_summary_data(index, ally.data.name, xp_earned, ally.data.stats_with_equipment.health, ally.data.stats_with_equipment.max_health)
+	else:
+		lost_screen.visible = true
 
 func _on_Status_battler_selected(battler_ui_button : Battler_UI_Controller) -> void:
 	toggle_menus(false)
@@ -277,6 +282,7 @@ func show_turn_log(description : String):
 func _on_end_screen_dismissed():
 	end_screen.visible = false
 	turn_description.visible = false
+	lost_screen.visible = false
 
 	for ally_status in allies_status:
 		ally_status.visible = true
@@ -290,3 +296,13 @@ func _on_end_screen_dismissed():
 	menu.visible = true
 	submenu.visible = true
 	emit_signal("end_combat_summary_dismissed")
+
+
+func _on_load_last_save_request() -> void:
+	# TODO add when save/load functionality is implemented
+	pass # Replace with function body.
+
+
+func _on_return_to_title_screen_request() -> void:
+	Game_Manager.goto_scene(Game_Manager.TITLE_SCREEN)
+	Game_Manager.campaign_data = null

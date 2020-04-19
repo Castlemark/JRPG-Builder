@@ -430,6 +430,73 @@ margin_bottom = 68.0
 custom_fonts/font = SubResource( 2 )
 text = "Combat Begins!"
 
+[node name="Lost_Screen" type="Panel" parent="UILayer/UI"]
+visible = false
+material = ExtResource( 11 )
+anchor_left = 0.3
+anchor_top = 0.2
+anchor_right = 0.7
+anchor_bottom = 0.6
+
+[node name="Message" type="Panel" parent="UILayer/UI/Lost_Screen"]
+anchor_right = 1.0
+anchor_bottom = 0.6
+margin_left = 48.0
+margin_top = 48.0
+margin_right = -48.0
+
+[node name="Title" type="Label" parent="UILayer/UI/Lost_Screen/Message"]
+anchor_right = 1.0
+anchor_bottom = 0.5
+custom_fonts/font = ExtResource( 13 )
+text = "You Lost!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="UILayer/UI/Lost_Screen/Message"]
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.5
+margin_left = 7.62939e-06
+margin_bottom = 4.0
+
+[node name="Text" type="Label" parent="UILayer/UI/Lost_Screen/Message"]
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.8
+anchor_bottom = 1.0
+text = "You have lost this combat, you can choose to load your last save or return to the title screen."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="LoadButton" type="Button" parent="UILayer/UI/Lost_Screen"]
+anchor_top = 0.6
+anchor_right = 0.4
+anchor_bottom = 1.0
+margin_left = 48.0
+margin_top = 48.0
+margin_right = -24.0
+margin_bottom = -48.0
+custom_fonts/font = ExtResource( 13 )
+text = "Load Last Save"
+
+[node name="ReturnButton" type="Button" parent="UILayer/UI/Lost_Screen"]
+anchor_left = 0.4
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 48.0
+margin_right = -48.0
+margin_bottom = -48.0
+custom_fonts/font = ExtResource( 13 )
+text = "return to title screen"
+
 [node name="Timer" type="Timer" parent="."]
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Second" to="." method="_update_yield_counter"]
@@ -448,3 +515,5 @@ text = "Combat Begins!"
 [connection signal="battler_selected" from="UILayer/UI/Enemies_Status/VBoxContainer/Status" to="UILayer/UI" method="_on_Status_battler_selected"]
 [connection signal="battler_selected" from="UILayer/UI/Enemies_Status/VBoxContainer/Status2" to="UILayer/UI" method="_on_Status_battler_selected"]
 [connection signal="battler_selected" from="UILayer/UI/Enemies_Status/VBoxContainer/Status3" to="UILayer/UI" method="_on_Status_battler_selected"]
+[connection signal="pressed" from="UILayer/UI/Lost_Screen/LoadButton" to="UILayer/UI" method="_on_load_last_save_request"]
+[connection signal="pressed" from="UILayer/UI/Lost_Screen/ReturnButton" to="UILayer/UI" method="_on_return_to_title_screen_request"]

@@ -29,6 +29,8 @@ onready var attack_bg_tween := $Attack_BG/Tween as Tween
 
 onready var timer := $Timer as Timer
 
+var combat_won := false
+
 var _combat_started := false
 var _turn_order := []
 var _cur_fighter : int = 0
@@ -44,6 +46,7 @@ func _ready() -> void:
 	UI.connect("end_combat_summary_dismissed", self, "_end_combat")
 
 func start_combat(combat_data : Dictionary) -> void:
+	combat_won = false
 	# TODO Disable all Menu and bind inventory
 	background.texture = Game_Manager.campaign_data.maps[Game_Manager.campaign_data.cur_map].combat_background
 	background.visible = true
@@ -99,6 +102,10 @@ func _end_combat() -> void:
 	_reset_character_after_combat(ally_first)
 	_reset_character_after_combat(ally_second)
 	_reset_character_after_combat(ally_third)
+	
+	ally_first.data.cur_xp += _xp_reward
+	ally_second.data.cur_xp += _xp_reward
+	ally_third.data.cur_xp += _xp_reward
 
 	# We deactivate all relevant elements
 	background.visible = false
@@ -157,13 +164,22 @@ func _execute_combat_loop() -> void:
 	
 	# Turn logic goes inside the loop
 	while _combat_is_in_progress():
-		print("new turn for " + _turn_order[_cur_fighter].data.name)
 
 		var battler = _turn_order[_cur_fighter]
 		if battler.data.stats_with_equipment.strain + int(battler.data.stats_with_equipment.max_strain / 10.0) > battler.data.stats_with_equipment.max_strain:
 			battler.data.stats_with_equipment.strain = battler.data.stats_with_equipment.max_strain
 		else:
 			battler.data.stats_with_equipment.strain += int(battler.data.stats_with_equipment.max_strain / 10.0)
+		if battler.data.stats_with_equipment.damage + int(battler.data.stats_with_equipment.max_damage / 10.0) > battler.data.stats_with_equipment.max_damage:
+			battler.data.stats_with_equipment.damage = battler.data.stats_with_equipment.max_damage
+		else:
+			battler.data.stats_with_equipment.damage += int(battler.data.stats_with_equipment.max_damage / 10.0)
+		if battler.data.stats_with_equipment.evasion + (battler.data.stats_with_equipment.max_evasion / 10.0) > battler.data.stats_with_equipment.max_evasion:
+			print("maxing evasion")
+			battler.data.stats_with_equipment.evasion = battler.data.stats_with_equipment.max_evasion
+		else:
+			print("increasing evasion")
+			battler.data.stats_with_equipment.evasion += (battler.data.stats_with_equipment.max_evasion / 10.0)
 		UI.update_status_graphics()
 
 		if battler is Enemy_Combat:
@@ -172,12 +188,9 @@ func _execute_combat_loop() -> void:
 		yield(self, "turn_finished")
 		_cur_fighter += 1
 		if _cur_fighter >= _turn_order.size():
-			print("New Round")
 			_update_turn_order()
 		UI.indicate_cur_fighter(_cur_fighter, _turn_order)
-
-	print("ending combat")
-	UI.on_combat_end(_xp_reward)
+	UI.on_combat_end(_xp_reward, combat_won)
 
 func _combat_is_in_progress() -> bool:
 	var allies_dead := true
@@ -191,11 +204,15 @@ func _combat_is_in_progress() -> bool:
 			if battler.data.stats_with_equipment.health > 0:
 				enemies_dead = false
 
+	if allies_dead:
+		combat_won = false
+	elif enemies_dead:
+		combat_won = true
+
 	return not (allies_dead or enemies_dead)
 
 func _set_cur_ability(data) -> void:
 	if data is bool:
-		print("no ability chosen")
 		emit_signal("turn_finished")
 	else:
 		_cur_ability = data
@@ -252,7 +269,8 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	emit_signal("turn_finished")
 
 func _apply_ability_effect(receiver, emiter) -> void:
-	var amount : int = (round(_cur_ability.amount * emiter.data.stats_with_equipment.damage) as int)
+	var raw_amount : float = _cur_ability.amount
+	var amount : int = (round(raw_amount * emiter.data.stats_with_equipment.damage) as int)
 	emiter.data.stats_with_equipment.strain -= _cur_ability.cost
 
 	var receiver_pos : float = receiver.position.x
@@ -262,25 +280,27 @@ func _apply_ability_effect(receiver, emiter) -> void:
 
 	var are_allies : bool = emiter.TYPE == receiver.TYPE
 	var evades : bool = randf() < receiver.data.stats_with_equipment.evasion
-	print("Evades: " + String(evades))
 	var is_critic : bool = randf() < emiter.data.stats_with_equipment.critic
 	if is_critic:
 		amount = int(amount * 1.5) 
+		raw_amount *= 1.5 
 		turn_description = "[center][color=yellow]" + _cur_ability.name + " is critic![/color]\n and "
 
 
 	if are_allies or not evades:
 		var str_amount := ("[color=red]" if amount > 0 else  "[color=green]") + String(amount) + "[/color]"
-		turn_description += "deals " + str_amount + " to " + _cur_ability.type + "[/center]"
 		match _cur_ability.type:
 			"health":
 				receiver.data.stats_with_equipment.health = receiver.data.stats_with_equipment.health - amount if (receiver.data.stats_with_equipment.health - amount > 0) else 0
 			"evasion":
-				receiver.data.stats_with_equipment.evasion = receiver.data.stats_with_equipment.evasion - amount if (receiver.data.stats_with_equipment.evasion - amount > 0) else 0
+				receiver.data.stats_with_equipment.evasion = receiver.data.stats_with_equipment.evasion - raw_amount if (receiver.data.stats_with_equipment.evasion - raw_amount > 0) else 0
+				str_amount = ("[color=red]" if raw_amount > 0 else  "[color=green]") + String(raw_amount * 100) + "%[/color]"
 			"strain":
 				receiver.data.stats_with_equipment.strain = receiver.data.stats_with_equipment.strain - amount if (receiver.data.stats_with_equipment.strain - amount > 0) else 0
 			"damage":
 				receiver.data.stats_with_equipment.damage = receiver.data.stats_with_equipment.damage - amount if (receiver.data.stats_with_equipment.damage - amount > 0) else 0
+		
+		turn_description += "deals " + str_amount + " to " + _cur_ability.type + "[/center]"
 	else:
 		turn_description = "[center][color=red]" + _cur_ability.name + " misses![/color][/center]"
 	UI.show_turn_log(turn_description)
@@ -331,16 +351,12 @@ func _enemy_decide_turn(enemy : Enemy_Combat) -> void:
 	var choosen_ability : Model.Ability_Data = enemy.data.abilities.values()[index]
 	_set_cur_ability(choosen_ability)
 
-	print("	choosen ability: " + choosen_ability.name + " ; with side " + choosen_ability.side)
-
 	var choosen_battler : Battler_UI_Controller
 	# we flip the selection because for the enemies, their enemies are our allies
 	if choosen_ability.side == "enemies":
 		choosen_battler = ui_allies_status[randi() % ui_allies_status.size()]
 	else:
 		choosen_battler = ui_enemies_status[randi() % ui_enemies_status.size()]
-
-	print("	choosen target: " + choosen_battler.data.data.name)
 
 	_play_ability(choosen_battler)
 
