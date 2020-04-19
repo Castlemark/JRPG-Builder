@@ -22,6 +22,8 @@ onready var UI : Combat_UI_Manager = $UILayer/UI as Combat_UI_Manager
 onready var attack_bg : Sprite = $Attack_BG as Sprite
 onready var attack_bg_tween : Tween = $Attack_BG/Tween as Tween
 
+onready var timer := $Timer as Timer
+
 var _combat_started := false
 var _turn_order := []
 var _cur_fighter : int = 0
@@ -139,7 +141,8 @@ func _priority_sort(a, b):
 	return priority_a > priority_b
 
 func _execute_combat_loop() -> void:
-	yield(get_tree().create_timer(3.0), "timeout")
+	timer.start(3.0)
+	yield(timer, "timeout")
 	UI.begin_label.visible = false
 	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
@@ -220,9 +223,13 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 		_turn_order.erase(recevier_battler)
 		UI.update_queue(_turn_order)
 
+	timer.start(0.5)
+	yield(timer, "timeout")
 	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
+	timer.start(0.5)
+	yield(timer, "timeout")
 
 	emiter.z_index = 0
 	recevier_battler.z_index = 0

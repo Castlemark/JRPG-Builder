@@ -62,6 +62,8 @@ centered = false
 [node name="Third" parent="Characters/Enemies" instance=ExtResource( 4 )]
 centered = false
 
+[node name="Tween" type="Tween" parent="Characters"]
+
 [node name="Attack_BG" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 material = ExtResource( 11 )
@@ -401,6 +403,8 @@ margin_right = 342.0
 margin_bottom = 68.0
 custom_fonts/font = SubResource( 2 )
 text = "Combat Begins!"
+
+[node name="Timer" type="Timer" parent="."]
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Second" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Third" to="." method="_update_yield_counter"]
