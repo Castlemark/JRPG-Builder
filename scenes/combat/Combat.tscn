@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -11,8 +11,13 @@
 [ext_resource path="res://scenes/combat/End_Screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/combat/Enemy_UI_Status.tscn" type="PackedScene" id=10]
 [ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=11]
+[ext_resource path="res://default_assets/theme/Galaktika.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 128
+font_data = ExtResource( 12 )
 
 [node name="Combat" type="Node2D"]
 script = ExtResource( 1 )
@@ -383,6 +388,19 @@ margin_top = 146.0
 margin_bottom = 215.0
 
 [node name="End_Screen" parent="UILayer/UI" instance=ExtResource( 9 )]
+
+[node name="BeginLabel" type="Label" parent="UILayer/UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -342.0
+margin_top = -68.0
+margin_right = 342.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 2 )
+text = "Combat Begins!"
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Second" to="." method="_update_yield_counter"]
 [connection signal="special_animation_finished" from="Characters/Allies/Third" to="." method="_update_yield_counter"]

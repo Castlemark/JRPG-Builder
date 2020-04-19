@@ -25,6 +25,7 @@ onready var items_grid : GridContainer = $Submenu/Grid/Items/Container as GridCo
 onready var items_container : ScrollContainer = $Submenu/Grid/Items as ScrollContainer
 
 onready var end_screen := $End_Screen as End_Screen
+onready var begin_label := $BeginLabel as Label
 
 var ability_button_group := ButtonGroup.new()
 

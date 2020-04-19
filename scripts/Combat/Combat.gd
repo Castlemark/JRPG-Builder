@@ -41,6 +41,9 @@ func start_combat(combat_data : Dictionary) -> void:
 	background.texture = Game_Manager.campaign_data.maps[Game_Manager.campaign_data.cur_map].combat_background
 	background.visible = true
 	UI.visible = true
+	
+	UI.begin_label.visible = true
+	attack_bg.modulate = Color(1, 1, 1, 1)
 
 	ally_first.prepare_for_combat(Game_Manager.campaign_data.party.first_character)
 	ally_second.prepare_for_combat(Game_Manager.campaign_data.party.second_character)
@@ -136,6 +139,12 @@ func _priority_sort(a, b):
 	return priority_a > priority_b
 
 func _execute_combat_loop() -> void:
+	yield(get_tree().create_timer(3.0), "timeout")
+	UI.begin_label.visible = false
+	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	attack_bg_tween.start()
+	yield(attack_bg_tween, "tween_completed")
+	
 	# Turn logic goes inside the loop
 	while _combat_is_in_progress():
 		print("new turn for " + _turn_order[_cur_fighter].data.name)
@@ -190,7 +199,7 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	emiter.z_index = 1
 	recevier_battler.z_index = 1
 
-	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 0.85), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	attack_bg_tween.interpolate_property(attack_bg, "modulate", null, Color(1, 1, 1, 1), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	attack_bg_tween.start()
 	yield(attack_bg_tween, "tween_completed")
 
