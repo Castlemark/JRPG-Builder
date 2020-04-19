@@ -279,6 +279,12 @@ class Campaign_Loader:
 			background_data.scale = 1
 		else:
 			background_data.scale = map_dict.background_info.scale
+		if map_dict.background_info.color.r >= 0 and map_dict.background_info.color.r < 256 and map_dict.background_info.color.g >= 0 and map_dict.background_info.color.g < 256 and map_dict.background_info.color.b >= 0 and map_dict.background_info.color.b < 256:
+			background_data.color = Color(map_dict.background_info.color.r / 255, map_dict.background_info.color.g / 255, map_dict.background_info.color.b / 255)
+		else:
+			load_correct = false
+			print("fields \"r\",\"g\" and \"b\" of \"color\" exist, but their values must be between 0 and 255 included")
+			background_data.color = Color(0, 0, 0)
 
 		map_data.background_info = background_data
 

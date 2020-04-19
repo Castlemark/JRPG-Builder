@@ -45,6 +45,7 @@ class Map_Data:
 	class BG_Data:
 		var x_offset : float
 		var y_offset : float
+		var color : Color
 		var scale : float
 
 	class Nav_Node_Data:

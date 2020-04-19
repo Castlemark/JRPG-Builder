@@ -25,9 +25,11 @@ static func _nav_node_is_valid(node_data : Dictionary) -> bool:
 	return false
 
 static func _map_bg_is_valid(background_info : Dictionary) -> bool:
-	if Generic_Validators.minimal_info_fields_exist(background_info, Data.Validation.bg_map_fields, "background_info has missing or incorrect required fields, " + Data.Validation.check_docu, ""):
-		return true
-	return false
+	if not Generic_Validators.minimal_info_fields_exist(background_info, Data.Validation.bg_map_fields, "background_info has missing or incorrect required fields, " + Data.Validation.check_docu, ""):
+		return false
+	if not Generic_Validators.minimal_info_fields_exist(background_info.color, Data.Validation.color_fields, "color has missing or incorrect required fields, " + Data.Validation.check_docu, ""):
+		return false
+	return true
 
 static func _map_detail_is_valid(detail_info : Dictionary) -> bool:
 	if Generic_Validators.minimal_info_fields_exist(detail_info, Data.Validation.detail_fields, "detail doesn't have the necessary fields to initialize properly, " + Data.Validation.check_docu, "filepath"):
