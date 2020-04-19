@@ -13,9 +13,9 @@ onready var energybar : ProgressBar = $EnergyBar as ProgressBar
 onready var energy_label : Label = $EnergyBar/Label as Label
 
 onready var evasion_label : Label = $Evasion as Label
-onready var cur_evasion : float = 0.0
+onready var cur_evasion : int = 0
 onready var critic_label : Label = $Critic as Label
-onready var cur_critic : float = 0.0
+onready var cur_critic : int = 0
 
 onready var tween : Tween = $Tween as Tween
 
@@ -32,10 +32,10 @@ func set_all_stats(name : String, cur_hp : int, total_hp : int, cur_energy : int
 	energybar.max_value = total_energy
 	energy_label.text = String(cur_energy) + "/" + String(total_energy)
 	
-	evasion_label.text = "Evasion " + String(battler_data.data.stats_with_equipment.evasion) + "%"
-	cur_evasion = battler_data.data.stats_with_equipment.evasion
-	critic_label.text = "Critic " + String(battler_data.data.stats_with_equipment.critic * 100) + "%"
-	cur_critic = battler_data.data.stats_with_equipment.critic
+	cur_evasion = int(battler_data.data.stats_with_equipment.evasion * 100)
+	evasion_label.text = "Evasion " + String(cur_evasion) + "%"
+	cur_critic = int(battler_data.data.stats_with_equipment.critic * 100)
+	critic_label.text = "Critic " + String(cur_critic) + "%"
 	
 	data = battler_data
 
@@ -48,13 +48,13 @@ func update_stats():
 		tween.interpolate_property(energybar, "value", energybar.value, data.data.stats_with_equipment.strain, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 		energy_label.text = String(data.data.stats_with_equipment.strain) + "/" + String(energybar.max_value)
 	
-	if data.data.stats_with_equipment.evasion != cur_evasion:
-		tween.interpolate_method(self, "_animate_evasion", cur_evasion, data.data.stats_with_equipment.evasion, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
-		cur_evasion = data.data.stats_with_equipment.evasion
+	if int(data.data.stats_with_equipment.evasion * 100) != cur_evasion:
+		tween.interpolate_method(self, "_animate_evasion", cur_evasion, int(data.data.stats_with_equipment.evasion * 100), 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		cur_evasion = int(data.data.stats_with_equipment.evasion * 100)
 	
-	if data.data.stats_with_equipment.critic != cur_critic:
-		tween.interpolate_method(self, "_animate_critic", cur_critic, data.data.stats_with_equipment.critic, 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
-		cur_critic = data.data.stats_with_equipment.critic
+	if int(data.data.stats_with_equipment.critic * 100) != cur_critic:
+		tween.interpolate_method(self, "_animate_critic", cur_critic, int(data.data.stats_with_equipment.critic * 100), 0.5, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
+		cur_critic = int(data.data.stats_with_equipment.critic * 100)
 	
 	tween.start()
 

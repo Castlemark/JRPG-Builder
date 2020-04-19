@@ -49,7 +49,7 @@ func update() -> void:
 
 	if item_button_group.get_pressed_button() == null:
 		inventory_container.get_child(0).pressed = true
-		_show_item_preview()
+	_show_item_preview()
 	_on_character_selected(party_preview.cur_character)
 
 func _on_filter_pressed() -> void:
@@ -90,9 +90,15 @@ func _on_consume_confirmed() -> void:
 	Game_Manager.campaign_data.party.inventory.erase(cur_item.data)
 	cur_item.queue_free()
 	
-	(inventory_container.get_child(0) as Item).grab_focus()
-	(inventory_container.get_child(0) as Item).pressed = true
-	item_preview.preview(inventory_container.get_child(0).data)
+	var first_item_available : Item
+	for item in inventory_container.get_children():
+		if not item.disabled:
+			first_item_available = item
+			break
+	first_item_available.grab_focus()
+	first_item_available.pressed = true
+	_show_item_preview()
+	
 
 func _on_equip_cur_item_request() -> void:
 	var cur_item := item_button_group.get_pressed_button().data as Model.Item_Data.Equipment_Item_Data
