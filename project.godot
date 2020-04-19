@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "VBoxContainer",
+"class": "Ability_Preview",
+"language": "GDScript",
+"path": "res://scripts/ui/Ability_Preview.gd"
+}, {
 "base": "Sprite3D",
 "class": "Background_Tile",
 "language": "GDScript",
@@ -235,6 +240,7 @@ _global_script_classes=[ {
 "path": "res://scripts/map/actions/Wait_Action.gd"
 } ]
 _global_script_class_icons={
+"Ability_Preview": "",
 "Background_Tile": "",
 "Battler_UI_Controller": "",
 "Between_node": "",

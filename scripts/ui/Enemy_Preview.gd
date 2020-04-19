@@ -2,7 +2,9 @@ extends VBoxContainer
 
 class_name Enemy_preview
 
-var character_ability_res : Resource = preload("res://scenes/ui/party/Character_Ability.tscn")
+signal redirect_to_ability()
+
+var character_ability_res : Resource = preload("res://scenes/ui/encyclopedia/Enemy_Preview_Ability.tscn")
 
 onready var sprite : Sprite = $BG/VBoxContainer/Color_BG/Sprite as Sprite
 onready var enemy_name : Label = $BG/VBoxContainer/Name as Label
@@ -111,7 +113,6 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 			character_ability_container.add_child(character_ability_node, true)
 			character_ability_container.move_child(character_ability_node, 0)
 			character_ability_node.connect("ability_pressed", self, "_on_ability_pressed")
-			character_ability_node.group = ability_button_group
 	elif difference < 0:
 # warning-ignore:unused_variable
 		for i in range(abs(difference)):
@@ -122,4 +123,6 @@ func _update_character_abilites_panel(abilities_data : Array) -> void:
 	for i in range(abilities_data.size()):
 		var ability_node : Character_Ability = character_ability_container.get_child(i) as Character_Ability
 		ability_node.initialize(abilities_data[i])
-		ability_node.pressed = false
+
+func _on_ability_pressed(ability_data : Model.Ability_Data, texture) -> void:
+	emit_signal("redirect_to_ability", ability_data.name)
