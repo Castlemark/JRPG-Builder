@@ -6,21 +6,26 @@ signal combat_finished()
 signal turn_finished()
 
 signal battler_animations_completed()
+signal turn_animations_completed()
 
-onready var background : TextureRect = $BackgroundLayer/Background as TextureRect
+const ACTIVE_POS = 0
 
-onready var ally_first : Character_Combat = $Characters/Allies/First as Character_Combat
-onready var ally_second : Character_Combat = $Characters/Allies/Second as Character_Combat
-onready var ally_third : Character_Combat = $Characters/Allies/Third as Character_Combat
+onready var background := $BackgroundLayer/Background as TextureRect
 
-onready var enemy_first : Sprite = $Characters/Enemies/First as Enemy_Combat
-onready var enemy_second : Sprite = $Characters/Enemies/Second as Enemy_Combat
-onready var enemy_third : Sprite = $Characters/Enemies/Third as Enemy_Combat
+onready var ally_first := $Characters/Allies/First as Character_Combat
+onready var ally_second := $Characters/Allies/Second as Character_Combat
+onready var ally_third := $Characters/Allies/Third as Character_Combat
 
-onready var UI : Combat_UI_Manager = $UILayer/UI as Combat_UI_Manager
+onready var enemy_first := $Characters/Enemies/First as Enemy_Combat
+onready var enemy_second := $Characters/Enemies/Second as Enemy_Combat
+onready var enemy_third := $Characters/Enemies/Third as Enemy_Combat
 
-onready var attack_bg : Sprite = $Attack_BG as Sprite
-onready var attack_bg_tween : Tween = $Attack_BG/Tween as Tween
+onready var chars_tween := $Characters/Tween as Tween
+
+onready var UI := $UILayer/UI as Combat_UI_Manager
+
+onready var attack_bg := $Attack_BG as Sprite
+onready var attack_bg_tween := $Attack_BG/Tween as Tween
 
 onready var timer := $Timer as Timer
 
@@ -207,11 +212,10 @@ func _play_ability(receiver_battler_ui : Battler_UI_Controller) -> void:
 	yield(attack_bg_tween, "tween_completed")
 
 	# We apply the effect
-	_apply_ability_effect(recevier_battler, emiter)
-	UI.update_status_graphics()
-
 	_yield_battler_counter = 1 if recevier_battler == emiter else 2
-	yield(self, "battler_animations_completed")
+	_apply_ability_effect(recevier_battler, emiter)
+
+	yield(self, "turn_animations_completed")
 
 	# We check if receiver has died
 	if recevier_battler.data.stats_with_equipment.health <= 0:
@@ -249,12 +253,22 @@ func _apply_ability_effect(receiver, emiter) -> void:
 	var amount : int = (round(_cur_ability.amount * emiter.data.stats_with_equipment.damage) as int)
 	emiter.data.stats_with_equipment.strain -= _cur_ability.cost
 
+	var receiver_pos : float = receiver.position.x
+	var emiter_pos : float= emiter.position.x
+	
+	chars_tween.interpolate_property(receiver, "position:x", null, ACTIVE_POS, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	chars_tween.interpolate_property(emiter, "position:x", null, ACTIVE_POS, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	chars_tween.start()
+	yield(chars_tween, "tween_all_completed")
+
 	if amount > 0:
 		emiter.play_animation("attack")
 		receiver.play_animation("hit")
 	else:
 		emiter.play_animation("miss")
 		receiver.play_animation("miss")
+
+	yield(self, "battler_animations_completed")
 
 	match _cur_ability.type:
 		"health":
@@ -265,6 +279,16 @@ func _apply_ability_effect(receiver, emiter) -> void:
 			receiver.data.stats_with_equipment.strain = receiver.data.stats_with_equipment.strain - amount if (receiver.data.stats_with_equipment.strain - amount > 0) else 0
 		"damage":
 			receiver.data.stats_with_equipment.damage = receiver.data.stats_with_equipment.damage - amount if (receiver.data.stats_with_equipment.damage - amount > 0) else 0
+	UI.update_status_graphics()
+
+	timer.start(0.5)
+	yield(timer, "timeout")
+
+	chars_tween.interpolate_property(receiver, "position:x", null, receiver_pos, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	chars_tween.interpolate_property(emiter, "position:x", null, emiter_pos, 1.0, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	chars_tween.start()
+	yield(chars_tween, "tween_all_completed")
+	emit_signal("turn_animations_completed")
 
 # This function decides what ability and target will an enemy choose, then executes it's turn
 func _enemy_decide_turn(enemy : Enemy_Combat) -> void:

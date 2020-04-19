@@ -37,7 +37,7 @@ current = true
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="Allies" type="Node2D" parent="Characters"]
-position = Vector2( -250, 0 )
+position = Vector2( -350, 0 )
 
 [node name="First" parent="Characters/Allies" instance=ExtResource( 3 )]
 position = Vector2( -500, -200 )
@@ -49,7 +49,7 @@ position = Vector2( -200, 0 )
 position = Vector2( -500, 200 )
 
 [node name="Enemies" type="Node2D" parent="Characters"]
-position = Vector2( 250, 0 )
+position = Vector2( 350, 0 )
 
 [node name="First" parent="Characters/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 500, -200 )
