@@ -21,7 +21,6 @@ func _ready() -> void:
 func start_encounter(combat_data : Dictionary) -> void:
 	emit_signal("on_combat_toggle", true)
 	
-	print("starting encounter")
 	tween.interpolate_property(self, "margin_bottom", null, MAX_SIZE, 0.4, Tween.TRANS_EXPO, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(tween,"tween_completed")
@@ -34,6 +33,5 @@ func start_encounter(combat_data : Dictionary) -> void:
 	tween.start()
 	yield(tween,"tween_completed")
 	
-	print("ending encounter")
 	emit_signal("on_combat_finished")
 	emit_signal("on_combat_toggle", false)

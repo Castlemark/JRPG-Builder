@@ -99,6 +99,10 @@ func _end_combat() -> void:
 	_reset_character_after_combat(ally_first)
 	_reset_character_after_combat(ally_second)
 	_reset_character_after_combat(ally_third)
+	
+	ally_first.data.cur_xp += _xp_reward
+	ally_second.data.cur_xp += _xp_reward
+	ally_third.data.cur_xp += _xp_reward
 
 	# We deactivate all relevant elements
 	background.visible = false
@@ -157,7 +161,6 @@ func _execute_combat_loop() -> void:
 	
 	# Turn logic goes inside the loop
 	while _combat_is_in_progress():
-		print("new turn for " + _turn_order[_cur_fighter].data.name)
 
 		var battler = _turn_order[_cur_fighter]
 		if battler.data.stats_with_equipment.strain + int(battler.data.stats_with_equipment.max_strain / 10.0) > battler.data.stats_with_equipment.max_strain:
@@ -172,11 +175,8 @@ func _execute_combat_loop() -> void:
 		yield(self, "turn_finished")
 		_cur_fighter += 1
 		if _cur_fighter >= _turn_order.size():
-			print("New Round")
 			_update_turn_order()
 		UI.indicate_cur_fighter(_cur_fighter, _turn_order)
-
-	print("ending combat")
 	UI.on_combat_end(_xp_reward)
 
 func _combat_is_in_progress() -> bool:
@@ -195,7 +195,6 @@ func _combat_is_in_progress() -> bool:
 
 func _set_cur_ability(data) -> void:
 	if data is bool:
-		print("no ability chosen")
 		emit_signal("turn_finished")
 	else:
 		_cur_ability = data
@@ -262,7 +261,6 @@ func _apply_ability_effect(receiver, emiter) -> void:
 
 	var are_allies : bool = emiter.TYPE == receiver.TYPE
 	var evades : bool = randf() < receiver.data.stats_with_equipment.evasion
-	print("Evades: " + String(evades))
 	var is_critic : bool = randf() < emiter.data.stats_with_equipment.critic
 	if is_critic:
 		amount = int(amount * 1.5) 
@@ -331,16 +329,12 @@ func _enemy_decide_turn(enemy : Enemy_Combat) -> void:
 	var choosen_ability : Model.Ability_Data = enemy.data.abilities.values()[index]
 	_set_cur_ability(choosen_ability)
 
-	print("	choosen ability: " + choosen_ability.name + " ; with side " + choosen_ability.side)
-
 	var choosen_battler : Battler_UI_Controller
 	# we flip the selection because for the enemies, their enemies are our allies
 	if choosen_ability.side == "enemies":
 		choosen_battler = ui_allies_status[randi() % ui_allies_status.size()]
 	else:
 		choosen_battler = ui_enemies_status[randi() % ui_enemies_status.size()]
-
-	print("	choosen target: " + choosen_battler.data.data.name)
 
 	_play_ability(choosen_battler)
 
