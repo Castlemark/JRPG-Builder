@@ -175,10 +175,8 @@ func _execute_combat_loop() -> void:
 		else:
 			battler.data.stats_with_equipment.damage += int(battler.data.stats_with_equipment.max_damage / 10.0)
 		if battler.data.stats_with_equipment.evasion + (battler.data.stats_with_equipment.max_evasion / 10.0) > battler.data.stats_with_equipment.max_evasion:
-			print("maxing evasion")
 			battler.data.stats_with_equipment.evasion = battler.data.stats_with_equipment.max_evasion
 		else:
-			print("increasing evasion")
 			battler.data.stats_with_equipment.evasion += (battler.data.stats_with_equipment.max_evasion / 10.0)
 		UI.update_status_graphics()
 
