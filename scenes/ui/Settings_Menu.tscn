@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_Small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://default_assets/theme/theme_default.tres" type="Theme" id=2]
-[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/ui/Settings_Options.tscn" type="PackedScene" id=4]
+
 
 [node name="Settings" type="Tabs"]
 anchor_right = 1.0
@@ -34,8 +35,8 @@ anchor_top = 0.7
 anchor_right = 0.5
 anchor_bottom = 0.8
 margin_right = -32.0
-custom_fonts/font = ExtResource( 3 )
-text = "go to title screen"
+custom_fonts/font = ExtResource( 1 )
+text = "Go to Title Screen"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,7 +47,7 @@ anchor_top = 0.7
 anchor_right = 0.74
 anchor_bottom = 0.8
 margin_left = 32.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 1 )
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false

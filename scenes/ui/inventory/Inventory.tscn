@@ -16,54 +16,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Filter_Bar" type="HBoxContainer" parent="."]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.6
-anchor_bottom = 0.05
-margin_bottom = 25.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="All" type="CheckBox" parent="Filter_Bar"]
-margin_right = 45.0
-margin_bottom = 25.0
-pressed = true
-group = SubResource( 1 )
-text = "All"
-
-[node name="VSeparator" type="VSeparator" parent="Filter_Bar"]
-margin_left = 49.0
-margin_right = 53.0
-margin_bottom = 25.0
-
-[node name="Equipment" type="CheckBox" parent="Filter_Bar"]
-margin_left = 57.0
-margin_right = 154.0
-margin_bottom = 25.0
-group = SubResource( 1 )
-text = "Equipment"
-
-[node name="VSeparator2" type="VSeparator" parent="Filter_Bar"]
-margin_left = 158.0
-margin_right = 162.0
-margin_bottom = 25.0
-
-[node name="Consumables" type="CheckBox" parent="Filter_Bar"]
-margin_left = 166.0
-margin_right = 280.0
-margin_bottom = 25.0
-group = SubResource( 1 )
-text = "Consumables"
-
 [node name="Items" type="Panel" parent="."]
 anchor_left = 0.05
 anchor_top = 0.05
 anchor_right = 0.6
 anchor_bottom = 0.95
 margin_left = 3.8147e-06
-margin_top = 30.0
 margin_right = -26.0
 rect_min_size = Vector2( 400, 370 )
 __meta__ = {
@@ -74,7 +32,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = 16.0
+margin_top = 54.0
 margin_right = -16.0
 margin_bottom = -16.0
 rect_min_size = Vector2( 400, 360 )
@@ -86,20 +44,63 @@ __meta__ = {
 
 [node name="Grid" type="GridContainer" parent="Items/Scroll"]
 margin_right = 998.0
-margin_bottom = 910.0
+margin_bottom = 902.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 16
 custom_constants/hseparation = 16
 columns = 4
 
+[node name="Filter_Bar" type="HBoxContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.6
+anchor_bottom = 0.05
+margin_left = 16.0
+margin_top = 8.0
+margin_bottom = 46.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="All" type="CheckBox" parent="Filter_Bar"]
+margin_right = 53.0
+margin_bottom = 38.0
+pressed = true
+group = SubResource( 1 )
+text = "All"
+
+[node name="VSeparator" type="VSeparator" parent="Filter_Bar"]
+margin_left = 57.0
+margin_right = 61.0
+margin_bottom = 38.0
+
+[node name="Equipment" type="CheckBox" parent="Filter_Bar"]
+margin_left = 65.0
+margin_right = 199.0
+margin_bottom = 38.0
+group = SubResource( 1 )
+text = "Equipment"
+
+[node name="VSeparator2" type="VSeparator" parent="Filter_Bar"]
+margin_left = 203.0
+margin_right = 207.0
+margin_bottom = 38.0
+
+[node name="Consumables" type="CheckBox" parent="Filter_Bar"]
+margin_left = 211.0
+margin_right = 376.0
+margin_bottom = 38.0
+group = SubResource( 1 )
+text = "Consumables"
+
 [node name="Item_Preview" parent="." instance=ExtResource( 4 )]
 margin_left = 0.0
+margin_top = 0.0
 margin_bottom = -13.0
 
 [node name="Party_Preview" parent="." instance=ExtResource( 3 )]
 margin_left = 0.0
-margin_top = 13.0
 
 [node name="EquipConfirmationDialog" type="ConfirmationDialog" parent="."]
 anchor_left = 0.4

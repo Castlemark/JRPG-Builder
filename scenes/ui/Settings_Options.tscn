@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/ui/Settings_Menu.gd" type="Script" id=1]
-[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=2]
+[ext_resource path="res://default_assets/theme/fonts/GlacialIndifference.tres" type="DynamicFont" id=2]
+
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -73,7 +74,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="RefreshRate"]
-margin_right = 1412.0
+margin_right = 1372.0
 margin_bottom = 287.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -82,18 +83,20 @@ text = "Refresh Rate"
 valign = 1
 
 [node name="CheckBox" type="CheckBox" parent="RefreshRate"]
-margin_left = 1428.0
-margin_right = 1472.0
+margin_left = 1388.0
+margin_right = 1452.0
 margin_bottom = 287.0
 rect_min_size = Vector2( 0, 89 )
+custom_fonts/font = ExtResource( 2 )
 group = SubResource( 1 )
 text = "30"
 
 [node name="CheckBox2" type="CheckBox" parent="RefreshRate"]
-margin_left = 1488.0
+margin_left = 1468.0
 margin_right = 1532.0
 margin_bottom = 287.0
 rect_min_size = Vector2( 0, 89 )
+custom_fonts/font = ExtResource( 2 )
 pressed = true
 group = SubResource( 1 )
 text = "60"

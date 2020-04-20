@@ -48,6 +48,7 @@ var cur_battler
 
 func _ready() -> void:
 	end_screen.visible = false
+	turn_description.visible = false
 	end_screen.continue_button.connect("pressed", self, "_on_end_screen_dismissed")
 
 	queue_tween.connect("tween_completed", self, "_on_tween_completed")

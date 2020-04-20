@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Combat/Character_End_Screen.gd" type="Script" id=2]
+[ext_resource path="res://default_assets/theme/fonts/GlacialIndifference_Small.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.831373, 0.168627, 0.168627, 1 )
@@ -42,8 +43,8 @@ __meta__ = {
 [node name="Name" type="Label" parent="."]
 anchor_right = 0.3
 anchor_bottom = 0.2
+custom_fonts/font = ExtResource( 3 )
 text = "Char Name"
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,6 +55,7 @@ anchor_top = 0.2
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = 64.0
+custom_fonts/font = ExtResource( 3 )
 text = "???XP points gained"
 valign = 1
 __meta__ = {
@@ -78,6 +80,7 @@ __meta__ = {
 [node name="Life_Label" type="Label" parent="Rem_Life"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
