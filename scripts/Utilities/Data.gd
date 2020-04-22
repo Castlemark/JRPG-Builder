@@ -68,7 +68,7 @@ class Validation:
 	const consumable_effect_fields := [{"type" : TEXT}, {"value" : NUMBER}]
 
 	# MAP
-	const map_fields := [{"navigation_nodes" : ARRAY}, {"detail_art" : ARRAY}, {"background_info" : DICTIONARY}, {"name" : TEXT}]
+	const map_fields := [{"navigation_nodes" : ARRAY}, {"detail_art" : ARRAY}, {"background_info" : DICTIONARY}, {"name" : TEXT}, {"avatar_scale" : NUMBER}]
 	const nav_node_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"connected_nodes" : ARRAY}, {"actions" : ARRAY}]
 	const bg_map_fields := [{"x_offset" : NUMBER}, {"y_offset" : NUMBER}, {"scale": NUMBER}, {"color": DICTIONARY}]
 	const detail_fields := [{"x" : NUMBER}, {"y" : NUMBER}, {"scale": NUMBER}, {"rotation" : NUMBER}, {"filepath" : TEXT}]

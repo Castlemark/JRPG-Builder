@@ -287,6 +287,9 @@ class Campaign_Loader:
 			background_data.color = Color(0, 0, 0)
 
 		map_data.background_info = background_data
+		
+		# Avatar scale
+		map_data.avatar_scale = map_dict.avatar_scale
 
 		#Textures
 		map_data.combat_background = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/maps/" + map_name +  "/combat_background.png")

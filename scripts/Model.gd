@@ -34,6 +34,7 @@ class Map_Data:
 	var detail_art : Array
 	var background_info : BG_Data
 	var access_point : int
+	var avatar_scale : float
 
 	var combat_background : Texture
 	var map_floor : Texture

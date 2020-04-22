@@ -46,7 +46,7 @@ func initialize(map) -> void:
 
 	VisualServer.set_default_clear_color(map.background_info.color)
 
-	player_avatar.initialize(navigation_nodes.get_child(map.access_point) as Navigation_Node, avatar_img)
+	player_avatar.initialize(navigation_nodes.get_child(map.access_point) as Navigation_Node, avatar_img, map.avatar_scale)
 	player_avatar.execute_actions()
 
 func instantiate_navigation_nodes(node_list : Array) -> void:
