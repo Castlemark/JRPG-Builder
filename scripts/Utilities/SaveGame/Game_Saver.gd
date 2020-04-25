@@ -16,9 +16,26 @@ func save():
 	if error != OK:
 		print("there was an error while trying to save the game")
 
-func load(campaign_name : String):
-	print("not yet implemented")
-	return null
+func try_load(campaign_name : String) -> Save_Game:
+	var path := "user://" + campaign_name + ".tres"
+	
+	var file := File.new()
+	if not file.file_exists(path):
+		return null
+	
+	var save_game : Save_Game = load(path)
+	return save_game
+
+func try_delete(campaign_name : String) -> bool:
+	var path := "user://" + campaign_name + ".tres"
+	
+	var dir := Directory.new()
+	var error := dir.remove(path)
+	if error != OK:
+		print("there was an error while trying to delete the save file")
+		return false
+	else:
+		return true
 
 func _party_to_info() -> Save_Game.Party_Info:
 	var party_info := Save_Game.Party_Info.new()

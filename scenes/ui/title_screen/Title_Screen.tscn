@@ -246,12 +246,36 @@ anchor_top = 0.85
 anchor_right = 0.75
 anchor_bottom = 1.0
 margin_left = 32.0
+margin_right = -16.0
 margin_bottom = -32.0
 custom_fonts/font = ExtResource( 11 )
 text = "Start / Load"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Delete_Save_Button" type="Button" parent="MenuContainer/Campaigns_Menu"]
+anchor_left = 0.75
+anchor_top = 0.85
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_right = -32.0
+margin_bottom = -32.0
+custom_fonts/font = ExtResource( 11 )
+text = "Delete Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Delete_Save_ConfirmationDialog" type="ConfirmationDialog" parent="MenuContainer/Campaigns_Menu"]
+anchor_left = 0.35
+anchor_top = 0.4
+anchor_right = 0.65
+anchor_bottom = 0.6
+window_title = ""
+dialog_text = "You're about to delete"
+dialog_autowrap = true
 
 [node name="Credit_Label" type="RichTextLabel" parent="."]
 anchor_top = 1.0
@@ -277,4 +301,6 @@ __meta__ = {
 [connection signal="pressed" from="MenuContainer/Options_Menu/Exit_Button" to="MenuContainer/Settings_Menu/Panel/Settings" method="_on_exit_pressed"]
 [connection signal="pressed" from="MenuContainer/Campaigns_Menu/BackButton" to="." method="move_to_menu" binds= [ 1 ]]
 [connection signal="pressed" from="MenuContainer/Campaigns_Menu/Start_Campaign_Button" to="." method="_on_start_campaign_pressed"]
+[connection signal="pressed" from="MenuContainer/Campaigns_Menu/Delete_Save_Button" to="." method="_on_delete_save_request"]
+[connection signal="confirmed" from="MenuContainer/Campaigns_Menu/Delete_Save_ConfirmationDialog" to="." method="_on_delete_save_confirmed"]
 [connection signal="meta_clicked" from="Credit_Label" to="." method="_on_Credit_Label_meta_clicked"]
