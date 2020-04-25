@@ -39,7 +39,7 @@ func is_moving() -> bool:
 	return tween.is_active()
 
 func execute_actions() -> void:
-	var actions_exist := current_node.get_child_count() > 0
+	var actions_exist := current_node.actions.get_child_count() > 0
 	
 	for action in current_node.actions.get_children():
 		(action as Generic_Action).execute()
