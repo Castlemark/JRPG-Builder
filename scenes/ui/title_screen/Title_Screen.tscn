@@ -271,8 +271,8 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="MenuContainer/Settings_Menu/BackButton" to="." method="move_to_menu" binds= [ 1 ]]
-[connection signal="pressed" from="MenuContainer/Options_Menu/Choose_Campaign_Button" to="." method="move_to_menu" binds= [ 2 ]]
 [connection signal="pressed" from="MenuContainer/Options_Menu/Choose_Campaign_Button" to="." method="_on_campaign_chooser_button_pressed"]
+[connection signal="pressed" from="MenuContainer/Options_Menu/Choose_Campaign_Button" to="." method="move_to_menu" binds= [ 2 ]]
 [connection signal="pressed" from="MenuContainer/Options_Menu/Settings_Button" to="." method="move_to_menu" binds= [ 0 ]]
 [connection signal="pressed" from="MenuContainer/Options_Menu/Exit_Button" to="MenuContainer/Settings_Menu/Panel/Settings" method="_on_exit_pressed"]
 [connection signal="pressed" from="MenuContainer/Campaigns_Menu/BackButton" to="." method="move_to_menu" binds= [ 1 ]]

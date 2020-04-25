@@ -322,6 +322,8 @@ class Campaign_Loader:
 			print("	map floor texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
 
+		campaign_data.completed_action_nodes[map_name] = []
+
 		if not load_correct:
 			return null
 

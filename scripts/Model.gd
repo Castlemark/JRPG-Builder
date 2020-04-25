@@ -20,6 +20,8 @@ class Campaign_Data:
 
 	var party : Party_Data
 
+	var completed_action_nodes := {}
+
 class Party_Data:
 	var first_character : Character_Data
 	var second_character : Character_Data

@@ -204,6 +204,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Player_Avatar.gd"
 }, {
+"base": "Resource",
+"class": "Save_Game",
+"language": "GDScript",
+"path": "res://scripts/Utilities/SaveGame/Save_Game.gd"
+}, {
 "base": "Control",
 "class": "Settings",
 "language": "GDScript",
@@ -279,6 +284,7 @@ _global_script_class_icons={
 "Navigation_Node": "",
 "Party_Preview": "",
 "Player_Avatar": "",
+"Save_Game": "",
 "Settings": "",
 "Travel_Action": "",
 "Treaseure_Menu": "",
@@ -301,6 +307,7 @@ default_bus_layout=""
 [autoload]
 
 Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
+Game_Saver="*res://scripts/Utilities/SaveGame/Game_Saver.gd"
 
 [debug]
 
