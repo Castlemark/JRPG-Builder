@@ -28,6 +28,11 @@ class Party_Data:
 	var third_character : Character_Data
 
 	var inventory : Array
+	
+	func apply_xp(xp_amount):
+		first_character.apply_xp(xp_amount)
+		second_character.apply_xp(xp_amount)
+		third_character.apply_xp(xp_amount)
 
 
 class Map_Data:
@@ -98,11 +103,12 @@ class Item_Data:
 			var icon_texture : Texture
 
 class Character_Data:
+	const _MAX_LEVEL = 30
+	
 	var name : String
 	var cur_xp : int
 	var min_stats : Stats_Data
 	var max_stats : Stats_Data
-	var stats : Stats_Data
 	var stats_with_equipment : Stats_Data
 	var abilities : Dictionary
 	var equipment : Equipment_Data
@@ -118,8 +124,25 @@ class Character_Data:
 	func cur_level() -> int:
 		return floor(self.cur_xp/100.0) as int
 	
+	func raw_stats() -> Model.Stats_Data:
+		var stats := Stats_Data.new()
+
+		stats.critic = min_stats.critic + (cur_level() - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
+		stats.speed = min_stats.speed + (cur_level() - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
+		stats.health = min_stats.health + ((cur_level() - 1) * float(max_stats.health - min_stats.health)/_MAX_LEVEL)
+		stats.max_health = stats.health
+		stats.strain = min_stats.strain + ((cur_level() - 1) * float(max_stats.strain - min_stats.strain)/_MAX_LEVEL)
+		stats.max_strain = stats.strain
+		stats.evasion = min_stats.evasion + ((cur_level() - 1) * float(max_stats.evasion - min_stats.evasion)/_MAX_LEVEL)
+		stats.max_evasion = stats.evasion
+		stats.damage = min_stats.damage + ((cur_level() - 1) * float(max_stats.damage - min_stats.damage)/_MAX_LEVEL)
+		stats.max_damage = stats.damage
+
+		return stats
+	
 	func stats_with_eq(equipment : Equipment_Data, max_everything : bool = false) -> Model.Stats_Data:
 		var eq_stats := Stats_Data.new()
+		var stats := raw_stats()
 
 		eq_stats.max_health = max(stats.max_health + equipment.legs.stats.health + equipment.torso.stats.health + equipment.accessory_1.stats.health + equipment.accessory_2.stats.health + equipment.accessory_3.stats.health + equipment.weapon.stats.health, 10)
 		eq_stats.health = eq_stats.max_health if max_everything else int(max(stats.health, 0))
@@ -146,6 +169,13 @@ class Character_Data:
 		diff_stats.speed -= cur_stats.speed
 
 		return diff_stats
+	
+	func apply_xp(xp_amount : int):
+		var prev_level = cur_level()
+		cur_xp += xp_amount
+		
+		if prev_level != cur_level():
+			stats_with_equipment = stats_with_eq(equipment, true)
 
 
 	class Equipment_Data:
