@@ -150,7 +150,9 @@ func _on_equip_confirmed() -> void:
 		"weapon":
 			item_to_replace = cur_character.equipment.weapon
 			cur_character.equipment.weapon = cur_item.data
-	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment)
+	
+	var health_is_max := cur_character.stats_with_equipment.health == cur_character.stats_with_equipment.max_health
+	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment, health_is_max)
 	
 	cur_item.initialize(item_to_replace)
 	
@@ -174,7 +176,9 @@ func _on_equip_accessory_confirmed(action: String) -> void:
 		"3":
 			item_to_replace = cur_character.equipment.accessory_3
 			cur_character.equipment.accessory_3 = cur_item.data
-	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment)
+	
+	var health_is_max := cur_character.stats_with_equipment.health == cur_character.stats_with_equipment.max_health
+	cur_character.stats_with_equipment = cur_character.stats_with_eq(cur_character.equipment, health_is_max)
 	
 	cur_item.initialize(item_to_replace)
 	accessory_dialog.queue_free()
