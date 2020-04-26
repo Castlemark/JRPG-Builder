@@ -82,6 +82,12 @@ func apply_save(save_game : Save_Game) -> void:
 	campaign_data.party.third_character.stats_with_equipment.health = save_game.party.third_character.cur_health
 	campaign_data.party.third_character.cur_xp = save_game.party.third_character.cur_xp
 
+func reload_to_last_save():
+	var save_game : Save_Game = Game_Saver.try_load(campaign_data.name)
+	if save_game != null:
+		apply_save(save_game)
+		goto_scene(MAP)
+
 func goto_scene(scene : Resource) -> void:
 	call_deferred("_deferred_goto_scene", scene)
 

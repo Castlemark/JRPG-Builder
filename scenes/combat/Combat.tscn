@@ -517,7 +517,7 @@ margin_top = 48.0
 margin_right = -48.0
 margin_bottom = -48.0
 custom_fonts/font = ExtResource( 13 )
-text = "return to title screen"
+text = "Return to Title Screen"
 
 [node name="Timer" type="Timer" parent="."]
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]
