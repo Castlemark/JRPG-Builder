@@ -23,7 +23,8 @@ func try_load(campaign_name : String) -> Save_Game:
 	if not file.file_exists(path):
 		return null
 	
-	var save_game : Save_Game = load(path)
+	
+	var save_game = ResourceLoader.load(path)
 	return save_game
 
 func try_delete(campaign_name : String) -> bool:
@@ -37,16 +38,16 @@ func try_delete(campaign_name : String) -> bool:
 	else:
 		return true
 
-func _party_to_info() -> Save_Game.Party_Info:
-	var party_info := Save_Game.Party_Info.new()
+func _party_to_info() -> Party_Info_Res:
+	var party_info := Party_Info_Res.new()
 	var party := Game_Manager.campaign_data.party
 	
-	var fc := Save_Game.Char_Info.new()
+	var fc := Char_Info_Res.new()
 	fc.name = party.first_character.name
 	fc.cur_xp = party.first_character.cur_xp
 	fc.cur_health = party.first_character.stats_with_equipment.health
 	
-	var fce := Save_Game.Eq_Info.new()
+	var fce := Eq_Info_Res.new()
 	fce.legs = party.first_character.equipment.legs.name
 	fce.torso = party.first_character.equipment.torso.name
 	fce.weapon = party.first_character.equipment.weapon.name
@@ -57,12 +58,12 @@ func _party_to_info() -> Save_Game.Party_Info:
 	
 	party_info.first_character = fc
 	
-	var sc := Save_Game.Char_Info.new()
+	var sc := Char_Info_Res.new()
 	sc.name = party.second_character.name
 	sc.cur_xp = party.second_character.cur_xp
 	sc.cur_health = party.second_character.stats_with_equipment.health
 	
-	var sce := Save_Game.Eq_Info.new()
+	var sce := Eq_Info_Res.new()
 	sce.legs = party.second_character.equipment.legs.name
 	sce.torso = party.second_character.equipment.torso.name
 	sce.weapon = party.second_character.equipment.weapon.name
@@ -73,12 +74,12 @@ func _party_to_info() -> Save_Game.Party_Info:
 	
 	party_info.second_character = sc
 	
-	var tc := Save_Game.Char_Info.new()
+	var tc := Char_Info_Res.new()
 	tc.name = party.third_character.name
 	tc.cur_xp = party.third_character.cur_xp
 	tc.cur_health = party.third_character.stats_with_equipment.health
 	
-	var tce := Save_Game.Eq_Info.new()
+	var tce := Eq_Info_Res.new()
 	tce.legs = party.third_character.equipment.legs.name
 	tce.torso = party.third_character.equipment.torso.name
 	tce.weapon = party.third_character.equipment.weapon.name
@@ -91,6 +92,5 @@ func _party_to_info() -> Save_Game.Party_Info:
 	
 	for item in party.inventory:
 		party_info.inventory.append(item.name)
-	
 	
 	return party_info

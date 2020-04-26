@@ -109,6 +109,9 @@ func _on_start_campaign_pressed():
 	# TODO load save file
 	start_campaign_button.disabled = true
 	Game_Manager.load_campaign(campaigns.keys()[cur_campaign_index])
+	if save_games.keys().has(campaigns.keys()[cur_campaign_index]):
+		Game_Manager.apply_save(save_games[campaigns.keys()[cur_campaign_index]])
+	
 	Game_Manager.goto_scene(Game_Manager.MAP)
 
 
