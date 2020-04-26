@@ -2,9 +2,6 @@ class_name Loaders
 
 class Campaign_Loader:
 
-	const _LEVEL = "Level "
-	const _MAX_LEVEL = 30
-
 	var campaign_data : Model.Campaign_Data
 
 	func load_campaign(campaign_name : String) -> Model.Campaign_Data:
@@ -413,22 +410,6 @@ class Campaign_Loader:
 		max_stats.max_damage = max_stats.damage
 
 		character_data.max_stats = max_stats
-
-		# Cur Stats
-		var stats := Model.Stats_Data.new()
-
-		stats.critic = min_stats.critic + (character_data.cur_level() - 1) * float(max_stats.critic - min_stats.critic)/_MAX_LEVEL
-		stats.speed = min_stats.speed + (character_data.cur_level() - 1) * float(max_stats.speed - min_stats.speed)/_MAX_LEVEL
-		stats.health = min_stats.health + ((character_data.cur_level() - 1) * float(max_stats.health - min_stats.health)/_MAX_LEVEL)
-		stats.max_health = stats.health
-		stats.strain = min_stats.strain + ((character_data.cur_level() - 1) * float(max_stats.strain - min_stats.strain)/_MAX_LEVEL)
-		stats.max_strain = stats.strain
-		stats.evasion = min_stats.evasion + ((character_data.cur_level() - 1) * float(max_stats.evasion - min_stats.evasion)/_MAX_LEVEL)
-		stats.max_evasion = stats.evasion
-		stats.damage = min_stats.damage + ((character_data.cur_level() - 1) * float(max_stats.damage - min_stats.damage)/_MAX_LEVEL)
-		stats.max_damage = stats.damage
-
-		character_data.stats = stats
 
 		# Equipment
 		var equipment := Model.Character_Data.Equipment_Data.new()
