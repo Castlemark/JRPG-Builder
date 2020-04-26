@@ -48,6 +48,6 @@ Below you'll find some deadlines for the various modules, when a module is marke
 - [ ] <u>Content creation Sprint</u>
   - [x] Add fonts and refine theme
   - [x] Save states
-  - [ ] Create Campaign **(final)**
+  - [x] Create Demo Campaign **(final)**
   - [ ] Documentation **(final)**
   - [ ] Memoria
