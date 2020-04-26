@@ -39,6 +39,11 @@ func is_moving() -> bool:
 	return tween.is_active()
 
 func execute_actions() -> void:
-	for action in current_node.actions.get_children():
-		(action as Generic_Action).execute()
-		yield(action, "finished")
+	if not Game_Manager.campaign_data.completed_action_nodes[Game_Manager.campaign_data.cur_map].has(current_node.index):
+		for action in current_node.actions.get_children():
+			(action as Generic_Action).execute()
+			yield(action, "finished")
+	
+		if current_node.actions.get_child_count() > 0:
+			(Game_Manager.campaign_data.completed_action_nodes[Game_Manager.campaign_data.cur_map] as Array).append(current_node.index)
+	Game_Saver.save()

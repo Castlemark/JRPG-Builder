@@ -300,8 +300,7 @@ func _on_end_screen_dismissed():
 
 
 func _on_load_last_save_request() -> void:
-	# TODO add when save/load functionality is implemented
-	pass # Replace with function body.
+	Game_Manager.reload_to_last_save()
 
 
 func _on_return_to_title_screen_request() -> void:
