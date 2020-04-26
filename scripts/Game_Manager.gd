@@ -34,6 +34,60 @@ func load_campaign(campaign_name : String) -> void:
 	var campaign_loader := Loaders.Campaign_Loader.new()
 	campaign_data = campaign_loader.load_campaign(campaign_name)
 
+func apply_save(save_game : Save_Game) -> void:
+	campaign_data.cur_map = save_game.cur_map
+	(campaign_data.maps[campaign_data.cur_map] as Model.Map_Data).access_point = save_game.cur_access_point
+	campaign_data.completed_action_nodes = save_game.completed_actions_nodes
+	
+	campaign_data.party.inventory = []
+	for item_name in save_game.party.inventory:
+		campaign_data.party.inventory.append(campaign_data.items[item_name])
+	
+	campaign_data.party.first_character = campaign_data.characters[save_game.party.first_character.name]
+	campaign_data.party.first_character.equipment.legs = campaign_data.items[save_game.party.first_character.equipment.legs]
+	campaign_data.party.first_character.equipment.torso = campaign_data.items[save_game.party.first_character.equipment.torso]
+	campaign_data.party.first_character.equipment.weapon = campaign_data.items[save_game.party.first_character.equipment.weapon]
+	campaign_data.party.first_character.equipment.accessory_1 = campaign_data.items[save_game.party.first_character.equipment.accessory_1]
+	campaign_data.party.first_character.equipment.accessory_2 = campaign_data.items[save_game.party.first_character.equipment.accessory_2]
+	campaign_data.party.first_character.equipment.accessory_3 = campaign_data.items[save_game.party.first_character.equipment.accessory_3]
+	
+	campaign_data.party.first_character.stats_with_equipment = campaign_data.party.first_character.stats_with_eq(campaign_data.party.first_character.equipment, true)
+	
+	campaign_data.party.first_character.stats_with_equipment.health = save_game.party.first_character.cur_health
+	campaign_data.party.first_character.cur_xp = save_game.party.first_character.cur_xp
+	
+	campaign_data.party.second_character = campaign_data.characters[save_game.party.second_character.name]
+	campaign_data.party.second_character.equipment.legs = campaign_data.items[save_game.party.second_character.equipment.legs]
+	campaign_data.party.second_character.equipment.torso = campaign_data.items[save_game.party.second_character.equipment.torso]
+	campaign_data.party.second_character.equipment.weapon = campaign_data.items[save_game.party.second_character.equipment.weapon]
+	campaign_data.party.second_character.equipment.accessory_1 = campaign_data.items[save_game.party.second_character.equipment.accessory_1]
+	campaign_data.party.second_character.equipment.accessory_2 = campaign_data.items[save_game.party.second_character.equipment.accessory_2]
+	campaign_data.party.second_character.equipment.accessory_3 = campaign_data.items[save_game.party.second_character.equipment.accessory_3]
+	
+	campaign_data.party.second_character.stats_with_equipment = campaign_data.party.second_character.stats_with_eq(campaign_data.party.second_character.equipment, true)
+	
+	campaign_data.party.second_character.stats_with_equipment.health = save_game.party.second_character.cur_health
+	campaign_data.party.second_character.cur_xp = save_game.party.second_character.cur_xp
+	
+	campaign_data.party.third_character = campaign_data.characters[save_game.party.third_character.name]
+	campaign_data.party.third_character.equipment.legs = campaign_data.items[save_game.party.third_character.equipment.legs]
+	campaign_data.party.third_character.equipment.torso = campaign_data.items[save_game.party.third_character.equipment.torso]
+	campaign_data.party.third_character.equipment.weapon = campaign_data.items[save_game.party.third_character.equipment.weapon]
+	campaign_data.party.third_character.equipment.accessory_1 = campaign_data.items[save_game.party.third_character.equipment.accessory_1]
+	campaign_data.party.third_character.equipment.accessory_2 = campaign_data.items[save_game.party.third_character.equipment.accessory_2]
+	campaign_data.party.third_character.equipment.accessory_3 = campaign_data.items[save_game.party.third_character.equipment.accessory_3]
+	
+	campaign_data.party.third_character.stats_with_equipment = campaign_data.party.third_character.stats_with_eq(campaign_data.party.third_character.equipment, true)
+	
+	campaign_data.party.third_character.stats_with_equipment.health = save_game.party.third_character.cur_health
+	campaign_data.party.third_character.cur_xp = save_game.party.third_character.cur_xp
+
+func reload_to_last_save():
+	var save_game : Save_Game = Game_Saver.try_load(campaign_data.name)
+	if save_game != null:
+		apply_save(save_game)
+		goto_scene(MAP)
+
 func goto_scene(scene : Resource) -> void:
 	call_deferred("_deferred_goto_scene", scene)
 

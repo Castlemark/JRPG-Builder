@@ -46,8 +46,8 @@ Below you'll find some deadlines for the various modules, when a module is marke
   - [x] Combat module V-2 **(final)**
     - [x] Combat refactor
 - [ ] <u>Content creation Sprint</u>
-  - [ ] Add fonts and refine theme
-  - [ ] Save states
+  - [x] Add fonts and refine theme
+  - [x] Save states
   - [ ] Create Campaign **(final)**
   - [ ] Documentation **(final)**
   - [ ] Memoria

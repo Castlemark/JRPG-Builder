@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=1]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_Small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=2]
 [ext_resource path="res://scenes/combat/End_Screen_Character_Summary.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Combat/End_Screen.gd" type="Script" id=4]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_ExtraSmall.tres" type="DynamicFont" id=5]
+
 
 [node name="End_Scren" type="Panel"]
 material = ExtResource( 2 )
@@ -22,8 +24,10 @@ anchor_left = 0.35
 anchor_top = 0.85
 anchor_right = 0.65
 anchor_bottom = 0.95
+custom_fonts/font = ExtResource( 5 )
 text = "Continue"
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
@@ -51,44 +55,44 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
 margin_right = 614.0
-margin_bottom = 43.0
+margin_bottom = 49.0
 custom_fonts/font = ExtResource( 1 )
 text = "Combat Result"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 47.0
+margin_top = 53.0
 margin_right = 614.0
-margin_bottom = 51.0
+margin_bottom = 57.0
 
 [node name="Character_Summary" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 55.0
+margin_top = 61.0
 margin_right = 614.0
-margin_bottom = 205.0
+margin_bottom = 209.0
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 209.0
+margin_top = 213.0
 margin_right = 614.0
-margin_bottom = 213.0
+margin_bottom = 217.0
 
 [node name="Character_Summary2" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 217.0
+margin_top = 221.0
 margin_right = 614.0
-margin_bottom = 367.0
+margin_bottom = 369.0
 
 [node name="HSeparator3" type="HSeparator" parent="Panel/VBoxContainer"]
-margin_top = 371.0
+margin_top = 373.0
 margin_right = 614.0
-margin_bottom = 375.0
+margin_bottom = 377.0
 
 [node name="Character_Summary3" parent="Panel/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 379.0
+margin_top = 381.0
 margin_right = 614.0
 margin_bottom = 529.0
 

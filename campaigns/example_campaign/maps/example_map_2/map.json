@@ -81,5 +81,6 @@
             "b": 0
         },
         "scale" : 1
-    }
+    },
+    "avatar_scale": 1
 }

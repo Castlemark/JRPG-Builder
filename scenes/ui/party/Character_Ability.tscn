@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/ui/Character_ability.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://default_assets/theme/fonts/GlacialIndifference_Small.tres" type="DynamicFont" id=3]
 
 [node name="Ability" type="Button"]
 margin_right = 136.0
@@ -21,10 +22,14 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = -2.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer"]
 margin_right = 132.0
-margin_bottom = 80.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 0, 33 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 2 )
@@ -32,11 +37,14 @@ expand = true
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 84.0
+margin_top = 69.0
 margin_right = 132.0
 margin_bottom = 98.0
+custom_fonts/font = ExtResource( 3 )
 text = "Ability"
 align = 1
+autowrap = true
+max_lines_visible = 2
 [connection signal="focus_entered" from="." to="." method="_on_Ability_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_Ability_focus_exited"]
 [connection signal="mouse_entered" from="." to="." method="_on_Ability_mouse_entered"]

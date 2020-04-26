@@ -7,7 +7,7 @@ onready var skin : Sprite3D
 
 var current_node : Navigation_Node
 
-func initialize(nav_node : Navigation_Node, avatar_img : Texture) -> void:
+func initialize(nav_node : Navigation_Node, avatar_img : Texture, avatar_scale : float) -> void:
 	tween = $Tween as Tween
 	skin = $Skin as Sprite3D
 	
@@ -20,6 +20,7 @@ func initialize(nav_node : Navigation_Node, avatar_img : Texture) -> void:
 	
 	if avatar_img != null:
 		skin.texture = avatar_img
+		skin.scale *= avatar_scale
 
 func move_to_pos(destination_node : Navigation_Node ) -> void:
 	var target := destination_node.translation + Vector3(0, 0.26, 0)
@@ -38,6 +39,11 @@ func is_moving() -> bool:
 	return tween.is_active()
 
 func execute_actions() -> void:
-	for action in current_node.actions.get_children():
-		(action as Generic_Action).execute()
-		yield(action, "finished")
+	if not Game_Manager.campaign_data.completed_action_nodes[Game_Manager.campaign_data.cur_map].has(current_node.index):
+		for action in current_node.actions.get_children():
+			(action as Generic_Action).execute()
+			yield(action, "finished")
+	
+		if current_node.actions.get_child_count() > 0:
+			(Game_Manager.campaign_data.completed_action_nodes[Game_Manager.campaign_data.cur_map] as Array).append(current_node.index)
+	Game_Saver.save()

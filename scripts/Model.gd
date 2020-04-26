@@ -20,6 +20,8 @@ class Campaign_Data:
 
 	var party : Party_Data
 
+	var completed_action_nodes := {}
+
 class Party_Data:
 	var first_character : Character_Data
 	var second_character : Character_Data
@@ -34,6 +36,7 @@ class Map_Data:
 	var detail_art : Array
 	var background_info : BG_Data
 	var access_point : int
+	var avatar_scale : float
 
 	var combat_background : Texture
 	var map_floor : Texture

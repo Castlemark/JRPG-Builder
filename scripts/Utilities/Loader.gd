@@ -287,6 +287,9 @@ class Campaign_Loader:
 			background_data.color = Color(0, 0, 0)
 
 		map_data.background_info = background_data
+		
+		# Avatar scale
+		map_data.avatar_scale = map_dict.avatar_scale
 
 		#Textures
 		map_data.combat_background = Utils.load_img_GUI("res://campaigns/" + campaign_name + "/maps/" + map_name +  "/combat_background.png")
@@ -318,6 +321,8 @@ class Campaign_Loader:
 		if map_data.map_floor == null:
 			print("	map floor texture could not be Loaded, please make sure the icon exists and has the correct name")
 			load_correct = false
+
+		campaign_data.completed_action_nodes[map_name] = []
 
 		if not load_correct:
 			return null

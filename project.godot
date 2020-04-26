@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Between_node.gd"
 }, {
+"base": "Resource",
+"class": "Char_Info_Res",
+"language": "GDScript",
+"path": "res://scripts/Utilities/SaveGame/Char_Info_Res.gd"
+}, {
 "base": "Button",
 "class": "Char_Stats_Preview",
 "language": "GDScript",
@@ -119,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ui/Enemy_Preview.gd"
 }, {
+"base": "Resource",
+"class": "Eq_Info_Res",
+"language": "GDScript",
+"path": "res://scripts/Utilities/SaveGame/Eq_Info_Res.gd"
+}, {
 "base": "Node",
 "class": "Generic_Action",
 "language": "GDScript",
@@ -194,6 +204,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/map/Navigation_Node.gd"
 }, {
+"base": "Resource",
+"class": "Party_Info_Res",
+"language": "GDScript",
+"path": "res://scripts/Utilities/SaveGame/Party_info_Res.gd"
+}, {
 "base": "Panel",
 "class": "Party_Preview",
 "language": "GDScript",
@@ -203,6 +218,11 @@ _global_script_classes=[ {
 "class": "Player_Avatar",
 "language": "GDScript",
 "path": "res://scripts/map/Player_Avatar.gd"
+}, {
+"base": "Resource",
+"class": "Save_Game",
+"language": "GDScript",
+"path": "res://scripts/Utilities/SaveGame/Save_Game.gd"
 }, {
 "base": "Control",
 "class": "Settings",
@@ -244,6 +264,7 @@ _global_script_class_icons={
 "Background_Tile": "",
 "Battler_UI_Controller": "",
 "Between_node": "",
+"Char_Info_Res": "",
 "Char_Stats_Preview": "",
 "Character_Ability": "",
 "Character_Combat": "",
@@ -262,6 +283,7 @@ _global_script_class_icons={
 "End_Screen": "",
 "Enemy_Combat": "",
 "Enemy_preview": "",
+"Eq_Info_Res": "",
 "Generic_Action": "",
 "Generic_Validators": "",
 "Item": "",
@@ -277,8 +299,10 @@ _global_script_class_icons={
 "Menu_Party": "",
 "Model": "",
 "Navigation_Node": "",
+"Party_Info_Res": "",
 "Party_Preview": "",
 "Player_Avatar": "",
+"Save_Game": "",
 "Settings": "",
 "Travel_Action": "",
 "Treaseure_Menu": "",
@@ -301,6 +325,7 @@ default_bus_layout=""
 [autoload]
 
 Game_Manager="*res://scenes/singletons/Game_Manager.tscn"
+Game_Saver="*res://scripts/Utilities/SaveGame/Game_Saver.gd"
 
 [debug]
 
@@ -316,6 +341,10 @@ window/size/width=1920
 window/size/height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="keep_height"
+
+[gui]
+
+theme/custom_font="res://default_assets/theme/fonts/GlacialIndifference_Small.tres"
 
 [importer_defaults]
 

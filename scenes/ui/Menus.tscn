@@ -2,7 +2,7 @@
 
 [ext_resource path="res://default_assets/theme/theme_buttons.tres" type="Theme" id=1]
 [ext_resource path="res://scripts/ui/Menu_Manager.gd" type="Script" id=2]
-[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=3]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_Small.tres" type="DynamicFont" id=3]
 [ext_resource path="res://default_assets/user_interface/backpack.png" type="Texture" id=4]
 [ext_resource path="res://default_assets/user_interface/team.png" type="Texture" id=5]
 [ext_resource path="res://default_assets/user_interface/encyclopedia.png" type="Texture" id=6]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/ui/encyclopedia/Encyclopedia.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/ui/Settings_Menu.tscn" type="PackedScene" id=11]
 [ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=12]
+
 
 [sub_resource type="ButtonGroup" id=1]
 
@@ -36,13 +37,13 @@ margin_right = 1536.0
 margin_bottom = 66.0
 
 [node name="Tabs" type="HBoxContainer" parent="Sections"]
-margin_right = 774.0
+margin_right = 916.0
 margin_bottom = 66.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 
 [node name="Inventory" type="Button" parent="Sections/Tabs"]
-margin_right = 257.0
+margin_right = 310.0
 margin_bottom = 66.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -52,8 +53,8 @@ text = "  Inventory  "
 icon = ExtResource( 4 )
 
 [node name="Party" type="Button" parent="Sections/Tabs"]
-margin_left = 265.0
-margin_right = 462.0
+margin_left = 318.0
+margin_right = 537.0
 margin_bottom = 66.0
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = true
@@ -62,8 +63,8 @@ text = "  Party  "
 icon = ExtResource( 5 )
 
 [node name="Encyclopedia" type="Button" parent="Sections/Tabs"]
-margin_left = 470.0
-margin_right = 774.0
+margin_left = 545.0
+margin_right = 916.0
 margin_bottom = 66.0
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = true
@@ -72,7 +73,7 @@ text = "  Encyclopedia  "
 icon = ExtResource( 6 )
 
 [node name="Controls" type="HBoxContainer" parent="Sections"]
-margin_left = 778.0
+margin_left = 920.0
 margin_right = 1536.0
 margin_bottom = 66.0
 size_flags_horizontal = 3
@@ -80,8 +81,8 @@ custom_constants/separation = 8
 alignment = 2
 
 [node name="Settings" type="Button" parent="Sections/Controls"]
-margin_left = 528.0
-margin_right = 758.0
+margin_left = 341.0
+margin_right = 616.0
 margin_bottom = 66.0
 custom_fonts/font = ExtResource( 3 )
 toggle_mode = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Combat/Combat.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -11,14 +11,13 @@
 [ext_resource path="res://scenes/combat/End_Screen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/combat/Enemy_UI_Status.tscn" type="PackedScene" id=10]
 [ext_resource path="res://default_assets/user_interface/blur_mat.tres" type="Material" id=11]
-[ext_resource path="res://default_assets/theme/Galaktika.ttf" type="DynamicFontData" id=12]
-[ext_resource path="res://default_assets/theme/galactika.tres" type="DynamicFont" id=13]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_Big.tres" type="DynamicFont" id=12]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_ExtraSmall.tres" type="DynamicFont" id=13]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_Small.tres" type="DynamicFont" id=14]
+[ext_resource path="res://default_assets/theme/fonts/Datalegreya_Medium.tres" type="DynamicFont" id=15]
+[ext_resource path="res://default_assets/theme/fonts/GlacialIndifference_Small.tres" type="DynamicFont" id=16]
 
 [sub_resource type="ButtonGroup" id=1]
-
-[sub_resource type="DynamicFont" id=2]
-size = 128
-font_data = ExtResource( 12 )
 
 [node name="Combat" type="Node2D"]
 script = ExtResource( 1 )
@@ -91,9 +90,12 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -196.0
-margin_top = -318.0
+margin_top = -380.0
 margin_right = 204.0
-margin_bottom = -278.0
+margin_bottom = -330.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UILayer/UI/Menu"]
 anchor_right = 1.0
@@ -105,37 +107,41 @@ margin_bottom = -4.0
 custom_constants/separation = 4
 
 [node name="Attack" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
-margin_right = 122.0
-margin_bottom = 32.0
+margin_right = 190.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 16 )
 toggle_mode = true
 group = SubResource( 1 )
 text = "ATTACK"
 
 [node name="VSeparator" type="VSeparator" parent="UILayer/UI/Menu/HBoxContainer"]
-margin_left = 126.0
-margin_right = 130.0
-margin_bottom = 32.0
+margin_left = 194.0
+margin_right = 198.0
+margin_bottom = 42.0
 
 [node name="Inventory" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
+visible = false
 margin_left = 134.0
 margin_right = 256.0
-margin_bottom = 32.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
 toggle_mode = true
 group = SubResource( 1 )
 text = "ITEMS"
 
 [node name="VSeparator2" type="VSeparator" parent="UILayer/UI/Menu/HBoxContainer"]
-margin_left = 260.0
-margin_right = 264.0
-margin_bottom = 32.0
+visible = false
+margin_left = 198.0
+margin_right = 202.0
+margin_bottom = 42.0
 
 [node name="End_Turn" type="Button" parent="UILayer/UI/Menu/HBoxContainer"]
-margin_left = 268.0
+margin_left = 202.0
 margin_right = 392.0
-margin_bottom = 32.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 16 )
 text = "END TURN"
 clip_text = true
 
@@ -143,7 +149,7 @@ clip_text = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 611.0
-margin_top = -248.0
+margin_top = -300.0
 margin_right = 1311.0
 margin_bottom = -32.0
 __meta__ = {
@@ -170,7 +176,7 @@ scroll_horizontal_enabled = false
 
 [node name="Container" type="GridContainer" parent="UILayer/UI/Submenu/Grid/Abilities"]
 margin_right = 338.0
-margin_bottom = 208.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
@@ -187,7 +193,7 @@ scroll_horizontal_enabled = false
 
 [node name="Container" type="GridContainer" parent="UILayer/UI/Submenu/Grid/Items"]
 margin_right = 338.0
-margin_bottom = 208.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
@@ -219,7 +225,7 @@ margin_bottom = -4.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Submenu/Description/Scroll"]
 margin_right = 338.0
-margin_bottom = 208.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -242,6 +248,7 @@ margin_right = 338.0
 margin_bottom = 65.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 16 )
 valign = 1
 
 [node name="HSeparator" type="HSeparator" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
@@ -253,34 +260,37 @@ size_flags_horizontal = 3
 [node name="Description" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
 margin_top = 77.0
 margin_right = 338.0
-margin_bottom = 99.0
+margin_bottom = 114.0
+custom_fonts/font = ExtResource( 16 )
 autowrap = true
 
 [node name="HSeparator2" type="HSeparator" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
-margin_top = 103.0
+margin_top = 118.0
 margin_right = 338.0
-margin_bottom = 107.0
+margin_bottom = 122.0
 size_flags_horizontal = 3
 
 [node name="Damage" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
-margin_top = 111.0
+margin_top = 126.0
 margin_right = 338.0
-margin_bottom = 133.0
+margin_bottom = 163.0
+custom_fonts/font = ExtResource( 16 )
 
 [node name="Cost" type="Label" parent="UILayer/UI/Submenu/Description/Scroll/VBoxContainer"]
-margin_top = 137.0
+margin_top = 167.0
 margin_right = 338.0
-margin_bottom = 159.0
+margin_bottom = 204.0
+custom_fonts/font = ExtResource( 16 )
 
 [node name="TurnDescription" type="RichTextLabel" parent="UILayer/UI"]
 visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 611.0
-margin_top = -248.0
+margin_top = -300.0
 margin_right = 1311.0
 margin_bottom = -32.0
-custom_fonts/normal_font = ExtResource( 13 )
+custom_fonts/normal_font = ExtResource( 15 )
 bbcode_enabled = true
 bbcode_text = "[center]{text}[/center]"
 text = "{text}"
@@ -369,7 +379,7 @@ stretch_mode = 7
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -248.0
+margin_top = -300.0
 margin_right = 579.0
 margin_bottom = -32.0
 __meta__ = {
@@ -379,24 +389,31 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Allies_Status"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Status" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
+margin_bottom = 86.0
 
 [node name="Status2" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
-margin_top = 73.0
-margin_bottom = 142.0
+margin_top = 90.0
+margin_bottom = 176.0
 
 [node name="Status3" parent="UILayer/UI/Allies_Status/VBoxContainer" instance=ExtResource( 8 )]
-margin_top = 146.0
-margin_bottom = 215.0
+margin_top = 180.0
+margin_bottom = 266.0
 
 [node name="Enemies_Status" type="Control" parent="UILayer/UI"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 1343.0
-margin_top = -248.0
+margin_top = -300.0
 margin_right = 1890.0
 margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI/Enemies_Status"]
 anchor_right = 1.0
@@ -406,14 +423,15 @@ __meta__ = {
 }
 
 [node name="Status" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 10 )]
+margin_bottom = 86.0
 
 [node name="Status2" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 73.0
-margin_bottom = 142.0
+margin_top = 90.0
+margin_bottom = 176.0
 
 [node name="Status3" parent="UILayer/UI/Enemies_Status/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 146.0
-margin_bottom = 215.0
+margin_top = 180.0
+margin_bottom = 266.0
 
 [node name="End_Screen" parent="UILayer/UI" instance=ExtResource( 9 )]
 
@@ -423,11 +441,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -342.0
-margin_top = -68.0
-margin_right = 342.0
-margin_bottom = 68.0
-custom_fonts/font = SubResource( 2 )
+margin_left = -402.0
+margin_top = -68.5
+margin_right = 402.0
+margin_bottom = 68.5
+custom_fonts/font = ExtResource( 12 )
 text = "Combat Begins!"
 
 [node name="Lost_Screen" type="Panel" parent="UILayer/UI"]
@@ -448,7 +466,7 @@ margin_right = -48.0
 [node name="Title" type="Label" parent="UILayer/UI/Lost_Screen/Message"]
 anchor_right = 1.0
 anchor_bottom = 0.5
-custom_fonts/font = ExtResource( 13 )
+custom_fonts/font = ExtResource( 14 )
 text = "You Lost!"
 align = 1
 valign = 1
@@ -469,14 +487,18 @@ anchor_left = 0.2
 anchor_top = 0.5
 anchor_right = 0.8
 anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 16 )
 text = "You have lost this combat, you can choose to load your last save or return to the title screen."
 align = 1
 valign = 1
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LoadButton" type="Button" parent="UILayer/UI/Lost_Screen"]
 anchor_top = 0.6
-anchor_right = 0.4
+anchor_right = 0.43
 anchor_bottom = 1.0
 margin_left = 48.0
 margin_top = 48.0
@@ -486,7 +508,7 @@ custom_fonts/font = ExtResource( 13 )
 text = "Load Last Save"
 
 [node name="ReturnButton" type="Button" parent="UILayer/UI/Lost_Screen"]
-anchor_left = 0.4
+anchor_left = 0.43
 anchor_top = 0.6
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -495,7 +517,7 @@ margin_top = 48.0
 margin_right = -48.0
 margin_bottom = -48.0
 custom_fonts/font = ExtResource( 13 )
-text = "return to title screen"
+text = "Return to Title Screen"
 
 [node name="Timer" type="Timer" parent="."]
 [connection signal="special_animation_finished" from="Characters/Allies/First" to="." method="_update_yield_counter"]

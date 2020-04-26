@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/Combat/Battler_UI_Controller.gd" type="Script" id=1]
+[ext_resource path="res://default_assets/theme/fonts/GlacialIndifference_Small.tres" type="DynamicFont" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.831373, 0.168627, 0.168627, 1 )
@@ -33,7 +34,7 @@ corner_radius_bottom_left = 4
 [node name="Status" type="Button"]
 margin_right = 547.0
 margin_bottom = 69.0
-rect_min_size = Vector2( 547, 69 )
+rect_min_size = Vector2( 547, 86 )
 focus_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 1 )
@@ -43,21 +44,21 @@ __meta__ = {
 
 [node name="Name" type="Label" parent="."]
 anchor_right = 0.35
-anchor_bottom = 0.5
+anchor_bottom = 0.45
 margin_left = 8.0
-margin_top = 8.0
 margin_right = -4.0
 margin_bottom = -4.0
+custom_fonts/font = ExtResource( 2 )
 text = "CharacterName"
 
 [node name="Evasion" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.75
-anchor_bottom = 0.5
+anchor_bottom = 0.45
 margin_left = 5.0
-margin_top = 8.0
 margin_right = -4.0
 margin_bottom = -4.0
+custom_fonts/font = ExtResource( 2 )
 text = "Evasion: XX%"
 align = 2
 valign = 1
@@ -65,17 +66,17 @@ valign = 1
 [node name="Critic" type="Label" parent="."]
 anchor_left = 0.75
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 0.45
 margin_left = 2.0
-margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -4.0
+custom_fonts/font = ExtResource( 2 )
 text = "Critic: XX%"
 align = 2
 valign = 1
 
 [node name="LifeBar" type="ProgressBar" parent="."]
-anchor_top = 0.5
+anchor_top = 0.45
 anchor_right = 0.65
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -94,6 +95,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="LifeBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -102,7 +104,7 @@ align = 1
 
 [node name="EnergyBar" type="ProgressBar" parent="."]
 anchor_left = 0.65
-anchor_top = 0.5
+anchor_top = 0.45
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -121,6 +123,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="EnergyBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

@@ -48,6 +48,7 @@ var cur_battler
 
 func _ready() -> void:
 	end_screen.visible = false
+	turn_description.visible = false
 	end_screen.continue_button.connect("pressed", self, "_on_end_screen_dismissed")
 
 	queue_tween.connect("tween_completed", self, "_on_tween_completed")
@@ -299,8 +300,7 @@ func _on_end_screen_dismissed():
 
 
 func _on_load_last_save_request() -> void:
-	# TODO add when save/load functionality is implemented
-	pass # Replace with function body.
+	Game_Manager.reload_to_last_save()
 
 
 func _on_return_to_title_screen_request() -> void:
