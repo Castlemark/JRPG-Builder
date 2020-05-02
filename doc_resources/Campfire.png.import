@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-03dae67304eb1a1e1d7813c31dfbd71e.s3tc.stex"
-path.etc2="res://.import/icon.png-03dae67304eb1a1e1d7813c31dfbd71e.etc2.stex"
+path.s3tc="res://.import/Campfire.png-a1414709f584a8450f025e5b5aa4170e.s3tc.stex"
+path.etc2="res://.import/Campfire.png-a1414709f584a8450f025e5b5aa4170e.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://campaigns/example_campaign/characters/enemies/Burning Ghoul/icon.png"
-dest_files=[ "res://.import/icon.png-03dae67304eb1a1e1d7813c31dfbd71e.s3tc.stex", "res://.import/icon.png-03dae67304eb1a1e1d7813c31dfbd71e.etc2.stex" ]
+source_file="res://doc_resources/Campfire.png"
+dest_files=[ "res://.import/Campfire.png-a1414709f584a8450f025e5b5aa4170e.s3tc.stex", "res://.import/Campfire.png-a1414709f584a8450f025e5b5aa4170e.etc2.stex" ]
 
 [params]
 
