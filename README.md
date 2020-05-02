@@ -8,46 +8,8 @@ Although creating content is quite easy, every type of game element must follow 
 
 Below you'll find some deadlines for the various modules, when a module is marked with **final** it means all gameplay elements from that module will not change in the near future. As elements are completed they will be marked as such. Please keep in mind this dates are not set in stone.
 
-### Tentative deadlines:
+## Getting Started
 
-- [x] <u>Navigation Sprint</u>
-  - [x] Map module V-1
-    - [x] Navigation
-    - [x] Inter-map movement
-    - [x] Background art
-- [x] <u>Map interaction Sprint</u>
-  - [x] Map module V-2
-    - [x] Individual art
-  - [x] Character and Enemy module **(final)**
-    - [x] Characters
-    - [x] Enemy
-    - [x] Equipment
-    - [x] Abilities
-    - [x] Items
-- [x] <u>Structure Sprint</u>
-  - [x] Story module V-1
-    - [x] Conversation
-  - [x] Combat module V-1
-    - [x] Combat logic
-    - [x] Placeholder enemy AI
-  - [x] Map module V-3
-    - [x] Combat trigger
-    - [X] Treasure
-    - [x] Conversation
-- [x] <u>Story Sprint</u>
-  - [x] Story module V-2 **(final)**
-    - [x] Cut-scene
-    - [x] Campaign structure file
-  - [x] Map module V-4 **(final)**
-    - [x] Inventory
-    - [x] Character management
-    - [x] Bestiary
-- [x] <u>Combat Sprint</u>
-  - [x] Combat module V-2 **(final)**
-    - [x] Combat refactor
-- [ ] <u>Content creation Sprint</u>
-  - [x] Add fonts and refine theme
-  - [x] Save states
-  - [x] Create Demo Campaign **(final)**
-  - [ ] Documentation **(final)**
-  - [ ] Memoria
+Documentation can be found [here](https://github.com/Castlemark/JRPG-Builder/blob/master/DOCUMENTATION.md).
+
+Additionally, there's an example campaign you can download with the binaries in the releases page, It's not pretty, but should help you understand the basics
